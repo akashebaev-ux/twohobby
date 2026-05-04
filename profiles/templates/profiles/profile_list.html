@@ -1,89 +1,24 @@
-{% load static %}
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nearby Profiles</title>
+{% block title %}Nearby{% endblock %}
 
-    <link rel="stylesheet" href="{% static 'profiles/css/style.css' %}">
-</head>
-<body>
+{% block content %}
+<div class="profile-grid">
 
-<div class="app-wrapper">
+    {% for profile in profiles %}
+        <div class="profile-card">
 
-    <header class="top-bar">
-        <h1>Nearby</h1>
-        <button class="filter-btn">Filter</button>
-    </header>
 
-    <main class="profile-grid">
+            {% if profile.profile_image %}
+                <img src="{{ profile.profile_image.url }}" class="profile-img">
+            {% else %}
+                <p>No image uploaded</p>
+            {% endif %}
 
-        {% if profiles %}
-            {% for profile in profiles %}
-                <div class="profile-card">
 
-                    {% if profile.profile_image %}
-                        <img
-                            src="{{ profile.profile_image.url }}"
-                            alt="{{ profile.display_name }}"
-                            class="profile-img"
-                        >
-                    {% else %}
-                        <img
-                            src="{% static 'profiles/images/default-profile.jpg' %}"
-                            alt="Default profile"
-                            class="profile-img"
-                        >
-                    {% endif %}
-
-                    <div class="profile-details">
-                        <p>
-                            {{ profile.display_name }}, {{ profile.age }}
-                            <span class="online-dot"></span>
-                        </p>
-                    </div>
-
-                </div>
-            {% endfor %}
-        {% else %}
-            <div class="empty-state">
-                <h2>No profiles yet</h2>
-                <p>Add profiles from the Django admin.</p>
-            </div>
-        {% endif %}
-
-    </main>
-
-    <nav class="bottom-nav">
-        <a href="#" class="nav-link active">
-            <span>📍</span>
-            <small>Nearby</small>
-        </a>
-
-        <a href="#" class="nav-link">
-            <span>💞</span>
-            <small>Encounters</small>
-        </a>
-
-        <a href="#" class="nav-link">
-            <span>❤</span>
-            <small>Likes</small>
-        </a>
-
-        <a href="#" class="nav-link">
-            <span>💬</span>
-            <small>Chats</small>
-        </a>
-
-        <a href="#" class="nav-link">
-            <span>👤</span>
-            <small>Profile</small>
-        </a>
-    </nav>
+            <p>{{ profile.display_name }}, {{ profile.age }}</p>
+        </div>
+    {% endfor %}
 
 </div>
-
-</body>
-</html>
+{% endblock %}
