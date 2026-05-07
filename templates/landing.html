@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="text-align:center; padding:40px;">
+    <h1>Welcome to TwoHobby 💕</h1>
+
+    <a href="{% url 'account_login' %}" class="filter-btn">Login</a>
+    <a href="{% url 'account_signup' %}" class="filter-btn">Register</a>
+</div>
+{% endblock %}

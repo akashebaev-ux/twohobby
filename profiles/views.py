@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 from .models import Profile
 
@@ -17,3 +17,9 @@ def profile_detail(request, id):
     return render(request, 'profiles/profile_detail.html', {
         'profile': profile
     })
+
+
+def landing_page(request):
+    if request.user.is_authenticated:
+        return redirect('profile_list')  
+    return render(request, 'landing.html')
