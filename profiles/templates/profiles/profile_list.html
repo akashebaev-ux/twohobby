@@ -6,7 +6,7 @@
 <div class="profile-grid">
 
     {% for profile in profiles %}
-        <div class="profile-card">
+        <a href="{% url 'profile_detail' profile.id %}" class="profile-card">
 
 
             {% if profile.profile_image %}
@@ -17,7 +17,7 @@
 
 
             <p>{{ profile.display_name }}, {{ profile.age }}</p>
-        </div>
+        </a>
     {% endfor %}
 
 </div>

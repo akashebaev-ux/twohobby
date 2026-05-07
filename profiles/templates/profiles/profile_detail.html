@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Profile Detail{% endblock %}
+
+{% block content %}
+<div class="profile-detail">
+
+    {% if profile.profile_image %}
+        <img src="{{ profile.profile_image.url }}" class="profile-img">
+    {% else %}
+        <p>No image uploaded</p>
+    {% endif %}
+
+    <h2>{{ profile.display_name }}</h2>
+    <p>Age: {{ profile.age }}</p>
+    <p>{{ profile.bio }}</p>
+
+    <a href="{% url 'profile_list' %}">Back to Nearby</a>
+
+</div>
+{% endblock %}
