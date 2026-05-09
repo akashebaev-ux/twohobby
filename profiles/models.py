@@ -27,8 +27,8 @@ class Profile(models.Model):
     looking_for = models.CharField(max_length=20, choices=LOOKING_FOR_CHOICES)
     profile_image = models.ImageField(
         upload_to="profile_images/",
+        default="profile_images/default.jpg",
         blank=True,
-        null=True
     )
     created_on = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
