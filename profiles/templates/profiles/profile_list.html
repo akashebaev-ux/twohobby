@@ -8,15 +8,25 @@
     {% for profile in profiles %}
         <a href="{% url 'profile_detail' profile.id %}" class="profile-card">
 
-
             {% if profile.profile_image %}
-                <img src="{{ profile.profile_image.url }}" class="profile-img">
+                <img
+                    src="{{ profile.profile_image.url }}"
+                    class="profile-img"
+                    alt="{{ profile.display_name|default:profile.user.username }}"
+                >
             {% else %}
-                <p>No image uploaded</p>
+                <img
+                    src="/media/profile_images/default.jpg"
+                    class="profile-img"
+                    alt="{{ profile.display_name|default:profile.user.username }}"
+                >
             {% endif %}
 
+            <p>
+                {{ profile.display_name|default:profile.user.username }}
+                {% if profile.age %}, {{ profile.age }}{% endif %}
+            </p>
 
-            <p>{{ profile.display_name }}, {{ profile.age }}</p>
         </a>
     {% endfor %}
 

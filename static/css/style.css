@@ -95,3 +95,14 @@ body {
     border-radius: 16px;
     display: block;
 }
+
+
+/* profile cards and images */
+
+.profile-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid #e74c3c;
+}
