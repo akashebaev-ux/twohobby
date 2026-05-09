@@ -20,7 +20,7 @@ class Profile(models.Model):
         User, on_delete=models.CASCADE, related_name="profile"
     )
     display_name = models.CharField(max_length=100)
-    age = models.PositiveIntegerField()
+    age = models.PositiveIntegerField(null=True, blank=True)
     bio = models.TextField(max_length=500)
     location = models.CharField(max_length=100)
     gender = models.CharField(max_length=20, choices=GENDER_CHOICES)
