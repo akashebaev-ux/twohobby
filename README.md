@@ -1,4 +1,4 @@
 # TwoHobby app
 
 
-<img width="900" height="700" alt="My First Board" src="https://github.com/user-attachments/assets/452d1ba0-61f4-4402-b621-bb2c4bb5c9b7">
+<img width="2048" height="762" alt="My First Board (1)" src="https://github.com/user-attachments/assets/52fb7127-198d-46bc-8a90-e1c243f22ce0">
