@@ -20,46 +20,49 @@
 
 <div class="app-wrapper">
 
-    <!-- 🔝 Top Bar -->
-    <header class="top-bar">
-        <h1>{% block header %}Nearby{% endblock %}</h1>
-        <button class="filter-btn">Filter</button>
-    </header>
+    <!-- Top Bar -->
+    {% block topbar %}
+        <header class="top-bar">
+            <h1>{% block header %}Nearby{% endblock %}</h1>
+            <button class="filter-btn">Filter</button>
+        </header>
+    {% endblock %}
 
-    <!-- 📄 Main Content -->
+    <!-- Main Content -->
     <main class="content">
         {% block content %}
         {% endblock %}
     </main>
 
-    <!-- 🔻 Bottom Navigation -->
-    <nav class="bottom-nav">
-        <a href="#" class="nav-link">
-            <span>📍</span>
-            <small>Nearby</small>
-        </a>
+    <!-- Bottom Navigation -->
+    {% block bottom_nav %}
+        <nav class="bottom-nav">
+            <a href="#" class="nav-link">
+                <span>📍</span>
+                <small>Nearby</small>
+            </a>
 
-        <a href="#" class="nav-link">
-            <span>💞</span>
-            <small>Encounters</small>
-        </a>
+            <a href="#" class="nav-link">
+                <span>💞</span>
+                <small>Encounters</small>
+            </a>
 
-        <a href="#" class="nav-link">
-            <span>❤</span>
-            <small>Likes</small>
-        </a>
+            <a href="#" class="nav-link">
+                <span>❤</span>
+                <small>Likes</small>
+            </a>
 
-        <a href="#" class="nav-link">
-            <span>💬</span>
-            <small>Chats</small>
-        </a>
+            <a href="#" class="nav-link">
+                <span>💬</span>
+                <small>Chats</small>
+            </a>
 
-        <a href="#" class="nav-link">
-            <span>👤</span>
-            <small>Profile</small>
-        </a>
-    </nav>
-
+            <a href="#" class="nav-link">
+                <span>👤</span>
+                <small>Profile</small>
+            </a>
+        </nav>
+    {% endblock %}
 </div>
 
 </body>
