@@ -47,12 +47,12 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    'profiles',
+    'profiles.apps.ProfilesConfig',
 ]
 
 
 SITE_ID = 1
-LOGIN_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/nearby/"
 LOGOUT_REDIRECT_URL = "/"
 
 
