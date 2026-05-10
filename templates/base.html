@@ -37,7 +37,7 @@
     <!-- Bottom Navigation -->
     {% block bottom_nav %}
         <nav class="bottom-nav">
-            <a href="#" class="nav-link">
+            <a href="{% url 'profile_list' %}" class="nav-link">
                 <span>📍</span>
                 <small>Nearby</small>
             </a>
@@ -57,7 +57,7 @@
                 <small>Chats</small>
             </a>
 
-            <a href="#" class="nav-link">
+            <a href="{% url 'my_profile' %}" class="nav-link">
                 <span>👤</span>
                 <small>Profile</small>
             </a>
