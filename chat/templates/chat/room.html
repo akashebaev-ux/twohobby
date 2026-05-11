@@ -49,12 +49,20 @@
 
     chatSocket.onmessage = function(e) {
         const data = JSON.parse(e.data);
+        const currentUser = "{{ request.user.username }}";
+        const messageClass =
+            data.username === currentUser
+                ? "my-message"
+                : "their-message";
         const chatLog = document.querySelector("#chat-log");
 
         chatLog.innerHTML += `
-            <div class="chat-message">
+            <div class="chat-message ${messageClass}">
                 <p>${data.message}</p>
-                <span>Now</span>
+                <span>${new Date().toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                })}</span>
             </div>
         `;
 
