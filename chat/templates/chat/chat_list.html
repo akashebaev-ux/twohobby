@@ -10,25 +10,72 @@
     <div class="chat-list-container">
 
         <div class="chat-list-header">
-            <h1>Messages</h1>
+
+            <h1 class="app-logo">TwoHobby</h1>
+
             <a href="{% url 'profile_list' %}" class="back-nearby-btn">
                 ← Back to Nearby
             </a>
 
+        </div>
 
+        <div class="connections-row">
+
+            {% for room in rooms %}
+
+                <a href="{% url 'room' room.id %}" class="connection-avatar">
+
+                    <div class="avatar-circle">
+                        💬
+                    </div>
+
+                </a>
+
+            {% endfor %}
+
+        </div>
+
+        <div class="connection-filter">
+            <span>All connections</span>
+            <span>⌄</span>
         </div>
 
         {% for room in rooms %}
 
-            <a href="{% url 'room' room.id %}" class="chat-room-card">
+            <a href="{% url 'room' room.id %}" class="chat-card">
 
                 <div class="chat-avatar">
                     💬
                 </div>
 
                 <div class="chat-info">
-                    <h3>Private Chat</h3>
-                    <p>Open conversation</p>
+
+                    <h3>
+                        {% for user in room.users.all %}
+                            {% if user != request.user %}
+                                {{ user.username }}
+                            {% endif %}
+                        {% endfor %}
+                    </h3>
+
+                    <p>
+                        {% if room.messages.last %}
+                            {{ room.messages.last.message|truncatechars:45 }}
+                        {% else %}
+                            Say hello 👋
+                        {% endif %}
+                    </p>
+
+                    <small class="chat-time">
+                        {% if room.messages.last %}
+                            {{ room.messages.last.created_on|date:"H:i" }}
+                        {% endif %}
+                    </small>
+
+                </div>
+
+                <div class="chat-star">
+                    ☆
                 </div>
 
             </a>
