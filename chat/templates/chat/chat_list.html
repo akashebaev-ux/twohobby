@@ -11,6 +11,11 @@
 
         <div class="chat-list-header">
             <h1>Messages</h1>
+            <a href="{% url 'profile_list' %}" class="back-nearby-btn">
+                ← Back to Nearby
+            </a>
+
+
         </div>
 
         {% for room in rooms %}

@@ -245,6 +245,20 @@ body {
     margin-top: 40px;
 }
 
+/* return to profiles button */
+
+.back-nearby-btn {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 14px;
+    background: #ff5864;
+    color: white;
+    text-decoration: none;
+    border-radius: 14px;
+    font-size: .9rem;
+    font-weight: 600;
+}
+
 
 /* Desktop app preview */
 
