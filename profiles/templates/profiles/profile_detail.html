@@ -17,5 +17,9 @@
 
     <a href="{% url 'profile_list' %}">Back to Nearby</a>
 
+    <a href="{% url 'start_chat' profile.user.id %}">
+        Message
+    </a>
+
 </div>
 {% endblock %}

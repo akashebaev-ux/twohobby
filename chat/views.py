@@ -23,3 +23,22 @@ def room(request, room_id):
         "room": room,
         "messages": messages,
     })
+
+
+@login_required
+def start_chat(request, user_id):
+    other_user = get_object_or_404(User, id=user_id)
+
+    existing_room = ChatRoom.objects.filter(
+        users=request.user
+    ).filter(
+        users=other_user
+    ).first()
+
+    if existing_room:
+        return redirect("room", room_id=existing_room.id)
+
+    room = ChatRoom.objects.create()
+    room.users.add(request.user, other_user)
+
+    return redirect("room", room_id=room.id)
