@@ -1,29 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="chat-page">
+
+    <div class="chat-container">
+
+        <div class="chat-header">
+            <a href="{% url 'chat_list' %}" class="back-btn">‹</a>
+            <div>
+                <h2>Chat</h2>
+                <p>Private conversation</p>
+            </div>
+        </div>
+
+        <div id="chat-log" class="chat-log">
+            {% for message in messages %}
+                <div class="chat-message {% if message.sender == request.user %}my-message{% else %}their-message{% endif %}">
+                    <p>{{ message.message }}</p>
+                    <span>{{ message.created_on|date:"H:i" }}</span>
+                </div>
+            {% empty %}
+                <p class="empty-chat">No messages yet. Start the conversation!</p>
+            {% endfor %}
+        </div>
+
+        <div class="chat-input-area">
+            <input
+                id="chat-message-input"
+                type="text"
+                placeholder="Type a message..."
+                autocomplete="off"
+            >
+            <button id="chat-message-submit">Send</button>
+        </div>
+
+    </div>
+
+</div>
+
 <script>
-    const roomName = "{{ room_name }}";
+    const roomId = "{{ room.id }}";
+
+    const protocol = window.location.protocol === "https:" ? "wss://" : "ws://";
 
     const chatSocket = new WebSocket(
-        "ws://" + window.location.host +
-        "/ws/chat/" + roomName + "/"
+        protocol + window.location.host + "/ws/chat/" + roomId + "/"
     );
 
     chatSocket.onmessage = function(e) {
         const data = JSON.parse(e.data);
+        const chatLog = document.querySelector("#chat-log");
 
-        document.querySelector("#chat-log").innerHTML +=
-            "<p><strong>" +
-            data.username +
-            ":</strong> " +
-            data.message +
-            "</p>";
+        chatLog.innerHTML += `
+            <div class="chat-message">
+                <p>${data.message}</p>
+                <span>Now</span>
+            </div>
+        `;
+
+        chatLog.scrollTop = chatLog.scrollHeight;
     };
 
-    document.querySelector("#chat-message-submit").onclick =
-    function() {
+    document.querySelector("#chat-message-submit").onclick = function() {
+        const messageInput = document.querySelector("#chat-message-input");
+        const message = messageInput.value.trim();
 
-        const messageInput =
-            document.querySelector("#chat-message-input");
-
-        const message = messageInput.value;
+        if (message === "") {
+            return;
+        }
 
         chatSocket.send(JSON.stringify({
             "message": message
@@ -31,4 +75,17 @@
 
         messageInput.value = "";
     };
+
+    document.querySelector("#chat-message-input").addEventListener(
+        "keyup",
+        function(e) {
+            if (e.key === "Enter") {
+                document.querySelector("#chat-message-submit").click();
+            }
+        }
+    );
+
+    const chatLog = document.querySelector("#chat-log");
+    chatLog.scrollTop = chatLog.scrollHeight;
 </script>
+{% endblock %}

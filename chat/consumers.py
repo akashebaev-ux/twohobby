@@ -8,8 +8,20 @@ from .models import ChatMessage, ChatRoom
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        self.room_name = self.scope["url_route"]["kwargs"]["room_name"]
-        self.room_group_name = f"chat_{self.room_name}"
+        self.room_id = self.scope["url_route"]["kwargs"]["room_id"]
+        self.room_group_name = f"chat_{self.room_id}"
+
+        user = self.scope["user"]
+
+        if user.is_anonymous:
+            await self.close()
+            return
+
+        has_access = await self.user_has_access(user, self.room_id)
+
+        if not has_access:
+            await self.close()
+            return
 
         await self.channel_layer.group_add(
             self.room_group_name,
@@ -29,7 +41,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         message = data["message"]
         username = self.scope["user"].username
 
-        await self.save_message(username, message)
+        await self.save_message(message)
 
         await self.channel_layer.group_send(
             self.room_group_name,
@@ -47,11 +59,18 @@ class ChatConsumer(AsyncWebsocketConsumer):
         }))
 
     @sync_to_async
-    def save_message(self, username, message):
-        room, created = ChatRoom.objects.get_or_create(name=self.room_name)
+    def user_has_access(self, user, room_id):
+        return ChatRoom.objects.filter(
+            id=room_id,
+            users=user
+        ).exists()
+
+    @sync_to_async
+    def save_message(self, message):
+        room = ChatRoom.objects.get(id=self.room_id)
 
         ChatMessage.objects.create(
             room=room,
-            user=self.scope["user"],
+            sender=self.scope["user"],
             message=message
         )
