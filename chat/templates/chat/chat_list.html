@@ -1,9 +1,40 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Chats</h1>
 
-<a href="{% url 'room' 'general' %}">
-    Open General Chat
-</a>
+<div class="chat-list-page">
+
+    <div class="chat-list-container">
+
+        <div class="chat-list-header">
+            <h1>Messages</h1>
+        </div>
+
+        {% for room in rooms %}
+
+            <a href="{% url 'room' room.id %}" class="chat-room-card">
+
+                <div class="chat-avatar">
+                    💬
+                </div>
+
+                <div class="chat-info">
+                    <h3>Private Chat</h3>
+                    <p>Open conversation</p>
+                </div>
+
+            </a>
+
+        {% empty %}
+
+            <div class="no-chats">
+                <p>No chats yet.</p>
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
 {% endblock %}
