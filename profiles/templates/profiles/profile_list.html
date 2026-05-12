@@ -9,7 +9,7 @@
     {% for profile in profiles %}
         <a href="{% url 'profile_detail' profile.id %}" class="profile-card">
 
-            {% if profile.profile_image %}
+            {% if profile.profile_image and profile.profile_image.url %}
                 <img
                     src="{{ profile.profile_image.url }}"
                     class="profile-img"

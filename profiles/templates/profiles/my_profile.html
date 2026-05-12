@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}My Profile{% endblock %}
 
@@ -12,10 +13,13 @@
         </form>
     {% endif %}
 
-    {% if profile.profile_image %}
+    {% if profile.profile_image and profile.profile_image.url %}
         <img src="{{ profile.profile_image.url }}" class="profile-img">
     {% else %}
-        <img src="/media/profile_images/default.jpg" class="profile-img">
+            <img
+                src="{% static 'images/default.jpg' %}"
+                class="profile-img"
+            >
     {% endif %}
 
     <h2>{{ profile.display_name|default:profile.user.username }}</h2>
