@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 
 
 GENDER_CHOICES = (
@@ -25,10 +26,11 @@ class Profile(models.Model):
     location = models.CharField(max_length=100)
     gender = models.CharField(max_length=20, choices=GENDER_CHOICES)
     looking_for = models.CharField(max_length=20, choices=LOOKING_FOR_CHOICES)
-    profile_image = models.ImageField(
-        upload_to="profile_images/",
-        default="profile_images/default.jpg",
+    profile_image = CloudinaryField(
+        "Profile Image",
+        folder="profile_images",
         blank=True,
+        null=True,
     )
     created_on = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
