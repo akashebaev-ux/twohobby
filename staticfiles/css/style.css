@@ -377,6 +377,69 @@ body {
 }
 
 
+
+
+/* Welcome page */
+
+.welcome-page {
+    min-height: calc(100vh - 32px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 140px 24px 24px;
+    background: white;
+}
+
+.welcome-card {
+    width: 100%;
+    max-width: 360px;
+    text-align: center;
+}
+
+.welcome-title {
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+    color: #ff5864;
+}
+
+.welcome-subtitle {
+    color: #666;
+    margin-bottom: 32px;
+    line-height: 1.5;
+}
+
+.welcome-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 30px;
+}
+
+.welcome-btn {
+    width: 100%;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+/* Auth pages */
+.auth-btn {
+    width: 100%;
+    margin-top: 12px;
+}
+
+.auth-link {
+    margin-top: 24px;
+    text-align: center;
+}
+
+
+
+
+
+
+
 /* Desktop app preview */
 
 @media screen and (min-width: 768px) {
@@ -386,3 +449,47 @@ body {
         box-shadow: 0 0 25px rgba(0, 0, 0, .08);
     }
 }
+
+
+.auth-form input,
+.auth-form select,
+.auth-form textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    margin-top: 6px;
+}
+
+.auth-btn {
+    width: 100%;
+    margin-top: 16px;
+}
+
+.auth-link {
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Desktop app preview */
+
+@media screen and (min-width: 768px) {
+    .app-wrapper {
+        max-width: 480px;
+        margin: 0 auto;
+        box-shadow: 0 0 25px rgba(0, 0, 0, .08);
+    }
+}
+
