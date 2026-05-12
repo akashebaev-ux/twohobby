@@ -26,6 +26,12 @@ body {
 }
 
 
+/* Hide scrollbar for connections row on mobile */
+.connections-row::-webkit-scrollbar {
+    display: none;
+}
+
+
 /* Top bar */
 
 .top-bar {
@@ -44,8 +50,13 @@ body {
     text-decoration: none;
     font-weight: 600;
     display: inline-block;
+    transition: .2s ease;
 }
 
+.filter-btn:hover {
+    transform: translateY(-1px);
+    opacity: .95;
+}
 
 /* Content */
 
@@ -53,6 +64,7 @@ body {
     flex: 1;
     padding: 16px;
     overflow-y: auto;
+    width: 100%;
 }
 
 
@@ -99,6 +111,11 @@ body {
     text-decoration: none;
     display: flex;
     flex-direction: column;
+    transition: .2s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-2px);
 }
 
 .profile-card p {
@@ -120,6 +137,7 @@ body {
     border: 2px solid #e74c3c;
     display: block;
     background: #f2f2f2;
+    transition: .2s ease;
 }
 
 
