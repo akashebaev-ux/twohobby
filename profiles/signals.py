@@ -10,5 +10,8 @@ def create_profile(sender, instance, created, **kwargs):
         Profile.objects.create(
             user=instance,
             display_name=instance.username,
-            profile_image='profile_images/default.jpg'
+            bio="",
+            location="",
+            gender="other",
+            looking_for="everyone",
         )
