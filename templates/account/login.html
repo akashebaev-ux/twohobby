@@ -4,20 +4,26 @@
 {% block bottom_nav %}{% endblock %}
 
 {% block content %}
-<div style="padding: 30px; text-align:center;">
+<div class="auth-page">
+    <div class="auth-card">
 
-    <h2>Login</h2>
+        <h1 class="app-logo">TwoHobby</h1>
+        <h2>Login</h2>
 
-    <form method="POST" action="{% url 'account_login' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="filter-btn">Login</button>
-    </form>
+        <form method="POST" action="{% url 'account_login' %}" class="auth-form">
+            {% csrf_token %}
+            {{ form.as_p }}
 
-    <p>
-        Don't have an account?
-        <a href="{% url 'account_signup' %}">Register</a>
-    </p>
+            <button type="submit" class="filter-btn auth-btn">
+                Login
+            </button>
+        </form>
 
+        <p class="auth-link">
+            Don't have an account?
+            <a href="{% url 'account_signup' %}">Register</a>
+        </p>
+
+    </div>
 </div>
 {% endblock %}

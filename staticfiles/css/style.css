@@ -13,7 +13,8 @@ img {
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #f5f5f5;
+    background: #fafafa;
+    color: #222;
 }
 
 .app-wrapper {
@@ -36,9 +37,14 @@ body {
 
 .filter-btn {
     border: none;
-    background: #eee;
-    padding: 6px 10px;
-    border-radius: 20px;
+    background: linear-gradient(135deg, #ff5864, #ff9966);
+    color: white;
+    padding: 14px 18px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    cursor: pointer;
 }
 
 
@@ -81,7 +87,8 @@ body {
 .profile-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    gap: 16px;
+    margin-top: 28px;
 }
 
 
@@ -90,13 +97,20 @@ body {
 .profile-card {
     text-align: left;
     text-decoration: none;
+    color: #222;
+    transition: transform .2s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-3px);
 }
 
 .profile-card p {
-    font-size: 12px;
-    margin: 5px 0 0;
-    font-weight: 600;
-    color: #555;
+    margin-top: 10px;
+    padding-left: 4px;
+    font-size: .95rem;
+    font-weight: 700;
+    color: #222;
 }
 
 
@@ -104,11 +118,13 @@ body {
 
 .profile-img {
     width: 100%;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1 / 1.3;
     object-fit: cover;
-    border-radius: 12px;
-    border: 2px solid #e74c3c;
+    border-radius: 20px;
     display: block;
+    background: #f2f2f2;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,.08);
 }
 
 
@@ -346,6 +362,142 @@ body {
     color: #ccc;
     font-size: 1.4rem;
 }
+
+
+
+
+
+
+
+
+/* Authentication pages */
+
+.auth-page {
+    min-height: calc(100vh - 32px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 80px 24px 24px;
+    background: white;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 360px;
+    text-align: center;
+}
+
+.auth-card h2 {
+    margin-bottom: 24px;
+    font-size: 1.8rem;
+}
+
+.auth-form p {
+    margin-bottom: 18px;
+    text-align: left;
+}
+
+.auth-form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #444;
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="password"],
+.auth-form input[type="email"] {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid #ddd;
+    border-radius: 14px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.auth-form input:focus {
+    border-color: #ff5864;
+}
+
+.auth-form input[type="checkbox"] {
+    margin-left: 8px;
+}
+
+.auth-form a {
+    color: #ff5864;
+    font-weight: 600;
+}
+
+.auth-btn {
+    width: 100%;
+    margin-top: 8px;
+    cursor: pointer;
+}
+
+.auth-link {
+    margin-top: 24px;
+    color: #555;
+}
+
+.auth-link a {
+    color: #ff5864;
+    font-weight: 700;
+}
+
+
+
+
+
+/* Welcome page */
+
+
+.welcome-page {
+    min-height: calc(100vh - 32px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 140px 24px 24px;
+    background: white;
+}
+
+.welcome-card {
+    width: 100%;
+    max-width: 360px;
+    text-align: center;
+}
+
+.welcome-title {
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+    color: #ff5864;
+}
+
+.welcome-subtitle {
+    color: #666;
+    margin-bottom: 32px;
+    line-height: 1.5;
+}
+
+.welcome-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 30px;
+}
+
+.welcome-btn {
+    width: 100%;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+
+
+
+
+
 
 
 /* Desktop app preview */

@@ -4,46 +4,43 @@
 {% block bottom_nav %}{% endblock %}
 
 {% load allauth i18n %}
-{% block head_title %}
-    {% trans "Signup" %}
-{% endblock head_title %}
+
 {% block content %}
-    {% element h1 %}
-        {% trans "Sign Up" %}
-    {% endelement %}
-    {% setvar link %}
-        <a href="{{ login_url }}">
-        {% endsetvar %}
-        {% setvar end_link %}
-        </a>
-    {% endsetvar %}
-    {% element p %}
-        {% blocktranslate %}Already have an account? Then please {{ link }}sign in{{ end_link }}.{% endblocktranslate %}
-    {% endelement %}
-    {% if not SOCIALACCOUNT_ONLY %}
-        {% url 'account_signup' as action_url %}
-        {% element form form=form method="post" action=action_url tags="entrance,signup" %}
-            {% slot body %}
+<div class="auth-page">
+    <div class="auth-card">
+
+        <h1 class="app-logo">TwoHobby</h1>
+
+        <h2>{% trans "Sign Up" %}</h2>
+
+        <p class="auth-link">
+            Already have an account?
+            <a href="{{ login_url }}">Sign in</a>
+        </p>
+
+        {% if not SOCIALACCOUNT_ONLY %}
+            {% url 'account_signup' as action_url %}
+
+            <form method="post"
+                  action="{{ action_url }}"
+                  class="auth-form">
+
                 {% csrf_token %}
-                {% element fields form=form unlabeled=True %}
-                {% endelement %}
+
+                {{ form.as_p }}
+
                 {{ redirect_field }}
-            {% endslot %}
-            {% slot actions %}
-                {% element button tags="prominent,signup" type="submit" %}
+
+                <button type="submit"
+                        class="filter-btn auth-btn">
+
                     {% trans "Sign Up" %}
-                {% endelement %}
-            {% endslot %}
-        {% endelement %}
-    {% endif %}
-    {% if PASSKEY_SIGNUP_ENABLED %}
-        {% element hr %}
-        {% endelement %}
-        {% element button href=signup_by_passkey_url tags="prominent,signup,outline,primary" %}
-            {% trans "Sign up using a passkey" %}
-        {% endelement %}
-    {% endif %}
-    {% if SOCIALACCOUNT_ENABLED %}
-        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
-    {% endif %}
-{% endblock content %}
+
+                </button>
+
+            </form>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}
