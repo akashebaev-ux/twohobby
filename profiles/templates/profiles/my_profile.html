@@ -5,21 +5,14 @@
 
 {% block content %}
 <div class="profile-detail">
-
-    {% if user.is_authenticated %}
-        <form method="post" action="{% url 'account_logout' %}">
-            {% csrf_token %}
-            <button type="submit" class="filter-btn">Logout</button>
-        </form>
-    {% endif %}
-
+    
     {% if profile.profile_image and profile.profile_image.url %}
         <img src="{{ profile.profile_image.url }}" class="profile-img">
     {% else %}
-            <img
-                src="{% static 'images/default.jpg' %}"
-                class="profile-img"
-            >
+        <img
+            src="{% static 'images/default.jpg' %}"
+            class="profile-img"
+        >
     {% endif %}
 
     <h2>{{ profile.display_name|default:profile.user.username }}</h2>
@@ -30,7 +23,28 @@
 
     <p>{{ profile.bio }}</p>
 
-    <a href="{% url 'profile_list' %}" class="filter-btn">Browse Profiles</a>
+    <div class="profile-actions">
+
+        <a href="{% url 'edit_profile' %}"
+           class="filter-btn">
+
+            Edit Profile
+
+        </a>
+
+        <a href="{% url 'profile_list' %}"
+           class="filter-btn">
+
+            Browse Profiles
+
+        </a>
+        {% if user.is_authenticated %}
+            <form method="post" action="{% url 'account_logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="filter-btn">Logout</button>
+            </form>
+        {% endif %}
+    </div>
 
 </div>
 {% endblock %}

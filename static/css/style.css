@@ -359,6 +359,24 @@ body {
 }
 
 
+/* Edit profile page */
+.profile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.profile-actions form {
+    margin: 0;
+}
+
+.profile-actions .filter-btn {
+    width: 100%;
+    text-align: center;
+}
+
+
 /* Desktop app preview */
 
 @media screen and (min-width: 768px) {
