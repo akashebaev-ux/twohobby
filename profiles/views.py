@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from .models import Profile
+from .forms import ProfileForm
 
 # Create your views here.
 class ProfileListView(generic.ListView):
@@ -42,3 +43,27 @@ def my_profile(request):
     return render(request, "profiles/my_profile.html", {
         "profile": profile
     })
+
+
+@login_required
+def edit_profile(request):
+    profile = request.user.profile
+
+    if request.method == "POST":
+        form = ProfileForm(
+            request.POST,
+            request.FILES,
+            instance=profile
+        )
+
+        if form.is_valid():
+            form.save()
+            return redirect("my_profile")
+    else:
+        form = ProfileForm(instance=profile)
+
+    return render(
+        request,
+        "profiles/edit_profile.html",
+        {"form": form}
+    )
