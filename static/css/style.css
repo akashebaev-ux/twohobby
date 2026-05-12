@@ -52,6 +52,7 @@ body {
     font-weight: 600;
     display: inline-block;
     transition: .2s ease;
+    cursor: pointer;
 }
 
 .filter-btn:hover {
@@ -140,6 +141,7 @@ body {
     display: block;
     background: #f2f2f2;
     transition: .2s ease;
+    overflow: hidden;
 }
 
 
@@ -438,7 +440,10 @@ body {
     width: 100%;
     margin-top: 12px;
 }
-
+.auth-form select,
+.edit-profile-form select {
+    cursor: pointer;
+}
 
 
 /* Edit profile */
