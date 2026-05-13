@@ -3,6 +3,7 @@ from django.views import generic
 from django.contrib.auth.decorators import login_required
 from .models import Profile
 from .forms import ProfileForm
+from matches.models import Swipe
 
 # Create your views here.
 class ProfileListView(generic.ListView):
@@ -27,7 +28,7 @@ def profile_detail(request, id):
 
 def landing_page(request):
     if request.user.is_authenticated:
-        return redirect('profile_list')  
+        return redirect('profile_list')
     return render(request, 'landing.html')
 
 
@@ -67,3 +68,22 @@ def edit_profile(request):
         "profiles/edit_profile.html",
         {"form": form}
     )
+
+
+@login_required
+def encounters(request):
+    swiped_users = Swipe.objects.filter(
+        from_user=request.user
+    ).values_list("to_user", flat=True)
+
+    profile = Profile.objects.filter(
+        is_active=True
+    ).exclude(
+        user=request.user
+    ).exclude(
+        user__id__in=swiped_users
+    ).first()
+
+    return render(request, "profiles/encounters.html", {
+        "profile": profile
+    })
