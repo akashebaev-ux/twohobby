@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Encounters{% endblock %}
+
+{% block content %}
+<div class="profile-detail">
+
+    {% if profile %}
+
+        {% if profile.profile_image and profile.profile_image.url %}
+            <img src="{{ profile.profile_image.url }}" class="profile-img">
+        {% else %}
+            <img src="{% static 'images/default.webp' %}" class="profile-img">
+        {% endif %}
+
+        <h2>{{ profile.display_name|default:profile.user.username }}</h2>
+
+        {% if profile.age %}
+            <p>Age: {{ profile.age }}</p>
+        {% endif %}
+
+        <p>{{ profile.bio }}</p>
+
+        <div class="profile-actions">
+
+            <a href="{% url 'swipe_user' profile.user.id 'pass' %}"
+               class="filter-btn">
+                Pass ❌
+            </a>
+
+            <a href="{% url 'swipe_user' profile.user.id 'like' %}"
+               class="filter-btn">
+                Like ❤️
+            </a>
+
+        </div>
+
+    {% else %}
+
+        <h2>No more profiles</h2>
+        <p>You have viewed everyone for now.</p>
+
+    {% endif %}
+
+</div>
+{% endblock %}
