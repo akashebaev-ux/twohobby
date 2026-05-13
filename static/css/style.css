@@ -166,6 +166,7 @@ body {
     display: flex;
     padding: 0;
     background: #f4f4f6;
+    min-height: 100dvh;
 }
 
 .chat-container {
@@ -248,15 +249,20 @@ body {
 
 .chat-input-area {
     display: flex;
+    align-items: center;
     gap: 8px;
     padding: 12px;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
     border-top: 1px solid #eee;
     background: white;
+    position: sticky;
+    bottom: 0;
 }
 
 #chat-message-input {
     flex: 1;
     min-width: 0;
+    font-size: 16px;
     border: 1px solid #ddd;
     border-radius: 30px;
     padding: 12px 15px;
@@ -264,13 +270,16 @@ body {
 }
 
 #chat-message-submit {
+    flex-shrink: 0;
+    min-width: 75px;
     border: none;
     border-radius: 30px;
-    padding: 0 18px;
+    padding: 12px 16px;
     background: #ff5864;
     color: white;
     cursor: pointer;
     font-weight: 600;
+    font-size: 16px;
 }
 
 .empty-chat {

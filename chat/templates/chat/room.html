@@ -98,5 +98,16 @@
 
     const chatLog = document.querySelector("#chat-log");
     chatLog.scrollTop = chatLog.scrollHeight;
+
+
+    window.addEventListener("load", function() {
+        const messageInput = document.querySelector("#chat-message-input");
+
+        if (messageInput) {
+            messageInput.focus();
+        }
+});
+
 </script>
+
 {% endblock %}
