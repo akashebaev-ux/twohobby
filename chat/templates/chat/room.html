@@ -69,7 +69,7 @@
             </div>
         `;
 
-        chatLog.scrollTop = chatLog.scrollHeight;
+        scrollToBottom();
     };
 
     document.querySelector("#chat-message-submit").onclick = function() {
@@ -79,7 +79,7 @@
         if (message === "") {
             return;
         }
-        
+
         if (chatSocket.readyState !== WebSocket.OPEN) {
             window.location.reload();
             return;
@@ -100,8 +100,17 @@
         }
     );
 
-    const chatLog = document.querySelector("#chat-log");
-    chatLog.scrollTop = chatLog.scrollHeight;
+    function scrollToBottom() {
+        const chatLog = document.querySelector("#chat-log");
+
+        if (chatLog) {
+            setTimeout(() => {
+                chatLog.scrollTop = chatLog.scrollHeight;
+            }, 100);
+        }
+    }
+
+    scrollToBottom();
 
 
     window.addEventListener("load", function() {
