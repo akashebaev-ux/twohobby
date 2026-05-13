@@ -256,16 +256,15 @@ body {
 /* Chat */
 
 .chat-page {
-    flex: 1;
+    height: 100dvh;
     display: flex;
     padding: 0;
     background: #f4f4f6;
-    min-height: 100dvh;
 }
 
 .chat-container {
     width: 100%;
-    flex: 1;
+    height: 100dvh;
     background: #ffffff;
     display: flex;
     flex-direction: column;
@@ -273,12 +272,16 @@ body {
 }
 
 .chat-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
     background: linear-gradient(135deg, #ff5864, #ff9966);
     color: white;
     padding: 18px;
     display: flex;
     align-items: center;
     gap: 14px;
+    flex-shrink: 0;
 }
 
 .chat-header h2 {
@@ -302,11 +305,29 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     padding: 18px;
     overflow-y: auto;
     background: #fafafa;
     scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #ff5864 #f1f1f1;
 }
+
+/* Custom scrollbar for WebKit browsers */
+.chat-log::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-log::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.chat-log::-webkit-scrollbar-thumb {
+    background: #ff5864;
+    border-radius: 10px;
+}
+
 
 .chat-message {
     max-width: 75%;
@@ -342,6 +363,9 @@ body {
 }
 
 .chat-input-area {
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -349,8 +373,7 @@ body {
     padding-bottom: calc(12px + env(safe-area-inset-bottom));
     border-top: 1px solid #eee;
     background: white;
-    position: sticky;
-    bottom: 0;
+    flex-shrink: 0;
 }
 
 #chat-message-input {
