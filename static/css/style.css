@@ -87,13 +87,23 @@ body {
     font-size: 12px;
     color: #777;
     text-decoration: none;
+    transition: .2s ease;
 }
 
 .nav-link span {
     display: block;
     font-size: 20px;
+    transition: transform .2s ease;
 }
 
+.nav-link.active {
+    color: #ff5864;
+    font-weight: 700;
+}
+
+.nav-link.active span {
+    transform: scale(1.08);
+}
 
 /* Profile grid */
 
@@ -199,6 +209,10 @@ body {
     border-radius: 22px;
     overflow: hidden;
     box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
+    transition: transform .2s ease;
+}
+.encounter-card:hover {
+    transform: translateY(-2px);
 }
 
 .encounter-card .profile-img {
@@ -206,6 +220,9 @@ body {
     border-radius: 0;
     border: none;
 }
+
+
+
 
 .encounter-info {
     padding: 20px;
@@ -372,6 +389,9 @@ body {
     object-fit: cover;
     border: 2px solid #ff5864;
     flex-shrink: 0;
+}
+.chat-card:hover {
+    background: #fafafa;
 }
 
 /* Chat time */

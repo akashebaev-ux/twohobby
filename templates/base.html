@@ -42,7 +42,11 @@
                 <small>Nearby</small>
             </a>
 
-            <a href="{% url 'encounters' %}" class="nav-link">
+            <a href="{% url 'encounters' %}"
+                class="nav-link
+                {% if request.resolver_match.url_name == 'encounters' %}
+                    active
+                {% endif %}">
                 <span>💞</span>
                 <small>Encounters</small>
             </a>
