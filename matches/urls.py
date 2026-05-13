@@ -1,0 +1,10 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path(
+        "swipe/<int:user_id>/<str:action>/",
+        views.swipe_user,
+        name="swipe_user"
+    ),
+]
