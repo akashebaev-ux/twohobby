@@ -16,4 +16,4 @@ def swipe_user(request, user_id, action):
             defaults={"action": action}
         )
 
-    return redirect("profile_list")
+    return redirect("encounters")
