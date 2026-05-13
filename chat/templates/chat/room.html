@@ -79,7 +79,11 @@
         if (message === "") {
             return;
         }
-
+        
+        if (chatSocket.readyState !== WebSocket.OPEN) {
+            window.location.reload();
+            return;
+        }
         chatSocket.send(JSON.stringify({
             "message": message
         }));
@@ -106,7 +110,16 @@
         if (messageInput) {
             messageInput.focus();
         }
-});
+    });
+
+    window.addEventListener("pageshow", function() {
+        const messageInput = document.querySelector("#chat-message-input");
+
+        if (messageInput) {
+            messageInput.disabled = false;
+            messageInput.focus();
+        }
+    });
 
 </script>
 
