@@ -483,6 +483,7 @@ body {
     color: #222;
     border-bottom: 1px solid #f0f0f0;
     transition: background .2s ease;
+    justify-content: space-between;
 }
 
 .chat-info {
@@ -523,6 +524,36 @@ body {
     width: 100%;
     text-align: center;
 }
+
+
+/* delete chat */
+
+.chat-card-main {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+    text-decoration: none;
+    color: #222;
+}
+
+.delete-chat-btn:hover {
+    color: #ff5864;
+}
+
+.delete-chat-form {
+    margin: 0;
+}
+
+.delete-chat-btn {
+    border: none;
+    background: transparent;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: #aaa;
+    transition: color .2s ease;
+}
+
 
 
 

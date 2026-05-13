@@ -21,7 +21,9 @@
             {% for room in rooms %}
                 {% for user in room.users.all %}
                     {% if user != request.user %}
-                        <a href="{% url 'room' room.id %}" class="connection-avatar">
+                        <a href="{% url 'room' room.id %}"
+                           class="connection-avatar">
+
                             {% if user.profile.profile_image and user.profile.profile_image.url %}
                                 <img src="{{ user.profile.profile_image.url }}"
                                      class="chat-avatar-img">
@@ -29,6 +31,7 @@
                                 <img src="{% static 'images/default.webp' %}"
                                      class="chat-avatar-img">
                             {% endif %}
+
                         </a>
                     {% endif %}
                 {% endfor %}
@@ -41,47 +44,63 @@
         </div>
 
         {% for room in rooms %}
-            <a href="{% url 'room' room.id %}" class="chat-card">
+            <div class="chat-card">
 
-                {% for user in room.users.all %}
-                    {% if user != request.user %}
+                <a href="{% url 'room' room.id %}"
+                   class="chat-card-main">
 
-                        {% if user.profile.profile_image and user.profile.profile_image.url %}
-                            <img src="{{ user.profile.profile_image.url }}"
-                                 class="chat-avatar-img">
-                        {% else %}
-                            <img src="{% static 'images/default.webp' %}"
-                                 class="chat-avatar-img">
+                    {% for user in room.users.all %}
+                        {% if user != request.user %}
+
+                            {% if user.profile.profile_image and user.profile.profile_image.url %}
+                                <img src="{{ user.profile.profile_image.url }}"
+                                     class="chat-avatar-img">
+                            {% else %}
+                                <img src="{% static 'images/default.webp' %}"
+                                     class="chat-avatar-img">
+                            {% endif %}
+
+                            <div class="chat-info">
+                                <h3>
+                                    {{ user.profile.display_name|default:user.username }}
+                                </h3>
+
+                                <p>
+                                    {% if room.messages.last %}
+                                        {{ room.messages.last.message|truncatechars:45 }}
+                                    {% else %}
+                                        No messages yet
+                                    {% endif %}
+                                </p>
+
+                                <small class="chat-time">
+                                    {% if room.messages.last %}
+                                        {{ room.messages.last.created_on|date:"H:i" }}
+                                    {% endif %}
+                                </small>
+                            </div>
+
                         {% endif %}
+                    {% endfor %}
 
-                        <div class="chat-info">
-                            <h3>
-                                {{ user.profile.display_name|default:user.username }}
-                            </h3>
+                </a>
 
-                            <p>
-                                {% if room.messages.last %}
-                                    {{ room.messages.last.message|truncatechars:45 }}
-                                {% else %}
-                                    No messages yet
-                                {% endif %}
-                            </p>
+                <form method="post"
+                      action="{% url 'delete_chat' room.id %}"
+                      class="delete-chat-form">
 
-                            <small class="chat-time">
-                                {% if room.messages.last %}
-                                    {{ room.messages.last.created_on|date:"H:i" }}
-                                {% endif %}
-                            </small>
-                        </div>
+                    {% csrf_token %}
 
-                    {% endif %}
-                {% endfor %}
+                    <button type="submit"
+                            class="delete-chat-btn">
 
-                <div class="chat-star">
-                    ☆
-                </div>
+                        🗑
 
-            </a>
+                    </button>
+
+                </form>
+
+            </div>
 
         {% empty %}
             <div class="no-chats">

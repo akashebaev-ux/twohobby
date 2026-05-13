@@ -43,3 +43,14 @@ def start_chat(request, user_id):
     room.users.add(request.user, other_user)
 
     return redirect("room", room_id=room.id)
+
+
+@login_required
+def delete_chat(request, room_id):
+    room = get_object_or_404(ChatRoom, id=room_id, users=request.user)
+
+    if request.method == "POST":
+        room.delete()
+        return redirect("chat_list")
+
+    return redirect("room", room_id=room.id)
