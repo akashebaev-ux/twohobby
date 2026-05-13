@@ -441,6 +441,14 @@ body {
     text-decoration: none;
 }
 
+.connection-avatar img {
+    transition: transform .2s ease;
+}
+
+.connection-avatar:hover img {
+    transform: scale(1.05);
+}
+
 .avatar-circle,
 .chat-avatar {
     width: 56px;
@@ -474,6 +482,7 @@ body {
     text-decoration: none;
     color: #222;
     border-bottom: 1px solid #f0f0f0;
+    transition: background .2s ease;
 }
 
 .chat-info {
