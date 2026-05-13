@@ -7,4 +7,5 @@ urlpatterns = [
     path("profile/edit/", views.edit_profile, name="edit_profile"),
     path('profile/<int:id>/', views.profile_detail, name='profile_detail'),
     path("my-profile/", views.my_profile, name="my_profile"),
+    path("encounters/", views.encounters, name="encounters"),
 ]
