@@ -16,15 +16,38 @@
         >
     {% endif %}
 
-    <h2>{{ profile.display_name }}</h2>
-    <p>Age: {{ profile.age }}</p>
+    <h2>{{ profile.display_name|default:profile.user.username }}</h2>
+
+    {% if profile.age %}
+        <p>Age: {{ profile.age }}</p>
+    {% endif %}
+
     <p>{{ profile.bio }}</p>
 
-    <a href="{% url 'profile_list' %}">Back to Nearby</a>
+    <div class="profile-actions">
 
-    <a href="{% url 'start_chat' profile.user.id %}">
-        Message
-    </a>
+        <a href="{% url 'swipe_user' profile.user.id 'like' %}"
+            class="filter-btn">
+            Like ❤️
+        </a>
+
+        <a href="{% url 'swipe_user' profile.user.id 'pass' %}"
+            class="filter-btn">
+            Pass ❌
+        </a>
+
+        <a href="{% url 'start_chat' profile.user.id %}"
+            class="filter-btn">
+            Message
+        </a>
+
+        <a href="{% url 'profile_list' %}"
+            class="filter-btn">
+
+            Back to Nearby
+
+        </a>
+    </div>
 
 </div>
 {% endblock %}
