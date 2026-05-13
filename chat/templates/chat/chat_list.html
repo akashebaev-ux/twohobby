@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block topbar %}{% endblock %}
 {% block bottom_nav %}{% endblock %}
@@ -6,33 +7,32 @@
 {% block content %}
 
 <div class="chat-list-page">
-
     <div class="chat-list-container">
 
         <div class="chat-list-header">
-
             <h1 class="app-logo">TwoHobby</h1>
 
             <a href="{% url 'profile_list' %}" class="back-nearby-btn">
                 ← Back to Nearby
             </a>
-
         </div>
 
         <div class="connections-row">
-
             {% for room in rooms %}
-
-                <a href="{% url 'room' room.id %}" class="connection-avatar">
-
-                    <div class="avatar-circle">
-                        💬
-                    </div>
-
-                </a>
-
+                {% for user in room.users.all %}
+                    {% if user != request.user %}
+                        <a href="{% url 'room' room.id %}" class="connection-avatar">
+                            {% if user.profile.profile_image and user.profile.profile_image.url %}
+                                <img src="{{ user.profile.profile_image.url }}"
+                                     class="chat-avatar-img">
+                            {% else %}
+                                <img src="{% static 'images/default.webp' %}"
+                                     class="chat-avatar-img">
+                            {% endif %}
+                        </a>
+                    {% endif %}
+                {% endfor %}
             {% endfor %}
-
         </div>
 
         <div class="connection-filter">
@@ -41,38 +41,41 @@
         </div>
 
         {% for room in rooms %}
-
             <a href="{% url 'room' room.id %}" class="chat-card">
 
-                <div class="chat-avatar">
-                    💬
-                </div>
+                {% for user in room.users.all %}
+                    {% if user != request.user %}
 
-                <div class="chat-info">
-
-                    <h3>
-                        {% for user in room.users.all %}
-                            {% if user != request.user %}
-                                {{ user.username }}
-                            {% endif %}
-                        {% endfor %}
-                    </h3>
-
-                    <p>
-                        {% if room.messages.last %}
-                            {{ room.messages.last.message|truncatechars:45 }}
+                        {% if user.profile.profile_image and user.profile.profile_image.url %}
+                            <img src="{{ user.profile.profile_image.url }}"
+                                 class="chat-avatar-img">
                         {% else %}
-                            Say hello 👋
+                            <img src="{% static 'images/default.webp' %}"
+                                 class="chat-avatar-img">
                         {% endif %}
-                    </p>
 
-                    <small class="chat-time">
-                        {% if room.messages.last %}
-                            {{ room.messages.last.created_on|date:"H:i" }}
-                        {% endif %}
-                    </small>
+                        <div class="chat-info">
+                            <h3>
+                                {{ user.profile.display_name|default:user.username }}
+                            </h3>
 
-                </div>
+                            <p>
+                                {% if room.messages.last %}
+                                    {{ room.messages.last.message|truncatechars:45 }}
+                                {% else %}
+                                    No messages yet
+                                {% endif %}
+                            </p>
+
+                            <small class="chat-time">
+                                {% if room.messages.last %}
+                                    {{ room.messages.last.created_on|date:"H:i" }}
+                                {% endif %}
+                            </small>
+                        </div>
+
+                    {% endif %}
+                {% endfor %}
 
                 <div class="chat-star">
                     ☆
@@ -81,15 +84,12 @@
             </a>
 
         {% empty %}
-
             <div class="no-chats">
                 <p>No chats yet.</p>
             </div>
-
         {% endfor %}
 
     </div>
-
 </div>
 
 {% endblock %}

@@ -159,6 +159,83 @@ body {
 }
 
 
+/* Profile info */
+.profile-info {
+    margin-top: 18px;
+    text-align: center;
+}
+
+.profile-info h2 {
+    margin-bottom: 6px;
+}
+
+.profile-age {
+    color: #777;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+.profile-bio {
+    line-height: 1.6;
+    color: #444;
+}
+
+
+
+
+/* Encounters swipe page */
+
+.encounters-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 120px);
+}
+
+.encounter-card {
+    width: 100%;
+    max-width: 420px;
+    background: white;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
+}
+
+.encounter-card .profile-img {
+    height: 420px;
+    border-radius: 0;
+    border: none;
+}
+
+.encounter-info {
+    padding: 20px;
+}
+
+.encounter-info h2 {
+    margin: 0 0 8px;
+    font-size: 1.6rem;
+}
+
+.encounter-info p {
+    color: #666;
+    line-height: 1.5;
+}
+
+.encounter-actions {
+    display: flex;
+    gap: 14px;
+    padding: 20px;
+}
+
+.encounter-actions .filter-btn {
+    flex: 1;
+    text-align: center;
+}
+
+
+
+
+
 /* Chat */
 
 .chat-page {
@@ -288,6 +365,22 @@ body {
     margin-top: 40px;
 }
 
+.chat-avatar-img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ff5864;
+    flex-shrink: 0;
+}
+
+/* Chat time */
+
+.chat-time {
+    color: #999;
+    font-size: .75rem;
+}
+
 /* return to profiles button */
 
 .back-nearby-btn {
@@ -302,12 +395,6 @@ body {
     font-weight: 600;
 }
 
-/* Chat time */
-
-.chat-time {
-    color: #999;
-    font-size: .75rem;
-}
 
 
 /* TwoHobby chat list */
@@ -497,26 +584,7 @@ body {
 
 
 
-/* Profile info */
-.profile-info {
-    margin-top: 18px;
-    text-align: center;
-}
 
-.profile-info h2 {
-    margin-bottom: 6px;
-}
-
-.profile-age {
-    color: #777;
-    font-weight: 600;
-    margin-bottom: 14px;
-}
-
-.profile-bio {
-    line-height: 1.6;
-    color: #444;
-}
 
 
 
