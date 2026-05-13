@@ -37,7 +37,11 @@
     <!-- Bottom Navigation -->
     {% block bottom_nav %}
         <nav class="bottom-nav">
-            <a href="{% url 'profile_list' %}" class="nav-link">
+            <a href="{% url 'profile_list' %}"
+                class="nav-link
+                {% if request.resolver_match.url_name == 'profile_list' %}
+                    active
+                {% endif %}">
                 <span>📍</span>
                 <small>Nearby</small>
             </a>
@@ -51,17 +55,29 @@
                 <small>Encounters</small>
             </a>
 
-            <a href="#" class="nav-link">
+            <a href="{% url 'likes' %}"
+                class="nav-link
+                {% if request.resolver_match.url_name == 'likes' %}
+                    active
+                {% endif %}">
                 <span>❤</span>
                 <small>Likes</small>
             </a>
 
-            <a href="{% url 'chat_list' %}" class="nav-link">
+            <a href="{% url 'chat_list' %}"
+                class="nav-link
+                {% if request.resolver_match.url_name == 'chat_list' %}
+                    active
+                {% endif %}">
                 <span>💬</span>
                 <small>Chats</small>
             </a>
 
-            <a href="{% url 'my_profile' %}" class="nav-link">
+            <a href="{% url 'my_profile' %}"
+                class="nav-link
+                {% if request.resolver_match.url_name == 'my_profile' %}
+                    active
+                {% endif %}">
                 <span>👤</span>
                 <small>Profile</small>
             </a>
