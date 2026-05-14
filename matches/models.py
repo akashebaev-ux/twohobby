@@ -45,6 +45,12 @@ class LikePost(models.Model):
         max_length=500
     )
 
+    liked_by = models.ManyToManyField(
+        User,
+        related_name="liked_like_posts",
+        blank=True
+    )
+
     created_on = models.DateTimeField(
         auto_now_add=True
     )
@@ -54,3 +60,4 @@ class LikePost(models.Model):
 
     def __str__(self):
         return f"{self.author} - {self.body[:30]}"
+    
