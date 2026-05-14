@@ -8,4 +8,5 @@ urlpatterns = [
     path('profile/<int:id>/', views.profile_detail, name='profile_detail'),
     path("my-profile/", views.my_profile, name="my_profile"),
     path("encounters/", views.encounters, name="encounters"),
+    path("save-location/", views.save_location, name="save_location"),
 ]
