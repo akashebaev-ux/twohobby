@@ -24,8 +24,22 @@ class Profile(models.Model):
     age = models.PositiveIntegerField(null=True, blank=True)
     bio = models.TextField(max_length=500)
     location = models.CharField(max_length=100)
-    gender = models.CharField(max_length=20, choices=GENDER_CHOICES)
-    looking_for = models.CharField(max_length=20, choices=LOOKING_FOR_CHOICES)
+    latitude = models.FloatField(
+        null=True,
+        blank=True
+    )
+    longitude = models.FloatField(
+        null=True,
+        blank=True
+    )
+    gender = models.CharField(
+        max_length=20,
+        choices=GENDER_CHOICES
+    )
+    looking_for = models.CharField(
+        max_length=20,
+        choices=LOOKING_FOR_CHOICES
+    )
     profile_image = CloudinaryField(
         "Profile Image",
         folder="profile_images",
