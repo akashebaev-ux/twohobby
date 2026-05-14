@@ -7,4 +7,5 @@ urlpatterns = [
         views.swipe_user,
         name="swipe_user"
     ),
+    path("likes/", views.likes, name="likes"),
 ]
