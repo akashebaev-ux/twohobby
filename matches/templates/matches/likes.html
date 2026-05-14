@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Likes{% endblock %}
+
+{% block content %}
+<div class="likes-page">
+
+    <h2>People You Liked</h2>
+
+    <div class="liked-users">
+        {% for swipe in liked_users %}
+            <div class="liked-user-card">
+                {{ swipe.to_user.profile.display_name|default:swipe.to_user.username }}
+            </div>
+        {% empty %}
+            <p>You have not liked anyone yet.</p>
+        {% endfor %}
+    </div>
+
+    <h2>Liked People Feed</h2>
+
+    {% if can_post %}
+        <form method="post" class="like-post-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit" class="filter-btn">
+                Post
+            </button>
+        </form>
+    {% else %}
+        <p>Like someone first to join the feed.</p>
+    {% endif %}
+
+    <div class="like-posts">
+        {% for post in posts %}
+            <div class="like-post-card">
+                <strong>
+                    {{ post.author.profile.display_name|default:post.author.username }}
+                </strong>
+
+                <p>{{ post.body }}</p>
+
+                <small>{{ post.created_on|date:"M d, H:i" }}</small>
+            </div>
+        {% empty %}
+            <p>No posts yet.</p>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}
