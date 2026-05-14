@@ -13,6 +13,7 @@ class LikePostForm(forms.ModelForm):
             })
         }
 
+
 class LikeCommentForm(forms.ModelForm):
     class Meta:
         model = LikeComment
