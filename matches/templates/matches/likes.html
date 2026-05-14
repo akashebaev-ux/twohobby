@@ -7,10 +7,24 @@
 
 <div class="likes-page">
 
+    <div class="liked-carousel">
+        {% for swipe in liked_users %}
+            <div class="liked-avatar-card">
+                {% if swipe.to_user.profile.profile_image %}
+                    <img src="{{ swipe.to_user.profile.profile_image.url }}"
+                        class="liked-avatar-img">
+                {% else %}
+                    <img src="{% static 'images/default.webp' %}"
+                        class="liked-avatar-img">
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+
     <div class="likes-header">
         <h2>Likes</h2>
     </div>
-    
+
 
     {% if can_post %}
         <form method="post" class="like-post-form">

@@ -764,6 +764,34 @@ body {
 }
 
 
+/* Carousel */
+
+.liked-carousel {
+    display: flex;
+    gap: 18px;
+    overflow-x: auto;
+    padding: 20px 0;
+    scroll-snap-type: x mandatory;
+}
+
+.liked-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.liked-avatar-card {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+}
+
+.liked-avatar-img {
+    width: 74px;
+    height: 74px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #e71920;
+}
+
+
 
 /* Desktop app preview */
 
