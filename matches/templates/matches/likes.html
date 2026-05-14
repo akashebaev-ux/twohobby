@@ -1,52 +1,77 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Likes{% endblock %}
 
 {% block content %}
+
 <div class="likes-page">
 
-    <h2>People You Liked</h2>
-
-    <div class="liked-users">
-        {% for swipe in liked_users %}
-            <div class="liked-user-card">
-                {{ swipe.to_user.profile.display_name|default:swipe.to_user.username }}
-            </div>
-        {% empty %}
-            <p>You have not liked anyone yet.</p>
-        {% endfor %}
+    <div class="likes-header">
+        <h2>Likes</h2>
     </div>
-
-    <h2>Liked People Feed</h2>
+    
 
     {% if can_post %}
         <form method="post" class="like-post-form">
             {% csrf_token %}
-            {{ form.as_p }}
+
+            {{ form.body }}
 
             <button type="submit" class="filter-btn">
                 Post
             </button>
         </form>
-    {% else %}
-        <p>Like someone first to join the feed.</p>
+
     {% endif %}
 
-    <div class="like-posts">
-        {% for post in posts %}
-            <div class="like-post-card">
-                <strong>
-                    {{ post.author.profile.display_name|default:post.author.username }}
-                </strong>
+    {% for post in posts %}
+        <div class="like-post-card">
 
-                <p>{{ post.body }}</p>
+            <div class="like-post-left">
+                {% if post.author.profile.profile_image %}
+                    <img src="{{ post.author.profile.profile_image.url }}"
+                         class="like-post-avatar">
+                {% else %}
+                    <img src="{% static 'images/default.webp' %}"
+                         class="like-post-avatar">
+                {% endif %}
 
-                <small>{{ post.created_on|date:"M d, H:i" }}</small>
+                <div class="thread-line"></div>
             </div>
-        {% empty %}
-            <p>No posts yet.</p>
-        {% endfor %}
-    </div>
+
+            <div class="like-post-content">
+                <div class="like-post-header">
+                    <span class="like-post-author">
+                        {{ post.author.profile.display_name|default:post.author.username }}
+                    </span>
+
+                    <span class="like-post-time">
+                        {{ post.created_on|timesince }} ago
+                    </span>
+                </div>
+
+                <p class="like-post-body">
+                    {{ post.body }}
+                </p>
+
+                <div class="like-post-actions">
+                    <span>♡</span>
+                    <span>💬</span>
+                    <span>↻</span>
+                    <span>➤</span>
+                </div>
+
+                <div class="like-post-meta">
+                    {{ post.comments.count }} replies · 0 likes
+                </div>
+            </div>
+
+        </div>
+    {% empty %}
+        <p>No posts yet.</p>
+    {% endfor %}
 
 </div>
+
 {% endblock %}

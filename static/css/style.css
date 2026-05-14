@@ -666,10 +666,102 @@ body {
 
 
 
+/* Threads-style likes feed */
 
+.likes-page {
+    padding: 0 14px 90px;
+}
 
+.likes-header {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 10;
+    text-align: center;
+    padding: 14px 0;
+    border-bottom: 1px solid #eee;
+}
 
+.like-post-card {
+    display: flex;
+    gap: 10px;
+    padding: 14px 0;
+    border-bottom: 1px solid #eee;
+    background: white;
+}
 
+.like-post-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.like-post-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.thread-line {
+    width: 2px;
+    flex: 1;
+    background: #e5e5e5;
+    margin-top: 8px;
+}
+
+.like-post-content {
+    flex: 1;
+}
+
+.like-post-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.like-post-author {
+    font-weight: 700;
+}
+
+.like-post-time {
+    color: #888;
+    font-size: .8rem;
+}
+
+.like-post-body {
+    margin: 5px 0 10px;
+    line-height: 1.4;
+}
+
+.like-post-actions {
+    display: flex;
+    gap: 18px;
+    font-size: 1.1rem;
+}
+
+.like-post-meta {
+    margin-top: 8px;
+    color: #888;
+    font-size: .8rem;
+}
+
+.like-post-form {
+    margin: 20px 0;
+}
+
+.like-post-form textarea {
+    width: 100%;
+    min-height: 90px;
+    border: 1px solid #eee;
+    border-radius: 18px;
+    padding: 14px;
+    font-size: 16px;
+    outline: none;
+}
+
+.like-post-form textarea:focus {
+    border-color: #ff5864;
+}
 
 
 
