@@ -25,7 +25,15 @@
 
             <p>
                 {{ profile.display_name|default:profile.user.username }}
-                {% if profile.age %}, {{ profile.age }}{% endif %}
+
+                {% if profile.age %}
+                    , {{ profile.age }}
+                {% endif %}
+
+                {% if profile.distance %}
+                    <br>
+                    <small>{{ profile.distance }} km away</small>
+                {% endif %}
             </p>
 
         </a>
