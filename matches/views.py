@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
-from .forms import LikePostForm
+from .forms import LikePostForm, LikeCommentForm
 from .models import Swipe, LikePost
 
 
@@ -26,7 +26,10 @@ def likes(request):
         action="like"
     ).select_related("to_user")
 
-    liked_user_ids = liked_users.values_list("to_user", flat=True)
+    liked_user_ids = liked_users.values_list(
+        "to_user",
+        flat=True
+    )
 
     posts = LikePost.objects.filter(
         author__id__in=list(liked_user_ids) + [request.user.id]
@@ -34,21 +37,49 @@ def likes(request):
 
     can_post = liked_users.exists()
 
+    form = LikePostForm()
+    comment_form = LikeCommentForm()
+
     if request.method == "POST" and can_post:
-        form = LikePostForm(request.POST)
 
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
+        if "comment_submit" in request.POST:
 
-            return redirect("likes")
-    else:
-        form = LikePostForm()
+            comment_form = LikeCommentForm(request.POST)
+
+            if comment_form.is_valid():
+
+                post = get_object_or_404(
+                    LikePost,
+                    id=request.POST.get("post_id")
+                )
+
+                comment = comment_form.save(commit=False)
+
+                comment.author = request.user
+                comment.post = post
+
+                comment.save()
+
+                return redirect("likes")
+
+        else:
+
+            form = LikePostForm(request.POST)
+
+            if form.is_valid():
+
+                post = form.save(commit=False)
+
+                post.author = request.user
+
+                post.save()
+
+                return redirect("likes")
 
     return render(request, "matches/likes.html", {
         "liked_users": liked_users,
         "posts": posts,
         "form": form,
+        "comment_form": comment_form,
         "can_post": can_post,
     })

@@ -1,5 +1,5 @@
 from django import forms
-from .models import LikePost
+from .models import LikePost, LikeComment
 
 
 class LikePostForm(forms.ModelForm):
@@ -10,5 +10,16 @@ class LikePostForm(forms.ModelForm):
             "body": forms.Textarea(attrs={
                 "placeholder": "Share something with liked people...",
                 "rows": 3,
+            })
+        }
+
+class LikeCommentForm(forms.ModelForm):
+    class Meta:
+        model = LikeComment
+        fields = ["body"]
+
+        widgets = {
+            "body": forms.TextInput(attrs={
+                "placeholder": "Reply...",
             })
         }
