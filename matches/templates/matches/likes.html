@@ -70,7 +70,22 @@
                 </p>
 
                 <div class="like-post-actions">
-                    <span>♡</span>
+                    <form method="post"
+                        action="{% url 'toggle_like_post' post.id %}"
+                        class="heart-form">
+                        
+                        {% csrf_token %}
+
+                        <button 
+                            type="submit"
+                            class="heart-btn 
+                            {% if request.user in post.liked_by.all %}
+                            liked
+                            {% endif %}"
+                        >
+                            ♥
+                        </button>
+                    </form>
                     <span>💬</span>
                     <span>↻</span>
                     <span>➤</span>

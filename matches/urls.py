@@ -8,4 +8,9 @@ urlpatterns = [
         name="swipe_user"
     ),
     path("likes/", views.likes, name="likes"),
+    path(
+    "post/<int:post_id>/like/",
+    views.toggle_like_post,
+    name="toggle_like_post"
+),
 ]

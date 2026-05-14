@@ -83,3 +83,15 @@ def likes(request):
         "comment_form": comment_form,
         "can_post": can_post,
     })
+
+
+@login_required
+def toggle_like_post(request, post_id):
+    post = get_object_or_404(LikePost, id=post_id)
+
+    if request.user in post.liked_by.all():
+        post.liked_by.remove(request.user)
+    else:
+        post.liked_by.add(request.user)
+
+    return redirect("likes")
