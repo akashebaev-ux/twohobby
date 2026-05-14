@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from .models import Profile
 from .forms import ProfileForm
 from matches.models import Swipe
+import json
+from django.http import JsonResponse
 
 # Create your views here.
 class ProfileListView(generic.ListView):
@@ -87,3 +89,18 @@ def encounters(request):
     return render(request, "profiles/encounters.html", {
         "profile": profile
     })
+
+
+@login_required
+def save_location(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+
+        profile = request.user.profile
+        profile.latitude = data.get("latitude")
+        profile.longitude = data.get("longitude")
+        profile.save()
+
+        return JsonResponse({"status": "ok"})
+
+    return JsonResponse({"status": "error"}, status=400)
