@@ -871,6 +871,33 @@ body {
     margin-bottom: 18px;
 }
 
+/* Post action buttons */
+.post-action-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: #222;
+    text-decoration: none;
+}
+
+.post-action-btn:hover {
+    color: #ff5864;
+}
+
+
+.comment-toggle-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: #222;
+}
+
+.comment-toggle-btn:hover {
+    color: #ff5864;
+}
+
 /* Desktop app preview */
 
 @media screen and (min-width: 768px) {
