@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
 from .forms import LikePostForm, LikeCommentForm
-from .models import Swipe, LikePost
+from .models import Swipe, LikePost, BlockedUser
 from chat.models import ChatRoom, ChatMessage
 
 @login_required
@@ -134,3 +134,16 @@ def share_like_post(request, post_id):
     )
 
     return redirect("room", room_id=room.id)
+
+
+@login_required
+def block_user(request, user_id):
+    blocked_user = get_object_or_404(User, id=user_id)
+
+    if request.user != blocked_user:
+        BlockedUser.objects.get_or_create(
+            blocker=request.user,
+            blocked=blocked_user
+        )
+
+    return redirect("profile_list")
