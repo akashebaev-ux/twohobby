@@ -4,6 +4,14 @@
 {% block title %}My Profile{% endblock %}
 
 {% block content %}
+<div class="top-profile-actions">
+    {% if user.is_authenticated %}
+        <form method="post" action="{% url 'account_logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="filter-btn">Logout</button>
+        </form>
+    {% endif %}
+</div>
 <div class="profile-detail">
     
     {% if profile.profile_image and profile.profile_image.url %}
@@ -39,12 +47,7 @@
             Browse Profiles
 
         </a>
-        {% if user.is_authenticated %}
-            <form method="post" action="{% url 'account_logout' %}">
-                {% csrf_token %}
-                <button type="submit" class="filter-btn">Logout</button>
-            </form>
-        {% endif %}
+
     </div>
 
 </div>

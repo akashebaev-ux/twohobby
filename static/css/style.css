@@ -663,7 +663,11 @@ body {
     resize: vertical;
 }
 
-
+.top-profile-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 12px;
+}
 
 
 /* Threads-style likes feed */
