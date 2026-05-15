@@ -84,3 +84,25 @@ class LikeComment(models.Model):
 
     def __str__(self):
         return f"{self.author} comment"
+    
+
+class BlockedUser(models.Model):
+    blocker = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="blocked_users"
+    )
+
+    blocked = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="blocked_by_users"
+    )
+
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ("blocker", "blocked")
+
+    def __str__(self):
+        return f"{self.blocker} blocked {self.blocked}"
