@@ -11,9 +11,18 @@
         <div class="chat-header">
             <a href="{% url 'chat_list' %}" class="back-btn">‹</a>
             <div>
-                <h2>Chat</h2>
+                <h2>
+                    {{ other_user.profile.display_name|default:other_user.username }}
+                </h2>
                 <p>Private conversation</p>
             </div>
+
+            {% if other_user %}
+                <a href="{% url 'block_user' other_user.id %}"
+                class="chat-block-btn">
+                    🚫 Block
+                </a>
+            {% endif %}
         </div>
 
         <div id="chat-log" class="chat-log">

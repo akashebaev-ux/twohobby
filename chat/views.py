@@ -16,13 +16,22 @@ def chat_list(request):
 
 @login_required
 def room(request, room_id):
-    room = get_object_or_404(ChatRoom, id=room_id)
+    room = get_object_or_404(
+        ChatRoom,
+        id=room_id,
+        users=request.user
+    )
 
     messages = room.messages.all()
+
+    other_user = room.users.exclude(
+        id=request.user.id
+    ).first()
 
     return render(request, "chat/room.html", {
         "room": room,
         "messages": messages,
+        "other_user": other_user,
     })
 
 
