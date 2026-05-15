@@ -898,6 +898,11 @@ body {
     color: #ff5864;
 }
 
+.comments-section {
+    display: none;
+    margin-top: 10px;
+}
+
 /* Desktop app preview */
 
 @media screen and (min-width: 768px) {

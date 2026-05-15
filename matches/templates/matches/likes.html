@@ -86,7 +86,22 @@
                             ♥
                         </button>
                     </form>
-                    <span>💬</span>
+                    <button
+                        type="button"
+                        class="comment-toggle-btn"
+                        onclick="
+                            const section = this.closest('.like-post-content')
+                            .querySelector('.comments-section');
+
+                            if (section.style.display === 'block') {
+                                section.style.display = 'none';
+                            } else {
+                                section.style.display = 'block';
+                            }
+                        "
+                    >
+                        💬
+                    </button>
                     {% if post.author == request.user %}
                         <form method="post"
                             action="{% url 'delete_like_post' post.id %}">
@@ -106,21 +121,34 @@
                 <div class="like-post-meta">
                     {{ post.comments.count }} replies · {{ post.liked_by.count }} likes
                 </div>
-                <div class="post-comments">
-                    {% for comment in post.comments.all %}
-                        <p>
-                            <strong>{{ comment.author.username }}</strong>
-                            {{ comment.body }}
-                        </p>
-                    {% endfor %}
-                </div>
+                
+                <div class="comments-section">
 
-                <form method="post" class="comment-form">
-                    {% csrf_token %}
-                    <input type="hidden" name="post_id" value="{{ post.id }}">
-                    {{ comment_form.body }}
-                    <button type="submit" name="comment_submit">Reply</button>
-                </form>
+                    <div class="post-comments">
+                        {% for comment in post.comments.all %}
+                            <p>
+                                <strong>{{ comment.author.username }}</strong>
+                                {{ comment.body }}
+                            </p>
+                        {% endfor %}
+                    </div>
+
+                    <form method="post" class="comment-form">
+                        {% csrf_token %}
+
+                        <input type="hidden"
+                            name="post_id"
+                            value="{{ post.id }}">
+
+                        {{ comment_form.body }}
+
+                        <button type="submit"
+                                name="comment_submit">
+                            Reply
+                        </button>
+                    </form>
+
+                </div>
 
             </div>
 
