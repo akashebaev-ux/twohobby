@@ -865,7 +865,11 @@ body {
     font-size: 14px;
 }
 
-
+/* Filter box */
+.filter-box {
+    display: none;
+    margin-bottom: 18px;
+}
 
 /* Desktop app preview */
 

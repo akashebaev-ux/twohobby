@@ -5,21 +5,23 @@
 
 {% block content %}
 
-<form method="get" class="profile-filter-form">
-    <select name="gender">
-        <option value="">Everyone</option>
-        <option value="male">Men</option>
-        <option value="female">Women</option>
-    </select>
+<div id="filter-box" class="filter-box"> 
 
-    <input type="number" name="min_age" placeholder="Min age">
-    <input type="number" name="max_age" placeholder="Max age">
+    <form method="get" class="profile-filter-form">
+        <select name="gender">
+            <option value="">Everyone</option>
+            <option value="male">Men</option>
+            <option value="female">Women</option>
+        </select>
 
-    <button type="submit" class="filter-btn">
-        Apply
-    </button>
-</form>
+        <input type="number" name="min_age" placeholder="Min age">
+        <input type="number" name="max_age" placeholder="Max age">
 
+        <button type="submit" class="filter-btn">
+            Apply
+        </button>
+    </form>
+</div>
 
 <div class="profile-grid">
 
@@ -74,5 +76,20 @@
             });
         });
     }
+
+        // Toggle filter box
+
+    const filterBtn = document.getElementById("toggle-filter-btn");
+    const filterBox = document.getElementById("filter-box");
+
+    filterBtn.addEventListener("click", function(e) {
+        e.preventDefault();
+
+        if (filterBox.style.display === "block") {
+            filterBox.style.display = "none";
+        } else {
+            filterBox.style.display = "block";
+        }
+    });
 </script>
 {% endblock %}
