@@ -847,6 +847,24 @@ body {
     line-height: 1.4;
 }
 
+/* Profile filter form */
+
+.profile-filter-form {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.profile-filter-form select,
+.profile-filter-form input {
+    flex: 1;
+    min-width: 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 14px;
+    font-size: 14px;
+}
+
 
 
 /* Desktop app preview */
