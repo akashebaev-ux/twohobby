@@ -3,7 +3,7 @@ from django.views import generic
 from django.contrib.auth.decorators import login_required
 from .models import Profile
 from .forms import ProfileForm
-from matches.models import Swipe
+from matches.models import Swipe, BlockedUser
 import json
 from django.http import JsonResponse
 
@@ -35,6 +35,12 @@ class ProfileListView(generic.ListView):
 
     def get_queryset(self):
         queryset = Profile.objects.filter(is_active=True)
+
+        blocked_users = BlockedUser.objects.filter(
+            blocker=self.request.user
+        ).values_list("blocked", flat=True)
+
+        queryset = queryset.exclude(user__id__in=blocked_users)
 
         gender = self.request.GET.get("gender")
         min_age = self.request.GET.get("min_age")
@@ -126,12 +132,18 @@ def encounters(request):
         from_user=request.user
     ).values_list("to_user", flat=True)
 
+    blocked_users = BlockedUser.objects.filter(
+        blocker=request.user
+    ).values_list("blocked", flat=True)
+
     queryset = Profile.objects.filter(
         is_active=True
     ).exclude(
         user=request.user
     ).exclude(
         user__id__in=swiped_users
+    ).exclude(
+        user__id__in=blocked_users
     )
 
     gender = request.GET.get("gender")
