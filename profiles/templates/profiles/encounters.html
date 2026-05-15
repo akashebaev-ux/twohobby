@@ -4,6 +4,25 @@
 {% block title %}Encounters{% endblock %}
 
 {% block content %}
+
+<div id="filter-box" class="filter-box">
+    <form method="get" class="profile-filter-form">
+        <select name="gender">
+            <option value="">Everyone</option>
+            <option value="male">Men</option>
+            <option value="female">Women</option>
+        </select>
+
+        <input type="number" name="min_age" placeholder="Min age">
+        <input type="number" name="max_age" placeholder="Max age">
+
+        <button type="submit" class="filter-btn">
+            Apply
+        </button>
+    </form>
+</div>
+
+
 <div class="profile-detail">
 
     {% if profile %}
@@ -44,4 +63,21 @@
     {% endif %}
 
 </div>
+
+<script>
+    const filterBtn = document.getElementById("toggle-filter-btn");
+    const filterBox = document.getElementById("filter-box");
+
+    if (filterBtn && filterBox) {
+        filterBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+
+            if (filterBox.style.display === "block") {
+                filterBox.style.display = "none";
+            } else {
+                filterBox.style.display = "block";
+            }
+        });
+    }
+</script>
 {% endblock %}

@@ -126,13 +126,28 @@ def encounters(request):
         from_user=request.user
     ).values_list("to_user", flat=True)
 
-    profile = Profile.objects.filter(
+    queryset = Profile.objects.filter(
         is_active=True
     ).exclude(
         user=request.user
     ).exclude(
         user__id__in=swiped_users
-    ).first()
+    )
+
+    gender = request.GET.get("gender")
+    min_age = request.GET.get("min_age")
+    max_age = request.GET.get("max_age")
+
+    if gender:
+        queryset = queryset.filter(gender=gender)
+
+    if min_age:
+        queryset = queryset.filter(age__gte=min_age)
+
+    if max_age:
+        queryset = queryset.filter(age__lte=max_age)
+
+    profile = queryset.first()
 
     return render(request, "profiles/encounters.html", {
         "profile": profile
