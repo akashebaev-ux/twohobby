@@ -36,6 +36,19 @@ class ProfileListView(generic.ListView):
     def get_queryset(self):
         queryset = Profile.objects.filter(is_active=True)
 
+        gender = self.request.GET.get("gender")
+        min_age = self.request.GET.get("min_age")
+        max_age = self.request.GET.get("max_age")
+
+        if gender:
+            queryset = queryset.filter(gender=gender)
+
+        if min_age:
+            queryset = queryset.filter(age__gte=min_age)
+
+        if max_age:
+            queryset = queryset.filter(age__lte=max_age)
+
         if self.request.user.is_authenticated:
             queryset = queryset.exclude(user=self.request.user)
 
