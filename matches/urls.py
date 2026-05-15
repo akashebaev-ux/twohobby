@@ -12,5 +12,16 @@ urlpatterns = [
     "post/<int:post_id>/like/",
     views.toggle_like_post,
     name="toggle_like_post"
-),
+    ),
+    path(
+        "post/<int:post_id>/delete/",
+        views.delete_like_post,
+        name="delete_like_post"
+    ),
+
+    path(
+        "post/<int:post_id>/share/",
+        views.share_like_post,
+        name="share_like_post"
+    ),
 ]

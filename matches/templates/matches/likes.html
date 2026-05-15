@@ -87,8 +87,20 @@
                         </button>
                     </form>
                     <span>💬</span>
-                    <span>↻</span>
-                    <span>➤</span>
+                    {% if post.author == request.user %}
+                        <form method="post"
+                            action="{% url 'delete_like_post' post.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="post-action-btn">
+                                🗑
+                            </button>
+                        </form>
+                    {% endif %}
+
+                    <a href="{% url 'share_like_post' post.id %}"
+                    class="post-action-btn">
+                        ➤
+                    </a>
                 </div>
 
                 <div class="like-post-meta">

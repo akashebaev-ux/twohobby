@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
 from .forms import LikePostForm, LikeCommentForm
 from .models import Swipe, LikePost
-
+from chat.models import ChatRoom, ChatMessage
 
 @login_required
 def swipe_user(request, user_id, action):
@@ -95,3 +95,42 @@ def toggle_like_post(request, post_id):
         post.liked_by.add(request.user)
 
     return redirect("likes")
+
+
+@login_required
+def delete_like_post(request, post_id):
+    post = get_object_or_404(
+        LikePost,
+        id=post_id,
+        author=request.user
+    )
+
+    if request.method == "POST":
+        post.delete()
+
+    return redirect("likes")
+
+
+@login_required
+def share_like_post(request, post_id):
+    post = get_object_or_404(LikePost, id=post_id)
+
+    existing_room = ChatRoom.objects.filter(
+        users=request.user
+    ).filter(
+        users=post.author
+    ).first()
+
+    if existing_room:
+        room = existing_room
+    else:
+        room = ChatRoom.objects.create()
+        room.users.add(request.user, post.author)
+
+    ChatMessage.objects.create(
+        room=room,
+        sender=request.user,
+        message=f"Shared post: {post.body}"
+    )
+
+    return redirect("room", room_id=room.id)
