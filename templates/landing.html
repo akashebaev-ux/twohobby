@@ -1,40 +1,35 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block topbar %}{% endblock %}
 {% block bottom_nav %}{% endblock %}
 
 {% block content %}
-<div class="welcome-page">
+<div class="landing-page">
+    <div class="landing-content">
 
-    <div class="welcome-card">
+        <h1 class="landing-title">TwoHobby</h1>
 
-        <h1 class="welcome-title">
-            Welcome to TwoHobby 💕
-        </h1>
-
-        <p class="welcome-subtitle">
-            Meet new people, chat and connect.
+        <p class="landing-subtitle">
+            Meet people nearby who share your interests
         </p>
 
-        <div class="welcome-buttons">
+        <img
+            src="{% static 'images/heart-logo.png' %}"
+            alt="TwoHobby heart logo"
+            class="landing-heart"
+        >
 
-            <a href="{% url 'account_login' %}"
-               class="filter-btn welcome-btn">
-
-                Login
-
+        <div class="landing-actions">
+            <a href="{% url 'account_login' %}" class="landing-btn">
+                LOGIN
             </a>
 
-            <a href="{% url 'account_signup' %}"
-               class="filter-btn welcome-btn">
-
-                Register
-
+            <a href="{% url 'account_signup' %}" class="landing-btn">
+                REGISTER
             </a>
-
         </div>
 
     </div>
-
 </div>
 {% endblock %}
