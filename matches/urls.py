@@ -24,4 +24,9 @@ urlpatterns = [
         views.share_like_post,
         name="share_like_post"
     ),
+    path(
+    "block/<int:user_id>/",
+    views.block_user,
+    name="block_user"
+    ),
 ]
