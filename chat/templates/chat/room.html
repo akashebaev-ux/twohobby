@@ -522,7 +522,8 @@
                 document.getElementById("remote-audio");
 
             remoteAudio.srcObject = event.streams[0];
-            remoteAudio.volume = 0.25;
+            remoteAudio.volume = 0.05;
+            remoteAudio.setAttribute("controls", false);
         };
 
         peerConnection.onicecandidate = function(event) {
