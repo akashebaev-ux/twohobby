@@ -281,6 +281,20 @@
     let recorder;
     let stream;
     let audioContext;
+    let peerConnection;
+    let localStream;
+    let remoteStream;
+
+    const rtcConfig = {
+        iceServers: [
+            {
+                urls: "stun:stun.l.google.com:19302"
+            }
+        ]
+    };
+
+
+
     let analyser;
     let source;
     let chunks = [];
