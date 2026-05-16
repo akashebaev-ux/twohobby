@@ -133,6 +133,17 @@
 
         console.log(data);
 
+        if (data.username === currentUser &&
+            [
+                "webrtc_offer",
+                "webrtc_answer",
+                "ice_candidate",
+                "call_invite"
+            ].includes(data.type)
+        ) {
+            return;
+        }
+        
         if (data.type === "call_invite") {
             showCallInvite(data.username);
             return;
@@ -287,7 +298,7 @@
         }));
     };
 
-    
+
 
     let recorder;
     let stream;
