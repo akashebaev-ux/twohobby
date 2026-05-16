@@ -261,7 +261,13 @@
                     "#chat-message-input"
                 );
 
-            messageInput.value = text;
+            const translatedText =
+                await window.translateText(
+                    text
+                );
+
+            messageInput.value =
+                translatedText;
 
             statusText.innerText =
                 "Sending...";
