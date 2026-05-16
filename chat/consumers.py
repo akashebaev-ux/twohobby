@@ -38,10 +38,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     async def receive(self, text_data):
         data = json.loads(text_data)
+
         message = data["message"]
         username = self.scope["user"].username
+        is_voice = data.get("is_voice", False)
 
-        await self.save_message(message)
+        if not is_voice:
+            await self.save_message(message)
 
         await self.channel_layer.group_send(
             self.room_group_name,
