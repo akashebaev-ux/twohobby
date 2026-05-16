@@ -190,6 +190,84 @@
 
     declineCallBtn.onclick = function () {
         callPanel.classList.add("hidden");
+        };
+
+
+    let recorder;
+    let chunks = [];
+    let isCalling = false;
+
+    const acceptBtn =
+        document.getElementById("accept-call");
+
+    acceptBtn.onclick = async function () {
+
+        isCalling = true;
+
+        const statusText =
+            document.getElementById("call-status");
+
+        statusText.innerText = "Listening...";
+
+        const stream =
+            await navigator.mediaDevices.getUserMedia({
+                audio: true
+            });
+
+        recorder = new MediaRecorder(stream);
+
+        chunks = [];
+
+        recorder.ondataavailable = function(event) {
+            chunks.push(event.data);
+        };
+
+        recorder.onstop = async function () {
+
+            statusText.innerText =
+                "Voice captured";
+
+            const audioBlob =
+                new Blob(chunks, {
+                    type: "audio/webm"
+                });
+
+            console.log(audioBlob);
+
+            stream.getTracks().forEach(track =>
+                track.stop()
+            );
+        };
+
+        recorder.start();
+
+        setTimeout(() => {
+
+            if (isCalling) {
+                recorder.stop();
+            }
+
+        }, 3000);
+    };
+
+    declineCallBtn.onclick = function () {
+
+        isCalling = false;
+
+        const statusText =
+            document.getElementById("call-status");
+
+        statusText.innerText =
+            "Call ended";
+
+        if (
+            recorder &&
+            recorder.state !== "inactive"
+        ) {
+            recorder.stop();
+        }
+
+        callPanel.classList.add("hidden");
     };
 </script>
 
