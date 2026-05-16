@@ -50,7 +50,7 @@
             </h2>
 
             <p id="call-status">
-                Ready to translate voice
+                Ready to translate your voice to: 
             </p>
             <audio 
                 id="remote-audio" 
@@ -496,7 +496,7 @@
                     audio: {
                         echoCancellation: true,
                         noiseSuppression: true,
-                        autoGainControl: true
+                        autoGainControl: false
                     },
                     video: false
                 });
@@ -522,7 +522,7 @@
                 document.getElementById("remote-audio");
 
             remoteAudio.srcObject = event.streams[0];
-            remoteAudio.volume = 0.7;
+            remoteAudio.volume = 0.25;
         };
 
         peerConnection.onicecandidate = function(event) {
