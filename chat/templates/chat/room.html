@@ -478,10 +478,13 @@
 
 
     async function startWebRTCCall() {
-        localStream = await navigator.mediaDevices.getUserMedia({
-            audio: true,
-            video: false
-        });
+        if (!localStream) {
+            localStream =
+                await navigator.mediaDevices.getUserMedia({
+                    audio: true,
+                    video: false
+                });
+        }
 
         stream = localStream;
 
