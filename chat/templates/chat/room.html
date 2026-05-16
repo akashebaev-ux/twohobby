@@ -154,10 +154,16 @@
         scrollToBottom();
         if (data.username !== currentUser) {
 
+            const targetLanguage =
+                document.querySelector(
+                    "#target-language"
+                ).value;
+
             window.speakText(
-                data.message
+                data.message,
+                targetLanguage
             );
-}
+        }
     };
 
     document.querySelector("#chat-message-submit").onclick = function() {
