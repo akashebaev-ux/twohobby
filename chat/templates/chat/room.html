@@ -287,11 +287,15 @@
 
         setTimeout(() => {
 
-            if (isCalling) {
+            if (        
+                isCalling &&
+                recorder &&
+                recorder.state !== "inactive"
+            ) {
                 recorder.stop();
             }
 
-        }, 3000);
+        }, 5000);
     };
 
     acceptBtn.onclick = async function () {
