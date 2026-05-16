@@ -483,17 +483,22 @@ body:has(.auth-page) .app-wrapper {
 }
 
 #chat-image-input::before {
-    content: "📷";
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 42px;
-    height: 42px;
+    content: "";
+    display: block;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #ff5864, #ff9966);
-    color: white;
-    font-size: 1.1rem;
-    cursor: pointer;
+    background:
+        linear-gradient(135deg, #ff5864, #ff9966);
+    mask: url("/static/images/camera-icon.webp")
+        center/45px no-repeat;
+
+    -webkit-mask:
+        url("/static/images/camera-icon.webp")
+        center/45px no-repeat;
+
+    background-color: white;
+    transform: translate(-10px, -10px);
 }
 
 
