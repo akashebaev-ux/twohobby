@@ -72,10 +72,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
         }))
 
     async def call_invite(self, event):
-    await self.send(text_data=json.dumps({
-        "type": "call_invite",
-        "username": event["username"],
-    }))
+        await self.send(text_data=json.dumps({
+            "type": "call_invite",
+            "username": event["username"],
+        }))
 
     @sync_to_async
     def user_has_access(self, user, room_id):
