@@ -98,6 +98,8 @@
 <script src="{% static 'js/translate.js' %}">
 </script>
 
+<script src="{% static 'js/tts.js' %}">
+</script>
 <script>
     const roomId = "{{ room.id }}";
 
@@ -127,6 +129,12 @@
         `;
 
         scrollToBottom();
+        if (data.username !== currentUser) {
+
+            window.speakText(
+                data.message
+            );
+}
     };
 
     document.querySelector("#chat-message-submit").onclick = function() {
