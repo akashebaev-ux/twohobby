@@ -150,7 +150,7 @@
         if (data.type === "ice_candidate") {
             handleIceCandidate(data.candidate);
             return;
-}
+        }
 
         let messageText = "";
 
@@ -520,25 +520,25 @@
 
 
     async function handleWebRTCOffer(offer) {
-    await startWebRTCCall();
+        await startWebRTCCall();
 
-    await peerConnection.setRemoteDescription(
-        new RTCSessionDescription(offer)
-    );
+        await peerConnection.setRemoteDescription(
+            new RTCSessionDescription(offer)
+        );
 
-    const answer =
-        await peerConnection.createAnswer();
+        const answer =
+            await peerConnection.createAnswer();
 
-    await peerConnection.setLocalDescription(answer);
+        await peerConnection.setLocalDescription(answer);
 
-    chatSocket.send(JSON.stringify({
-        type: "webrtc_answer",
-        answer: answer
-    }));
+        chatSocket.send(JSON.stringify({
+            type: "webrtc_answer",
+            answer: answer
+        }));
 
-    document.getElementById("call-status").innerText =
-        "Call connected";
-}
+        document.getElementById("call-status").innerText =
+            "Call connected";
+    }
 
     async function handleWebRTCAnswer(answer) {
         await peerConnection.setRemoteDescription(
