@@ -603,7 +603,18 @@
         ) {
             audioContext.close();
         }
-        
+        if (peerConnection) {
+            peerConnection.close();
+            peerConnection = null;
+        }
+
+        if (localStream) {
+            localStream.getTracks().forEach(track => {
+                track.stop();
+            });
+
+            localStream = null;
+        }
 
         callPanel.classList.add("hidden");
     };
