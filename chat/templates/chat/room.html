@@ -512,6 +512,45 @@
         };
     }
 
+
+    async function handleWebRTCOffer(offer) {
+    await startWebRTCCall();
+
+    await peerConnection.setRemoteDescription(
+        new RTCSessionDescription(offer)
+    );
+
+    const answer =
+        await peerConnection.createAnswer();
+
+    await peerConnection.setLocalDescription(answer);
+
+    chatSocket.send(JSON.stringify({
+        type: "webrtc_answer",
+        answer: answer
+    }));
+
+    document.getElementById("call-status").innerText =
+        "Call connected";
+}
+
+    async function handleWebRTCAnswer(answer) {
+        await peerConnection.setRemoteDescription(
+            new RTCSessionDescription(answer)
+        );
+
+        document.getElementById("call-status").innerText =
+            "Call connected";
+    }
+
+    async function handleIceCandidate(candidate) {
+        if (peerConnection) {
+            await peerConnection.addIceCandidate(
+                new RTCIceCandidate(candidate)
+            );
+        }
+    }
+
     acceptBtn.onclick = async function () {
         isCalling = true;
 
