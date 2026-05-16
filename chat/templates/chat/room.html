@@ -211,6 +211,9 @@
 
     let recorder;
     let stream;
+    let audioContext;
+    let analyser;
+    let source;
     let chunks = [];
     let isCalling = false;
 
@@ -234,6 +237,7 @@
         recorder.ondataavailable = function(event) {
             chunks.push(event.data);
         };
+       
 
         recorder.onstop = async function () {
 
@@ -282,20 +286,38 @@
                 startRecording();
             }
         };
-
+        
         recorder.start();
+        
+        const dataArray =
+            new Uint8Array(analyser.frequencyBinCount);
 
-        setTimeout(() => {
+        let silenceTime = 0;
 
-            if (        
-                isCalling &&
-                recorder &&
-                recorder.state !== "inactive"
-            ) {
-                recorder.stop();
-            }
+        const silenceCheck =
+            setInterval(() => {
 
-        }, 5000);
+                analyser.getByteFrequencyData(dataArray);
+
+                const volume =
+                    dataArray.reduce((a, b) => a + b) / dataArray.length;
+
+                if (volume < 8) {
+                    silenceTime += 200;
+                } else {
+                    silenceTime = 0;
+                }
+
+                if (
+                    silenceTime > 1500 &&
+                    recorder &&
+                    recorder.state !== "inactive"
+                ) {
+                    clearInterval(silenceCheck);
+                    recorder.stop();
+                }
+
+            }, 200);
     };
 
     acceptBtn.onclick = async function () {
@@ -304,6 +326,18 @@
         stream = await navigator.mediaDevices.getUserMedia({
             audio: true
         });
+        audioContext = new AudioContext();
+
+        source =
+            audioContext.createMediaStreamSource(stream);
+
+        analyser =
+            audioContext.createAnalyser();
+
+        analyser.fftSize = 256;
+
+        source.connect(analyser);
+
         startRecording();
     };
 
@@ -327,6 +361,9 @@
             stream.getTracks().forEach(track =>
                 track.stop()
             );
+        }
+        if (audioContext) {
+            audioContext.close();
         }
         
 
