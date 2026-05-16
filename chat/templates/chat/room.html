@@ -393,22 +393,17 @@
     acceptBtn.onclick = async function () {
 
         isCalling = true;
+
         stream = await navigator.mediaDevices.getUserMedia({
             audio: true
         });
-        audioContext = new AudioContext();
 
-        source =
-            audioContext.createMediaStreamSource(stream);
+        document
+            .getElementById("translation-btn")
+            .disabled = false;
 
-        analyser =
-            audioContext.createAnalyser();
-
-        analyser.fftSize = 256;
-
-        source.connect(analyser);
-
-        startRecording();
+        document.getElementById("call-status")
+            .innerText = "Voice call connected";
     };
 
     declineCallBtn.onclick = function () {
