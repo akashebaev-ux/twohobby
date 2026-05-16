@@ -113,6 +113,8 @@
 <script>
     const roomId = "{{ room.id }}";
 
+    const currentUser = "{{ request.user.username }}";
+
     const protocol = window.location.protocol === "https:" ? "wss://" : "ws://";
 
     const chatSocket = new WebSocket(
@@ -120,30 +122,41 @@
     );
 
     chatSocket.onmessage = function(e) {
+
         const data = JSON.parse(e.data);
-        const currentUser = "{{ request.user.username }}";
-        if (
-            data.type === "call_invite" &&
-            data.username !== currentUser
-        ) {
-            callPanel.classList.remove("hidden");
 
-            document.getElementById("call-status").innerText =
-                data.username + " is calling...";
+        console.log(data);
 
+        if (data.type === "call_invite") {
+            showCallInvite(data.username);
             return;
         }
 
+        let messageText = "";
+
+        if (data.type === "translation") {
+            messageText = data.translated_text;
+
+            speakText(
+                data.translated_text,
+                "en-US"
+            );
+
+        } else {
+            messageText = data.message;
+        }
 
         const messageClass =
             data.username === currentUser
                 ? "my-message"
                 : "their-message";
-        const chatLog = document.querySelector("#chat-log");
+
+        const chatLog =
+            document.querySelector("#chat-log");
 
         chatLog.innerHTML += `
             <div class="chat-message ${messageClass}">
-                <p>${data.message}</p>
+                <p>${messageText}</p>
                 <span>${new Date().toLocaleTimeString([], {
                     hour: '2-digit',
                     minute: '2-digit'
@@ -152,7 +165,11 @@
         `;
 
         scrollToBottom();
-        if (data.username !== currentUser) {
+
+        if (
+            data.username !== currentUser &&
+            messageText
+        ) {
 
             const targetLanguage =
                 document.querySelector(
@@ -160,7 +177,7 @@
                 ).value;
 
             window.speakText(
-                data.message,
+                messageText,
                 targetLanguage
             );
         }
@@ -206,7 +223,19 @@
     }
 
     scrollToBottom();
+    function showCallInvite(username) {
 
+        const callPanel =
+            document.getElementById("call-panel");
+
+        const statusText =
+            document.getElementById("call-status");
+
+        callPanel.classList.remove("hidden");
+
+        statusText.innerText =
+            `${username} started voice translation`;
+    }
 
     window.addEventListener("load", function() {
         const messageInput = document.querySelector("#chat-message-input");
@@ -403,7 +432,10 @@
                 track.stop()
             );
         }
-        if (audioContext) {
+        if (
+            audioContext &&
+            audioContext.state !== "closed"
+        ) {
             audioContext.close();
         }
         
