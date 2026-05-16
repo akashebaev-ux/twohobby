@@ -468,14 +468,18 @@ body:has(.auth-page) .app-wrapper {
 }
 
 #chat-image-input {
+    position: relative;
     width: 42px;
     min-width: 42px;
+    height: 42px;
+    overflow: hidden;
     color: transparent;
     cursor: pointer;
 }
 
 #chat-image-input::-webkit-file-upload-button {
     visibility: hidden;
+    cursor: pointer;
 }
 
 #chat-image-input::before {
