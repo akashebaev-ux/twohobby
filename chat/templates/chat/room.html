@@ -338,50 +338,8 @@
 
     let translationEnabled = false;
 
-    translationBtn.onclick = async function () {
-
-        translationEnabled = !translationEnabled;
-
-        if (translationEnabled) {
-
-            document.getElementById("call-status")
-                .innerText = "Translation active";
-
-            audioContext = new AudioContext();
-
-            source =
-                audioContext.createMediaStreamSource(stream);
-
-            analyser =
-                audioContext.createAnalyser();
-
-            analyser.fftSize = 256;
-
-            source.connect(analyser);
-
-            startRecording();
-
-            translationBtn.innerText =
-                "🛑 Stop Translation";
-
-        } else {
-
-            isCalling = false;
-
-            if (
-                recorder &&
-                recorder.state !== "inactive"
-            ) {
-                recorder.stop();
-            }
-
-            translationBtn.innerText =
-                "🌍 Translation";
-
-            document.getElementById("call-status")
-                .innerText =
-                "Voice call connected";
-        }
+    translationBtn.onclick = function () {
+        console.log("Translation disabled");
     };
 
     async function startRecording() {
