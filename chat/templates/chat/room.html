@@ -461,6 +461,43 @@
             }, 200);
     };
 
+
+
+    async function startWebRTCCall() {
+        localStream = await navigator.mediaDevices.getUserMedia({
+            audio: true,
+            video: false
+        });
+
+        stream = localStream;
+
+        remoteStream = new MediaStream();
+
+        document.getElementById("remote-audio").srcObject =
+            remoteStream;
+
+        peerConnection = new RTCPeerConnection(rtcConfig);
+
+        localStream.getTracks().forEach(function(track) {
+            peerConnection.addTrack(track, localStream);
+        });
+
+        peerConnection.ontrack = function(event) {
+            event.streams[0].getTracks().forEach(function(track) {
+                remoteStream.addTrack(track);
+            });
+        };
+
+        peerConnection.onicecandidate = function(event) {
+            if (event.candidate) {
+                chatSocket.send(JSON.stringify({
+                    type: "ice_candidate",
+                    candidate: event.candidate
+                }));
+            }
+        };
+    }
+
     acceptBtn.onclick = async function () {
 
         isCalling = true;
