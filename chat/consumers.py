@@ -49,6 +49,24 @@ class ChatConsumer(AsyncWebsocketConsumer):
             )
             return
 
+
+
+        if data.get("type") in [
+            "webrtc_offer",
+            "webrtc_answer",
+            "ice_candidate",
+        ]:
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    "type": "webrtc_signal",
+                    "data": data,
+                    "username": self.scope["user"].username,
+                }
+            )
+            return
+
+
         message = data["message"]
         username = self.scope["user"].username
         is_voice = data.get("is_voice", False)
@@ -77,6 +95,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
             "type": "call_invite",
             "username": event["username"],
         }))
+
+    async def webrtc_signal(self, event):
+        data = event["data"]
+        data["username"] = event["username"]
+
+        await self.send(text_data=json.dumps(data))
 
     @sync_to_async
     def user_has_access(self, user, room_id):
