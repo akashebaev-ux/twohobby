@@ -18,10 +18,19 @@
             </div>
 
             {% if other_user %}
-                <a href="{% url 'block_user' other_user.id %}"
-                class="chat-block-btn">
-                    🚫 Block
-                </a>
+
+                {% if is_blocked %}
+                    <a href="{% url 'unblock_user' other_user.id %}?room={{ room.id }}"
+                    class="chat-block-btn">
+                        ✅ Unblock
+                    </a>
+                {% else %}
+                    <a href="{% url 'block_user' other_user.id %}"
+                    class="chat-block-btn">
+                        🚫 Block
+                    </a>
+                {% endif %}
+
             {% endif %}
         </div>
 

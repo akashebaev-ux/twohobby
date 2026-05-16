@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
-
+from matches.models import BlockedUser
 from .models import ChatRoom
 
 
@@ -28,10 +28,16 @@ def room(request, room_id):
         id=request.user.id
     ).first()
 
+    is_blocked = BlockedUser.objects.filter(
+        blocker=request.user,
+        blocked=other_user
+    ).exists()
+
     return render(request, "chat/room.html", {
         "room": room,
         "messages": messages,
         "other_user": other_user,
+        "is_blocked": is_blocked,
     })
 
 

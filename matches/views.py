@@ -147,3 +147,15 @@ def block_user(request, user_id):
         )
 
     return redirect("profile_list")
+
+
+@login_required
+def unblock_user(request, user_id):
+    blocked_user = get_object_or_404(User, id=user_id)
+
+    BlockedUser.objects.filter(
+        blocker=request.user,
+        blocked=blocked_user
+    ).delete()
+
+    return redirect("room", room_id=request.GET.get("room"))
