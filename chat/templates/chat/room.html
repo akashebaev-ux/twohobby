@@ -499,19 +499,22 @@
     }
 
     acceptBtn.onclick = async function () {
-
         isCalling = true;
 
-        stream = await navigator.mediaDevices.getUserMedia({
-            audio: true
-        });
+        await startWebRTCCall();
 
-        document
-            .getElementById("translation-btn")
-            .disabled = false;
+        const offer =
+            await peerConnection.createOffer();
 
-        document.getElementById("call-status")
-            .innerText = "Voice call connected";
+        await peerConnection.setLocalDescription(offer);
+
+        chatSocket.send(JSON.stringify({
+            type: "webrtc_offer",
+            offer: offer
+        }));
+
+        document.getElementById("call-status").innerText =
+            "Calling...";
     };
 
     declineCallBtn.onclick = function () {
