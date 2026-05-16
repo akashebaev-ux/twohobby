@@ -39,6 +39,16 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         data = json.loads(text_data)
 
+        if data.get("type") == "call_invite":
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    "type": "call_invite",
+                    "username": self.scope["user"].username,
+                }
+            )
+            return
+
         message = data["message"]
         username = self.scope["user"].username
         is_voice = data.get("is_voice", False)
@@ -60,6 +70,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
             "message": event["message"],
             "username": event["username"],
         }))
+
+    async def call_invite(self, event):
+    await self.send(text_data=json.dumps({
+        "type": "call_invite",
+        "username": event["username"],
+    }))
 
     @sync_to_async
     def user_has_access(self, user, room_id):

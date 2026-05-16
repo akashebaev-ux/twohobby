@@ -212,7 +212,11 @@
     const declineCallBtn = document.getElementById("decline-call");
 
     openCallBtn.onclick = function () {
-        callPanel.classList.toggle("hidden");
+        callPanel.classList.remove("hidden");
+
+        chatSocket.send(JSON.stringify({
+            "type": "call_invite"
+        }));
     };
 
     declineCallBtn.onclick = function () {
