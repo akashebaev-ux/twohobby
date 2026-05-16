@@ -29,13 +29,15 @@ body {
 /* Landing page */
 .landing-page {
     min-height: 100dvh;
+    height: 100dvh;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
     background:
         radial-gradient(circle at center, rgba(255, 0, 60, .28), transparent 35%),
         linear-gradient(180deg, #070000, #130004 45%, #000);
-    padding: 24px;
+
 }
 
 .landing-content {
@@ -141,6 +143,21 @@ body {
 body:has(.chat-page) .content {
     padding: 0;
     overflow: hidden;
+
+}
+
+
+/* Fullscreen pages */
+
+body:has(.landing-page) .content,
+body:has(.auth-page) .content {
+    padding: 0;
+    overflow: hidden;
+}
+
+body:has(.landing-page) .app-wrapper,
+body:has(.auth-page) .app-wrapper {
+    min-height: 100dvh;
 }
 
 
@@ -652,7 +669,9 @@ body:has(.chat-page) .content {
 /* Auth pages */
 
 .auth-page {
-    min-height: calc(100vh - 32px);
+    min-height: 100dvh;
+    height: 100dvh;
+    overflow-y: auto;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -977,9 +996,24 @@ body:has(.chat-page) .content {
 }
 
 
+/* Ensure landing and chat pages*/
+/* take full viewport height and hide overflow */
 
+.landing-page,
+.chat-page {
+    height: 100dvh;
+    min-height: 100dvh;
+    overflow: hidden;
+}
 
+.chat-container {
+    height: 100dvh;
+}
 
+.chat-log {
+    flex: 1;
+    overflow-y: auto;
+}
 
 
 
