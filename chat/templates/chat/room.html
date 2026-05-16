@@ -469,14 +469,14 @@
                 const volume =
                     dataArray.reduce((a, b) => a + b) / dataArray.length;
 
-                if (volume < 8) {
+                if (volume < 15) {
                     silenceTime += 200;
                 } else {
                     silenceTime = 0;
                 }
 
                 if (
-                    silenceTime > 1500 &&
+                    silenceTime > 2500 &&
                     recorder &&
                     recorder.state !== "inactive"
                 ) {
