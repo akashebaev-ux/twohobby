@@ -179,6 +179,18 @@
         }
     });
 
+
+    const openCallBtn = document.getElementById("open-call-ui");
+    const callPanel = document.getElementById("call-panel");
+    const declineCallBtn = document.getElementById("decline-call");
+
+    openCallBtn.onclick = function () {
+        callPanel.classList.toggle("hidden");
+    };
+
+    declineCallBtn.onclick = function () {
+        callPanel.classList.add("hidden");
+    };
 </script>
 
 {% endblock %}
