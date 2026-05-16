@@ -30,7 +30,7 @@
 
             {% if profile.profile_image and profile.profile_image.url %}
                 <img
-                    src="{{ profile.profile_image.url }}"
+                    src="{{ profile.profile_image.url|cut:'http:' }}"
                     class="profile-img"
                     alt="{{ profile.display_name|default:profile.user.username }}"
                 >

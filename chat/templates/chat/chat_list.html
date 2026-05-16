@@ -25,7 +25,7 @@
                            class="connection-avatar">
 
                             {% if user.profile.profile_image and user.profile.profile_image.url %}
-                                <img src="{{ user.profile.profile_image.url }}"
+                                <img src="{{ user.profile.profile_image.url|cut:'http:' }}"
                                      class="chat-avatar-img">
                             {% else %}
                                 <img src="{% static 'images/default.webp' %}"
@@ -53,7 +53,7 @@
                         {% if user != request.user %}
 
                             {% if user.profile.profile_image and user.profile.profile_image.url %}
-                                <img src="{{ user.profile.profile_image.url }}"
+                                <img src="{{ user.profile.profile_image.url|cut:'http:' }}"
                                      class="chat-avatar-img">
                             {% else %}
                                 <img src="{% static 'images/default.webp' %}"

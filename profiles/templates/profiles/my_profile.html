@@ -15,7 +15,7 @@
 <div class="profile-detail">
     
     {% if profile.profile_image and profile.profile_image.url %}
-        <img src="{{ profile.profile_image.url }}" class="profile-img">
+        <img src="{{ profile.profile_image.url|cut:'http:' }}" class="profile-img">
     {% else %}
         <img
             src="{% static 'images/default.webp' %}"
