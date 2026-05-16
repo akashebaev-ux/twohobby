@@ -137,6 +137,20 @@
             showCallInvite(data.username);
             return;
         }
+        if (data.type === "webrtc_offer") {
+            handleWebRTCOffer(data.offer);
+            return;
+        }
+
+        if (data.type === "webrtc_answer") {
+            handleWebRTCAnswer(data.answer);
+            return;
+        }
+
+        if (data.type === "ice_candidate") {
+            handleIceCandidate(data.candidate);
+            return;
+}
 
         let messageText = "";
 
