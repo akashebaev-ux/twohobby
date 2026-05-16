@@ -210,6 +210,7 @@
 
 
     let recorder;
+    let stream;
     let chunks = [];
     let isCalling = false;
 
@@ -225,10 +226,6 @@
 
         statusText.innerText = "Listening...";
 
-        const stream =
-            await navigator.mediaDevices.getUserMedia({
-                audio: true
-            });
 
         recorder = new MediaRecorder(stream);
 
@@ -279,9 +276,7 @@
             statusText.innerText =
                 "Sent";
 
-            stream.getTracks().forEach(track =>
-                track.stop()
-            );
+
             if (isCalling) {
 
                 startRecording();
@@ -299,10 +294,12 @@
         }, 3000);
     };
 
-    acceptBtn.onclick = function () {
+    acceptBtn.onclick = async function () {
 
         isCalling = true;
-
+        stream = await navigator.mediaDevices.getUserMedia({
+            audio: true
+        });
         startRecording();
     };
 
@@ -322,6 +319,12 @@
         ) {
             recorder.stop();
         }
+        if (stream) {
+            stream.getTracks().forEach(track =>
+                track.stop()
+            );
+        }
+        
 
         callPanel.classList.add("hidden");
     };
