@@ -15,7 +15,12 @@
                     {{ other_user.profile.display_name|default:other_user.username }}
                 </h2>
                 <p>Private conversation</p>
+
             </div>
+
+                <button id="open-call-ui" class="chat-call-btn">
+                    📞
+                </button>
 
             {% if other_user %}
 
@@ -33,6 +38,32 @@
 
             {% endif %}
         </div>
+        
+        <div id="call-panel" class="call-panel hidden">
+            <div class="call-avatar">
+                👤
+            </div>
+
+            <h2>
+                {{ other_user.profile.display_name|default:other_user.username }}
+            </h2>
+
+            <p id="call-status">
+                Ready to translate voice
+            </p>
+
+            <div class="call-buttons">
+                <button id="decline-call" class="decline-btn">
+                    ☎
+                </button>
+
+                <button id="accept-call" class="accept-btn">
+                    📞
+                </button>
+            </div>
+        </div>
+
+
 
         <div id="chat-log" class="chat-log">
             {% for message in messages %}
