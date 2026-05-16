@@ -216,7 +216,7 @@
     const acceptBtn =
         document.getElementById("accept-call");
 
-    acceptBtn.onclick = async function () {
+    async function startRecording() {
 
         isCalling = true;
 
@@ -282,6 +282,10 @@
             stream.getTracks().forEach(track =>
                 track.stop()
             );
+            if (isCalling) {
+
+                startRecording();
+            }
         };
 
         recorder.start();
@@ -293,6 +297,13 @@
             }
 
         }, 3000);
+    };
+
+    acceptBtn.onclick = function () {
+
+        isCalling = true;
+
+        startRecording();
     };
 
     declineCallBtn.onclick = function () {
