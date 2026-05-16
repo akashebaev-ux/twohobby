@@ -245,12 +245,22 @@
                     audioBlob
                 );
 
-            document.querySelector(
-                "#chat-message-input"
-            ).value = text;
+            const messageInput =
+                document.querySelector(
+                    "#chat-message-input"
+                );
+
+            messageInput.value = text;
 
             statusText.innerText =
-                "Voice converted to text";
+                "Sending...";
+
+            document.querySelector(
+                "#chat-message-submit"
+            ).click();
+
+            statusText.innerText =
+                "Sent";
 
             stream.getTracks().forEach(track =>
                 track.stop()
