@@ -499,10 +499,13 @@
             peerConnection.addTrack(track, localStream);
         });
 
+
         peerConnection.ontrack = function(event) {
-            event.streams[0].getTracks().forEach(function(track) {
-                remoteStream.addTrack(track);
-            });
+
+            const remoteAudio =
+                document.getElementById("remote-audio");
+
+            remoteAudio.srcObject = event.streams[0];
         };
 
         peerConnection.onicecandidate = function(event) {
