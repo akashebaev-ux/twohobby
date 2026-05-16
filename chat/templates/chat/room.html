@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block topbar %}{% endblock %}
 {% block bottom_nav %}{% endblock %}
@@ -89,6 +90,10 @@
     </div>
 
 </div>
+
+<script type="module"
+        src="{% static 'js/whisper.js' %}">
+</script>
 
 <script>
     const roomId = "{{ room.id }}";
@@ -232,7 +237,20 @@
                     type: "audio/webm"
                 });
 
-            console.log(audioBlob);
+            statusText.innerText =
+                "Transcribing...";
+
+            const text =
+                await window.transcribeAudio(
+                    audioBlob
+                );
+
+            document.querySelector(
+                "#chat-message-input"
+            ).value = text;
+
+            statusText.innerText =
+                "Voice converted to text";
 
             stream.getTracks().forEach(track =>
                 track.stop()
