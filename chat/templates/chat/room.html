@@ -122,6 +122,19 @@
     chatSocket.onmessage = function(e) {
         const data = JSON.parse(e.data);
         const currentUser = "{{ request.user.username }}";
+        if (
+            data.type === "call_invite" &&
+            data.username !== currentUser
+        ) {
+            callPanel.classList.remove("hidden");
+
+            document.getElementById("call-status").innerText =
+                data.username + " is calling...";
+
+            return;
+        }
+
+
         const messageClass =
             data.username === currentUser
                 ? "my-message"
