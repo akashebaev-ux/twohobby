@@ -52,7 +52,11 @@
             <p id="call-status">
                 Ready to translate voice
             </p>
-            <audio id="remote-audio" autoplay></audio>
+            <audio 
+                id="remote-audio" 
+                autoplay 
+                playsinline
+            ></audio>
             <div class="language-selectors">
 
                 <select id="target-language">
@@ -518,6 +522,7 @@
                 document.getElementById("remote-audio");
 
             remoteAudio.srcObject = event.streams[0];
+            remoteAudio.volume = 0.7;
         };
 
         peerConnection.onicecandidate = function(event) {
