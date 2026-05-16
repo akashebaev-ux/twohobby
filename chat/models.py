@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-
+from cloudinary.models import CloudinaryField
 
 class ChatRoom(models.Model):
     users = models.ManyToManyField(
@@ -24,7 +24,14 @@ class ChatMessage(models.Model):
         on_delete=models.CASCADE,
         related_name="sent_messages"
     )
-    message = models.TextField()
+    message = models.TextField(blank=True)
+
+    image = CloudinaryField(
+        "image",
+        blank=True,
+        null=True
+    )
+
     created_on = models.DateTimeField(auto_now_add=True)
     is_read = models.BooleanField(default=False)
 
