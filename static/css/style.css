@@ -467,6 +467,32 @@ body:has(.auth-page) .app-wrapper {
     flex-shrink: 0;
 }
 
+#chat-image-input {
+    width: 42px;
+    min-width: 42px;
+    color: transparent;
+    cursor: pointer;
+}
+
+#chat-image-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+#chat-image-input::before {
+    content: "📷";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff5864, #ff9966);
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+
 #chat-message-input {
     flex: 1;
     min-width: 0;
