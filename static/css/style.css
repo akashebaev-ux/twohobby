@@ -1017,6 +1017,68 @@ body:has(.auth-page) .app-wrapper {
 
 
 
+
+/* Chat call button */
+
+
+.chat-call-btn {
+    border: none;
+    background: #28c840;
+    color: white;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    font-size: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+.call-panel {
+    padding: 25px;
+    text-align: center;
+    background: #252525;
+    color: white;
+    border-radius: 0 0 25px 25px;
+}
+
+.call-avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: #dfe5e7;
+    margin: 10px auto 20px;
+    font-size: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.call-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 25px;
+}
+
+.call-buttons button {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    border: none;
+    color: white;
+    font-size: 28px;
+}
+
+.accept-btn {
+    background: #28c840;
+}
+
+.decline-btn {
+    background: #ff3b30;
+}
+
 /* Desktop app preview */
 
 @media screen and (min-width: 768px) {
