@@ -30,10 +30,13 @@ def room(request, room_id):
         id=request.user.id
     ).first()
 
-    is_blocked = BlockedUser.objects.filter(
-        blocker=request.user,
-        blocked=other_user
-    ).exists()
+    is_blocked = False
+
+    if other_user:
+        is_blocked = BlockedUser.objects.filter(
+            blocker=request.user,
+            blocked=other_user
+        ).exists()
 
     return render(request, "chat/room.html", {
         "room": room,
