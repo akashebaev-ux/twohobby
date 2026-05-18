@@ -103,7 +103,7 @@
 
                     {% if message.image %}
                         <img
-                            src="{{ message.image.url|cut:'http:'}}"
+                            src="{{ message.image.url|cut:'http:'}}?f_auto,q_auto"
                             class="chat-image"
                             alt="Chat image"
                         >
