@@ -97,7 +97,18 @@
         <div id="chat-log" class="chat-log">
             {% for message in messages %}
                 <div class="chat-message {% if message.sender == request.user %}my-message{% else %}their-message{% endif %}">
-                    <p>{{ message.message }}</p>
+                    {% if message.message %}
+                        <p>{{ message.message }}</p>
+                    {% endif %}
+
+                    {% if message.image %}
+                        <img
+                            src="{{ message.image.url|cut:'http:'|add:'?f_auto,q_auto' }}"
+                            class="chat-image"
+                            alt="Chat image"
+                        >
+                    {% endif %}
+
                     <span>{{ message.created_on|date:"H:i" }}</span>
                 </div>
             {% empty %}
@@ -136,7 +147,7 @@
             </button>
 
         </div>
-        
+
     </div>
 
 </div>
