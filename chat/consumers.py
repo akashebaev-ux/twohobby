@@ -48,9 +48,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 }
             )
             return
-
-
-
         if data.get("type") in [
             "webrtc_offer",
             "webrtc_answer",
@@ -65,8 +62,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 }
             )
             return
-
-
         message = data["message"]
         username = self.scope["user"].username
         is_voice = data.get("is_voice", False)
@@ -118,3 +113,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
             sender=self.scope["user"],
             message=message
         )
+
+    async def chat_image(self, event):
+        await self.send(text_data=json.dumps({
+            "type": "image",
+            "username": event["username"],
+            "image_url": event["image_url"],
+        }))
