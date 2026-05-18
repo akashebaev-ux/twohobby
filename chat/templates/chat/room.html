@@ -178,6 +178,32 @@
 
         const data = JSON.parse(e.data);
 
+        if (data.type === "image") {
+            const messageClass =
+                data.username === currentUser
+                    ? "my-message"
+                    : "their-message";
+
+            const chatLog = document.querySelector("#chat-log");
+
+            chatLog.innerHTML += `
+                <div class="chat-message ${messageClass}">
+                    <img
+                        src="${data.image_url}?f_auto,q_auto"
+                        class="chat-image"
+                        alt="Chat image"
+                    >
+                    <span>${new Date().toLocaleTimeString([], {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    })}</span>
+                </div>
+            `;
+
+            scrollToBottom();
+            return;
+        }
+
         console.log(data);
 
         if (data.username === currentUser &&
