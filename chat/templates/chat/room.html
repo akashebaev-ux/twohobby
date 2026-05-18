@@ -58,20 +58,7 @@
                 playsinline
                 style="display: none;"
             ></audio>
-            <div
-                class="language-selectors"
-                style="display:none;"
-            >
 
-                <select id="target-language">
-                    <option value="en">English</option>
-                    <option value="sv">Swedish</option>
-                    <option value="fr">French</option>
-                    <option value="kk">Kazakh</option>
-                    <option value="ru">Russian</option>
-                </select>
-
-            </div>
             <div class="call-buttons">
                 <button id="decline-call" class="decline-btn">
                     ☎
@@ -79,13 +66,6 @@
 
                 <button id="accept-call" class="accept-btn">
                     📞
-                </button>
-                <button 
-                    id="translation-btn" 
-                    disabled
-                    style="display:none;"
-                >
-                    🌍 Translation
                 </button>
 
 
@@ -151,17 +131,6 @@
     </div>
 
 </div>
-<!--
-<script type="module"
-        src="{% static 'js/whisper.js' %}">
-</script>
-
-<script src="{% static 'js/translate.js' %}">
-</script>
-
-<script src="{% static 'js/tts.js' %}">
-</script>
--->
 
 <script>
     const roomId = "{{ room.id }}";
@@ -238,17 +207,7 @@
 
         let messageText = "";
 
-        if (data.type === "translation") {
-            messageText = data.translated_text;
-
-            speakText(
-                data.translated_text,
-                "en-US"
-            );
-
-        } else {
-            messageText = data.message;
-        }
+        messageText = data.message;
 
         const messageClass =
             data.username === currentUser
@@ -270,21 +229,7 @@
 
         scrollToBottom();
 
-        if (
-            data.username !== currentUser &&
-            messageText
-        ) {
-
-            const targetLanguage =
-                document.querySelector(
-                    "#target-language"
-                ).value;
-
-            window.speakText(
-                messageText,
-                targetLanguage
-            );
-        }
+  
     };
 
     document.querySelector("#chat-message-submit").onclick = function() {
@@ -379,10 +324,6 @@
     };
 
 
-
-    let recorder;
-    let stream;
-    let audioContext;
     let peerConnection;
     let localStream;
     let remoteStream;
@@ -396,130 +337,10 @@
     };
 
 
-
-    let analyser;
-    let source;
-    let chunks = [];
     let isCalling = false;
 
     const acceptBtn =
         document.getElementById("accept-call");
-
-    const translationBtn =
-        document.getElementById("translation-btn");
-
-    let translationEnabled = false;
-
-    translationBtn.onclick = function () {
-        console.log("Translation disabled");
-    };
-
-    async function startRecording() {
-
-        isCalling = true;
-
-        const statusText =
-            document.getElementById("call-status");
-
-        statusText.innerText = "Listening...";
-
-
-        recorder = new MediaRecorder(stream);
-
-        chunks = [];
-
-        recorder.ondataavailable = function(event) {
-            chunks.push(event.data);
-        };
-       
-
-        recorder.onstop = async function () {
-
-            statusText.innerText =
-                "Voice captured";
-
-            const audioBlob =
-                new Blob(chunks, {
-                    type: "audio/webm"
-                });
-
-            statusText.innerText =
-                "Transcribing...";
-
-            const text =
-                await window.transcribeAudio(
-                    audioBlob
-                );
-
-            const messageInput =
-                document.querySelector(
-                    "#chat-message-input"
-                );
-
-            const targetLanguage =
-                document.querySelector(
-                    "#target-language"
-                ).value;
-
-            const translatedText =
-                await window.translateText(
-                    text,
-                    targetLanguage
-                );
-
-            messageInput.value =
-                translatedText;
-
-            statusText.innerText =
-                "Sending...";
-
-            chatSocket.send(JSON.stringify({
-                "message": translatedText,
-                "is_voice": true
-            }));
-
-            statusText.innerText =
-                "Sent";
-
-
-            if (isCalling) {
-
-                startRecording();
-            }
-        };
-        
-        recorder.start();
-        
-        const dataArray =
-            new Uint8Array(analyser.frequencyBinCount);
-
-        let silenceTime = 0;
-
-        const silenceCheck =
-            setInterval(() => {
-
-                analyser.getByteFrequencyData(dataArray);
-
-                const volume =
-                    dataArray.reduce((a, b) => a + b) / dataArray.length;
-
-                if (volume < 15) {
-                    silenceTime += 200;
-                } else {
-                    silenceTime = 0;
-                }
-
-                if (
-                    silenceTime > 2500 &&
-                    recorder &&
-                    recorder.state !== "inactive"
-                ) {
-                    clearInterval(silenceCheck);
-                    recorder.stop();
-                }
-
-            }, 200);
-    };
 
 
 
@@ -536,7 +357,6 @@
                 });
         }
 
-        stream = localStream;
 
         remoteStream = new MediaStream();
 
@@ -638,23 +458,6 @@
         statusText.innerText =
             "Call ended";
 
-        if (
-            recorder &&
-            recorder.state !== "inactive"
-        ) {
-            recorder.stop();
-        }
-        if (stream) {
-            stream.getTracks().forEach(track =>
-                track.stop()
-            );
-        }
-        if (
-            audioContext &&
-            audioContext.state !== "closed"
-        ) {
-            audioContext.close();
-        }
         if (peerConnection) {
             peerConnection.close();
             peerConnection = null;
