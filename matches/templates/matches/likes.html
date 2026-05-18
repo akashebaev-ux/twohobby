@@ -11,10 +11,10 @@
         {% for swipe in liked_users %}
             <div class="liked-avatar-card">
                 {% if swipe.to_user.profile.profile_image %}
-                    <img src="{{ swipe.to_user.profile.profile_image.url|cut:'http:' }}"
+                    <img src="{{ swipe.to_user.profile.profile_image.url|cut:'http:' }}?f_auto,q_auto,w_150,h_150,c_limit"
                         class="liked-avatar-img">
                 {% else %}
-                    <img src="{% static 'images/default.webp' %}"
+                    <img src="{% static 'images/default.webp' %}?f_auto,q_auto,w_150,h_150,c_limit"
                         class="liked-avatar-img">
                 {% endif %}
             </div>
@@ -44,10 +44,10 @@
 
             <div class="like-post-left">
                 {% if post.author.profile.profile_image %}
-                    <img src="{{ post.author.profile.profile_image.url|cut:'http:' }}"
+                    <img src="{{ post.author.profile.profile_image.url|cut:'http:' }}?f_auto,q_auto,w_150,h_150,c_limit"
                          class="like-post-avatar">
                 {% else %}
-                    <img src="{% static 'images/default.webp' %}"
+                    <img src="{% static 'images/default.webp' %}?f_auto,q_auto,w_150,h_150,c_limit"
                          class="like-post-avatar">
                 {% endif %}
 

@@ -28,9 +28,9 @@
     {% if profile %}
 
         {% if profile.profile_image and profile.profile_image.url %}
-            <img src="{{ profile.profile_image.url|cut:'http:' }}" class="profile-img">
+            <img src="{{ profile.profile_image.url|cut:'http:' }}?f_auto,q_auto,w_300,h_300,c_limit" class="profile-img">
         {% else %}
-            <img src="{% static 'images/default.webp' %}" class="profile-img">
+            <img src="{% static 'images/default.webp' %}?f_auto,q_auto,w_300,h_300,c_limit" class="profile-img">
         {% endif %}
 
         <h2>{{ profile.display_name|default:profile.user.username }}</h2>
