@@ -2,8 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
 from matches.models import BlockedUser
-from .models import ChatRoom, ChatMessage
 from .utils import convert_image_to_webp
+from .models import ChatRoom, ChatMessage
 
 
 @login_required
@@ -89,6 +89,7 @@ def upload_chat_image(request, room_id):
             ChatMessage.objects.create(
                 room=room,
                 sender=request.user,
+                message="",
                 image=webp_image
             )
 
