@@ -2,7 +2,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
 from matches.models import BlockedUser
-from .utils import convert_image_to_webp
 from .models import ChatRoom, ChatMessage
 
 
@@ -84,13 +83,11 @@ def upload_chat_image(request, room_id):
         image = request.FILES.get("image")
 
         if image:
-            webp_image = convert_image_to_webp(image)
-
             ChatMessage.objects.create(
                 room=room,
                 sender=request.user,
                 message="",
-                image=webp_image
+                image=image
             )
 
     return redirect("room", room_id=room.id)
