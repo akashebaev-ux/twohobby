@@ -3,7 +3,7 @@ import json
 from asgiref.sync import sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
 
-from .models import ChatMessage, ChatRoom
+from .models import ChatMessage, ChatRoom, CallLog
 
 
 class ChatConsumer(AsyncWebsocketConsumer):
@@ -40,6 +40,17 @@ class ChatConsumer(AsyncWebsocketConsumer):
         data = json.loads(text_data)
 
         if data.get("type") == "call_invite":
+            can_call = await self.can_make_call()
+
+            if not can_call:
+                await self.send(text_data=json.dumps({
+                    "type": "call_limit",
+                    "message": "You already used your call for today."
+                }))
+                return
+
+            await self.save_call_log()
+
             await self.channel_layer.group_send(
                 self.room_group_name,
                 {
@@ -48,6 +59,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 }
             )
             return
+
         if data.get("type") in [
             "webrtc_offer",
             "webrtc_answer",
@@ -120,3 +132,28 @@ class ChatConsumer(AsyncWebsocketConsumer):
             "username": event["username"],
             "image_url": event["image_url"],
         }))
+
+    @sync_to_async
+    def can_make_call(self):
+        from django.utils import timezone
+
+        today = timezone.now().date()
+
+        return not CallLog.objects.filter(
+            caller=self.scope["user"],
+            started_at__date=today
+        ).exists()
+
+    @sync_to_async
+    def save_call_log(self):
+        room = ChatRoom.objects.get(id=self.room_id)
+
+        receiver = room.users.exclude(
+            id=self.scope["user"].id
+        ).first()
+
+        if receiver:
+            CallLog.objects.create(
+                caller=self.scope["user"],
+                receiver=receiver
+            )
