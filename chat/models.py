@@ -41,3 +41,19 @@ class ChatMessage(models.Model):
 
     def __str__(self):
         return f"{self.sender.username}: {self.message[:20]}"
+
+
+class CallLog(models.Model):
+    caller = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="calls_made"
+    )
+
+    receiver = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="calls_received"
+    )
+
+    started_at = models.DateTimeField(auto_now_add=True)
