@@ -86,11 +86,16 @@ def upload_chat_image(request, room_id):
         if image:
             webp_image = convert_image_to_webp(image)
 
-            ChatMessage.objects.create(
+            message = ChatMessage(
                 room=room,
                 sender=request.user,
-                message="",
-                image=webp_image
+                message=""
+            )
+
+            message.image.save(
+                webp_image.name,
+                webp_image,
+                save=True
             )
 
     return redirect("room", room_id=room.id)
