@@ -444,11 +444,14 @@ body:has(.auth-page) .app-wrapper {
 }
 
 .chat-image {
+    width: 100%;
     max-width: 220px;
+    max-height: 260px;
     border-radius: 16px;
     margin-top: 6px;
     display: block;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .my-message {
