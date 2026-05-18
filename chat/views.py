@@ -85,11 +85,22 @@ def upload_chat_image(request, room_id):
         image = request.FILES.get("image")
 
         if image:
-            ChatMessage.objects.create(
+            message = ChatMessage.objects.create(
                 room=room,
                 sender=request.user,
                 message="",
                 image=image
+            )
+
+            channel_layer = get_channel_layer()
+
+            async_to_sync(channel_layer.group_send)(
+                f"chat_{room.id}",
+                {
+                    "type": "chat_image",
+                    "username": request.user.username,
+                    "image_url": message.image.url,
+                }
             )
 
     return redirect("room", room_id=room.id)
