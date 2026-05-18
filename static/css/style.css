@@ -439,6 +439,18 @@ body:has(.auth-page) .app-wrapper {
     opacity: .6;
 }
 
+.chat-image-form {
+    margin: 0;
+}
+
+.chat-image {
+    max-width: 220px;
+    border-radius: 16px;
+    margin-top: 6px;
+    display: block;
+    object-fit: cover;
+}
+
 .my-message {
     margin-left: auto;
     background: #ff5864;
