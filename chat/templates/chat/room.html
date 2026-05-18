@@ -106,11 +106,23 @@
         </div>
 
         <div class="chat-input-area">
-            <input
-                id="chat-image-input"
-                type="file"
-                accept="image/*"
+
+            <form
+                method="post"
+                action="{% url 'upload_chat_image' room.id %}"
+                enctype="multipart/form-data"
+                class="chat-image-form"
             >
+                {% csrf_token %}
+
+                <input
+                    id="chat-image-input"
+                    name="image"
+                    type="file"
+                    accept="image/*"
+                    onchange="this.form.submit()"
+                >
+            </form>
 
             <input
                 id="chat-message-input"
@@ -118,9 +130,13 @@
                 placeholder="Type a message..."
                 autocomplete="off"
             >
-            <button id="chat-message-submit">Send</button>
-        </div>
 
+            <button id="chat-message-submit">
+                Send
+            </button>
+
+        </div>
+        
     </div>
 
 </div>
