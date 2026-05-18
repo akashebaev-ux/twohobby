@@ -62,7 +62,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 }
             )
             return
-        message = data["message"]
+        message = data.get("message", "")
         username = self.scope["user"].username
         is_voice = data.get("is_voice", False)
 
