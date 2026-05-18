@@ -2,7 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
 from matches.models import BlockedUser
-from .models import ChatRoom
+from .models import ChatRoom, ChatMessage
+from .utils import convert_image_to_webp
 
 
 @login_required
@@ -67,5 +68,28 @@ def delete_chat(request, room_id):
     if request.method == "POST":
         room.delete()
         return redirect("chat_list")
+
+    return redirect("room", room_id=room.id)
+
+
+@login_required
+def upload_chat_image(request, room_id):
+    room = get_object_or_404(
+        ChatRoom,
+        id=room_id,
+        users=request.user
+    )
+
+    if request.method == "POST":
+        image = request.FILES.get("image")
+
+        if image:
+            webp_image = convert_image_to_webp(image)
+
+            ChatMessage.objects.create(
+                room=room,
+                sender=request.user,
+                image=webp_image
+            )
 
     return redirect("room", room_id=room.id)
