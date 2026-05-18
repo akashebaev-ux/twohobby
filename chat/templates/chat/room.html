@@ -342,6 +342,30 @@
     const acceptBtn =
         document.getElementById("accept-call");
 
+    function endCallAfterOneMinute() {
+
+            setTimeout(() => {
+
+                if (peerConnection) {
+                    peerConnection.close();
+                    peerConnection = null;
+                }
+
+                if (localStream) {
+                    localStream.getTracks().forEach(track => {
+                        track.stop();
+                    });
+
+                    localStream = null;
+                }
+
+                document.getElementById("call-status").innerText =
+                    "1 minute limit reached";
+
+                callPanel.classList.add("hidden");
+
+            }, 60000);
+        }
 
 
     async function startWebRTCCall() {
@@ -433,6 +457,8 @@
         isCalling = true;
 
         await startWebRTCCall();
+        
+        endCallAfterOneMinute();
 
         const offer =
             await peerConnection.createOffer();
