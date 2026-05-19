@@ -1071,7 +1071,7 @@ body:has(.auth-page) .app-wrapper {
 
 .chat-call-btn {
     border: none;
-    background: #28c840;
+    background: white;
     color: white;
     width: 42px;
     height: 42px;
