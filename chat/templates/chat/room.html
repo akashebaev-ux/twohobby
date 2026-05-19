@@ -280,11 +280,17 @@
     function scrollToBottom() {
         const chatLog = document.querySelector("#chat-log");
 
-        if (chatLog) {
-            setTimeout(() => {
-                chatLog.scrollTop = chatLog.scrollHeight;
-            }, 100);
+        if (!chatLog) {
+            return;
         }
+
+        requestAnimationFrame(() => {
+            chatLog.scrollTop = chatLog.scrollHeight;
+        });
+
+        setTimeout(() => {
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }, 300);
     }
 
     scrollToBottom();
