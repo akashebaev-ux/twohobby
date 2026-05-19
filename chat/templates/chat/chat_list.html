@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-
+{% load custom_filters %}
 {% block topbar %}{% endblock %}
 {% block bottom_nav %}{% endblock %}
 
@@ -30,11 +30,19 @@
                            class="connection-avatar">
 
                             {% if user.profile.profile_image and user.profile.profile_image.url %}
-                                <img src="{{ user.profile.profile_image.url|cut:'http:' }}?f_auto,q_auto,w_150,h_150,c_limit"
-                                     class="chat-avatar-img">
+                                <img
+                                    src="{{ user.profile.profile_image.url|cut:'http:'|replace:'/upload/|/upload/f_auto,q_auto,w_150,h_150,c_thumb,g_face/' }}"
+                                    loading="lazy"
+                                    class="chat-avatar-img"
+                                    alt="{{ user.profile.display_name|default:user.username }}"
+                                >
                             {% else %}
-                                <img src="{% static 'images/default.webp' %}"
-                                     class="chat-avatar-img">
+                                <img
+                                    src="{% static 'images/default.webp' %}"
+                                    loading="lazy"
+                                    class="chat-avatar-img"
+                                    alt="{{ user.profile.display_name|default:user.username }}"
+                                >
                             {% endif %}
 
                         </a>
@@ -58,11 +66,19 @@
                         {% if user != request.user %}
 
                             {% if user.profile.profile_image and user.profile.profile_image.url %}
-                                <img src="{{ user.profile.profile_image.url|cut:'http:' }}?f_auto,q_auto,w_150,h_150,c_limit"
-                                     class="chat-avatar-img">
+                                <img
+                                    src="{{ user.profile.profile_image.url|cut:'http:'|replace:'/upload/|/upload/f_auto,q_auto,w_150,h_150,c_thumb,g_face/' }}"
+                                    loading="lazy"
+                                    class="chat-avatar-img"
+                                    alt="{{ user.profile.display_name|default:user.username }}"
+                                >
                             {% else %}
-                                <img src="{% static 'images/default.webp' %}"
-                                     class="chat-avatar-img">
+                                <img
+                                    src="{% static 'images/default.webp' %}"
+                                    loading="lazy"
+                                    class="chat-avatar-img"
+                                    alt="{{ user.profile.display_name|default:user.username }}"
+                                >
                             {% endif %}
 
                             <div class="chat-info">

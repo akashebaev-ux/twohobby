@@ -28,14 +28,16 @@
     {% if profile %}
 
         {% if profile.profile_image and profile.profile_image.url %}
-        <img
-            src="{{ profile.profile_image.url|cut:'http:'|replace:'/upload/|/upload/f_auto,q_auto,w_400,h_400,c_fill,g_face/' }}"
-            class="profile-img"
-            alt="{{ profile.display_name|default:profile.user.username }}"
-        >
+            <img
+                src="{{ profile.profile_image.url|cut:'http:'|replace:'/upload/|/upload/f_auto,q_auto,w_400,h_400,c_fill,g_face/' }}"
+                loading="lazy"
+                class="profile-img"
+                alt="{{ profile.display_name|default:profile.user.username }}"
+            >
         {% else %}
             <img 
                 src="{% static 'images/default.webp' %}" 
+                loading="lazy"
                 class="profile-img" 
                 alt="{{ profile.display_name|default:profile.user.username }}"
             >
