@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-<body>
+<body id="app-body">
 
 <div class="app-wrapper">
 
@@ -29,6 +29,9 @@
                 Filter
             </button>
             {% endblock %}
+            <button id="theme-toggle" class="theme-toggle-btn" type="button">
+                🌙
+            </button>
         </header>
     {% endblock %}
 
@@ -89,6 +92,28 @@
         </nav>
     {% endblock %}
 </div>
+<script>
+const toggleBtn = document.getElementById("theme-toggle");
+const body = document.getElementById("app-body");
 
+if (toggleBtn) {
+    if (localStorage.getItem("theme") === "dark") {
+        body.classList.add("dark-mode");
+        toggleBtn.textContent = "☀️";
+    }
+
+    toggleBtn.addEventListener("click", function () {
+        body.classList.toggle("dark-mode");
+
+        if (body.classList.contains("dark-mode")) {
+            localStorage.setItem("theme", "dark");
+            toggleBtn.textContent = "☀️";
+        } else {
+            localStorage.setItem("theme", "light");
+            toggleBtn.textContent = "🌙";
+        }
+    });
+}
+</script>
 </body>
 </html>

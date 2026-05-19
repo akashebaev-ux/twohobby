@@ -1130,6 +1130,193 @@ body:has(.auth-page) .app-wrapper {
     background: #ff3b30;
 }
 
+
+
+
+/* Dark mode */
+
+.theme-toggle-btn {
+    border: none;
+    background: transparent;
+    font-size: 22px;
+    cursor: pointer;
+    color: inherit;
+}
+
+
+/* Main dark background */
+
+.dark-mode {
+    background: #dcdcdc;
+    color: white;
+}
+
+
+/* Main containers */
+
+.dark-mode .app-wrapper,
+.dark-mode .content,
+.dark-mode .chat-page,
+.dark-mode .chat-container,
+.dark-mode .chat-log,
+.dark-mode .chat-list-page,
+.dark-mode .profile-detail,
+.dark-mode .likes-page,
+.dark-mode .auth-page,
+.dark-mode .edit-profile-page {
+    background: #121212;
+    color: white;
+}
+
+
+/* Top bars */
+
+.dark-mode .top-bar,
+.dark-mode .chat-header,
+.dark-mode .likes-header {
+    background: #1e1e1e;
+    border-color: #333;
+}
+
+
+/* Bottom nav */
+
+.dark-mode .bottom-nav {
+    background: #1e1e1e;
+    border-top: 1px solid #333;
+}
+
+
+/* Navigation text */
+
+.dark-mode .nav-link {
+    color: #cccccc;
+}
+
+.dark-mode .nav-link.active {
+    color: #ff5864;
+}
+
+
+/* Profile cards */
+
+.dark-mode .profile-card p,
+.dark-mode .profile-bio,
+.dark-mode .profile-age,
+.dark-mode .chat-info p,
+.dark-mode .like-post-meta,
+.dark-mode .like-post-time {
+    color: #cccccc;
+}
+
+
+/* Cards */
+
+.dark-mode .chat-card,
+.dark-mode .connection-filter,
+.dark-mode .like-post-card,
+.dark-mode .their-message {
+    background: #2b2b2b;
+    color: white;
+}
+
+
+/* My messages */
+
+.dark-mode .my-message {
+    background: #ff5864;
+    color: white;
+}
+
+
+/* Inputs */
+
+.dark-mode #chat-message-input,
+.dark-mode .comment-form input,
+.dark-mode .like-post-form textarea,
+.dark-mode .edit-profile-form input,
+.dark-mode .edit-profile-form textarea,
+.dark-mode .edit-profile-form select,
+.dark-mode .auth-form input {
+    background: #2b2b2b;
+    color: white;
+    border: 1px solid #444;
+}
+
+
+/* Placeholder text */
+
+.dark-mode #chat-message-input::placeholder,
+.dark-mode textarea::placeholder,
+.dark-mode input::placeholder {
+    color: #aaaaaa;
+}
+
+
+/* Chat input area */
+
+.dark-mode .chat-input-area {
+    background: #1e1e1e;
+    border-top: 1px solid #333;
+}
+
+
+/* Likes/comments */
+
+.dark-mode .post-comments p,
+.dark-mode .like-post-body,
+.dark-mode .chat-time {
+    color: #cccccc;
+}
+
+
+/* Buttons */
+
+.dark-mode .theme-toggle-btn,
+.dark-mode .post-action-btn,
+.dark-mode .comment-toggle-btn,
+.dark-mode .heart-btn,
+.dark-mode .delete-chat-btn {
+    color: white;
+}
+
+
+/* Scrollbars */
+
+.dark-mode .chat-log::-webkit-scrollbar-track {
+    background: #1e1e1e;
+}
+
+.dark-mode .chat-log::-webkit-scrollbar-thumb {
+    background: #ff5864;
+}
+
+
+/* Profile images */
+
+.dark-mode .profile-img,
+.dark-mode .liked-avatar-img,
+.dark-mode .chat-avatar-img {
+    border-color: #ff5864;
+}
+
+
+@media screen and (min-width: 768px) {
+
+    .dark-mode .app-wrapper {
+        max-width: 480px;
+        margin: 0 auto;
+
+        box-shadow:
+            0 0 40px rgba(0,0,0,.18);
+
+        border-left: 1px solid rgba(255,255,255,.04);
+        border-right: 1px solid rgba(255,255,255,.04);
+    }
+}
+
+
+
 /* Desktop app preview */
 
 @media screen and (min-width: 768px) {
