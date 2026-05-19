@@ -77,19 +77,28 @@
         });
     }
 
-        // Toggle filter box
+    // Toggle filter box
 
-    const filterBtn = document.getElementById("toggle-filter-btn");
-    const filterBox = document.getElementById("filter-box");
+    const filterBtn =
+        document.getElementById("toggle-filter-btn");
 
-    filterBtn.addEventListener("click", function(e) {
-        e.preventDefault();
+    const filterBox =
+        document.getElementById("filter-box");
 
-        if (filterBox.style.display === "block") {
-            filterBox.style.display = "none";
-        } else {
-            filterBox.style.display = "block";
-        }
-    });
+    if (filterBtn && filterBox) {
+
+        filterBtn.addEventListener(
+            "click",
+            function(e) {
+
+                e.preventDefault();
+
+                filterBox.style.display =
+                    filterBox.style.display === "block"
+                    ? "none"
+                    : "block";
+            }
+        );
+    }
 </script>
 {% endblock %}
