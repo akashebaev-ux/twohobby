@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load custom_filters %}
 {% block filter_button %}{% endblock %}
 {% block title %}Profile Detail{% endblock %}
 
@@ -8,11 +9,16 @@
 <div class="profile-detail">
 
     {% if profile.profile_image and profile.profile_image.url %}
-        <img src="{{ profile.profile_image.url|cut:'http:' }}?f_auto,q_auto,w_300,h_300,c_limit" class="profile-img">
+        <img
+            src="{{ profile.profile_image.url|cut:'http:'|replace:'/upload/|/upload/f_auto,q_auto,w_400,h_400,c_fill,g_face/' }}"
+            class="profile-img"
+            alt="{{ profile.display_name|default:profile.user.username }}"
+        >
     {% else %}
         <img
-            src="{% static 'images/default.webp' %}?f_auto,q_auto,w_300,h_300,c_limit"
+            src="{% static 'images/default.webp' %}"
             class="profile-img"
+            alt="{{ profile.display_name|default:profile.user.username }}"
         >
     {% endif %}
 
