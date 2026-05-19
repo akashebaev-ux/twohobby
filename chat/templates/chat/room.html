@@ -179,6 +179,13 @@
             `;
 
             scrollToBottom();
+
+            const images = chatLog.querySelectorAll("img");
+
+            images.forEach(img => {
+                img.onload = scrollToBottom;
+            });
+
             return;
         }
 
