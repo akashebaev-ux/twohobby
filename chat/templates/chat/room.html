@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load custom_filters %}
 
 {% block topbar %}{% endblock %}
 {% block bottom_nav %}{% endblock %}
@@ -83,7 +84,7 @@
 
                     {% if message.image %}
                         <img
-                            src="{{ message.image.url|cut:'http:'}}?f_auto,q_auto,w_300,h_300,c_limit"
+                            src="{{ message.image.url|cut:'http:'|replace:'/upload/':'/upload/f_auto,q_auto,w_300,h_300,c_fill,g_face/' }}"
                             class="chat-image"
                             alt="Chat image"
                         >
@@ -163,7 +164,10 @@
             chatLog.innerHTML += `
                 <div class="chat-message ${messageClass}">
                     <img
-                        src="${data.image_url}?f_auto,q_auto,w_300,h_300,c_limit"
+                        src="${data.image_url.replace(
+                            '/upload/',
+                            '/upload/f_auto,q_auto,w_300,h_300,c_fill,g_auto/'
+                        )}"
                         class="chat-image"
                         alt="Chat image"
                     >
