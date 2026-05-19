@@ -84,7 +84,7 @@
 
                     {% if message.image %}
                         <img
-                            src="{{ message.image.url|cut:'http:'|replace:'/upload/':'/upload/f_auto,q_auto,w_300,h_300,c_fill,g_face/' }}"
+                            src="{{ message.image.url|cut:'http:'|replace:'/upload/|/upload/f_auto,q_auto,w_300,h_300,c_fill,g_face/' }}"
                             class="chat-image"
                             alt="Chat image"
                         >
