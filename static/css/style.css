@@ -1300,6 +1300,13 @@ body:has(.auth-page) .app-wrapper {
     border-color: #ff5864;
 }
 
+/* Chat list text */
+.dark-mode .chat-info h3,
+.dark-mode .chat-card-main,
+.dark-mode .chat-card {
+    color: white !important;
+}
+
 
 @media screen and (min-width: 768px) {
 
