@@ -1,3 +1,8 @@
+/* jshint esversion: 11 */
+/* global roomId, currentUser, showCallInvite,
+handleWebRTCOffer, handleWebRTCAnswer, handleIceCandidate */
+
+
 const protocol =
     window.location.protocol === "https:" ? "wss://" : "ws://";
 
@@ -135,11 +140,11 @@ function scrollToBottom() {
         return;
     }
 
-    requestAnimationFrame(() => {
+    requestAnimationFrame(function() {
         chatLog.scrollTop = chatLog.scrollHeight;
     });
 
-    setTimeout(() => {
+    setTimeout(function() {
         chatLog.scrollTop = chatLog.scrollHeight;
     }, 300);
 }
