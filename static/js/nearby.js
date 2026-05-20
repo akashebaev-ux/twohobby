@@ -1,3 +1,7 @@
+/* jshint esversion: 11 */
+/* global saveLocationUrl, csrfToken */
+
+
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
 
@@ -31,9 +35,7 @@ if (filterBtn && filterBox) {
             e.preventDefault();
 
             filterBox.style.display =
-                filterBox.style.display === "block"
-                ? "none"
-                : "block";
+                filterBox.style.display === "block" ? "none" : "block";
         }
     );
 }
