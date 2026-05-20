@@ -13,9 +13,9 @@
         <div class="chat-header">
             <a href="{% url 'chat_list' %}" class="back-btn">‹</a>
             <div>
-                <h2>
+                <h1>
                     {{ other_user.profile.display_name|default:other_user.username }}
-                </h2>
+                </h1>
                 <p>Private conversation</p>
 
             </div>
@@ -57,8 +57,7 @@
             </p>
             <audio 
                 id="remote-audio" 
-                autoplay 
-                playsinline
+                autoplay
                 style="display: none;"
             ></audio>
 

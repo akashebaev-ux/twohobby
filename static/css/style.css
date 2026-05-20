@@ -381,6 +381,7 @@ body:has(.auth-page) .app-wrapper {
     flex-shrink: 0;
 }
 
+.chat-header h1,
 .chat-header h2 {
     margin: 0;
     font-size: 1.3rem;
