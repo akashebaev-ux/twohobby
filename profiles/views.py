@@ -6,6 +6,7 @@ from .forms import ProfileForm
 from matches.models import Swipe, BlockedUser
 import json
 from django.http import JsonResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 from math import radians, sin, cos, sqrt, atan2
@@ -29,7 +30,9 @@ def calculate_distance(lat1, lon1, lat2, lon2):
     return round(earth_radius * c, 1)
 
 # Create your views here.
-class ProfileListView(generic.ListView):
+
+
+class ProfileListView(LoginRequiredMixin, generic.ListView):
     template_name = 'profiles/profile_list.html'
     context_object_name = 'profiles'
 
@@ -73,7 +76,7 @@ class ProfileListView(generic.ListView):
                         profile.distance = None
 
         return queryset
-    
+
 
 def profile_detail(request, id):
     profile = get_object_or_404(Profile, id=id)
