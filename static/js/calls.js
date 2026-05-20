@@ -1,3 +1,7 @@
+/* jshint esversion: 11 */
+/* global MediaStream, RTCPeerConnection,
+RTCSessionDescription, RTCIceCandidate, navigator */
+
 function showCallInvite(username) {
     const callPanel = document.getElementById("call-panel");
     const statusText = document.getElementById("call-status");
@@ -168,3 +172,8 @@ declineCallBtn.onclick = function() {
 
     callPanel.classList.add("hidden");
 };
+
+window.showCallInvite = showCallInvite;
+window.handleWebRTCOffer = handleWebRTCOffer;
+window.handleWebRTCAnswer = handleWebRTCAnswer;
+window.handleIceCandidate = handleIceCandidate;
