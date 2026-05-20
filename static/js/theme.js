@@ -1,3 +1,6 @@
+/* jshint esversion: 11 */
+
+
 const toggleBtn = document.getElementById("theme-toggle");
 const body = document.getElementById("app-body");
 
