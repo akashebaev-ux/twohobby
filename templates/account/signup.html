@@ -22,12 +22,32 @@
             {% url 'account_signup' as action_url %}
 
             <form method="post"
-                  action="{{ action_url }}"
-                  class="auth-form">
+                action="{{ action_url }}"
+                class="auth-form">
 
                 {% csrf_token %}
 
-                {{ form.as_p }}
+                {% for field in form %}
+
+                    <div class="form-group">
+
+                        {{ field.label_tag }}
+
+                        {{ field }}
+
+                        {% if field.help_text %}
+                            <div class="helptext">
+                                {{ field.help_text|safe }}
+                            </div>
+                        {% endif %}
+
+                        {% for error in field.errors %}
+                            <p class="form-error">{{ error }}</p>
+                        {% endfor %}
+
+                    </div>
+
+                {% endfor %}
 
                 {{ redirect_field }}
 
@@ -39,6 +59,7 @@
                 </button>
 
             </form>
+
         {% endif %}
 
     </div>
