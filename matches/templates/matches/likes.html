@@ -11,11 +11,19 @@
         {% for swipe in liked_users %}
             <div class="liked-avatar-card">
                 {% if swipe.to_user.profile.profile_image %}
-                    <img src="{{ swipe.to_user.profile.profile_image.url|cut:'http:' }}?f_auto,q_auto,w_150,h_150,c_limit"
-                        class="liked-avatar-img">
+                    <img
+                        src="{{ swipe.to_user.profile.profile_image.url|cut:'http:'|replace:'/upload/|/upload/f_auto,q_auto,w_150,h_150,c_thumb,g_face/' }}"
+                        loading="lazy"
+                        class="liked-avatar-img"
+                        alt="{{ swipe.to_user.profile.display_name|default:swipe.to_user.username }}"
+                    >
                 {% else %}
-                    <img src="{% static 'images/default.webp' %}?f_auto,q_auto,w_150,h_150,c_limit"
-                        class="liked-avatar-img">
+                    <img
+                        src="{% static 'images/default.webp' %}"
+                        loading="lazy"
+                        class="liked-avatar-img"
+                        alt="Default profile picture"
+                    >
                 {% endif %}
             </div>
         {% endfor %}
@@ -44,11 +52,17 @@
 
             <div class="like-post-left">
                 {% if post.author.profile.profile_image %}
-                    <img src="{{ post.author.profile.profile_image.url|cut:'http:' }}?f_auto,q_auto,w_150,h_150,c_limit"
-                         class="like-post-avatar">
+                    <img src="{{ post.author.profile.profile_image.url|cut:'http:'|replace:'/upload/|/upload/f_auto,q_auto,w_150,h_150,c_thumb,g_face/' }}"
+                        loading="lazy"
+                        class="like-post-avatar"
+                        alt="{{ post.author.profile.display_name|default:post.author.username }}"
+                    >
                 {% else %}
-                    <img src="{% static 'images/default.webp' %}?f_auto,q_auto,w_150,h_150,c_limit"
-                         class="like-post-avatar">
+                    <img src="{% static 'images/default.webp' %}"
+                        loading="lazy"
+                        class="like-post-avatar"
+                        alt="Default profile picture"
+                    >
                 {% endif %}
 
                 <div class="thread-line"></div>
