@@ -63,44 +63,9 @@
 </div>
 
 <script>
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            fetch("{% url 'save_location' %}", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRFToken": "{{ csrf_token }}"
-                },
-                body: JSON.stringify({
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude
-                })
-            });
-        });
-    }
-
-    // Toggle filter box
-
-    const filterBtn =
-        document.getElementById("toggle-filter-btn");
-
-    const filterBox =
-        document.getElementById("filter-box");
-
-    if (filterBtn && filterBox) {
-
-        filterBtn.addEventListener(
-            "click",
-            function(e) {
-
-                e.preventDefault();
-
-                filterBox.style.display =
-                    filterBox.style.display === "block"
-                    ? "none"
-                    : "block";
-            }
-        );
-    }
+    const saveLocationUrl = "{% url 'save_location' %}";
+    const csrfToken = "{{ csrf_token }}";
 </script>
+
+<script src="{% static 'js/nearby.js' %}"></script>
 {% endblock %}
