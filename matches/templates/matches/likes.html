@@ -154,7 +154,14 @@
                             name="post_id"
                             value="{{ post.id }}">
 
-                        {{ comment_form.body }}
+                        <input
+                            type="text"
+                            name="body"
+                            placeholder="Reply..."
+                            maxlength="300"
+                            required
+                            id="comment_body_post_{{ post.id }}"
+                        >
 
                         <button type="submit"
                                 name="comment_submit">
