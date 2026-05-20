@@ -1,3 +1,6 @@
+/* jshint esversion: 11 */
+
+
 const filterBtn =
     document.getElementById("toggle-filter-btn");
 
