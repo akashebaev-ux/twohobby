@@ -1,24 +1,41 @@
-# TwoHobby app
-
-
-<img width="2048" height="762" alt="My First Board (1)" src="https://github.com/user-attachments/assets/52fb7127-198d-46bc-8a90-e1c243f22ce0">
-
-
-
 # TwoHobby – Social & Dating Platform
 
 ## Overview
 
-**TwoHobby** is a modern social and dating web application built with Django.  
-The platform allows users to create profiles, upload images, browse other users, and communicate in real-time through chat and voice features.
+**TwoHobby** is a modern social connection platform inspired by real-time communication apps and social discovery systems.
 
-The project focuses on:
+The platform combines elements of community-driven applications such as Threads with the discovery-based experience of platforms like Badoo and Tinder. Its goal is to create a more meaningful and private environment where people can connect through shared interests, hobbies, values, and authentic interaction.
+
+TwoHobby allows users to share thoughts, posts, and experiences exclusively with people they have marked as liked. Only liked users can exchange feedback, ideas, and private messages within their social circle, creating a more personal and engaging communication environment.
+
+The platform is designed to encourage genuine social interaction beyond traditional dating-focused applications. By combining hobby-based discovery, private social networking, instant messaging, and real-time communication features, TwoHobby creates a space where users can build friendships, relationships, and communities based on common ground.
+
+
+Built as a responsive full-stack web application, TwoHobby integrates scalable communication technologies and optimized media delivery to provide a smooth user experience across desktop and mobile devices.
+
+---
+
+## Project Philosophy
+
+TwoHobby is designed as a free-to-use social platform with a scalable and cost-efficient infrastructure capable of supporting thousands of users while maintaining relatively low operational costs.
+
+The philosophy behind the platform is simple:
+
+Human connection, emotions, and the opportunity to build meaningful relationships — including finding a soulmate — should never be unnecessarily restricted or hidden behind expensive barriers.
+
+---
+
+## Project Focus
+
+This project focuses on:
+
 - Real-time communication
-- Modern responsive UI
-- Media optimization
-- Scalable Django architecture
-- WebSocket integration
-- Cloud-based media storage
+- Responsive mobile-first user experience
+- Scalable communication systems
+- Optimized media delivery
+- Private and meaningful social interaction
+- Full-stack web development practices
+- Efficient and cost-optimized infrastructure design
 
 ---
 
