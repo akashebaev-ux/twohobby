@@ -32,7 +32,7 @@ class Swipe(models.Model):
 
     def __str__(self):
         return f"{self.from_user} {self.action} {self.to_user}"
-    
+
 
 class LikePost(models.Model):
     author = models.ForeignKey(
@@ -84,7 +84,7 @@ class LikeComment(models.Model):
 
     def __str__(self):
         return f"{self.author} comment"
-    
+
 
 class BlockedUser(models.Model):
     blocker = models.ForeignKey(
