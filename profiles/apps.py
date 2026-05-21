@@ -6,4 +6,4 @@ class ProfilesConfig(AppConfig):
     name = 'profiles'
 
     def ready(self):
-        import profiles.signals   # 👈 THIS LINE IS REQUIRED
+        import profiles.signals  # noqa
