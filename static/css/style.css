@@ -772,6 +772,16 @@ body:has(.auth-page) .app-wrapper {
     cursor: pointer;
 }
 
+.auth-card p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+.dark-mode .auth-card p {
+    color: #cccccc;
+}
+
 
 /* Edit profile */
 
