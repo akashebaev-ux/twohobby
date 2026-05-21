@@ -5,6 +5,7 @@ from .forms import LikePostForm, LikeCommentForm
 from .models import Swipe, LikePost, BlockedUser
 from chat.models import ChatRoom, ChatMessage
 
+
 @login_required
 def swipe_user(request, user_id, action):
     target_user = get_object_or_404(User, id=user_id)
