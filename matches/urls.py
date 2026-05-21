@@ -9,9 +9,9 @@ urlpatterns = [
     ),
     path("likes/", views.likes, name="likes"),
     path(
-    "post/<int:post_id>/like/",
-    views.toggle_like_post,
-    name="toggle_like_post"
+        "post/<int:post_id>/like/",
+        views.toggle_like_post,
+        name="toggle_like_post"
     ),
     path(
         "post/<int:post_id>/delete/",
@@ -25,13 +25,13 @@ urlpatterns = [
         name="share_like_post"
     ),
     path(
-    "block/<int:user_id>/",
-    views.block_user,
-    name="block_user"
+        "block/<int:user_id>/",
+        views.block_user,
+        name="block_user"
     ),
     path(
-    "unblock/<int:user_id>/",
-    views.unblock_user,
-    name="unblock_user"
+        "unblock/<int:user_id>/",
+        views.unblock_user,
+        name="unblock_user"
     ),
 ]
