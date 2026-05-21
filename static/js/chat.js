@@ -42,6 +42,13 @@ window.chatSocket.onmessage = function(e) {
             </div>
         `;
 
+        const newImage =
+            chatLog.querySelector(".chat-message:last-child img");
+
+        if (newImage && !newImage.complete) {
+            newImage.addEventListener("load", scrollToBottom);
+        }
+
         scrollToBottom();
         return;
     }
@@ -150,12 +157,6 @@ function scrollToBottom() {
 }
 
 window.addEventListener("load", function() {
-    const messageInput = document.querySelector("#chat-message-input");
-
-    if (messageInput) {
-        messageInput.focus();
-    }
-
     scrollToBottom();
 });
 
@@ -164,6 +165,7 @@ window.addEventListener("pageshow", function() {
 
     if (messageInput) {
         messageInput.disabled = false;
-        messageInput.focus();
     }
+    
+    scrollToBottom();
 });

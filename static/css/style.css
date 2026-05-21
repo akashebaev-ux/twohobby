@@ -142,7 +142,6 @@ body {
 
 body:has(.chat-page) {
     overflow: hidden;
-    height: 100dvh;
 }
 
 body:has(.chat-page) .content {
@@ -412,6 +411,7 @@ body:has(.auth-page) .app-wrapper {
     scrollbar-width: thin;
     scrollbar-color: #ff5864 #f1f1f1;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
 }
 
 /* Custom scrollbar for WebKit browsers */
