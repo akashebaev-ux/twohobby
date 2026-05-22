@@ -6,7 +6,10 @@ from django.db import models
 
 
 class ChatRoom(models.Model):
-    """Model representing a private chat room."""
+    """
+    Stores a private chat room related to multiple
+    :model:`auth.User` instances.
+    """
 
     users = models.ManyToManyField(
         User,
@@ -21,7 +24,10 @@ class ChatRoom(models.Model):
 
 
 class ChatMessage(models.Model):
-    """Model representing chat messages exchanged between users."""
+    """
+    Stores a single chat message related to a
+    :model:`chat.ChatRoom` and :model:`auth.User`.
+    """
 
     room = models.ForeignKey(
         ChatRoom,
@@ -54,7 +60,10 @@ class ChatMessage(models.Model):
 
 
 class CallLog(models.Model):
-    """Model storing call activity between users."""
+    """
+    Stores a call activity entry between two
+    :model:`auth.User` instances.
+    """
 
     caller = models.ForeignKey(
         User,

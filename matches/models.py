@@ -6,7 +6,10 @@ from django.db import models
 
 
 class Swipe(models.Model):
-    """Model representing a swipe action between users."""
+    """
+    Stores a swipe action between two
+    :model:`auth.User` instances.
+    """
 
     LIKE = "like"
     PASS = "pass"
@@ -43,7 +46,10 @@ class Swipe(models.Model):
 
 
 class LikePost(models.Model):
-    """Model representing posts shared with liked users."""
+    """
+    Stores a single post created by a
+    :model:`auth.User`.
+    """
 
     author = models.ForeignKey(
         User,
@@ -76,7 +82,11 @@ class LikePost(models.Model):
 
 
 class LikeComment(models.Model):
-    """Model representing comments on like posts."""
+    """
+    Stores a single comment related to a
+    :model:`matches.LikePost`.
+    """
+
     post = models.ForeignKey(
         LikePost,
         on_delete=models.CASCADE,
@@ -103,7 +113,10 @@ class LikeComment(models.Model):
 
 
 class BlockedUser(models.Model):
-    """Model representing blocked relationships between users."""
+    """
+    Stores a blocked relationship between two
+    :model:`auth.User` instances.
+    """
 
     blocker = models.ForeignKey(
         User,

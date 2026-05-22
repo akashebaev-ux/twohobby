@@ -19,7 +19,10 @@ LOOKING_FOR_CHOICES = (
 
 
 class Profile(models.Model):
-    """Model representing a user's dating profile."""
+    """
+    Stores a dating profile related to a
+    :model:`auth.User`.
+    """
 
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name="profile"
