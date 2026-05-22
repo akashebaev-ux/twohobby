@@ -33,9 +33,12 @@ class Swipe(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
+        # Prevent duplicate swipes between users
         unique_together = ("from_user", "to_user")
 
     def __str__(self):
+        """Return a readable representation of the swipe."""
+
         return f"{self.from_user} {self.action} {self.to_user}"
 
 
@@ -63,9 +66,12 @@ class LikePost(models.Model):
     )
 
     class Meta:
+        # Show newest posts first
         ordering = ["-created_on"]
 
     def __str__(self):
+        """Return a readable representation of the post."""
+
         return f"{self.author} - {self.body[:30]}"
 
 
@@ -91,6 +97,8 @@ class LikeComment(models.Model):
     )
 
     def __str__(self):
+        """Return a readable representation of the comment."""
+
         return f"{self.author} comment"
 
 
@@ -115,4 +123,6 @@ class BlockedUser(models.Model):
         unique_together = ("blocker", "blocked")
 
     def __str__(self):
+        """Return a readable representation of the blocked user."""
+
         return f"{self.blocker} blocked {self.blocked}"
