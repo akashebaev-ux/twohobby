@@ -15,6 +15,8 @@ class ChatRoom(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
+        """Return a readable representation of the chat room."""
+
         return f"ChatRoom {self.id}"
 
 
@@ -46,6 +48,8 @@ class ChatMessage(models.Model):
         ordering = ["created_on"]
 
     def __str__(self):
+        """Return a readable representation of the chat message."""
+
         return f"{self.sender.username}: {self.message[:20]}"
 
 
@@ -65,3 +69,8 @@ class CallLog(models.Model):
     )
 
     started_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        """Return a readable representation of the call log."""
+
+        return f"{self.caller} called {self.receiver}"
