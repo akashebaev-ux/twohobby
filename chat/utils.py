@@ -1,6 +1,6 @@
 from io import BytesIO
-from django.core.files.base import ContentFile
 from PIL import Image
+from django.core.files.base import ContentFile
 
 
 def convert_image_to_webp(image):

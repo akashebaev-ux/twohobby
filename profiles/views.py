@@ -1,15 +1,13 @@
+import json
+from math import radians, sin, cos, sqrt, atan2
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
-from django.contrib.auth.decorators import login_required
-from .models import Profile
-from .forms import ProfileForm
 from matches.models import Swipe, BlockedUser
-import json
-from django.http import JsonResponse
-from django.contrib.auth.mixins import LoginRequiredMixin
-
-
-from math import radians, sin, cos, sqrt, atan2
+from .forms import ProfileForm
+from .models import Profile
 
 
 def calculate_distance(lat1, lon1, lat2, lon2):
