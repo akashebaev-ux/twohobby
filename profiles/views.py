@@ -14,7 +14,10 @@ from .models import Profile
 
 
 def calculate_distance(lat1, lon1, lat2, lon2):
-    """Calculate the distance between two coordinates in kilometres."""
+    """
+    Calculates the distance between two geographical
+    coordinates in kilometres.
+    """
 
     earth_radius = 6371
 
@@ -34,7 +37,12 @@ def calculate_distance(lat1, lon1, lat2, lon2):
 
 
 class ProfileListView(LoginRequiredMixin, generic.ListView):
-    """Display nearby active profiles with optional filters."""
+    """
+    Renders a list of active profiles excluding blocked
+    :model:`profiles.Profile` instances.
+
+    Allows filtering profiles by gender and age.
+    """
 
     template_name = 'profiles/profile_list.html'
     context_object_name = 'profiles'
@@ -84,7 +92,10 @@ class ProfileListView(LoginRequiredMixin, generic.ListView):
 
 
 def profile_detail(request, id):
-    """Display the details of a selected profile."""
+    """
+    Displays an individual instance of
+    :model:`profiles.Profile`.
+    """
 
     profile = get_object_or_404(Profile, id=id)
     return render(request, 'profiles/profile_detail.html', {
@@ -93,7 +104,12 @@ def profile_detail(request, id):
 
 
 def landing_page(request):
-    """Display the landing page or redirect authenticated users."""
+    """
+    Renders the landing page for unauthenticated users.
+
+    Redirects authenticated :model:`auth.User`
+    instances to the profile list page.
+    """
 
     if request.user.is_authenticated:
         return redirect('profile_list')
@@ -102,7 +118,10 @@ def landing_page(request):
 
 @login_required
 def my_profile(request):
-    """Display the current user's profile page."""
+    """
+    Displays the profile related to the logged-in
+    :model:`auth.User`.
+    """
 
     profile, created = Profile.objects.get_or_create(
         user=request.user,
@@ -118,7 +137,10 @@ def my_profile(request):
 
 @login_required
 def edit_profile(request):
-    """Allow the current user to update their profile."""
+    """
+    Updates an individual instance of
+    :model:`profiles.Profile`.
+    """
 
     profile = request.user.profile
 
@@ -144,7 +166,11 @@ def edit_profile(request):
 
 @login_required
 def encounters(request):
-    """Display one profile that the user has not swiped or blocked."""
+    """
+    Renders profile encounters excluding previously
+    swiped and blocked :model:`profiles.Profile`
+    instances.
+    """
 
     swiped_users = Swipe.objects.filter(
         from_user=request.user
@@ -186,7 +212,10 @@ def encounters(request):
 
 @login_required
 def save_location(request):
-    """Save the user's browser geolocation to their profile."""
+    """
+    Stores geolocation coordinates for an individual
+    :model:`profiles.Profile`.
+    """
 
     if request.method == "POST":
         data = json.loads(request.body)

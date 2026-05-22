@@ -1,6 +1,5 @@
 """Views for swiping, likes, posts, comments, sharing, and blocking."""
 
-
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
@@ -11,7 +10,11 @@ from .models import Swipe, LikePost, BlockedUser
 
 @login_required
 def swipe_user(request, user_id, action):
-    """Save a user's swipe action and redirect to encounters."""
+    """
+    Stores a swipe action between two
+    :model:`auth.User` instances and redirects
+    to the encounters page.
+    """
 
     target_user = get_object_or_404(User, id=user_id)
 
@@ -27,7 +30,13 @@ def swipe_user(request, user_id, action):
 
 @login_required
 def likes(request):
-    """Display liked users, related posts, and handle post comments."""
+    """
+    Renders liked users, posts, and comments related
+    to :model:`matches.LikePost`.
+
+    Allows logged-in :model:`auth.User` instances
+    to create posts and comments.
+    """
 
     liked_users = Swipe.objects.filter(
         from_user=request.user,
@@ -95,7 +104,10 @@ def likes(request):
 
 @login_required
 def toggle_like_post(request, post_id):
-    """Add or remove the current user's like on a post."""
+    """
+    Adds or removes a like from an individual
+    :model:`matches.LikePost`.
+    """
 
     post = get_object_or_404(LikePost, id=post_id)
 
@@ -109,7 +121,10 @@ def toggle_like_post(request, post_id):
 
 @login_required
 def delete_like_post(request, post_id):
-    """Delete a like post owned by the current user."""
+    """
+    Deletes an individual instance of
+    :model:`matches.LikePost`.
+    """
 
     post = get_object_or_404(
         LikePost,
@@ -125,7 +140,11 @@ def delete_like_post(request, post_id):
 
 @login_required
 def share_like_post(request, post_id):
-    """Share a like post into a private chat room."""
+    """
+    Shares an individual instance of
+    :model:`matches.LikePost` into a
+    :model:`chat.ChatRoom`.
+    """
 
     post = get_object_or_404(LikePost, id=post_id)
 
@@ -152,7 +171,10 @@ def share_like_post(request, post_id):
 
 @login_required
 def block_user(request, user_id):
-    """Block a user and redirect back to the profile list."""
+    """
+    Creates a blocked relationship between two
+    :model:`auth.User` instances.
+    """
 
     blocked_user = get_object_or_404(User, id=user_id)
 
@@ -167,7 +189,10 @@ def block_user(request, user_id):
 
 @login_required
 def unblock_user(request, user_id):
-    """Unblock a user and redirect back to the chat room."""
+    """
+    Removes a blocked relationship between two
+    :model:`auth.User` instances.
+    """
 
     blocked_user = get_object_or_404(User, id=user_id)
 
