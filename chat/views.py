@@ -5,15 +5,26 @@ from channels.layers import get_channel_layer
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
+
 from matches.models import BlockedUser
-from .models import ChatRoom, ChatMessage
+
+from .models import ChatMessage, ChatRoom
 
 
 @login_required
 def chat_list(request):
     """
-    Renders all chat rooms related to the logged-in
-    :model:`auth.User` instance.
+    Displays all chat rooms related to the logged-in
+    :model:`auth.User`.
+
+    **Context**
+
+    ``rooms``
+        Queryset of :model:`chat.ChatRoom` instances.
+
+    **Template:**
+
+    :template:`chat/chat_list.html`
     """
 
     rooms = request.user.chat_rooms.all()
@@ -26,10 +37,30 @@ def chat_list(request):
 @login_required
 def room(request, room_id):
     """
-    Renders an individual chat room and its messages.
+    Displays an individual instance of
+    :model:`chat.ChatRoom`.
 
-    Displays an individual instance of :model:`chat.ChatRoom`
-    and related instances of :model:`chat.ChatMessage`.
+    Displays related instances of
+    :model:`chat.ChatMessage`.
+
+    **Context**
+
+    ``room``
+        An instance of :model:`chat.ChatRoom`.
+
+    ``messages``
+        Queryset of related :model:`chat.ChatMessage`
+        instances.
+
+    ``other_user``
+        Related :model:`auth.User` instance.
+
+    ``is_blocked``
+        Boolean indicating blocked status.
+
+    **Template:**
+
+    :template:`chat/room.html`
     """
 
     room = get_object_or_404(
@@ -63,10 +94,11 @@ def room(request, room_id):
 @login_required
 def start_chat(request, user_id):
     """
-    Creates a new chat room or redirects to an existing one.
+    Creates a new :model:`chat.ChatRoom` or redirects
+    to an existing one.
 
-    Connects the logged-in :model:`auth.User` with another
-    :model:`auth.User`.
+    Connects the logged-in :model:`auth.User` with
+    another :model:`auth.User`.
     """
 
     other_user = get_object_or_404(User, id=user_id)
@@ -89,9 +121,8 @@ def start_chat(request, user_id):
 @login_required
 def delete_chat(request, room_id):
     """
-    Deletes an individual chat room after a POST request.
-
-    Deletes an instance of :model:`chat.ChatRoom`.
+    Deletes an individual instance of
+    :model:`chat.ChatRoom` after a POST request.
     """
 
     room = get_object_or_404(ChatRoom, id=room_id, users=request.user)
@@ -106,7 +137,8 @@ def delete_chat(request, room_id):
 @login_required
 def upload_chat_image(request, room_id):
     """
-    Uploads an image message and broadcasts it to the chat room.
+    Uploads an image message to an individual
+    :model:`chat.ChatRoom`.
 
     Creates an instance of :model:`chat.ChatMessage`.
     """

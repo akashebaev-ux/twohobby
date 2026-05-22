@@ -3,9 +3,11 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
-from chat.models import ChatRoom, ChatMessage
-from .forms import LikePostForm, LikeCommentForm
-from .models import Swipe, LikePost, BlockedUser
+
+from chat.models import ChatMessage, ChatRoom
+
+from .forms import LikeCommentForm, LikePostForm
+from .models import BlockedUser, LikePost, Swipe
 
 
 @login_required
@@ -36,6 +38,27 @@ def likes(request):
 
     Allows logged-in :model:`auth.User` instances
     to create posts and comments.
+
+    **Context**
+
+    ``liked_users``
+        Queryset of liked :model:`auth.User` instances.
+
+    ``posts``
+        Queryset of :model:`matches.LikePost` instances.
+
+    ``form``
+        Instance of :form:`matches.LikePostForm`.
+
+    ``comment_form``
+        Instance of :form:`matches.LikeCommentForm`.
+
+    ``can_post``
+        Boolean determining whether posting is allowed.
+
+    **Template:**
+
+    :template:`matches/likes.html`
     """
 
     liked_users = Swipe.objects.filter(
@@ -107,6 +130,8 @@ def toggle_like_post(request, post_id):
     """
     Adds or removes a like from an individual
     :model:`matches.LikePost`.
+
+    Redirects the user back to the likes page.
     """
 
     post = get_object_or_404(LikePost, id=post_id)
@@ -124,6 +149,8 @@ def delete_like_post(request, post_id):
     """
     Deletes an individual instance of
     :model:`matches.LikePost`.
+
+    Redirects the user back to the likes page.
     """
 
     post = get_object_or_404(
@@ -144,6 +171,9 @@ def share_like_post(request, post_id):
     Shares an individual instance of
     :model:`matches.LikePost` into a
     :model:`chat.ChatRoom`.
+
+    Creates an instance of
+    :model:`chat.ChatMessage`.
     """
 
     post = get_object_or_404(LikePost, id=post_id)
@@ -174,6 +204,8 @@ def block_user(request, user_id):
     """
     Creates a blocked relationship between two
     :model:`auth.User` instances.
+
+    Redirects the user back to the profile list.
     """
 
     blocked_user = get_object_or_404(User, id=user_id)
@@ -192,6 +224,8 @@ def unblock_user(request, user_id):
     """
     Removes a blocked relationship between two
     :model:`auth.User` instances.
+
+    Redirects the user back to the chat room.
     """
 
     blocked_user = get_object_or_404(User, id=user_id)

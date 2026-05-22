@@ -2,13 +2,15 @@
 
 
 import json
-from math import radians, sin, cos, sqrt, atan2
+from math import atan2, cos, radians, sin, sqrt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views import generic
-from matches.models import Swipe, BlockedUser
+
+from matches.models import BlockedUser, Swipe
+
 from .forms import ProfileForm
 from .models import Profile
 
@@ -38,10 +40,22 @@ def calculate_distance(lat1, lon1, lat2, lon2):
 
 class ProfileListView(LoginRequiredMixin, generic.ListView):
     """
-    Renders a list of active profiles excluding blocked
+    Renders a list of active
     :model:`profiles.Profile` instances.
 
+    Excludes blocked and current user profiles.
+
     Allows filtering profiles by gender and age.
+
+    **Context**
+
+    ``profiles``
+        Queryset of :model:`profiles.Profile`
+        instances.
+
+    **Template:**
+
+    :template:`profiles/profile_list.html`
     """
 
     template_name = 'profiles/profile_list.html'
@@ -95,6 +109,15 @@ def profile_detail(request, id):
     """
     Displays an individual instance of
     :model:`profiles.Profile`.
+
+    **Context**
+
+    ``profile``
+        An instance of :model:`profiles.Profile`.
+
+    **Template:**
+
+    :template:`profiles/profile_detail.html`
     """
 
     profile = get_object_or_404(Profile, id=id)
@@ -121,6 +144,15 @@ def my_profile(request):
     """
     Displays the profile related to the logged-in
     :model:`auth.User`.
+
+    **Context**
+
+    ``profile``
+        Instance of :model:`profiles.Profile`.
+
+    **Template:**
+
+    :template:`profiles/my_profile.html`
     """
 
     profile, created = Profile.objects.get_or_create(
@@ -140,6 +172,15 @@ def edit_profile(request):
     """
     Updates an individual instance of
     :model:`profiles.Profile`.
+
+    **Context**
+
+    ``form``
+        Instance of :form:`profiles.ProfileForm`.
+
+    **Template:**
+
+    :template:`profiles/edit_profile.html`
     """
 
     profile = request.user.profile
@@ -170,6 +211,15 @@ def encounters(request):
     Renders profile encounters excluding previously
     swiped and blocked :model:`profiles.Profile`
     instances.
+
+    **Context**
+
+    ``profile``
+        Instance of :model:`profiles.Profile`.
+
+    **Template:**
+
+    :template:`profiles/encounters.html`
     """
 
     swiped_users = Swipe.objects.filter(
@@ -215,6 +265,9 @@ def save_location(request):
     """
     Stores geolocation coordinates for an individual
     :model:`profiles.Profile`.
+
+    Returns a JSON response indicating whether the
+    location was successfully saved.
     """
 
     if request.method == "POST":
