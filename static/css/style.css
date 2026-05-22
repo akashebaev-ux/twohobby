@@ -353,7 +353,7 @@ body:has(.auth-page) .app-wrapper {
 /* Chat */
 
 .chat-page {
-    min-height: 100dvh;
+    height: 100dvh;
     display: flex;
     flex-direction: column;
     background: #f4f4f6;
@@ -402,18 +402,9 @@ body:has(.auth-page) .app-wrapper {
 .chat-log {
     flex: 1;
     min-height: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 18px;
     overflow-y: auto;
-    background: #fafafa;
-    scroll-behavior: smooth;
-    scrollbar-width: thin;
-    scrollbar-color: #ff5864 #f1f1f1;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior: contain;
-    padding-bottom: 20px;
+    padding: 18px;
+    padding-bottom: 90px;
 }
 
 /* Custom scrollbar for WebKit browsers */
