@@ -1,3 +1,6 @@
+"""Views and helper functions for profiles, encounters, and locations."""
+
+
 import json
 from math import radians, sin, cos, sqrt, atan2
 from django.contrib.auth.decorators import login_required
@@ -11,6 +14,8 @@ from .models import Profile
 
 
 def calculate_distance(lat1, lon1, lat2, lon2):
+    """Calculate the distance between two coordinates in kilometres."""
+
     earth_radius = 6371
 
     dlat = radians(lat2 - lat1)
@@ -27,14 +32,16 @@ def calculate_distance(lat1, lon1, lat2, lon2):
 
     return round(earth_radius * c, 1)
 
-# Create your views here.
-
 
 class ProfileListView(LoginRequiredMixin, generic.ListView):
+    """Display nearby active profiles with optional filters."""
+
     template_name = 'profiles/profile_list.html'
     context_object_name = 'profiles'
 
     def get_queryset(self):
+        """Return filtered profiles excluding blocked and current users."""
+
         queryset = Profile.objects.filter(is_active=True)
 
         blocked_users = BlockedUser.objects.filter(
@@ -77,6 +84,8 @@ class ProfileListView(LoginRequiredMixin, generic.ListView):
 
 
 def profile_detail(request, id):
+    """Display the details of a selected profile."""
+
     profile = get_object_or_404(Profile, id=id)
     return render(request, 'profiles/profile_detail.html', {
         'profile': profile
@@ -84,6 +93,8 @@ def profile_detail(request, id):
 
 
 def landing_page(request):
+    """Display the landing page or redirect authenticated users."""
+
     if request.user.is_authenticated:
         return redirect('profile_list')
     return render(request, 'landing.html')
@@ -91,6 +102,8 @@ def landing_page(request):
 
 @login_required
 def my_profile(request):
+    """Display the current user's profile page."""
+
     profile, created = Profile.objects.get_or_create(
         user=request.user,
         defaults={
@@ -105,6 +118,8 @@ def my_profile(request):
 
 @login_required
 def edit_profile(request):
+    """Allow the current user to update their profile."""
+
     profile = request.user.profile
 
     if request.method == "POST":
@@ -129,6 +144,8 @@ def edit_profile(request):
 
 @login_required
 def encounters(request):
+    """Display one profile that the user has not swiped or blocked."""
+
     swiped_users = Swipe.objects.filter(
         from_user=request.user
     ).values_list("to_user", flat=True)
@@ -169,6 +186,8 @@ def encounters(request):
 
 @login_required
 def save_location(request):
+    """Save the user's browser geolocation to their profile."""
+
     if request.method == "POST":
         data = json.loads(request.body)
 

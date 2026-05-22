@@ -1,3 +1,6 @@
+"""WebSocket consumer handling chat, images, and WebRTC calls."""
+
+
 import json
 
 from asgiref.sync import sync_to_async
@@ -7,7 +10,11 @@ from .models import ChatMessage, ChatRoom, CallLog
 
 
 class ChatConsumer(AsyncWebsocketConsumer):
+    """Consumer for real-time chat and call functionality."""
+
     async def connect(self):
+        """Connect a user to the chat room WebSocket."""
+
         self.room_id = self.scope["url_route"]["kwargs"]["room_id"]
         self.room_group_name = f"chat_{self.room_id}"
 
@@ -31,12 +38,16 @@ class ChatConsumer(AsyncWebsocketConsumer):
         await self.accept()
 
     async def disconnect(self, close_code):
+        """Disconnect a user from the chat room."""
+
         await self.channel_layer.group_discard(
             self.room_group_name,
             self.channel_name
         )
 
     async def receive(self, text_data):
+        """Receive and process WebSocket messages."""
+
         data = json.loads(text_data)
 
         if data.get("type") == "call_invite":
@@ -91,6 +102,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
         )
 
     async def chat_message(self, event):
+        """Send chat messages to the WebSocket."""
+
         await self.send(text_data=json.dumps({
             "type": "chat_message",
             "message": event["message"],
@@ -98,12 +111,16 @@ class ChatConsumer(AsyncWebsocketConsumer):
         }))
 
     async def call_invite(self, event):
+        """Send call invitation events to connected users."""
+
         await self.send(text_data=json.dumps({
             "type": "call_invite",
             "username": event["username"],
         }))
 
     async def webrtc_signal(self, event):
+        """Handle WebRTC signaling events."""
+
         data = event["data"]
         data["username"] = event["username"]
 
@@ -111,6 +128,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @sync_to_async
     def user_has_access(self, user, room_id):
+        """Check whether the user has access to the chat room."""
+
         return ChatRoom.objects.filter(
             id=room_id,
             users=user
@@ -118,6 +137,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @sync_to_async
     def save_message(self, message):
+        """Save a chat message to the database."""
+
         room = ChatRoom.objects.get(id=self.room_id)
 
         ChatMessage.objects.create(
@@ -127,6 +148,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
         )
 
     async def chat_image(self, event):
+        """Send image messages to connected users."""
+
         await self.send(text_data=json.dumps({
             "type": "image",
             "username": event["username"],
@@ -135,6 +158,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @sync_to_async
     def can_make_call(self):
+        """Check whether the user can make a call today."""
+
         from django.utils import timezone
 
         today = timezone.now().date()
@@ -146,6 +171,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @sync_to_async
     def save_call_log(self):
+        """Save a call log entry to the database."""
+
         room = ChatRoom.objects.get(id=self.room_id)
 
         receiver = room.users.exclude(

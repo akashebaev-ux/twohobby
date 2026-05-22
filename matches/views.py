@@ -1,3 +1,6 @@
+"""Views for swiping, likes, posts, comments, sharing, and blocking."""
+
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
@@ -8,6 +11,8 @@ from .models import Swipe, LikePost, BlockedUser
 
 @login_required
 def swipe_user(request, user_id, action):
+    """Save a user's swipe action and redirect to encounters."""
+
     target_user = get_object_or_404(User, id=user_id)
 
     if request.user != target_user and action in ["like", "pass"]:
@@ -22,6 +27,8 @@ def swipe_user(request, user_id, action):
 
 @login_required
 def likes(request):
+    """Display liked users, related posts, and handle post comments."""
+
     liked_users = Swipe.objects.filter(
         from_user=request.user,
         action="like"
@@ -88,6 +95,8 @@ def likes(request):
 
 @login_required
 def toggle_like_post(request, post_id):
+    """Add or remove the current user's like on a post."""
+
     post = get_object_or_404(LikePost, id=post_id)
 
     if request.user in post.liked_by.all():
@@ -100,6 +109,8 @@ def toggle_like_post(request, post_id):
 
 @login_required
 def delete_like_post(request, post_id):
+    """Delete a like post owned by the current user."""
+
     post = get_object_or_404(
         LikePost,
         id=post_id,
@@ -114,6 +125,8 @@ def delete_like_post(request, post_id):
 
 @login_required
 def share_like_post(request, post_id):
+    """Share a like post into a private chat room."""
+
     post = get_object_or_404(LikePost, id=post_id)
 
     existing_room = ChatRoom.objects.filter(
@@ -139,6 +152,8 @@ def share_like_post(request, post_id):
 
 @login_required
 def block_user(request, user_id):
+    """Block a user and redirect back to the profile list."""
+
     blocked_user = get_object_or_404(User, id=user_id)
 
     if request.user != blocked_user:
@@ -152,6 +167,8 @@ def block_user(request, user_id):
 
 @login_required
 def unblock_user(request, user_id):
+    """Unblock a user and redirect back to the chat room."""
+
     blocked_user = get_object_or_404(User, id=user_id)
 
     BlockedUser.objects.filter(

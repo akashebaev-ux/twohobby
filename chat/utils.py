@@ -1,9 +1,14 @@
+"""Utility functions for image processing."""
+
+
 from io import BytesIO
 from PIL import Image
 from django.core.files.base import ContentFile
 
 
 def convert_image_to_webp(image):
+    """Convert an uploaded image to WebP format."""
+
     img = Image.open(image)
 
     if img.mode in ("RGBA", "P"):

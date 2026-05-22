@@ -1,8 +1,13 @@
+"""Forms for creating posts and comments in the matches app."""
+
+
 from django import forms
 from .models import LikePost, LikeComment
 
 
 class LikePostForm(forms.ModelForm):
+    """Form for creating a like post."""
+
     class Meta:
         model = LikePost
         fields = ["body"]
@@ -15,6 +20,8 @@ class LikePostForm(forms.ModelForm):
 
 
 class LikeCommentForm(forms.ModelForm):
+    """Form for creating comments on like posts."""
+
     class Meta:
         model = LikeComment
         fields = ["body"]

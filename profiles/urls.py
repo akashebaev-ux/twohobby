@@ -1,3 +1,6 @@
+"""URL patterns for profile management and matching features."""
+
+
 from django.urls import path
 from . import views
 

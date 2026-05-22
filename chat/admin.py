@@ -1,3 +1,6 @@
+"""Admin configuration for the chat app."""
+
+
 from django.contrib import admin
 
 from .models import (
@@ -8,6 +11,7 @@ from .models import (
 
 @admin.register(ChatRoom)
 class ChatRoomAdmin(admin.ModelAdmin):
+    """Admin panel configuration for chat rooms."""
 
     list_display = (
         "id",
@@ -20,6 +24,7 @@ class ChatRoomAdmin(admin.ModelAdmin):
 
 @admin.register(ChatMessage)
 class ChatMessageAdmin(admin.ModelAdmin):
+    """Admin panel configuration for chat messages."""
 
     list_display = (
         "sender",

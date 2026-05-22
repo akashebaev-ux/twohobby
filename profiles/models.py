@@ -1,3 +1,6 @@
+"""Database models for user profiles and matching preferences."""
+
+
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
 from django.db import models
@@ -16,6 +19,8 @@ LOOKING_FOR_CHOICES = (
 
 
 class Profile(models.Model):
+    """Model representing a user's dating profile."""
+
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name="profile"
     )
@@ -49,4 +54,6 @@ class Profile(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
+        """Return the profile display name."""
+
         return self.display_name

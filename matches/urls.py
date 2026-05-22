@@ -1,3 +1,6 @@
+"""URL patterns for the matches application."""
+
+
 from django.urls import path
 from . import views
 

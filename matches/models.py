@@ -1,8 +1,13 @@
+"""Database models for matching, posts, comments, and blocking users."""
+
+
 from django.contrib.auth.models import User
 from django.db import models
 
 
 class Swipe(models.Model):
+    """Model representing a swipe action between users."""
+
     LIKE = "like"
     PASS = "pass"
 
@@ -35,6 +40,8 @@ class Swipe(models.Model):
 
 
 class LikePost(models.Model):
+    """Model representing posts shared with liked users."""
+
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -63,6 +70,7 @@ class LikePost(models.Model):
 
 
 class LikeComment(models.Model):
+    """Model representing comments on like posts."""
     post = models.ForeignKey(
         LikePost,
         on_delete=models.CASCADE,
@@ -87,6 +95,8 @@ class LikeComment(models.Model):
 
 
 class BlockedUser(models.Model):
+    """Model representing blocked relationships between users."""
+
     blocker = models.ForeignKey(
         User,
         on_delete=models.CASCADE,

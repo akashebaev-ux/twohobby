@@ -1,3 +1,6 @@
+"""URL patterns for the chat application."""
+
+
 from django.urls import path
 
 from . import views

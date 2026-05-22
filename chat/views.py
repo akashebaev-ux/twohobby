@@ -1,3 +1,6 @@
+"""Views for chat rooms, messages, and image uploads."""
+
+
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
 from django.contrib.auth.decorators import login_required
@@ -9,6 +12,8 @@ from .models import ChatRoom, ChatMessage
 
 @login_required
 def chat_list(request):
+    """Display all chat rooms for the logged-in user."""
+
     rooms = request.user.chat_rooms.all()
 
     return render(request, "chat/chat_list.html", {
@@ -18,6 +23,8 @@ def chat_list(request):
 
 @login_required
 def room(request, room_id):
+    """Display a single chat room and its messages."""
+
     room = get_object_or_404(
         ChatRoom,
         id=room_id,
@@ -48,6 +55,8 @@ def room(request, room_id):
 
 @login_required
 def start_chat(request, user_id):
+    """Start a new chat or redirect to an existing chat room."""
+
     other_user = get_object_or_404(User, id=user_id)
 
     existing_room = ChatRoom.objects.filter(
@@ -67,6 +76,8 @@ def start_chat(request, user_id):
 
 @login_required
 def delete_chat(request, room_id):
+    """Delete a chat room after a POST request."""
+
     room = get_object_or_404(ChatRoom, id=room_id, users=request.user)
 
     if request.method == "POST":
@@ -78,6 +89,8 @@ def delete_chat(request, room_id):
 
 @login_required
 def upload_chat_image(request, room_id):
+    """Upload an image message and broadcast it to the chat room."""
+
     room = get_object_or_404(
         ChatRoom,
         id=room_id,

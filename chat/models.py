@@ -1,9 +1,13 @@
+"""Database models for chat, messaging, and call functionality."""
+
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
 from django.db import models
 
 
 class ChatRoom(models.Model):
+    """Model representing a private chat room."""
+
     users = models.ManyToManyField(
         User,
         related_name="chat_rooms"
@@ -15,6 +19,8 @@ class ChatRoom(models.Model):
 
 
 class ChatMessage(models.Model):
+    """Model representing chat messages exchanged between users."""
+
     room = models.ForeignKey(
         ChatRoom,
         on_delete=models.CASCADE,
@@ -44,6 +50,8 @@ class ChatMessage(models.Model):
 
 
 class CallLog(models.Model):
+    """Model storing call activity between users."""
+
     caller = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
