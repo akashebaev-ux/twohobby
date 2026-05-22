@@ -24,7 +24,7 @@ window.chatSocket.onmessage = function(e) {
 
         const chatLog = document.querySelector("#chat-log");
 
-        chatLog.innerHTML += `
+        chatLog.insertAdjacentHTML("beforeend", `
             <div class="chat-message ${messageClass}">
                 <img
                     src="${data.image_url.replace(
@@ -40,12 +40,12 @@ window.chatSocket.onmessage = function(e) {
                     minute: "2-digit"
                 })}</span>
             </div>
-        `;
+        `);
 
         const newImage =
             chatLog.querySelector(".chat-message:last-child img");
 
-        if (newImage && !newImage.complete) {
+        if (newImage) {
             newImage.addEventListener("load", scrollToBottom);
         }
 
@@ -90,7 +90,7 @@ window.chatSocket.onmessage = function(e) {
 
     const chatLog = document.querySelector("#chat-log");
 
-    chatLog.innerHTML += `
+    chatLog.insertAdjacentHTML("beforeend", `
         <div class="chat-message ${messageClass}">
             <p>${data.message}</p>
             <span>${new Date().toLocaleTimeString([], {
@@ -98,7 +98,7 @@ window.chatSocket.onmessage = function(e) {
                 minute: "2-digit"
             })}</span>
         </div>
-    `;
+    `);
 
     scrollToBottom();
 };
@@ -129,6 +129,8 @@ document.querySelector("#chat-message-submit").onclick = function() {
     }));
 
     messageInput.value = "";
+    messageInput.focus();
+    scrollToBottom();
 };
 
 document.querySelector("#chat-message-input").addEventListener(
@@ -147,16 +149,17 @@ function scrollToBottom() {
         return;
     }
 
-    requestAnimationFrame(function() {
+    function doScroll() {
         chatLog.scrollTop = chatLog.scrollHeight;
-    });
+    }
 
-    setTimeout(function() {
-        chatLog.scrollTop = chatLog.scrollHeight;
-    }, 300);
+    requestAnimationFrame(doScroll);
+    setTimeout(doScroll, 100);
+    setTimeout(doScroll, 300);
+    setTimeout(doScroll, 1000);
 }
 
-window.addEventListener("load", function() {
+window.addEventListener("DOMContentLoaded", function() {
     scrollToBottom();
 });
 
@@ -166,6 +169,5 @@ window.addEventListener("pageshow", function() {
     if (messageInput) {
         messageInput.disabled = false;
     }
-    
     scrollToBottom();
 });
