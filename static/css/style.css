@@ -357,6 +357,7 @@ body:has(.auth-page) .app-wrapper {
     display: flex;
     flex-direction: column;
     background: #f4f4f6;
+    overflow: hidden;
 }
 
 .chat-container {
@@ -399,18 +400,27 @@ body:has(.auth-page) .app-wrapper {
     text-decoration: none;
 }
 
-.chat-log {
+
+.chat-log,
+#chat-log {
     flex: 1;
     min-height: 0;
     overflow-y: auto;
 
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
 
     padding: 18px;
-    padding-bottom: 90px;
+    padding-bottom: 12px;
+
+    gap: 12px;
 
     -webkit-overflow-scrolling: touch;
+}
+
+.chat-message {
+    flex-shrink: 0;
 }
 
 /* Custom scrollbar for WebKit browsers */
@@ -480,13 +490,17 @@ body:has(.auth-page) .app-wrapper {
     position: sticky;
     bottom: 0;
     z-index: 100;
+
     display: flex;
     align-items: center;
     gap: 8px;
+
     padding: 12px;
     padding-bottom: calc(12px + env(safe-area-inset-bottom));
+
     border-top: 1px solid #eee;
     background: white;
+
     flex-shrink: 0;
 }
 
