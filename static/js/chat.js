@@ -160,15 +160,28 @@ function scrollToBottom() {
     setTimeout(doScroll, 800);
 }
 
+const messageInput = document.querySelector("#chat-message-input");
+
+function fixIOSInputPosition() {
+    setTimeout(function() {
+        window.scrollTo(0, 0);
+        scrollToBottom();
+    }, 300);
+}
+
+if (messageInput) {
+    messageInput.addEventListener("blur", fixIOSInputPosition);
+}
+
 window.addEventListener("load", function() {
     scrollToBottom();
 });
 
 window.addEventListener("pageshow", function() {
-    const messageInput = document.querySelector("#chat-message-input");
 
     if (messageInput) {
         messageInput.disabled = false;
     }
+    
     scrollToBottom();
 });
