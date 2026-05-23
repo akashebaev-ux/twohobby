@@ -29,7 +29,6 @@ body {
     background: white;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
 }
 
 /* Landing page */
@@ -143,6 +142,7 @@ body {
     flex: 1;
     padding: 16px;
     width: 100%;
+    overflow-y: auto;
 }
 
 body:has(.chat-page) {
@@ -160,7 +160,7 @@ body:has(.chat-page) .content {
 body:has(.landing-page) .content,
 body:has(.auth-page) .content {
     padding: 0;
-    overflow: hidden;
+    overflow: auto;
 }
 
 body:has(.landing-page) .app-wrapper,
@@ -747,23 +747,23 @@ body:has(.auth-page) .app-wrapper {
 /* Auth pages */
 
 .auth-page {
-    min-height: 100dvh;
-    height: 100dvh;
-    overflow: hidden;
+    min-height: 100%;
+
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding: 80px 24px 24px;
+
+    padding: 10px 24px;
+
     background: white;
+
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .auth-card {
     width: 100%;
     max-width: 360px;
-    max-height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    scrollbar-gutter: stable;
 }
 
 .auth-card h2 {
