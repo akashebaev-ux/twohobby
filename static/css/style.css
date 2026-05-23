@@ -21,8 +21,6 @@ body {
 html,
 body {
     height: 100%;
-    overflow: hidden;
-    overflow-x: hidden;
 }
 
 .app-wrapper {
@@ -148,7 +146,7 @@ body {
 }
 
 body:has(.chat-page) {
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 body:has(.chat-page) .content {
