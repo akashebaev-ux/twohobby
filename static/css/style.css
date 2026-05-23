@@ -403,8 +403,14 @@ body:has(.auth-page) .app-wrapper {
     flex: 1;
     min-height: 0;
     overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+
     padding: 18px;
     padding-bottom: 90px;
+
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Custom scrollbar for WebKit browsers */

@@ -154,12 +154,13 @@ function scrollToBottom() {
     }
 
     requestAnimationFrame(doScroll);
-    setTimeout(doScroll, 100);
-    setTimeout(doScroll, 300);
-    setTimeout(doScroll, 1000);
+    setTimeout(doScroll, 50);
+    setTimeout(doScroll, 150);
+    setTimeout(doScroll, 400);
+    setTimeout(doScroll, 800);
 }
 
-window.addEventListener("DOMContentLoaded", function() {
+window.addEventListener("load", function() {
     scrollToBottom();
 });
 
