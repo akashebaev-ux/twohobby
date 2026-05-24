@@ -843,6 +843,23 @@ body:has(.auth-page) .app-wrapper {
     margin: 0 auto;
 }
 
+.edit-profile-page a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 14px;
+
+    background: rgba(255,255,255,0.06);
+
+    border-radius: 14px;
+
+    color: #A30088;
+    text-decoration: none;
+    font-weight: 600;
+
+    max-width: 100%;
+    overflow-wrap: break-word;
+}
+
 .edit-profile-title {
     text-align: center;
     margin-bottom: 24px;
@@ -1244,7 +1261,9 @@ body:has(.auth-page) .app-wrapper {
 .dark-mode .app-logo {
     color: #ff9966;
 }
-
+.dark-mode .edit-profile-page a {
+    color: #ff9966;
+}
 
 /* Top bars */
 
