@@ -402,7 +402,10 @@ body:has(.auth-page) .app-wrapper {
     font-size: 2rem;
     text-decoration: none;
 }
-
+.back-btn:hover {
+    color:#A30088;
+    background-color: white;
+}
 
 .chat-log,
 #chat-log {
@@ -548,7 +551,7 @@ body:has(.auth-page) .app-wrapper {
     flex: 1;
     min-width: 0;
     font-size: 16px;
-    border: 1px solid #ddd;
+    border: 1px solid #555;
     border-radius: 30px;
     padding: 12px 15px;
     outline: none;
@@ -568,7 +571,9 @@ body:has(.auth-page) .app-wrapper {
     font-weight: 600;
     font-size: 16px;
 }
-
+#chat-message-submit:hover {
+    transform: translateY(-2px);
+}
 .empty-chat {
     text-align: center;
     color: #595656;
@@ -607,7 +612,9 @@ body:has(.auth-page) .app-wrapper {
     font-size: .9rem;
     font-weight: 600;
 }
-
+.back-nearby-btn:hover{
+    transform: translateY(-2px);
+}
 
 
 /* TwoHobby chat list */
@@ -786,7 +793,7 @@ body:has(.auth-page) .app-wrapper {
     width: 100%;
     padding: 12px;
     border-radius: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid #555;
     margin-top: 6px;
 }
 
@@ -838,6 +845,11 @@ body:has(.auth-page) .app-wrapper {
     font-weight: 600;
     color: #595656;
 }
+.edit-profile-form p:has(input[type="file"]) {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
 
 .edit-profile-form input,
 .edit-profile-form textarea,
@@ -845,7 +857,7 @@ body:has(.auth-page) .app-wrapper {
     width: 100%;
     padding: 12px;
     border-radius: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid #555;
     margin-top: 4px;
 }
 
@@ -1004,7 +1016,7 @@ body:has(.auth-page) .app-wrapper {
     transform: scale(1.08);
 }
 .heart-btn.liked {
-    color: linear-gradient(135deg, #A30088, #ff9966);
+    color: #A30088;
 }
 
 .comment-form {
@@ -1053,7 +1065,7 @@ body:has(.auth-page) .app-wrapper {
     flex: 1;
     min-width: 0;
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #555;
     border-radius: 14px;
     font-size: 16px;
 }
@@ -1119,11 +1131,14 @@ body:has(.auth-page) .app-wrapper {
 .chat-call-btn {
     border: none;
     background: white;
-    color: linear-gradient(135deg, #A30088, #ff9966);
+    color: #A30088;
     width: 42px;
     height: 42px;
     border-radius: 50%;
     font-size: 20px;
+}
+.chat-call-btn:hover{
+    transform: translateY(-2px);
 }
 
 .hidden {
