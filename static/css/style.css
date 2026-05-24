@@ -1301,10 +1301,11 @@ body:has(.auth-page) .app-wrapper {
 .dark-mode .edit-profile-form input,
 .dark-mode .edit-profile-form textarea,
 .dark-mode .edit-profile-form select,
+.dark-mode .edit-profile-form label,
 .dark-mode .auth-form input {
     background: #2b2b2b;
     color: white;
-    border: 1px solid #cccccc;
+    border: 1px solid #595656;
 }
 
 
