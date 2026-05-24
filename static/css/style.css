@@ -69,6 +69,7 @@ body {
 
 .landing-heart {
     width: 78%;
+    height: auto;
     max-width: 330px;
     margin: 0 auto 34px;
     display: block;
