@@ -531,12 +531,12 @@ body:has(.auth-page) .app-wrapper {
     border-radius: 50%;
     background: linear-gradient(135deg, #A30088, #ff9966);
 
-    mask-image: url("/static/images/camera-icon.webp");
+    mask-image: url("/static/images/camera-icon.22eae9f5a0a8.webp");
     mask-position: center;
     mask-repeat: no-repeat;
     mask-size: 45px;
 
-    -webkit-mask-image: url("/static/images/camera-icon.webp");
+    -webkit-mask-image: url("/static/images/camera-icon.22eae9f5a0a8.webp");
     -webkit-mask-position: center;
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-size: 45px;
