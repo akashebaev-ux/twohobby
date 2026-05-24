@@ -1,5 +1,5 @@
 {% load static %}
-{% load compress %}
+
 {% url "account_login" as login_url %}
 {% url "account_signup" as signup_url %}
 {% url "account_logout" as logout_url %}
@@ -14,9 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}TwoHobby{% endblock %}</title>
 
-    {% compress css %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    {% endcompress %}
 </head>
 <body id="app-body">
 
