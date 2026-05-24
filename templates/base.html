@@ -14,7 +14,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}TwoHobby{% endblock %}</title>
 
+    {% load compress %}
+
+    {% compress css %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% endcompress %}
 </head>
 <body id="app-body">
 
