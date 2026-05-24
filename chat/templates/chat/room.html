@@ -6,7 +6,7 @@
 {% block bottom_nav %}{% endblock %}
 
 {% block page_wrapper %}
-<div class="chat-page">
+<main class="chat-page">
 
     <div class="chat-container">
 
@@ -108,6 +108,9 @@
                 class="chat-image-form"
             >
                 {% csrf_token %}
+                <label for="chat-image-input" class="visually-hidden">
+                    Upload chat image
+                </label>
 
                 <input
                     id="chat-image-input"
@@ -133,7 +136,7 @@
 
     </div>
 
-</div>
+</main>
 
 <script>
     const roomId = "{{ room.id }}";
