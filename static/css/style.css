@@ -886,15 +886,17 @@ body:has(.auth-page) .app-wrapper {
     background: white;
     text-align: center;
     padding: 0;
-    border-bottom: 1px solid #eee;
 }
 
 .like-post-card {
     display: flex;
-    gap: 10px;
-    padding: 14px 0;
-    border-bottom: 1px solid #eee;
+    gap: 14px;
+    padding: 18px;
+    margin-bottom: 18px;
     background: white;
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.25);
 }
 
 .like-post-left {
@@ -1238,7 +1240,7 @@ body:has(.auth-page) .app-wrapper {
 .dark-mode .top-bar,
 .dark-mode .chat-header,
 .dark-mode .likes-header {
-    background: #1e1e1e;
+    background: none;
     border-color: #333;
 }
 
@@ -1301,13 +1303,18 @@ body:has(.auth-page) .app-wrapper {
 .dark-mode .edit-profile-form input,
 .dark-mode .edit-profile-form textarea,
 .dark-mode .edit-profile-form select,
-.dark-mode .edit-profile-form label,
 .dark-mode .auth-form input {
     background: #2b2b2b;
     color: white;
     border: 1px solid #595656;
 }
 
+.dark-mode .edit-profile-form label {
+    color: white;
+    background: none;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
 
 /* Placeholder text */
 
