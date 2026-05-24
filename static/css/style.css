@@ -571,7 +571,7 @@ body:has(.auth-page) .app-wrapper {
 
 .empty-chat {
     text-align: center;
-    color: #888;
+    color: #595656;
     margin-top: 40px;
 }
 
@@ -934,7 +934,7 @@ body:has(.auth-page) .app-wrapper {
 
 .like-post-meta {
     margin-top: 8px;
-    color: #888;
+    color: #595656;
     font-size: .8rem;
 }
 
