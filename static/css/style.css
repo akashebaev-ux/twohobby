@@ -42,7 +42,6 @@ body {
     background:
         radial-gradient(circle at center, rgba(255, 0, 60, .28), transparent 35%),
         linear-gradient(180deg, #070000, #130004 45%, #000);
-
 }
 
 .landing-content {
@@ -585,7 +584,7 @@ body:has(.auth-page) .app-wrapper {
     height: 56px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid linear-gradient(135deg, #A30088, #ff9966);
+    border: 2px solid #A30088;
     flex-shrink: 0;
 }
 .chat-card:hover {
@@ -625,7 +624,7 @@ body:has(.auth-page) .app-wrapper {
 
 .app-logo {
     text-align: center;
-    color: linear-gradient(135deg, #A30088, #ff9966);
+    color: #A30088;
     font-size: 2rem;
     margin: 10px 0 20px;
 }
@@ -725,7 +724,7 @@ body:has(.auth-page) .app-wrapper {
 }
 
 .delete-chat-btn:hover {
-    color: linear-gradient(135deg, #A30088, #ff9966);
+    color: #A30088;
 }
 
 .delete-chat-form {
@@ -772,6 +771,16 @@ body:has(.auth-page) .app-wrapper {
 .auth-card {
     width: 100%;
     max-width: 360px;
+}
+
+.auth-card a {
+    color: #A30088;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.auth-card a:hover {
+    color: #ff9966;
 }
 
 .auth-card h2 {
@@ -965,7 +974,7 @@ body:has(.auth-page) .app-wrapper {
 }
 
 .like-post-form textarea:focus {
-    border-color: linear-gradient(135deg, #A30088, #ff9966);
+    border-color: #A30088;
 }
 
 
@@ -1087,7 +1096,7 @@ body:has(.auth-page) .app-wrapper {
 }
 
 .post-action-btn:hover {
-    color: linear-gradient(135deg, #A30088, #ff9966);
+    color:#A30088;
 }
 
 
@@ -1108,15 +1117,6 @@ body:has(.auth-page) .app-wrapper {
     margin-top: 10px;
 }
 
-
-/* Ensure landing and chat pages*/
-/* take full viewport height and hide overflow */
-
-.landing-page {
-    height: 100dvh;
-    min-height: 100dvh;
-    overflow: hidden;
-}
 
 
 
@@ -1189,10 +1189,6 @@ body:has(.auth-page) .app-wrapper {
     background: #ff3b30;
 }
 
-.hidden {
-    display: none;
-}
-
 .visually-hidden {
     position: absolute;
     width: 1px;
@@ -1239,6 +1235,9 @@ body:has(.auth-page) .app-wrapper {
     background: #121212;
     color: white;
 }
+.dark-mode .app-logo {
+    color: #ff9966;
+}
 
 
 /* Top bars */
@@ -1266,7 +1265,7 @@ body:has(.auth-page) .app-wrapper {
 }
 
 .dark-mode .nav-link.active {
-    color: linear-gradient(135deg, #A30088, #ff9966);
+    color: #ff9966;
 }
 
 
@@ -1377,6 +1376,20 @@ body:has(.auth-page) .app-wrapper {
 .dark-mode .chat-card-main,
 .dark-mode .chat-card {
     color: white !important;
+}
+/* Link dark-mode */
+
+.dark-mode .auth-card a {
+    color: #ff9966;
+    font-weight: 600;
+}
+
+.dark-mode .auth-card a:hover {
+    color: #A30088;
+}
+
+.dark-mode a.filter-btn {
+    color: white;
 }
 
 

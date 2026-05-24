@@ -27,7 +27,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1', 'localhost']
 
@@ -195,15 +195,6 @@ STORAGES = {
 
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [{
-                "address": os.environ.get(
-                    "REDIS_URL",
-                    "redis://127.0.0.1:6379"
-                ),
-                "ssl_cert_reqs": None,
-            }],
-        },
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
     },
 }
