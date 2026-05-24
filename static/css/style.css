@@ -185,7 +185,7 @@ body:has(.auth-page) .app-wrapper {
 .nav-link {
     text-align: center;
     font-size: 12px;
-    color: #777;
+    color: #595656;
     text-decoration: none;
     transition: .2s ease;
 }
@@ -197,7 +197,7 @@ body:has(.auth-page) .app-wrapper {
 }
 
 .nav-link.active {
-    color: #ff5864;
+    color: #B6000C;
     font-weight: 700;
 }
 
@@ -280,14 +280,14 @@ body:has(.auth-page) .app-wrapper {
 }
 
 .profile-age {
-    color: #777;
+    color: #595656;
     font-weight: 600;
     margin-bottom: 14px;
 }
 
 .profile-bio {
     line-height: 1.6;
-    color: #444;
+    color: #595656;
 }
 
 
@@ -836,7 +836,7 @@ body:has(.auth-page) .app-wrapper {
     display: block;
     margin-bottom: 6px;
     font-weight: 600;
-    color: #444;
+    color: #595656;
 }
 
 .edit-profile-form input,
@@ -1284,7 +1284,7 @@ body:has(.auth-page) .app-wrapper {
 .dark-mode .auth-form input {
     background: #2b2b2b;
     color: white;
-    border: 1px solid #444;
+    border: 1px solid #595656;
 }
 
 
