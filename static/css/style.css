@@ -121,7 +121,7 @@ body {
 
 .filter-btn {
     border: none;
-    background: linear-gradient(135deg, #ff5864, #ff9966);
+    background: linear-gradient(135deg, #A30088, #ff9966);
     color: white;
     padding: 10px 18px;
     border-radius: 25px;
@@ -435,7 +435,7 @@ body:has(.auth-page) .app-wrapper {
 }
 
 .chat-log::-webkit-scrollbar-thumb {
-    background: #ff5864;
+    background: linear-gradient(135deg, #A30088, #ff9966);
     border-radius: 10px;
 }
 
@@ -580,7 +580,7 @@ body:has(.auth-page) .app-wrapper {
     height: 56px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #ff5864;
+    border: 2px solid linear-gradient(135deg, #A30088, #ff9966);
     flex-shrink: 0;
 }
 .chat-card:hover {
@@ -600,7 +600,7 @@ body:has(.auth-page) .app-wrapper {
     display: inline-block;
     margin-bottom: 20px;
     padding: 10px 14px;
-    background: linear-gradient(135deg, #ff5864, #ff9966);
+    background: linear-gradient(135deg, #A30088, #ff9966);
     color: white;
     text-decoration: none;
     border-radius: 14px;
@@ -618,7 +618,7 @@ body:has(.auth-page) .app-wrapper {
 
 .app-logo {
     text-align: center;
-    color: #ff5864;
+    color: linear-gradient(135deg, #A30088, #ff9966);
     font-size: 2rem;
     margin: 10px 0 20px;
 }
@@ -718,7 +718,7 @@ body:has(.auth-page) .app-wrapper {
 }
 
 .delete-chat-btn:hover {
-    color: #ff5864;
+    color: linear-gradient(135deg, #A30088, #ff9966);
 }
 
 .delete-chat-form {
@@ -953,7 +953,7 @@ body:has(.auth-page) .app-wrapper {
 }
 
 .like-post-form textarea:focus {
-    border-color: #ff5864;
+    border-color: linear-gradient(135deg, #A30088, #ff9966);
 }
 
 
@@ -981,7 +981,7 @@ body:has(.auth-page) .app-wrapper {
     height: 74px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid #e71920;
+    border: 4px solid #A30088;
 }
 
 
@@ -1004,7 +1004,7 @@ body:has(.auth-page) .app-wrapper {
     transform: scale(1.08);
 }
 .heart-btn.liked {
-    color: #ff5864;
+    color: linear-gradient(135deg, #A30088, #ff9966);
 }
 
 .comment-form {
@@ -1024,7 +1024,7 @@ body:has(.auth-page) .app-wrapper {
 
 .comment-form button {
     border: none;
-    background: linear-gradient(135deg, #ff5864, #ff9966);
+    background: linear-gradient(135deg, #A30088, #ff9966);
     color: white;
     border-radius: 18px;
     padding: 8px 14px;
@@ -1075,7 +1075,7 @@ body:has(.auth-page) .app-wrapper {
 }
 
 .post-action-btn:hover {
-    color: #ff5864;
+    color: linear-gradient(135deg, #A30088, #ff9966);
 }
 
 
@@ -1119,7 +1119,7 @@ body:has(.auth-page) .app-wrapper {
 .chat-call-btn {
     border: none;
     background: white;
-    color: #ff5864;
+    color: linear-gradient(135deg, #A30088, #ff9966);
     width: 42px;
     height: 42px;
     border-radius: 50%;
@@ -1251,7 +1251,7 @@ body:has(.auth-page) .app-wrapper {
 }
 
 .dark-mode .nav-link.active {
-    color: #ff5864;
+    color: linear-gradient(135deg, #A30088, #ff9966);
 }
 
 
@@ -1281,7 +1281,7 @@ body:has(.auth-page) .app-wrapper {
 /* My messages */
 
 .dark-mode .my-message {
-    background: #ff5864;
+    background: linear-gradient(135deg, #A30088, #ff9966);
     color: white;
 }
 
