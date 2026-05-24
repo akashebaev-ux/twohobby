@@ -775,12 +775,24 @@ body:has(.auth-page) .app-wrapper {
     text-align: left;
 }
 
-.auth-form input {
+.auth-form p:has(input[type="checkbox"]) {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.auth-form input:not([type="checkbox"]) {
     width: 100%;
     padding: 12px;
     border-radius: 12px;
     border: 1px solid #ddd;
     margin-top: 6px;
+}
+
+.auth-form input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin: 0;
 }
 
 .auth-form button {
