@@ -586,7 +586,7 @@ body:has(.auth-page) .app-wrapper {
     flex-shrink: 0;
 }
 .chat-card:hover {
-    background: #fafafa;
+    transform: translateY(-2px);
 }
 
 /* Chat time */
@@ -661,13 +661,24 @@ body:has(.auth-page) .app-wrapper {
 .chat-card {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 14px;
-    padding: 14px 0;
+
+    padding: 18px;
+    margin-bottom: 14px;
+
     text-decoration: none;
     color: #222;
-    border-bottom: 1px solid #f0f0f0;
-    transition: background .2s ease;
-    justify-content: space-between;
+
+    background: white;
+    border-radius: 22px;
+
+    box-shadow:
+        0 4px 18px rgba(0,0,0,.08);
+
+    transition:
+        transform .2s ease,
+        background .2s ease;
 }
 
 .chat-info {
@@ -1238,12 +1249,13 @@ body:has(.auth-page) .app-wrapper {
 /* Top bars */
 
 .dark-mode .top-bar,
-.dark-mode .chat-header,
 .dark-mode .likes-header {
     background: none;
     border-color: #333;
 }
-
+.dark-mode .chat-header{
+    background: #1e1e1e;
+}
 
 /* Bottom nav */
 
