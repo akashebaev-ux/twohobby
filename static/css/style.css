@@ -334,7 +334,7 @@ body:has(.auth-page) .app-wrapper {
 }
 
 .encounter-info p {
-    color: #666;
+    color: #595656;
     line-height: 1.5;
 }
 
@@ -590,7 +590,7 @@ body:has(.auth-page) .app-wrapper {
 /* Chat time */
 
 .chat-time {
-    color: #999;
+    color: #595656;
     font-size: .75rem;
 }
 
@@ -677,7 +677,7 @@ body:has(.auth-page) .app-wrapper {
 
 .chat-info p {
     margin: 0;
-    color: #666;
+    color: #595656;
     font-size: .9rem;
     line-height: 1.3;
 }
@@ -730,7 +730,7 @@ body:has(.auth-page) .app-wrapper {
     background: transparent;
     font-size: 1.1rem;
     cursor: pointer;
-    color: #aaa;
+    color: #595656;
     transition: color .2s ease;
 }
 
@@ -806,7 +806,7 @@ body:has(.auth-page) .app-wrapper {
 }
 
 .auth-card p {
-    color: #666;
+    color: #595656;
     line-height: 1.6;
     margin-bottom: 18px;
 }
