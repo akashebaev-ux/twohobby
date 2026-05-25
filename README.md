@@ -48,28 +48,28 @@ This project focuses on:
 
 | Feature | Notes | Screenshot |
 |---|---|---|
-| Register | Users can create an account using Django allauth. | ![alt text](image.png) |
-| Login | Existing users can log in and access protected pages. | ![alt text](image-1.png) |
-| Logout | Logged-in users can securely log out using the logout button on their profile page. | ![alt text](image-3.png) |
-| Responsive Layout | The website is designed to work on desktop, tablet, but mainly on mobile screens. | ![alt text](image-2.png) |
-| Dark / Light Mode | Users can switch between light and dark mode for a better viewing experience. | ![alt text](image-4.png)|
-| Nearby | Users can browse nearby profiles and see profile cards. | ![alt text](image-5.png) |
-| Profile | Users can see their own profile image, name, age, and bio. | ![alt text](image-6.png) |
-| Profile Detail | Users can open a full profile page to see more information about another user. | ![alt text](image-7.png) |
-| Edit Profile | Users can update their own profile information and profile image. | ![alt text](image-8.png) |
-| Encounters | Users can like other profiles to show interest. | ![alt text](image-9.png) |
-| Likes | Users can view profiles they have liked and create group posts where only liked profiles can view and comment on them. | ![alt text](image-10.png) |
-| Posts | Users can create posts connected to their profile and interests. | ![alt text](image-11.png) |
-| Comments | Users can comment on posts and interact with other users. | ![alt text](image-12.png) |
-| Post Likes | Users can like posts to show engagement. | ![alt text](image-13.png) |
-| Private Messages | Users can send private messages to the post owner/or to the first contact. | ![alt text](image-14.png) |
-| Real-time Chat | Chat messages update through WebSockets for a smoother messaging experience. | ![alt text](image-15.png) |
-| Image Messages | Users can send images in private chat. | ![alt text](image-16.png) |
-| Call Button | The chat interface includes a call button for communication features. | ![alt text](image-17.png) |
-| Block / Unblock Users | Users can block or unblock other users for safety and control. | ![alt text](image-18.png) |
-| Bottom Navigation | Mobile-style bottom navigation helps users move around the app easily. | ![alt text](image-19.png) |
-| Filter Profiles | Users can filter profiles by gender and age range. | ![alt text](image-20.png) |
-| Admin Panel | Site admins can manage users, profiles, posts, comments, and other app content through Django admin. | ![alt text](image-21.png) |
+| Register | Users can create an account using Django allauth. | ![alt text](assets/screenshots/image.png) |
+| Login | Existing users can log in and access protected pages. | ![alt text](assets/screenshots/image-1.png) |
+| Logout | Logged-in users can securely log out using the logout button on their profile page. | ![alt text](assets/screenshots/image-3.png) |
+| Responsive Layout | The website is designed to work on desktop, tablet, but mainly on mobile screens. | ![alt text](assets/screenshots/image-2.png) |
+| Dark / Light Mode | Users can switch between light and dark mode for a better viewing experience. | ![alt text](assets/screenshots/image-4.png)|
+| Nearby | Users can browse nearby profiles and see profile cards. | ![alt text](assets/screenshots/image-5.png) |
+| Profile | Users can see their own profile image, name, age, and bio. | ![alt text](assets/screenshots/image-6.png) |
+| Profile Detail | Users can open a full profile page to see more information about another user. | ![alt text](assets/screenshots/image-7.png) |
+| Edit Profile | Users can update their own profile information and profile image. | ![alt text](assets/screenshots/image-8.png) |
+| Encounters | Users can like other profiles to show interest. | ![alt text](assets/screenshots/image-9.png) |
+| Likes | Users can view profiles they have liked and create group posts where only liked profiles can view and comment on them. | ![alt text](assets/screenshots/image-10.png) |
+| Posts | Users can create posts connected to their profile and interests. | ![alt text](assets/screenshots/image-11.png) |
+| Comments | Users can comment on posts and interact with other users. | ![alt text](assets/screenshots/image-12.png) |
+| Post Likes | Users can like posts to show engagement. | ![alt text](assets/screenshots/image-13.png) |
+| Private Messages | Users can send private messages to the post owner/or to the first contact. | ![alt text](assets/screenshots/image-14.png) |
+| Real-time Chat | Chat messages update through WebSockets for a smoother messaging experience. | ![alt text](assets/screenshots/image-15.png) |
+| Image Messages | Users can send images in private chat. | ![alt text](assets/screenshots/image-16.png) |
+| Call Button | The chat interface includes a call button for communication features. | ![alt text](assets/screenshots/image-17.png) |
+| Block / Unblock Users | Users can block or unblock other users for safety and control. | ![alt text](assets/screenshots/image-18.png) |
+| Bottom Navigation | Mobile-style bottom navigation helps users move around the app easily. | ![alt text](assets/screenshots/image-19.png) |
+| Filter Profiles | Users can filter profiles by gender and age range. | ![alt text](assets/screenshots/image-20.png) |
+| Admin Panel | Site admins can manage users, profiles, posts, comments, and other app content through Django admin. | ![alt text](assets/screenshots/image-21.png) |
 
 ### Future Features
 
