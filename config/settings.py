@@ -59,6 +59,9 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = "/nearby/"
 LOGOUT_REDIRECT_URL = "/"
 
+ACCOUNT_SESSION_REMEMBER = None
+SESSION_COOKIE_AGE = 3600
+SESSION_SAVE_EVERY_REQUEST = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
