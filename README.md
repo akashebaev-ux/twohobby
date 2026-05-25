@@ -176,6 +176,77 @@ This project focuses on:
 
 ---
 
+
+
+## Database Design
+
+### Data Model
+
+The central models in TwoHobby are `Profile`, `ChatRoom`, `ChatMessage`, `Post`, and `Comment`, which together power the social, messaging, and interaction features of the platform.
+
+The `Profile` model extends Django’s built-in `User` model using a one-to-one relationship. It stores additional user information such as display name, age, bio, gender, location, profile image, hobbies, and relationship preferences.
+
+The `Post` model allows users to create social posts connected to their profile. Posts can include text content, images, timestamps, and user interactions such as likes and comments.
+
+The `Comment` model connects to both `Post` and `User`, allowing authenticated users to participate in discussions under posts.
+
+The `ChatRoom` and `ChatMessage` models handle the real-time messaging system. `ChatRoom` stores private conversations between users, while `ChatMessage` stores individual messages, timestamps, images, and sender information. These models work together with Django Channels and WebSockets to provide live chat functionality.
+
+The likes system connects users with profiles and posts they interact with, allowing the application to display liked profiles and create social engagement features.
+
+The blocking system links users together through a `BlockedUser` model, allowing users to block or unblock other members for safety and privacy.
+
+Django’s built-in `User` model is used for authentication, registration, login, logout, and permission handling throughout the project.
+
+I used [dbdiagram.io](https://dbdiagram.io/) to design the Entity Relationship Diagram (ERD) and referenced it throughout development to maintain a clear database structure and relationships between models.
+
+
+![ERD Diagram](assets/screenshots/ERD-final.png)
+
+## Agile Development Process
+---
+
+## GitHub Projects
+
+GitHub Projects was used as an Agile tool throughout the development of TwoHobby. EPICs, User Stories, feature tasks, and bug fixes were planned and organised using a Kanban project board. Progress was tracked regularly through the Todo, In Progress, and Done sections to manage development workflow and monitor completed features.
+
+![alt text](assets/screenshots/image.png)
+
+## GitHub Issues
+
+GitHub Issues was used as an additional Agile tool throughout the development of TwoHobby. User Stories, feature tasks, bug fixes, and milestone objectives were managed and tracked using GitHub Issues to organise the development process and monitor progress.
+
+| Link | Screenshot |
+|---|---|
+| GitHub Issues | ![alt text](assets/screenshots/image-1.png) |
+| Closed Issues | ![alt text](assets/screenshots/image-2.png) |
+
+## MoSCoW Prioritization
+
+Project features and functionality were organised into User Stories and prioritised using the MoSCoW prioritization method. This approach helped structure development tasks according to project goals and user needs.
+
+Each User Story was created to support one or more core project objectives identified during the planning and strategy stages of development.
+
+- **Must Have**: Essential features required for the core functionality of the application.
+- **Should Have**: Important features that add significant value but are not critical.
+- **Could Have**: Additional improvements that enhance the user experience but are not necessary for launch.
+- **Won't Have**: Features planned for future development iterations.
+
+As development progressed, User Stories were moved across the Kanban board between Todo, In Progress, and Done stages. Labels were used to organise EPICs, feature categories, priorities, and development tasks.
+
+| Screenshot | Description |
+|---|---|
+| ![alt text](assets/screenshots/image-4.png) | Milestones and project planning |
+| ![alt text](assets/screenshots/image-3.png) | Issue history and completed tasks |
+
+
+
+
+
+
+
+---
+
 # Project Structure
 
 ```bash
