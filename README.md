@@ -41,6 +41,77 @@ This project focuses on:
 
 # Features
 
+
+## Features
+
+### Existing Features
+
+| Feature | Notes | Screenshot |
+|---|---|---|
+| Register | Users can create an account using Django allauth. | ![alt text](image.png) |
+| Login | Existing users can log in and access protected pages. | ![alt text](image-1.png) |
+| Logout | Logged-in users can securely log out using the logout button on their profile page. | ![alt text](image-3.png) |
+| Responsive Layout | The website is designed to work on desktop, tablet, but mainly on mobile screens. | ![alt text](image-2.png) |
+| Dark / Light Mode | Users can switch between light and dark mode for a better viewing experience. | ![alt text](image-4.png)|
+| Nearby | Users can browse nearby profiles and see profile cards. | ![alt text](image-5.png) |
+| Profile | Users can see their own profile image, name, age, and bio. | ![alt text](image-6.png) |
+| Profile Detail | Users can open a full profile page to see more information about another user. | ![alt text](image-7.png) |
+| Edit Profile | Users can update their own profile information and profile image. | ![alt text](image-8.png) |
+| Encounters | Users can like other profiles to show interest. | ![alt text](image-9.png) |
+| Likes | Users can view profiles they have liked and create group posts where only liked profiles can view and comment on them. | ![alt text](image-10.png) |
+| Posts | Users can create posts connected to their profile and interests. | ![alt text](image-11.png) |
+| Comments | Users can comment on posts and interact with other users. | ![alt text](image-12.png) |
+| Post Likes | Users can like posts to show engagement. | ![alt text](image-13.png) |
+| Private Messages | Users can send private messages to the post owner/or to the first contact. | ![alt text](image-14.png) |
+| Real-time Chat | Chat messages update through WebSockets for a smoother messaging experience. | ![alt text](image-15.png) |
+| Image Messages | Users can send images in private chat. | ![alt text](image-16.png) |
+| Call Button | The chat interface includes a call button for communication features. | ![alt text](image-17.png) |
+| Block / Unblock Users | Users can block or unblock other users for safety and control. | ![alt text](image-18.png) |
+| Bottom Navigation | Mobile-style bottom navigation helps users move around the app easily. | ![alt text](image-19.png) |
+| Filter Profiles | Users can filter profiles by gender and age range. | ![alt text](image-20.png) |
+| Admin Panel | Site admins can manage users, profiles, posts, comments, and other app content through Django admin. | ![alt text](image-21.png) |
+
+### Future Features
+
+| Feature | Notes |
+|---|---|
+| Notifications | Notify users about new likes, comments, messages, and profile interactions. |
+| Search Profiles | Add search by name, location, hobbies, or interests. |
+| Advanced Filters | Allow filtering by distance, hobbies, activity status, and relationship preferences. |
+| Online Status | Show whether a user is online or recently active. |
+| Improved Calls | Improve voice/video call functionality and call notifications. |
+| Message Read Status | Show when a message has been delivered or read. |
+| Emoji Picker | Add an emoji keyboard for desktop users. |
+| Profile Verification | Add verification badges to make profiles more trustworthy. |
+| Report User | Allow users to report inappropriate profiles, posts, comments, or messages. |
+| Admin Dashboard | Add statistics for users, posts, messages, reports, and activity. |
+| Push Notifications | Send browser or mobile notifications for new messages and likes. |
+| Location Improvements | Improve distance accuracy and location privacy settings. |
+| Mobile App | Develop TwoHobby as a mobile app for iOS and Android. |
+| Social Login | Allow users to sign in with Google or other social accounts. |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## User Authentication
 - User registration and login
 - Secure authentication using Django Allauth
