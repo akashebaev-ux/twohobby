@@ -1,4 +1,10 @@
 # TwoHobby – Social & Dating Platform
+![alt text](assets/screenshots/Logo.png)
+---
+[View Live Website TwoHobby](https://twohobby-978688a704ee.herokuapp.com/)
+
+
+### Developer: [Azamat Kashebayev](https://github.com/akashebaev-ux)
 
 ## Overview
 
@@ -462,7 +468,7 @@ Connected Users
 
 # Author
 
-**Azamat**
+**Azamat Kashebayev**
 
 - Full Stack Developer
 - Django & Python Enthusiast
