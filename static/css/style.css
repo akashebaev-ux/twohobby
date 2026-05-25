@@ -377,23 +377,32 @@ body:has(.auth-page) .app-wrapper {
     z-index: 100;
     background: linear-gradient(135deg, #A30088, #ff9966);
     color: white;
-    padding: 18px;
+    padding: 14px;
     display: flex;
     align-items: center;
     gap: 14px;
     flex-shrink: 0;
+    justify-content: space-between;
 }
 
 .chat-header h1,
 .chat-header h2 {
     margin: 0;
-    font-size: 1.3rem;
+    font-size: 1rem;
+}
+
+.chat-header h1 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+    min-width: 0;
 }
 
 .chat-header p {
     margin: 3px 0 0;
-    font-size: .85rem;
     opacity: .9;
+    font-size: .75rem;
 }
 
 .back-btn {
