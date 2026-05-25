@@ -1,5 +1,5 @@
 # TwoHobby – Social & Dating Platform
-![alt text](assets/screenshots/Logo.png)
+<img src="assets/screenshots/Logo.png" width="300">
 ---
 [View Live Website TwoHobby](https://twohobby-978688a704ee.herokuapp.com/)
 
