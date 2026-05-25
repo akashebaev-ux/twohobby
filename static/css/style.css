@@ -787,6 +787,10 @@ body:has(.auth-page) .app-wrapper {
     color: #ff9966;
 }
 
+a.filter-btn {
+    color: white;
+}
+
 .auth-card h2 {
     margin-bottom: 24px;
 }
@@ -953,16 +957,26 @@ body:has(.auth-page) .app-wrapper {
 
 .like-post-header {
     display: flex;
+    align-items: flex-start;
     justify-content: space-between;
+    gap: 12px;
+    min-width: 0;
 }
 
 .like-post-author {
     font-weight: 700;
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .like-post-time {
     color: #595656;
     font-size: .8rem;
+    flex-shrink: 0;
+    text-align: right;
 }
 
 .like-post-body {
