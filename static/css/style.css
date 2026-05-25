@@ -1405,7 +1405,9 @@ a.filter-btn {
 .dark-mode .delete-chat-btn {
     color: white;
 }
-
+.dark-mode .heart-btn.liked {
+    color: #ff5864;
+}
 
 /* Scrollbars */
 
