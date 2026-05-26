@@ -14,7 +14,7 @@ I used the recommended HTML W3C Validator to validate all HTML files throughout 
 
 | Directory | File | Validator | Screenshot | Notes |
 |---|---|---|---|---|
-| templates | landing.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/Landing_page_No_Errors.png" width="600"> | Cloudinary automatically adds trailing slashes to void elements, which appears as an informational warning |
+| templates | landing.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/Landing_page_No_Errors.png" width="600"> | No errors found |
 | templates | password_reset.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/RESET_PASSWORD_NO_ERRORS.png" width="600"> | No errors found |
 | templates | success.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/PASSWORD_RESET_SUCCESS_PAGE_NO_ERRORS.png" width="600"> | No errors found |
 | nearby | nearby.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/Main_nearby_page_No_ERRORS.png" width="600"> | No errors found |
