@@ -17,11 +17,13 @@ TwoHobby allows users to share thoughts, posts, and experiences exclusively with
 The platform is designed to encourage genuine social interaction beyond traditional dating-focused applications. By combining hobby-based discovery, private social networking, instant messaging, and real-time communication features, TwoHobby creates a space where users can build friendships, relationships, and communities based on common ground.
 
 
-<img src="assets/screenshots/Responsive.png" width="600">
+<img src="assets/screenshots/Responsive.png">
 
 source: [ChatGTP](https://chatgpt.com/)
 
 **NOTE**: Due to security and browser restrictions across different devices, screenshots of the application were captured separately on desktop, tablet, and mobile devices, then professionally combined into a single responsive showcase image using ChatGPT.
+
+
 ---
 
 ## Project Focus
