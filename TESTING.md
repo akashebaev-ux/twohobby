@@ -27,8 +27,6 @@ I used the recommended HTML W3C Validator to validate all HTML files throughout 
 | templates | signup.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/SignUp_registration_page_No_Errors.png" width="450"> | No errors found |
 | templates | login.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/Login_Page_No_Errors.png" width="450"> | No errors found |
 | templates | logout.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/My_Profile_No_Errors.png" width="450"> | No errors found |
-| templates | 404.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/Anonymous_login_validation_500Error_in_view.py_profiles.png" width="450"> | No errors found after fixing profile view access |
-|
 
 ---
 
@@ -40,7 +38,7 @@ I used the recommended HTML W3C Validator to validate all HTML files throughout 
 | chat_room.html | <img src="assets/screenshots/Initial HTML errors/Chat_room_html.png" width="450"> | Removed invalid nested HTML elements and corrected unclosed tags |
 | likes.html | <img src="assets/screenshots/Initial HTML errors/LIKES_HTML_ERRORS.png" width="450"> | Fixed unclosed `<div>` elements and removed duplicate attributes |
 | messages.html | <img src="assets/screenshots/Initial HTML errors/Chat_list_html.png" width="450"> | Corrected invalid layout structure and removed improperly nested container elements |
-
+| 404.html | <img src="assets/screenshots/Initial HTML errors/Anonymous_login_validation_500Error_in_view.py_profiles.png" width="450"> | Fixed profile access handling to prevent server errors for anonymous users |
 
 
 
