@@ -84,6 +84,49 @@ These are intentional browser-specific enhancements used for custom scrollbars, 
 | static/css | style.css | <img src="assets/screenshots/CSS_No_ERRORS.png" width="800"> | Warnings relate to vendor-specific WebKit extensions and CSS variables |
 
 
+---
+
+
+## JavaScript
+
+I used the recommended JSHint Validator to validate all JavaScript files used throughout the project.
+
+Initial validation produced several warnings related to modern JavaScript syntax such as `const`, `let`, arrow functions, template literals, and async functions. These warnings were resolved by configuring JSHint to support ES11 syntax using:
+
+```javascript
+/* jshint esversion: 11 */
+```
+
+Additional warnings related to globally defined variables were resolved using JSHint global declarations where required.
+
+---
+
+### JavaScript Validation Results
+
+| File | Screenshot | Notes |
+|---|---|---|
+| chat.js | <img src="assets/screenshots/JS_Chat_NO_ERRORS.png" width="800"> | ES11 configuration added and undefined global warnings resolved |
+| call.js | <img src="assets/screenshots/JS_Call_NO_ERRORS.png" width="800"> | Async WebRTC-related warnings corrected using ES11 configuration |
+| nearby.js | <img src="assets/screenshots/JS_NEARBY_NO_ERRORS.png" width="800"> | Global variable declarations and ternary formatting corrected |
+| encounters.js | <img src="assets/screenshots/JS_ENCOUNTERS_NO_ERRORS.png" width="800"> | ES11 configuration added to support modern JavaScript syntax |
+| themes.js | <img src="assets/screenshots/JS_THEMES_NO_ERRORS.png" width="800"> | Modern syntax warnings resolved through ES11 configuration |
+
+---
+
+## Initial JSHint Warnings and Fixes
+
+| File | Screenshot | Actions Taken |
+|---|---|---|
+| chat.js | <img src="assets/screenshots/JS_Chat_ERRORS.png" width="800"> | Added ES11 configuration and resolved undefined global variable warnings |
+| chat.js | <img src="assets/screenshots/JS_Chat_ERRORS-2.png" width="800"> | Corrected additional ES6 syntax warnings and unused variable notices |
+| call.js | <img src="assets/screenshots/JS_Call_ERRORS.png" width="800"> | Added ES11 support to resolve async function and arrow syntax warnings |
+| call.js | <img src="assets/screenshots/JS_Call_ERRORS-2.png" width="800"> | Declared required global WebRTC variables and removed unused variables |
+| call.js | <img src="assets/screenshots/JS_Call_ERRORS-3.png" width="800"> | Final validation cleanup and syntax corrections applied |
+| nearby.js | <img src="assets/screenshots/JS_NEARBY_ERRORS.png" width="800"> | Declared global variables and corrected ternary operator formatting |
+| encounters.js | <img src="assets/screenshots/JS_ENCOUNTERS_ERROR.png" width="800"> | Added ES11 configuration for modern JavaScript syntax support |
+| themes.js | <img src="assets/screenshots/JS_THEMES_ERRORS.png" width="800"> | Added ES11 configuration to resolve `const` syntax warnings |
+
+
 
 
 
