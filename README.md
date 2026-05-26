@@ -45,6 +45,32 @@ This project focuses on:
 
 ---
 
+## User Stories
+
+| Target | Expectation | Outcome | Priority |
+|---|---|---|---|
+| As a Site User | I can browse user profiles<br><img src="assets/screenshots/browse-profile.png" width="120"> | so that I can find people I’m interested in | <img src="assets/screenshots/must-have.png" width="60"> |
+| As a Site User | I can open a user’s profile<br><img src="assets/screenshots/view-profile.png" width="120"> | so that I can learn more about them | <img src="assets/screenshots/must-have.png" width="60"> |
+| As a Site User | I can register an account<br><img src="assets/screenshots/registration.png" width="120"> | so that I can use the dating features | <img src="assets/screenshots/must-have.png" width="60"> |
+| As a Site User | I can create and edit my profile<br><img src="assets/screenshots/create-profile.png" width="120"> | so that others can learn about me | <img src="assets/screenshots/must-have.png" width="60"> |
+| As a Site User | I can like or pass profiles<br><img src="assets/screenshots/match.png" width="120"> | so that I can find matches | <img src="assets/screenshots/should-have.png" width="60"> |
+| As a Site User | I can send messages to matched users<br><img src="assets/screenshots/message.png" width="120"> | so that I can communicate with them | <img src="assets/screenshots/must-have.png" width="60"> |
+| As a Site User | I can view and manage my matches<br><img src="assets/screenshots/manage.png" width="120"> | so that I can organize my connections | <img src="assets/screenshots/should-have.png" width="60"> |
+| As a Site User | I can filter profiles<br><img src="assets/screenshots/filter-1.png" width="120"> | so that I can find compatible people | <img src="assets/screenshots/should-have.png" width="60"> |
+| As a Site User | I can report or block users<br><img src="assets/screenshots/block.png" width="120"> | so that I can feel safe on the platform | <img src="assets/screenshots/could-have.png" width="60"> |
+| As a Site User | I can receive notifications<br><img src="assets/screenshots/notification.png" width="180"> | so that I don’t miss matches or messages | <img src="assets/screenshots/could-have.png" width="60"> |
+| As a Site Admin | I can manage user accounts<br><img src="assets/screenshots/admin-2.png" width="120"> | so that I can maintain platform quality | <img src="assets/screenshots/must-have.png" width="60"> |
+| As a Site Admin | I can moderate profiles and messages<br><img src="assets/screenshots/block-3.png" width="180"> | so that the platform remains safe | <img src="assets/screenshots/must-have.png" width="60"> |
+
+
+
+
+
+
+
+
+---
+
 # Features
 
 
