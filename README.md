@@ -17,18 +17,11 @@ TwoHobby allows users to share thoughts, posts, and experiences exclusively with
 The platform is designed to encourage genuine social interaction beyond traditional dating-focused applications. By combining hobby-based discovery, private social networking, instant messaging, and real-time communication features, TwoHobby creates a space where users can build friendships, relationships, and communities based on common ground.
 
 
-Built as a responsive full-stack web application, TwoHobby integrates scalable communication technologies and optimized media delivery to provide a smooth user experience across desktop and mobile devices.
+<img src="assets/screenshots/Responsive.png" width="600">
 
----
+source: [ChatGTP](https://chatgpt.com/)
 
-## Project Philosophy
-
-TwoHobby is designed as a free-to-use social platform with a scalable and cost-efficient infrastructure capable of supporting thousands of users while maintaining relatively low operational costs.
-
-The philosophy behind the platform is simple:
-
-Human connection, emotions, and the opportunity to build meaningful relationships — including finding a soulmate — should never be unnecessarily restricted or hidden behind expensive barriers.
-
+**NOTE**: Due to security and browser restrictions across different devices, screenshots of the application were captured separately on desktop, tablet, and mobile devices, then professionally combined into a single responsive showcase image using ChatGPT.
 ---
 
 ## Project Focus
@@ -42,6 +35,209 @@ This project focuses on:
 - Private and meaningful social interaction
 - Full-stack web development practices
 - Efficient and cost-optimized infrastructure design
+
+---
+
+
+## The 5 Planes of UX
+---
+
+### 1. Strategy
+
+**Purpose**
+
+- TwoHobby exists to provide people with a modern and engaging platform where they can connect with others through shared hobbies and interests. 
+- The platform combines social interaction, messaging, profile discovery, and matching features in a clean mobile-first experience inspired by modern social and dating applications.
+
+**Needs**
+
+- **Site owners** require an efficient and intuitive system for managing users, moderating content, and maintaining a secure, welcoming, and high-quality platform experience.
+- **Registered users** require a seamless way to discover people with shared interests, engage through likes, posts, and messaging, and build meaningful social connections.
+- **Business partners** require an attractive and responsive platform that enables them to promote advertisements, build targeted communities through content and posts, and effectively engage with potential clients.
+
+**Business Goals**
+
+- Establish TwoHobby as an engaging social platform focused on shared interests and meaningful connections.
+- Grow an active user community through interactive features such as posts (similar to Threads), messaging and calls (similar to WhatsApp), encounters (similar to Tinder), and profile discovery (similar to Badoo).
+- Encourage guest users to create accounts through an appealing, intuitive, and user-friendly experience.
+- Maintain a safe and trustworthy environment through moderation tools, reporting systems, and account management features.
+---
+
+## 2. Scope
+
+### Features
+- User authentication and profile management
+- Profile discovery and matching system
+- Likes and connection requests
+- Real-time private messaging and calls
+- Encounters feature (similar to Tinder swipe system)
+- Nearby users discovery
+- Post sharing and social feed functionality
+- User blocking and reporting tools
+- Dark/light mode support
+- Responsive mobile-first design
+- Admin moderation and management tools
+
+---
+
+## Functional Requirements
+
+### Authentication and Access Control
+- Users can register, log in, and log out securely.
+- Authentication state is maintained across sessions.
+- Restricted pages and features require authentication.
+- Unauthenticated users attempting to access protected pages are redirected to the login page.
+- Role-based permissions are implemented for guest users, registered users, and administrators.
+
+### Profile Management
+- Registered users can create, view, update, and manage their profiles.
+- Users can upload profile images and personal information.
+- Users can set preferences such as gender, age, and bio/hobbies/interests.
+
+### Social Interaction Features
+- Users can browse profiles and discover other users.
+- Users can like profiles and create mutual connections.
+- Users can send and receive private messages/images in real time.
+- Users can initiate audio calls.
+- Users can block or report inappropriate users.
+
+### Posts and Community Features (CRUD)
+- Registered users can create, read, update, and delete posts.
+- Users can like posts and interact with community content.
+- Only selected/liked users can read, view, or comment on posts.
+- Posts are displayed dynamically in social-feed style layouts.
+
+### Encounters and Discovery
+- Users can access an encounters feature to discover potential matches.
+- Users can filter profiles by gender and age.
+- Nearby users are displayed dynamically based on available location data.
+
+### Admin Functionality
+- Administrators can manage users through the Django admin panel.
+- Administrators can moderate profiles, posts, and messages.
+- Administrators can delete inappropriate or harmful content.
+- Administrators can manage reports and blocked content.
+
+### User Validation
+- Forms include validation and user-friendly error handling.
+- Interactive elements provide clear visual feedback for usability.
+
+---
+
+## Content Requirements
+
+### Static Content
+- Brand identity and logo
+- Navigation
+- Landing page
+
+### Admin Managed Content
+Managed through the Django admin panel:
+- User moderation
+- Reports and blocked accounts
+
+### User Generated Content
+Created dynamically by registered users:
+- User profiles
+- Profile images
+- Posts and captions
+- Likes and matches
+- Private messages
+- User blocking actions
+
+### System Generated Content
+Automatically generated by the platform:
+- Matching system
+- Like counts
+- Validation
+- Message timestamps and ordering
+
+---
+
+## Constraints
+
+- Profile bios are limited in length to maintain clean layouts and readability.
+- Profile images are limited according to Cloudinary upload restrictions.
+- Audio calls are limited to 1 minute. 
+- Video uploads are not currently supported.
+- The platform currently supports only the English language.
+- Reactive moderation is used, meaning content is moderated after publication through admin reviews.
+- The website has restrictions preventing it from being displayed on third-party websites for security reasons.
+- Calls require mutual connections or platform permissions depending on user settings. The connect and disconnect system still requires further development.
+- A success message system still needs to be implemented on the registration page.
+
+---
+
+
+## 3. Structure
+
+### Information Architecture
+
+#### Navigation Menu
+The navigation system provides quick access to the main areas of the platform:
+- Home
+- Nearby Users
+- Encounters
+- Messages
+- Likes and Matches
+- User Profile
+- Login / Logout / Registration
+- Settings and Theme Toggle
+
+---
+
+### Hierarchy
+
+- The homepage(nearby) provides a welcoming introduction to the platform with clear navigation to core features.
+- Users are encouraged to create an account through visible call-to-action buttons and interactive features.
+- Profiles are displayed in clean card-based layouts optimized for mobile-first usability.
+- Nearby and Encounters pages prioritise profile images, age, interests, and interaction buttons.
+- Messages are organised in a real-time chat interface similar to modern messaging applications.
+- Posts and social content are displayed in reverse chronological order for easy browsing.
+- Navigation is simplified using a bottom navigation bar for mobile users and intuitive layouts for tablets and desktops.
+- Important actions such as liking, messaging, matching, blocking, and reporting are visually highlighted.
+
+---
+
+## User Flow
+
+### Guest Users
+
+- Guest users land on the homepage(nearby) and can explore the platform interface.
+- Guests can browse public profiles and view limited social content.
+- Guests are encouraged to register through visible sign-up buttons and engagement prompts.
+- Attempting to access restricted features such as messaging, likes, or encounters redirects guests to the login page.
+- Guests can read community guidelines and platform information before registering.
+
+---
+
+### Registered Users
+
+- Registered users log into their accounts and access the main platform features.
+- Users browse nearby profiles and discover potential matches.
+- Users can like profiles and create mutual connections.
+- Users can access the encounters feature to quickly discover new users.
+- Users can send and receive private messages in real time.
+- Users can initiate calls and interact through the messaging system.
+- Users can create, update, and manage their profiles.
+- Users can create posts, interact with content, and receive notifications.
+- Users can block or report inappropriate accounts.
+- Confirmation and feedback messages are displayed throughout user interactions.
+- Users can log out securely to protect account privacy.
+
+---
+
+### Admin Users
+
+- Administrators log into the platform with elevated permissions.
+- Admins can access the Django admin panel to manage platform content.
+- Admins can moderate profiles, posts, messages, and reported content.
+- Admins can delete inappropriate or harmful user-generated content.
+- Admins can review user reports and take moderation actions when necessary.
+- Admins can manage user accounts, including suspending or removing accounts that violate community rules.
+- Admins can manage platform announcements and featured content.
+- Admins monitor the platform to maintain a safe and welcoming environment for users.
+
 
 ---
 
