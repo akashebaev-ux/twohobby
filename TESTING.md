@@ -14,19 +14,19 @@ I used the recommended HTML W3C Validator to validate all HTML files throughout 
 
 | Directory | File | Validator | Screenshot | Notes |
 |---|---|---|---|---|
-| templates | landing.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/Landing_page_No_Errors.png" width="450"> | Cloudinary automatically adds trailing slashes to void elements, which appears as an informational warning |
-| templates | password_reset.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/RESET_PASSWORD_NO_ERRORS.png" width="450"> | No errors found |
-| templates | success.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/PASSWORD_RESET_SUCCESS_PAGE_NO_ERRORS.png" width="450"> | No errors found |
-| nearby | nearby.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/Main_nearby_page_No_ERRORS.png" width="450"> | No errors found |
-| encounters | encounters.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/Encounters_html_page_No_Errors.png" width="450"> | No errors found |
-| chat | messages.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/Chat_list_html_No_Errors.png" width="450"> | No errors found |
-| chat | chat_room.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/Chat_room_html_No_Errors.png" width="450"> | No errors found |
-| profiles | profile_detail.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/My_Profile_No_Errors.png" width="450"> | No errors found |
-| profiles | edit_profile.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/Profils_Details_page_No_Erros.png" width="450"> | No errors found |
-| likes | likes.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/Matches_likes_No_Errors.png" width="450"> | No errors found |
-| templates | signup.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/SignUp_registration_page_No_Errors.png" width="450"> | No errors found |
-| templates | login.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/Login_Page_No_Errors.png" width="450"> | No errors found |
-| templates | logout.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/My_Profile_No_Errors.png" width="450"> | No errors found |
+| templates | landing.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/Landing_page_No_Errors.png" width="600"> | Cloudinary automatically adds trailing slashes to void elements, which appears as an informational warning |
+| templates | password_reset.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/RESET_PASSWORD_NO_ERRORS.png" width="600"> | No errors found |
+| templates | success.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/PASSWORD_RESET_SUCCESS_PAGE_NO_ERRORS.png" width="600"> | No errors found |
+| nearby | nearby.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/Main_nearby_page_No_ERRORS.png" width="600"> | No errors found |
+| encounters | encounters.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/Encounters_html_page_No_Errors.png" width="600"> | No errors found |
+| chat | messages.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/Chat_list_html_No_Errors.png" width="600"> | No errors found |
+| chat | chat_room.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/Chat_room_html_No_Errors.png" width="600"> | No errors found |
+| profiles | profile_detail.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/My_Profile_No_Errors.png" width="600"> | No errors found |
+| profiles | edit_profile.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/Profils_Details_page_No_Erros.png" width="600"> | No errors found |
+| likes | likes.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/Matches_likes_No_Errors.png" width="600"> | No errors found |
+| templates | signup.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/SignUp_registration_page_No_Errors.png" width="600"> | No errors found |
+| templates | login.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/Login_Page_No_Errors.png" width="600"> | No errors found |
+| templates | logout.html | Link to validator | <img src="assets/screenshots/Initial HTML errors/My_Profile_No_Errors.png" width="600"> | No errors found |
 
 ---
 
@@ -34,12 +34,11 @@ I used the recommended HTML W3C Validator to validate all HTML files throughout 
 
 | Page | Errors | Actions Taken |
 |---|---|---|
-| signup.html | <img src="assets/screenshots/Initial HTML errors/Registration_page_ERRORS.png" width="450"> | Added missing form element IDs and improved accessibility structure for validation compliance |
-| chat_room.html | <img src="assets/screenshots/Initial HTML errors/Chat_room_html.png" width="450"> | Removed invalid nested HTML elements and corrected unclosed tags |
-| likes.html | <img src="assets/screenshots/Initial HTML errors/LIKES_HTML_ERRORS.png" width="450"> | Fixed unclosed `<div>` elements and removed duplicate attributes |
-| messages.html | <img src="assets/screenshots/Initial HTML errors/Chat_list_html.png" width="450"> | Corrected invalid layout structure and removed improperly nested container elements |
-| 404.html | <img src="assets/screenshots/Initial HTML errors/Anonymous_login_validation_500Error_in_view.py_profiles.png" width="450"> | Fixed profile access handling to prevent server errors for anonymous users |
-
+| signup.html | <img src="assets/screenshots/Initial HTML errors/Registration_page_ERRORS.png" width="600"> | Added missing form element IDs and improved accessibility structure for validation compliance |
+| chat_room.html | <img src="assets/screenshots/Initial HTML errors/Chat_room_html.png" width="600"> | Removed invalid nested HTML elements and corrected unclosed tags |
+| likes.html | <img src="assets/screenshots/Initial HTML errors/LIKES_HTML_ERRORS.png" width="600"> | Fixed unclosed `<div>` elements and removed duplicate attributes |
+| messages.html | <img src="assets/screenshots/Initial HTML errors/Chat_list_html.png" width="600"> | Corrected invalid layout structure and removed improperly nested container elements |
+| 404.html | <img src="assets/screenshots/Initial HTML errors/Anonymous_login_validation_500Error_in_view.py_profiles.png" width="600"> | Fixed profile access handling to prevent server errors for anonymous users |
 
 
 
