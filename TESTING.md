@@ -40,6 +40,48 @@ I used the recommended HTML W3C Validator to validate all HTML files throughout 
 | messages.html | <img src="assets/screenshots/Initial HTML errors/Chat_list_html.png" width="600"> | Corrected invalid layout structure and removed improperly nested container elements |
 | 404.html | <img src="assets/screenshots/Initial HTML errors/Anonymous_login_validation_500Error_in_view.py_profiles.png" width="600"> | Fixed profile access handling to prevent server errors for anonymous users |
 
+---
+
+## CSS
+
+I used the recommended CSS Jigsaw Validator to validate all custom CSS files used throughout the project.
+
+When validating by direct input, the validator returned several vendor-extension warnings related to WebKit-specific properties and pseudo-elements. These warnings are expected and were intentionally used to improve browser compatibility and mobile user experience.
+
+One validation error was also identified and corrected during development.
+
+---
+
+### Initial CSS Validation Error
+
+<img src="assets/screenshots/CSS_ERRORS.png" width="800">
+
+| Line | Error | Fix Applied |
+|---|---|---|
+| 517 | `Too many values or values are not recognized` caused by shorthand background syntax | Replaced unsupported shorthand syntax with separate `background-image`, `background-position`, `background-size`, and `background-repeat` properties |
+
+---
+
+### CSS Validation Warnings
+
+The remaining warnings are related to vendor-specific extensions such as:
+
+- `::-webkit-scrollbar`
+- `::-webkit-scrollbar-thumb`
+- `::-webkit-scrollbar-track`
+- `-webkit-overflow-scrolling`
+- `::-webkit-file-upload-button`
+- `-webkit-mask`
+
+These are intentional browser-specific enhancements used for custom scrollbars, mobile scrolling behavior, and improved UI styling compatibility.
+
+---
+
+### CSS Validation Results
+
+| Directory | File | Screenshot | Notes |
+|---|---|---|---|
+| static/css | style.css | <img src="assets/screenshots/CSS_No_ERRORS.png" width="800"> | Warnings relate to vendor-specific WebKit extensions and CSS variables |
 
 
 
