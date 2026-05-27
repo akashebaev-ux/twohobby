@@ -126,36 +126,41 @@ Additional warnings related to globally defined variables were resolved using JS
 | encounters.js | <img src="assets/screenshots/JS_ENCOUNTERS_ERROR.png" width="800"> | Added ES11 configuration for modern JavaScript syntax support |
 | themes.js | <img src="assets/screenshots/JS_THEMES_ERRORS.png" width="800"> | Added ES11 configuration to resolve `const` syntax warnings |
 
-
 ---
+
+## Python Validation
+
+
+I used the recommended PEP8 CI Python Linter to validate all Python files throughout the project. During the validation process, several files initially contained issues such as indentation problems, missing blank lines, trailing whitespace, and missing newline characters at the end of files.
+
+All reported issues were carefully reviewed and corrected in accordance with PEP8 standards. This included fixing indentation in URL configuration files, removing unnecessary whitespace, adding missing newline characters, and improving overall code formatting consistency.
+
+After applying the necessary corrections, every Python file successfully passed validation with no remaining errors reported by the linter.
 
 
 | File | Validator | Screenshot | Notes |
 |---|---|---|---|
-| manage.py | CI Python Linter | assets/screenshots/manage.py_NO_ERRORS.png | No errors found |
-| matches/apps.py | CI Python Linter | assets/screenshots/MATCHES_apps.py.png | No errors found |
-| matches/forms.py | CI Python Linter | assets/screenshots/MATCHES_forms.py.png | No errors found |
-| matches/models.py | CI Python Linter | assets/screenshots/MATCHES_models.py_ERRORS(1).png | Initial validation errors fixed |
-| matches/models.py | CI Python Linter | assets/screenshots/MATCHES_models.py_NO_ERRORS.png | No errors found |
-| matches/urls.py | CI Python Linter | assets/screenshots/MATCHES_urls.py_ERRORS-1(1).png | Initial indentation errors fixed |
-| matches/urls.py | CI Python Linter | assets/screenshots/MATCHES_urls.py_ERRORS-2.png | Final indentation and newline errors fixed |
-| matches/urls.py | CI Python Linter | assets/screenshots/MATCHES_urls.py_NO_ERRORS.png | No errors found |
-| matches/views.py | CI Python Linter | assets/screenshots/MATCHES_view.py_ERRORS(1).png | Initial validation errors fixed |
-| matches/views.py | CI Python Linter | assets/screenshots/MATCHES_views.py_NO_ERRORS.png | No errors found |
-| profiles/admin.py | CI Python Linter | assets/screenshots/PROFILES_admin.py_ERRORS.png | Missing newline at end of file fixed |
-| profiles/admin.py | CI Python Linter | assets/screenshots/PROFILES_admin.py_NO_ERRORS(1).png | No errors found |
-| profiles/apps.py | CI Python Linter | assets/screenshots/PROFILES_apps.py.png | No errors found |
-| profiles/forms.py | CI Python Linter | assets/screenshots/PROFILES_forms.py.png | No errors found |
-| profiles/models.py | CI Python Linter | assets/screenshots/PROFILES_models.py_ERRORS(1).png | Missing newline at end of file fixed |
-| profiles/models.py | CI Python Linter | assets/screenshots/PROFILES_models.py_NO_ERRORS.png | No errors found |
-| profiles/signals.py | CI Python Linter | assets/screenshots/PROFILES_signals.py_ERRORS(1).png | Missing newline at end of file fixed |
-| profiles/signals.py | CI Python Linter | assets/screenshots/PROFILES_signals.py_NO_ERRORS.png | No errors found |
-| profiles/urls.py | CI Python Linter | assets/screenshots/PROFILES_urls.py_ERRORS(1).png | Missing newline at end of file fixed |
-| profiles/urls.py | CI Python Linter | assets/screenshots/PROFILES_urls.py_NO_ERRORS.png | No errors found |
-| profiles/views.py | CI Python Linter | assets/screenshots/PROFILES_views.py.png | No errors found |
-
-
-
+| manage.py | CI Python Linter | <img src="assets/screenshots/manage.py_NO_ERRORS.png" width="350"> | No errors found |
+| matches/apps.py | CI Python Linter | <img src="assets/screenshots/MATCHES_apps.py.png" width="350"> | No errors found |
+| matches/forms.py | CI Python Linter | <img src="assets/screenshots/MATCHES_forms.py.png" width="350"> | No errors found |
+| matches/models.py | CI Python Linter | <img src="assets/screenshots/MATCHES_models.py_ERRORS(1).png" width="350"> | Initial validation errors fixed |
+| matches/models.py | CI Python Linter | <img src="assets/screenshots/MATCHES_models.py_NO_ERRORS.png" width="350"> | No errors found |
+| matches/urls.py | CI Python Linter | <img src="assets/screenshots/MATCHES_urls.py_ERRORS-1(1).png" width="350"> | Initial indentation errors fixed |
+| matches/urls.py | CI Python Linter | <img src="assets/screenshots/MATCHES_urls.py_ERRORS-2.png" width="350"> | Final indentation and newline errors fixed |
+| matches/urls.py | CI Python Linter | <img src="assets/screenshots/MATCHES_urls.py_NO_ERRORS.png" width="350"> | No errors found |
+| matches/views.py | CI Python Linter | <img src="assets/screenshots/MATCHES_view.py_ERRORS(1).png" width="350"> | Initial validation errors fixed |
+| matches/views.py | CI Python Linter | <img src="assets/screenshots/MATCHES_views.py_NO_ERRORS.png" width="350"> | No errors found |
+| profiles/admin.py | CI Python Linter | <img src="assets/screenshots/PROFILES_admin.py_ERRORS.png" width="350"> | Missing newline at end of file fixed |
+| profiles/admin.py | CI Python Linter | <img src="assets/screenshots/PROFILES_admin.py_NO_ERRORS(1).png" width="350"> | No errors found |
+| profiles/apps.py | CI Python Linter | <img src="assets/screenshots/PROFILES_apps.py.png" width="350"> | No errors found |
+| profiles/forms.py | CI Python Linter | <img src="assets/screenshots/PROFILES_forms.py.png" width="350"> | No errors found |
+| profiles/models.py | CI Python Linter | <img src="assets/screenshots/PROFILES_models.py_ERRORS(1).png" width="350"> | Missing newline at end of file fixed |
+| profiles/models.py | CI Python Linter | <img src="assets/screenshots/PROFILES_models.py_NO_ERRORS.png" width="350"> | No errors found |
+| profiles/signals.py | CI Python Linter | <img src="assets/screenshots/PROFILES_signals.py_ERRORS(1).png" width="350"> | Missing newline at end of file fixed |
+| profiles/signals.py | CI Python Linter | <img src="assets/screenshots/PROFILES_signals.py_NO_ERRORS.png" width="350"> | No errors found |
+| profiles/urls.py | CI Python Linter | <img src="assets/screenshots/PROFILES_urls.py_ERRORS(1).png" width="350"> | Missing newline at end of file fixed |
+| profiles/urls.py | CI Python Linter | <img src="assets/screenshots/PROFILES_urls.py_NO_ERRORS.png" width="350"> | No errors found |
+| profiles/views.py | CI Python Linter | <img src="assets/screenshots/PROFILES_views.py.png" width="350"> | No errors found |
 
 
 
