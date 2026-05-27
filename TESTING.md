@@ -143,22 +143,22 @@ After applying the necessary corrections, every Python file successfully passed 
 | manage.py | CI Python Linter | <img src="assets/screenshots/manage.py_NO_ERRORS.png" width="350"> | No errors found |
 | matches/apps.py | CI Python Linter | <img src="assets/screenshots/MATCHES_apps.py.png" width="350"> | No errors found |
 | matches/forms.py | CI Python Linter | <img src="assets/screenshots/MATCHES_forms.py.png" width="350"> | No errors found |
-| matches/models.py | CI Python Linter | <img src="assets/screenshots/MATCHES_models.py_ERRORS(1).png" width="350"> | Initial validation errors fixed |
+| matches/models.py | CI Python Linter | <img src="assets/screenshots/MATCHES_models.py_ERRORS.png" width="350"> | Initial validation errors fixed |
 | matches/models.py | CI Python Linter | <img src="assets/screenshots/MATCHES_models.py_NO_ERRORS.png" width="350"> | No errors found |
-| matches/urls.py | CI Python Linter | <img src="assets/screenshots/MATCHES_urls.py_ERRORS-1(1).png" width="350"> | Initial indentation errors fixed |
+| matches/urls.py | CI Python Linter | <img src="assets/screenshots/MATCHES_urls.py_ERRORS-1.png" width="350"> | Initial indentation errors fixed |
 | matches/urls.py | CI Python Linter | <img src="assets/screenshots/MATCHES_urls.py_ERRORS-2.png" width="350"> | Final indentation and newline errors fixed |
 | matches/urls.py | CI Python Linter | <img src="assets/screenshots/MATCHES_urls.py_NO_ERRORS.png" width="350"> | No errors found |
-| matches/views.py | CI Python Linter | <img src="assets/screenshots/MATCHES_view.py_ERRORS(1).png" width="350"> | Initial validation errors fixed |
+| matches/views.py | CI Python Linter | <img src="assets/screenshots/MATCHES_view.py_ERRORS.png" width="350"> | Initial validation errors fixed |
 | matches/views.py | CI Python Linter | <img src="assets/screenshots/MATCHES_views.py_NO_ERRORS.png" width="350"> | No errors found |
 | profiles/admin.py | CI Python Linter | <img src="assets/screenshots/PROFILES_admin.py_ERRORS.png" width="350"> | Missing newline at end of file fixed |
-| profiles/admin.py | CI Python Linter | <img src="assets/screenshots/PROFILES_admin.py_NO_ERRORS(1).png" width="350"> | No errors found |
+| profiles/admin.py | CI Python Linter | <img src="assets/screenshots/PROFILES_admin.py_NO_ERRORS.png" width="350"> | No errors found |
 | profiles/apps.py | CI Python Linter | <img src="assets/screenshots/PROFILES_apps.py.png" width="350"> | No errors found |
 | profiles/forms.py | CI Python Linter | <img src="assets/screenshots/PROFILES_forms.py.png" width="350"> | No errors found |
-| profiles/models.py | CI Python Linter | <img src="assets/screenshots/PROFILES_models.py_ERRORS(1).png" width="350"> | Missing newline at end of file fixed |
+| profiles/models.py | CI Python Linter | <img src="assets/screenshots/PROFILES_models.py_ERRORS.png" width="350"> | Missing newline at end of file fixed |
 | profiles/models.py | CI Python Linter | <img src="assets/screenshots/PROFILES_models.py_NO_ERRORS.png" width="350"> | No errors found |
-| profiles/signals.py | CI Python Linter | <img src="assets/screenshots/PROFILES_signals.py_ERRORS(1).png" width="350"> | Missing newline at end of file fixed |
+| profiles/signals.py | CI Python Linter | <img src="assets/screenshots/PROFILES_signals.py_ERRORS.png" width="350"> | Missing newline at end of file fixed |
 | profiles/signals.py | CI Python Linter | <img src="assets/screenshots/PROFILES_signals.py_NO_ERRORS.png" width="350"> | No errors found |
-| profiles/urls.py | CI Python Linter | <img src="assets/screenshots/PROFILES_urls.py_ERRORS(1).png" width="350"> | Missing newline at end of file fixed |
+| profiles/urls.py | CI Python Linter | <img src="assets/screenshots/PROFILES_urls.py_ERRORS.png" width="350"> | Missing newline at end of file fixed |
 | profiles/urls.py | CI Python Linter | <img src="assets/screenshots/PROFILES_urls.py_NO_ERRORS.png" width="350"> | No errors found |
 | profiles/views.py | CI Python Linter | <img src="assets/screenshots/PROFILES_views.py.png" width="350"> | No errors found |
 
