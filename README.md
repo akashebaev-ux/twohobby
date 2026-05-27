@@ -278,8 +278,11 @@ The navigation system provides quick access to the main areas of the platform:
 
 | Feature | Notes | Screenshot |
 |---|---|---|
-| Register | Users can create an account using Django allauth. | ![alt text](assets/screenshots/register.png) |
+| Landing page | Users can create an account using Django allauth. | ![alt text](assets/screenshots/register.png) |
+| Register | Users can register an account by adding a username, email (optional), and password. | ![alt text](assets/screenshots/1-Registration.png) |
 | Login | Existing users can log in and access protected pages. | ![alt text](assets/screenshots/login.png) |
+| Password reset | Existing users can reset their password to regain access to their protected profile page. | ![alt text](assets/screenshots/Password-reset.png) |
+| Success page | The success page informs users that their password reset request has been submitted successfully. | ![alt text](assets/screenshots/Success-page.png) |
 | Logout | Logged-in users can securely log out using the logout button on their profile page. | ![alt text](assets/screenshots/logout.png) |
 | Responsive Layout | The website is designed to work on desktop and tablet devices, but mainly for mobile screens. | ![alt text](assets/screenshots/ipadmini.png) |
 | Dark / Light Mode | Users can switch between light and dark mode for a better viewing experience. | ![alt text](assets/screenshots/Nearby.png)|
