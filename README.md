@@ -506,7 +506,7 @@ twohobby/
 ## Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/twohobby.git
+git clone https://github.com/akashebaev-ux/twohobby.git
 cd twohobby
 ```
 
