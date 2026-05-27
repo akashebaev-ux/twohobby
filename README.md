@@ -659,6 +659,7 @@ Connected Users
 ---
 
 # Testing
+Detailed testing documentation can be found in [TESTING.md](TESTING.md).
 
 ## Manual Testing
 - Authentication testing
