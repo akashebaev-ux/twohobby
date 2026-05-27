@@ -684,6 +684,26 @@ Connected Users
 # Testing
 Detailed testing documentation can be found in [TESTING.md](TESTING.md).
 
+**Running Chat Tests**
+
+The production application uses Redis as the Django Channels backend to support real-time WebSocket communication between users.
+
+However, during automated local testing, the Redis configuration may cause issues because:
+
+- the Redis server may not be running locally
+- SSL-based Redis providers (such as Heroku Redis or Upstash) can produce connection errors during tests
+- WebSocket consumer tests do not require an external Redis service to validate application logic
+
+For this reason, Django’s built-in in-memory channel layer should be used temporarily during testing:
+
+```python
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
+}
+```
+
 ## Manual Testing
 - Authentication testing
 - Chat functionality testing
