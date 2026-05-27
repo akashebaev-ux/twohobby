@@ -261,7 +261,78 @@ The navigation system provides quick access to the main areas of the platform:
 | As a Site Admin | I can moderate profiles and messages<br><img src="assets/screenshots/block-3.png" width="180"> | so that the platform remains safe | <img src="assets/screenshots/must-have.png" width="60"> |
 
 
+---
 
+## 4. Design and Colour Scheme
+
+The design of TwoHobby was inspired by modern social networking and messaging applications such as WhatsApp, Tinder, Threads and Badoo. The platform was designed with a strong mobile-first approach to create an app-like experience across phones, tablets and desktop devices.
+
+The interface heavily uses:
+
+- Rounded cards and buttons
+- Sticky navigation bars
+- Soft shadows
+- Gradient backgrounds
+- Responsive layouts
+- Dark mode support
+- Mobile-style bottom navigation
+
+The website intentionally keeps a centered mobile application layout on desktop screens to preserve visual consistency and improve usability.
+
+---
+
+## Colour Scheme
+
+The colour palette was created using Coolors and refined further with an image colour picker tool to select colours directly from the website interface and gradients.
+
+### Primary Colours
+
+| Colour | Hex Code | Purpose |
+|---|---|---|
+| Purple | `#A30088` | Main branding colour, buttons and chat UI |
+| Orange | `#ff9966` | Gradient highlights and interaction effects |
+| Light Grey | `#f5f5f5` | Main page background |
+| White | `#ffffff` | Cards, forms and content containers |
+| Dark Grey | `#222222` | Main text colour |
+| Secondary Grey | `#595656` | Metadata and secondary text |
+
+The purple-orange gradient was repeatedly used across:
+
+- Chat headers
+- Buttons
+- Navigation elements
+- Like buttons
+- Call interface elements
+
+These colours were selected to create a vibrant modern social-media-style appearance while maintaining readability and strong visual contrast.
+
+The landing page additionally uses darker cinematic colours with glow effects and radial gradients to create a stronger visual first impression.
+
+![Colour Palette](assets/screenshots/color-palette.png)
+
+**NOTE:** The original color palette generated using Image Color Picker was later adjusted to improve accessibility and meet the visual contrast recommendations provided by Coolors for visually impaired users.
+ 
+
+---
+
+## Typography
+
+TwoHobby uses `Arial, sans-serif` as the primary typography style throughout the platform.
+
+Arial was selected because it:
+
+- Provides strong readability on mobile devices
+- Loads quickly without external font libraries
+- Maintains a clean and modern appearance
+- Renders consistently across browsers and operating systems
+
+Typography hierarchy is created using:
+
+- Large bold headings for usernames and page titles
+- Medium-weight navigation labels
+- Smaller grey metadata text for timestamps and secondary information
+
+The compact typography helps preserve the lightweight mobile-app-style appearance of the platform while maintaining readability across all screen sizes.
 
 
 
@@ -269,10 +340,8 @@ The navigation system provides quick access to the main areas of the platform:
 
 ---
 
-# Features
 
-
-## Features
+## 5. Features
 
 ### Existing Features
 
@@ -326,26 +395,6 @@ The navigation system provides quick access to the main areas of the platform:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## User Authentication
 - User registration and login
 - Secure authentication using Django Allauth
@@ -382,7 +431,6 @@ The navigation system provides quick access to the main areas of the platform:
 - Optimized for Android and iPhone
 - Dynamic grid system
 
----
 
 # Technologies Used
 
@@ -412,25 +460,25 @@ The navigation system provides quick access to the main areas of the platform:
 
 
 
-## Database Design
+## 6. Database Design
 
 ### Data Model
 
-The central models in TwoHobby are `Profile`, `ChatRoom`, `ChatMessage`, `Post`, and `Comment`, which together power the social, messaging, and interaction features of the platform.
+The central models in TwoHobby are `Profile`, `ChatRoom`, `ChatMessage`, `LikePost`, `LikeComment`, `Swipe`, and `BlockedUser`, which together power the social, matching, and real-time messaging features of the platform.
 
-The `Profile` model extends Django’s built-in `User` model using a one-to-one relationship. It stores additional user information such as display name, age, bio, gender, location, profile image, hobbies, and relationship preferences.
+The `Profile` model extends Django’s built-in `User` model using a one-to-one relationship. It stores additional user information such as display name, age, bio, gender, location, profile image, and matching preferences.
 
-The `Post` model allows users to create social posts connected to their profile. Posts can include text content, images, timestamps, and user interactions such as likes and comments.
+The `LikePost` model allows authenticated users to create social posts connected to their accounts. Posts support user interaction through likes and comments and include timestamps for chronological ordering.
 
-The `Comment` model connects to both `Post` and `User`, allowing authenticated users to participate in discussions under posts.
+The `LikeComment` model connects users to posts, allowing authenticated users to participate in discussions and interact with community content.
 
-The `ChatRoom` and `ChatMessage` models handle the real-time messaging system. `ChatRoom` stores private conversations between users, while `ChatMessage` stores individual messages, timestamps, images, and sender information. These models work together with Django Channels and WebSockets to provide live chat functionality.
+The `Swipe` model manages profile interactions between users by storing like and pass actions used in the matching system.
 
-The likes system connects users with profiles and posts they interact with, allowing the application to display liked profiles and create social engagement features.
+The `ChatRoom` and `ChatMessage` models power the real-time messaging functionality. `ChatRoom` stores private conversations between users, while `ChatMessage` stores individual messages, timestamps, image uploads, and sender information. These models work together with Django Channels and WebSockets to provide live chat communication.
 
-The blocking system links users together through a `BlockedUser` model, allowing users to block or unblock other members for safety and privacy.
+The `BlockedUser` model manages user safety and privacy by allowing users to block or unblock other members of the platform.
 
-Django’s built-in `User` model is used for authentication, registration, login, logout, and permission handling throughout the project.
+Django’s built-in `User` model is used throughout the project for authentication, registration, login, logout, and permission management.
 
 I used [dbdiagram.io](https://dbdiagram.io/) to design the Entity Relationship Diagram (ERD) and referenced it throughout development to maintain a clear database structure and relationships between models.
 
@@ -628,9 +676,9 @@ podman run -d \
 # Deployment
 
 The application is deployed using:
-- Heroku
-- Cloudinary
-- PostgreSQL
+- [Heroku](https://dashboard.heroku.com/apps/twohobby)
+- [Cloudinary](https://cloudinary.com/)
+- [PostgreSQL](https://dbs.ci-dbs.net/)
 
 ## Heroku Deployment
 
@@ -712,20 +760,92 @@ CHANNEL_LAYERS = {
 - WebRTC audio testing
 
 ## Code Quality
-- PEP8 validation
-- Django system checks
-- Responsive UI testing
+- [PEP8 validation](https://pep8ci.herokuapp.com/)
+- [W3C CSS](https://jigsaw.w3.org/css-validator/#validate_by_input)
+- [JSHint](https://jshint.com/)
+- [W3C HTML](https://validator.w3.org/detailed.html)
+
+## Design Quality
+- [coolors](https://coolors.co/)
+- [Image Color Picker](https://imagecolorpicker.com/)
 
 ---
 
 # Credits
 
-## Frameworks & Libraries
-- Django
-- Django Channels
-- Redis
-- Cloudinary
-- WebRTC
+## Main Frameworks & Technologies
+
+- [Django](https://www.djangoproject.com/) — Main Python web framework used to build the backend, authentication system, views, models, and overall application structure.
+- [Django Channels](https://channels.readthedocs.io/) — Added real-time WebSocket support for live messaging and interactive features.
+- [Daphne](https://github.com/django/daphne) — ASGI server used to run Django Channels and WebSocket connections.
+- [Redis](https://redis.io/) — Used as the channel layer backend for handling real-time communication.
+- [Channels Redis](https://github.com/django/channels_redis) — Integration layer connecting Django Channels with Redis.
+- [PostgreSQL](https://www.postgresql.org/) — Production database used to store user profiles, messages, posts, and platform data.
+- [Cloudinary](https://cloudinary.com/) — Cloud media storage service used for uploading and managing user profile images and media content.
+- [Django Allauth](https://docs.allauth.org/en/latest/) — Authentication framework used for registration, login, logout, and password reset functionality.
+- [WhiteNoise](https://whitenoise.readthedocs.io/) — Used to efficiently serve static files in production.
+- [Heroku](https://www.heroku.com/) — Cloud deployment platform used to host the application online.
+
+---
+
+## Python Libraries & Packages
+
+- [asgiref](https://pypi.org/project/asgiref/) — ASGI utilities required for asynchronous Django support.
+- [attrs](https://www.attrs.org/) — Python class utility library.
+- [autobahn](https://github.com/crossbario/autobahn-python) — WebSocket and real-time networking support.
+- [Automat](https://github.com/glyph/Automat) — State machine library used by Twisted components.
+- [cbor2](https://pypi.org/project/cbor2/) — Binary serialization format support.
+- [certifi](https://pypi.org/project/certifi/) — SSL certificate validation package.
+- [cffi](https://cffi.readthedocs.io/) — Foreign function interface for Python.
+- [cryptography](https://cryptography.io/) — Security and encryption library.
+- [dj-database-url](https://pypi.org/project/dj-database-url/) — Simplifies database configuration using environment variables.
+- [django-cloudinary-storage](https://pypi.org/project/django-cloudinary-storage/) — Cloudinary integration for Django media files.
+- [Pillow](https://python-pillow.org/) — Image processing library for handling uploaded images.
+- [psycopg2-binary](https://pypi.org/project/psycopg2-binary/) — PostgreSQL database adapter for Python.
+- [python-dotenv](https://pypi.org/project/python-dotenv/) — Loads environment variables from `.env` files.
+- [Requests](https://requests.readthedocs.io/) — HTTP request library.
+- [sqlparse](https://sqlparse.readthedocs.io/) — SQL formatting and parsing utility.
+- [Twisted](https://twisted.org/) — Event-driven networking engine used with Daphne and Channels.
+- [ujson](https://pypi.org/project/ujson/) — Fast JSON processing library.
+- [urllib3](https://urllib3.readthedocs.io/) — HTTP client library.
+
+---
+
+## Frontend & UI Technologies
+
+- HTML5
+- CSS3
+- JavaScript (ES6+)
+- Responsive testing
+- WebSockets for real-time chat and calling features
+- Mobile-first interface inspired by platforms such as Threads, WhatsApp, Tinder, and Badoo
+
+---
+
+## Security & Authentication
+
+- Secure authentication using [Django Allauth](https://docs.allauth.org/en/latest/)
+- Environment variable protection using [python-dotenv](https://pypi.org/project/python-dotenv/)
+- HTTPS deployment through [Heroku](https://www.heroku.com/)
+- Password reset and account management system
+- User blocking and moderation features
+
+---
+
+## Deployment & Hosting
+
+- [Heroku](https://www.heroku.com/) — Application hosting and deployment
+- [Cloudinary](https://cloudinary.com/) — Media hosting
+- [PostgreSQL](https://www.postgresql.org/) — Production database
+- [Redis](https://redis.io/) — Real-time message broker for WebSockets and Channels
+
+---
+
+## Development Tools & Educational Resources
+
+- [Git](https://git-scm.com/) & [GitHub](https://github.com/) — Version control and project management
+- [Visual Studio Code](https://code.visualstudio.com/) — Main development environment
+- [ChatGPT](https://chatgpt.com/) — Used for debugging, fixing errors, learning new concepts, improving code structure, and educational purposes throughout the development process.
 
 ## Inspiration
 - Badoo
