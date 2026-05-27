@@ -162,6 +162,22 @@ After applying the necessary corrections, every Python file successfully passed 
 | profiles/urls.py | CI Python Linter | <img src="assets/screenshots/PROFILES_urls.py_NO_ERRORS.png" width="350"> | No errors found |
 | profiles/views.py | CI Python Linter | <img src="assets/screenshots/PROFILES_views.py.png" width="350"> | No errors found |
 
+---
+
+### Python tests PEP8
+
+---
+
+| File | Validator | Screenshot | Result |
+|---|---|---|---|
+| chat/test_consumers.py | CI Python Linter | <img src="assets/screenshots/Chat_test-consumers_No_Errors.png" width="350"> | No errors found |
+| chat/test_models.py | CI Python Linter | <img src="assets/screenshots/Chat_test-models_No_Errors.png" width="350"> | No errors found |
+| chat/test_views.py | CI Python Linter | <img src="assets/screenshots/Chat_test-views_No_Errors.png" width="350"> | No errors found |
+| matches/test_models.py | CI Python Linter | <img src="assets/screenshots/Matches_test-models_No_Errors.png" width="350"> | No errors found |
+| matches/test_views.py | CI Python Linter | <img src="assets/screenshots/Matches_test-views_No_Errors.png" width="350"> | No errors found |
+| profiles/test_forms.py | CI Python Linter | <img src="assets/screenshots/Profile_test_forms_No_Errors.png" width="350"> | No errors found |
+| profiles/test_models.py | CI Python Linter | <img src="assets/screenshots/Profile_test_models_No_Errors.png" width="350"> | No errors found |
+| profiles/test_views.py | CI Python Linter | <img src="assets/screenshots/Profile_test_views_No_Errors.png" width="350"> | No errors found |
 
 
 
