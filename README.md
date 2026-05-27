@@ -483,19 +483,39 @@ As development progressed, User Stories were moved across the Kanban board betwe
 
 # Project Structure
 
+
 ```bash
 twohobby/
 │
 ├── chat/
 ├── profiles/
+├── posts/
 ├── static/
-├── templates/
-├── media/
-├── config/
+│   ├── css/
+│   ├── js/
+│   └── images/
 │
-├── manage.py
+├── templates/
+│   ├── account/
+│   ├── chat/
+│   ├── profiles/
+│   └── posts/
+│
+├── media/
+├── assets/
+│   └── screenshots/
+│
+├── config/
+│   ├── settings.py
+│   ├── urls.py
+│   ├── asgi.py
+│   └── wsgi.py
+│
 ├── requirements.txt
+├── manage.py
 ├── Procfile
+├── runtime.txt
+├── env.py
 └── README.md
 ```
 
