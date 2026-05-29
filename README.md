@@ -387,8 +387,7 @@ Whimsical was used to plan page structure, user flows, and feature relationships
 | Nearby | Users can browse nearby profiles and see profile cards. | ![alt text](assets/screenshots/nearby-1.png) |
 | Profile | Users can see their own profile image, name, age, and bio. | ![alt text](assets/screenshots/Profile.png) |
 | Profile Detail | Users can open a full profile page to see more information about another user. | ![alt text](assets/screenshots/Profile-details.png) |
-| Edit Profile | Users can update their own profile information and profile image. | ![alt text](assets/screenshots/Edit-profile
-.png) |
+| Edit Profile | Users can update their own profile information and profile image. | ![alt text](assets/screenshots/Edit-profile.png) |
 | Encounters | Users can like other profiles to show interest. | ![alt text](assets/screenshots/Encounters.png) |
 | Likes | Users can view profiles they have liked and create group posts where only liked profiles can view and comment on them. | ![alt text](assets/screenshots/Likes.png) |
 | Posts | Users can create posts connected to their profile and interests. | ![alt text](assets/screenshots/Posts.png) |
