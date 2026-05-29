@@ -1111,19 +1111,34 @@ a.filter-btn {
 
 .profile-filter-form {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
     gap: 8px;
     margin-bottom: 18px;
 }
 
+.profile-filter-form select {
+    flex: 0 1 120px;
+}
+
+.profile-filter-form input[name="min_age"],
+.profile-filter-form input[name="max_age"] {
+    flex: 0 1 145px;
+}
+
+.profile-filter-form .filter-btn {
+    flex: 0 1 130px;
+}
+
 .profile-filter-form select,
-.profile-filter-form input {
-    flex: 1;
-    min-width: 0;
+.profile-filter-form input,
+.profile-filter-form .filter-btn {
     padding: 10px;
-    border: 1px solid #555;
     border-radius: 14px;
     font-size: 16px;
 }
+
 
 /* Filter box */
 .filter-box {
@@ -1487,5 +1502,38 @@ a.filter-btn {
     .profile-grid {
         grid-template-columns:
             repeat(auto-fill, minmax(180px, 1fr));
+    }
+}
+
+
+
+@media screen and (min-width: 413px) and (max-width: 600px) {
+    .profile-filter-form {
+        display: grid;
+        grid-template-columns: 120px 128px 128px;
+        gap: 4px;
+        justify-content: center;
+    }
+
+    .profile-filter-form select,
+    .profile-filter-form input,
+    .profile-filter-form .filter-btn {
+        width: 100%;
+        min-width: 0;
+        flex: none;
+    }
+
+    .profile-filter-form .filter-btn {
+        grid-column: 1 / -1;
+        width: 160px;
+        justify-self: center;
+    }
+}
+@media screen and (max-width: 412px) {
+    .profile-filter-form select,
+    .profile-filter-form input[name="min_age"],
+    .profile-filter-form input[name="max_age"],
+    .profile-filter-form .filter-btn {
+        flex: 1 1 100%;
     }
 }
