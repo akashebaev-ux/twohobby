@@ -226,3 +226,20 @@ Any issues that could be improved were reviewed and addressed where possible.
 | My Profile | <img src="assets/screenshots/Lighthouse/WHITE-MODE/11.MY-PROFILE-W.png" width="450"> | <img src="assets/screenshots/Lighthouse/DARK-MODE/11.MY-PROFILE.png" width="450"> |
 | Edit Profile | <img src="assets/screenshots/Lighthouse/WHITE-MODE/12.EDIT_PROFILE-W.png" width="450"> | <img src="assets/screenshots/Lighthouse/DARK-MODE/12.EDIT-PROFILE.png" width="450"> |
 
+---
+
+## Manual Testing
+
+The application was tested manually on both desktop and mobile devices to ensure that forms, validation, messaging, profile management, and social features function correctly.
+
+| Feature | Test Performed | Expected Result | Actual Result | Status | Screenshot |
+|----------|---------------|----------------|---------------|---------|------------|
+| Password Reset | Entered an invalid email address without an `@` symbol | Users should not be able to submit the form with an invalid email address | The form could not be submitted and a validation message was displayed | ✅ Pass | ![Password Reset](assets/screenshots/MANUAL-TESTING-email.png) |
+| Filter Validation | Entered an age below the minimum allowed value and attempted to enter letters and symbols | System should only accept numeric values between 18 and 100 and display a validation warning for invalid input | Validation message displayed correctly | ✅ Pass | ![Filter Validation](assets/screenshots/MANUAL-TESTING-filter-input-validation-18-to-100.png) |
+| Profile Age Input | Attempted to enter non-numeric values in the age field | Only numeric values should be accepted | Field accepts numbers only | ✅ Pass | ![Age Validation](assets/screenshots/MANUAL-TESTING-input-age-only-numbers-and-gender-drop-down.png) |
+| Gender Selection | Opened the gender dropdown menu | Available gender options should be displayed | Options displayed correctly | ✅ Pass | ![Gender Dropdown](assets/screenshots/MANUAL-TESTING-input-age-only-numbers-and-gender-drop-down.png) |
+| Registration Validation | Entered a weak password during registration | Password validation messages should be displayed | Appropriate validation messages displayed | ✅ Pass | ![Signup Validation](assets/screenshots/MANUAL-TESTING-signup.png) |
+| Login Validation | Entered an incorrect username/password combination | An error message should be displayed | Login error displayed correctly | ✅ Pass | ![Login Validation](assets/screenshots/MANUAL-TESTING-login.png) |
+| Empty Likes Post | Attempted to submit an empty post | Form should prevent submission and display a warning message | Validation message displayed correctly | ✅ Pass | ![Empty Post](assets/screenshots/MANUAL-TESTING-likes-post-empty-input.png) |
+| Empty Chat Message | Attempted to send an empty chat message | System should prevent submission | Empty message was not sent | ✅ Pass | ![Empty Message](assets/screenshots/MANUAL-TESTING-no-empty-messages-send.png) |
+| Image Upload and WebP Conversion | Uploaded JPEG and PNG images through chat | Images should be automatically converted to WebP format to reduce storage usage and display correctly in chat | Images were converted to WebP format and displayed successfully | ✅ Pass | ![Image Upload](assets/screenshots/MANUAL-TESTING-image-uploaded-in-webp.png) |
