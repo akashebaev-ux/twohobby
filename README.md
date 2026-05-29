@@ -283,7 +283,7 @@ The navigation system provides quick access to the main areas of the platform:
 
 ---
 
-## 5. Design and Colour Scheme
+## 5. Design, Colour Scheme and wireframes
 
 The design of TwoHobby was inspired by modern social networking and messaging applications such as WhatsApp, Tinder, Threads and Badoo. The platform was designed with a strong mobile-first approach to create an app-like experience across phones, tablets and desktop devices.
 
@@ -354,6 +354,15 @@ Typography hierarchy is created using:
 
 The compact typography helps preserve the lightweight mobile-app-style appearance of the platform while maintaining readability across all screen sizes.
 
+### Wireframes
+
+Traditional wireframe templates were not extensively used during the design process of TwoHobby. Instead, the platform's layout and user experience were inspired by the established design patterns of popular social networking and communication applications such as Badoo, Tinder, Threads, and WhatsApp.
+
+As TwoHobby combines profile discovery, social posting, real-time messaging, and user interaction features, the design was developed around familiar interfaces that users already understand. This approach helped create an intuitive user experience while reducing the learning curve for new users.
+
+The project was designed with a mobile-first mindset, as social networking applications are primarily accessed on mobile devices. However, special attention was also given to desktop usability to ensure that all features remain accessible and responsive across different screen sizes.
+
+Whimsical was used to plan page structure, user flows, and feature relationships rather than creating detailed low-fidelity wireframes for every page. Throughout development, some layouts evolved as functionality was added and user experience considerations were refined.
 
 
 
@@ -880,12 +889,23 @@ CHANNEL_LAYERS = {
 
 **Azamat Kashebayev**
 
-- Full Stack Developer
-- Django & Python Enthusiast
-- Real-Time Communication Systems
+Full Stack Developer
 
 ---
 
 ### License
 
 This project is for educational and portfolio purposes.
+
+---
+
+## Acknowledgements
+
+I would like to express my sincere gratitude to **Tim Nelson** for being my mentor and for his guidance throughout this project.
+
+Special thanks to the **Code Institute** for providing the knowledge, resources, and learning environment that made this project possible.
+
+I am also grateful to the **Code Institute Discord community** for their encouragement, support, and motivation during challenging moments throughout my learning journey.
+
+Finally, I would like to thank my Code Institute facilitator, **Marko Tot**, for his valuable feedback and guidance. Marko helped me identify critical areas for improvement and provided useful suggestions that enhanced both this project and its documentation.
+
