@@ -34,7 +34,7 @@ source: [ChatGTP](https://chatgpt.com/)
   - [2. Scope](#2-scope)
   - [3. Structure](#3-structure)
   - [4. User Stories](#4-user-stories)
-  - [5. Design and Colour Scheme](#5-design-and-colour-scheme)
+  - [5. Design, Colour Scheme and Wireframes](#5-design-colour-scheme-and-wireframes)
 - [Features](#6-features)
 - [Database Design](#7-database-design)
 - [Agile Development Process](#8-agile-development-process)
@@ -283,7 +283,7 @@ The navigation system provides quick access to the main areas of the platform:
 
 ---
 
-## 5. Design, Colour Scheme and wireframes
+## 5. Design, Colour Scheme and Wireframes
 
 The design of TwoHobby was inspired by modern social networking and messaging applications such as WhatsApp, Tinder, Threads and Badoo. The platform was designed with a strong mobile-first approach to create an app-like experience across phones, tablets and desktop devices.
 
