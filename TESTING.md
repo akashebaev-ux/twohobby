@@ -110,6 +110,7 @@ Additional warnings related to globally defined variables were resolved using JS
 | [`static/js/encounters.js`](static/js/encounters.js) | <img src="assets/screenshots/JS_ENCOUNTERS_NO_ERRORS.png" width="800"> | ES11 configuration added to support modern JavaScript syntax |
 | [`static/js/theme.js`](static/js/theme.js) | <img src="assets/screenshots/JS_THEMES_NO_ERRORS.png" width="800"> | Modern syntax warnings resolved through ES11 configuration |
 | [`static/js/delete-modal.js`](static/js/delete-modal.js) | <img src="assets/screenshots/DELETE-MODAL-JS-NO-ERRORS.png" width="800"> | JSHint passed with no errors after applying ES11 configuration |
+| [`static/js/carousel-hover-scroll.js`](static/js/carousel-hover-scroll.js) | <img src="assets/screenshots/CAROUSEL-HOVER-SCROLL-NO-ERRORS.png" width="800"> | JSHint passed with no errors after applying ES11 configuration and validating carousel hover scrolling functionality |
 ---
 
 ## Initial JSHint Warnings and Fixes
@@ -124,6 +125,7 @@ Additional warnings related to globally defined variables were resolved using JS
 | [`static/js/nearby.js`](static/js/nearby.js) | <img src="assets/screenshots/JS_NEARBY_ERRORS.png" width="800"> | Declared global variables and corrected ternary operator formatting |
 | [`static/js/encounters.js`](static/js/encounters.js) | <img src="assets/screenshots/JS_ENCOUNTERS_ERROR.png" width="800"> | Added ES11 configuration for modern JavaScript syntax support |
 | [`static/js/theme.js`](static/js/theme.js) | <img src="assets/screenshots/JS_THEMES_ERRORS.png" width="800"> | Added ES11 configuration to resolve `const` syntax warnings |
+| [`static/js/carousel-hover-scroll.js`](static/js/carousel-hover-scroll.js) | <img src="assets/screenshots/ERRORS-JS-CAROUSEL.png" width="800"> | Added ES11 configuration and moved the `animate()` function outside the conditional block to resolve JSHint function declaration warnings |
 
 ---
 
