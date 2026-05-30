@@ -410,8 +410,11 @@ Whimsical was used to plan page structure, user flows, and feature relationships
 | Posts | Users can create posts connected to their profile and interests. | ![alt text](assets/screenshots/Posts.png) |
 | Comments | Users can comment on posts and interact with other users. | ![alt text](assets/screenshots/Comments.png) |
 | Post Likes | Users can like posts to show engagement. | ![alt text](assets/screenshots/Like-posts.png) |
+| Likes Carousel Hover Scroll | Users can hover near the carousel edges on desktop to scroll through liked profiles. | ![alt text](assets/screenshots/LIKES-HOVER-SCROLL.png) |
 | Private Messages | Users can send private messages to the post owner/or to the first contact. | ![alt text](assets/screenshots/Private-message-post.png) |
 | Real-time Chat | Chat messages update through WebSockets for a smoother messaging experience. | ![alt text](assets/screenshots/Chat.png) |
+| Delete Confirmation Modal | Users receive a styled confirmation popup before deleting a post or chat. | ![alt text](assets/screenshots/DELETE-CONFIRMATION-MODEL.png) |
+
 | Image Messages | Users can send images in private chat. | ![alt text](assets/screenshots/Chat-img.png) |
 | Call Button | The chat interface includes a call button for communication features. | ![alt text](assets/screenshots/Chat-calls.png) |
 | Block / Unblock Users | Users can block or unblock other users for safety and control. | ![alt text](assets/screenshots/Chat-block.png) |
