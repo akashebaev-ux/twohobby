@@ -331,7 +331,24 @@ The landing page additionally uses darker cinematic colours with glow effects an
 ![Colour Palette](assets/screenshots/color-palette.png)
 
 **NOTE:** The original color palette generated using Image Color Picker was later adjusted to improve accessibility and meet the visual contrast recommendations provided by Coolors for visually impaired users.
- 
+
+---
+
+#### Icons
+
+TwoHobby uses native Unicode emoji icons instead of an external icon library such as Font Awesome. Emoji characters are rendered by the user's operating system and browser, providing a lightweight and mobile-friendly solution without requiring additional dependencies.
+
+Examples include:
+
+* 📍 Nearby
+* 💞 Encounters
+* ❤ Likes
+* 💬 Chats
+* 👤 Profile
+* 🌙 Theme Toggle
+
+**Reference:** Unicode Emoji Standard (https://unicode.org/emoji/charts/full-emoji-list.html?utm_source) 
+
 
 ---
 
