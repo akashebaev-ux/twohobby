@@ -140,6 +140,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_LOGIN_ON_SIGNUP = True
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
