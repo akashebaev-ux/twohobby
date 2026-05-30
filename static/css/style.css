@@ -1035,6 +1035,8 @@ a.filter-btn {
     overflow-x: auto;
     padding: 0;
     scroll-snap-type: x mandatory;
+    cursor: ew-resize;
+    scroll-behavior: smooth;
 }
 
 .liked-carousel::-webkit-scrollbar {
@@ -1043,7 +1045,6 @@ a.filter-btn {
 
 .liked-avatar-card {
     flex: 0 0 auto;
-    scroll-snap-align: start;
 }
 
 .liked-avatar-img {

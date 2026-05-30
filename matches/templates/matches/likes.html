@@ -8,7 +8,7 @@
 
 <div class="likes-page">
 
-    <div class="liked-carousel">
+    <div class="liked-carousel" id="liked-carousel">
         {% for swipe in liked_users %}
             <div class="liked-avatar-card">
                 {% if swipe.to_user.profile.profile_image %}
