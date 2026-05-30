@@ -113,7 +113,8 @@
                     {% csrf_token %}
 
                     <button type="submit"
-                            class="delete-chat-btn">
+                            class="delete-chat-btn"
+                            onclick="return confirm('Are you sure you want to delete this chat?');">
 
                         🗑
 

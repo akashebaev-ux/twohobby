@@ -938,6 +938,7 @@ a.filter-btn {
     border-radius: 24px;
     border: 1px solid rgba(255,255,255,0.08);
     box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+    overflow: visible;
 }
 
 .like-post-left {
@@ -1178,8 +1179,94 @@ a.filter-btn {
     margin-top: 10px;
 }
 
+/* Delete modal Likes page */
 
+.delete-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+}
 
+.delete-modal-content {
+    width: 90%;
+    max-width: 420px;
+    padding: 2rem;
+    text-align: center;
+
+    background: #1f1f25;
+
+    border-radius: 28px;
+
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.delete-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 2.5rem;
+
+    border-radius: 50%;
+
+    color: white;
+
+    background: linear-gradient(
+        135deg,
+        #A30088,
+        #ff9966
+    );
+}
+
+.delete-modal-content h2 {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.delete-modal-content p {
+    color: #cccccc;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+}
+
+.delete-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.cancel-btn,
+.confirm-btn {
+    flex: 1;
+    padding: 14px;
+    border-radius: 999px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    background: transparent;
+    border: 1px solid #777;
+    color: white;
+}
+
+.confirm-btn {
+    border: none;
+    color: white;
+    background: linear-gradient(
+        135deg,
+        #A30088,
+        #ff9966
+    );
+}
 
 
 

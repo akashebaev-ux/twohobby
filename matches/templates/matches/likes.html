@@ -121,9 +121,35 @@
                         <form method="post"
                             action="{% url 'delete_like_post' post.id %}">
                             {% csrf_token %}
-                            <button type="submit" class="post-action-btn">
+                            <button type="button"
+                                    class="post-action-btn"
+                                    onclick="openDeleteModal(this)">
                                 🗑
                             </button>
+                            <div class="delete-modal">
+                                <div class="delete-modal-content">
+                                    <div class="delete-icon">🗑</div>
+
+                                    <h2>Delete this post?</h2>
+
+                                    <p>
+                                        This action cannot be undone.
+                                        The post will be permanently removed.
+                                    </p>
+
+                                    <div class="delete-actions">
+                                        <button type="button"
+                                                class="cancel-btn"
+                                                onclick="closeDeleteModal(this)">
+                                            Cancel
+                                        </button>
+                                        <button type="submit"
+                                                class="confirm-btn">
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                     {% endif %}
 
