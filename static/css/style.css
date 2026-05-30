@@ -594,8 +594,10 @@ body:has(.auth-page) .app-wrapper {
     border: 2px solid #A30088;
     flex-shrink: 0;
 }
-.chat-card:hover {
-    transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+    .chat-card:hover {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
 }
 
 /* Chat time */
@@ -672,7 +674,7 @@ body:has(.auth-page) .app-wrapper {
     align-items: center;
     justify-content: space-between;
     gap: 14px;
-
+    overflow: visible;
     padding: 18px;
     margin-bottom: 14px;
 

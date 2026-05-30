@@ -112,13 +112,37 @@
 
                     {% csrf_token %}
 
-                    <button type="submit"
+                    <button type="button"
                             class="delete-chat-btn"
-                            onclick="return confirm('Are you sure you want to delete this chat?');">
-
+                            onclick="openDeleteModal(this)">
                         🗑
-
                     </button>
+
+                    <div class="delete-modal">
+                        <div class="delete-modal-content">
+                            <div class="delete-icon">🗑</div>
+
+                            <h2>Delete this chat?</h2>
+
+                            <p>
+                                This action cannot be undone.
+                                The chat will be permanently removed.
+                            </p>
+
+                            <div class="delete-actions">
+                                <button type="button"
+                                        class="cancel-btn"
+                                        onclick="closeDeleteModal(this)">
+                                    Cancel
+                                </button>
+
+                                <button type="submit"
+                                        class="confirm-btn">
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
                 </form>
 
