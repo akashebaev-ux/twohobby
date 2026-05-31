@@ -2,14 +2,6 @@
 /* global MediaStream, RTCPeerConnection,
 RTCSessionDescription, RTCIceCandidate, navigator */
 
-function showCallInvite(username) {
-    const callPanel = document.getElementById("call-panel");
-    const statusText = document.getElementById("call-status");
-
-    callPanel.classList.remove("hidden");
-    statusText.innerText = `${username} is calling you...`;
-}
-
 const openCallBtn = document.getElementById("open-call-ui");
 const callPanel = document.getElementById("call-panel");
 const declineCallBtn = document.getElementById("decline-call");
@@ -173,7 +165,7 @@ declineCallBtn.onclick = function() {
     callPanel.classList.add("hidden");
 };
 
-window.showCallInvite = showCallInvite;
+
 window.handleWebRTCOffer = handleWebRTCOffer;
 window.handleWebRTCAnswer = handleWebRTCAnswer;
 window.handleIceCandidate = handleIceCandidate;
