@@ -1,3 +1,4 @@
+/* jshint esversion: 11 */
 /* global roomId, currentUser,
 handleCallAccepted, handleWebRTCOffer,
 handleWebRTCAnswer, handleIceCandidate */
