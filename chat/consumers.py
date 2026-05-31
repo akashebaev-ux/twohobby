@@ -80,6 +80,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 self.room_group_name,
                 {
                     "type": "call_accept",
+                    "username": self.scope["user"].username,
                 }
             )
 
@@ -124,17 +125,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
             "username": event["username"],
         }))
 
-    async def call_invite(self, event):
-        """Send call invitation events to connected users."""
-
-        await self.send(text_data=json.dumps({
-            "type": "call_invite",
-            "username": event["username"],
-        }))
-
     async def call_accept(self, event):
+        """Send call acceptance event to chat participants."""
         await self.send(text_data=json.dumps({
             "type": "call_accept",
+            "username": event["username"],
         }))
 
     async def webrtc_signal(self, event):
@@ -220,6 +215,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
 class CallConsumer(AsyncWebsocketConsumer):
     async def connect(self):
+        """Connect user to personal incoming-call WebSocket group."""
         user = self.scope["user"]
 
         if user.is_anonymous:
@@ -236,12 +232,14 @@ class CallConsumer(AsyncWebsocketConsumer):
         await self.accept()
 
     async def disconnect(self, close_code):
+        """Remove user from personal call notification group."""
         await self.channel_layer.group_discard(
             self.user_group_name,
             self.channel_name
         )
 
     async def incoming_call(self, event):
+        """Send incoming call notification to the receiver."""
         await self.send(text_data=json.dumps({
             "type": "incoming_call",
             "username": event["username"],

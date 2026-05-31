@@ -18,7 +18,24 @@ window.chatSocket.onmessage = function(e) {
         return;
     }
 
-    if (data.type === "call_accept") {
+    if (
+        data.type === "incoming_call" &&
+        data.username &&
+        data.username !== currentUser
+    ) {
+        document.getElementById("call-panel")
+            .classList.remove("hidden");
+
+        document.getElementById("call-status").innerText =
+            `${data.username} is calling...`;
+
+        return;
+    }
+
+    if (
+        data.type === "call_accept" &&
+        data.username !== currentUser
+    ) {
         handleCallAccepted();
         return;
     }

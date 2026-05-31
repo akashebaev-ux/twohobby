@@ -10,7 +10,6 @@ const acceptBtn = document.getElementById("accept-call");
 let peerConnection;
 let localStream;
 let remoteStream;
-let isCalling = false;
 
 const rtcConfig = {
     iceServers: [
@@ -21,6 +20,11 @@ const rtcConfig = {
 };
 
 openCallBtn.onclick = function() {
+
+    callPanel.classList.remove("hidden");
+
+    document.getElementById("call-status").innerText =
+        "Calling...";
 
     window.chatSocket.send(JSON.stringify({
         type: "call_invite"
@@ -104,6 +108,8 @@ async function handleWebRTCOffer(offer) {
         type: "webrtc_answer",
         answer: answer
     }));
+    
+    endCallAfterOneMinute();
 
     document.getElementById("call-status").innerText = "Call connected";
 }
@@ -124,27 +130,19 @@ async function handleIceCandidate(candidate) {
     }
 }
 
-acceptBtn.onclick = async function() {
-    isCalling = true;
-
-    await startWebRTCCall();
-
-    endCallAfterOneMinute();
-
-    const offer = await peerConnection.createOffer();
-
-    await peerConnection.setLocalDescription(offer);
+acceptBtn.onclick = function() {
 
     window.chatSocket.send(JSON.stringify({
-        type: "webrtc_offer",
-        offer: offer
+        type: "call_accept"
     }));
 
-    document.getElementById("call-status").innerText = "Calling...";
+    callPanel.classList.remove("hidden");
+
+    document.getElementById("call-status").innerText =
+        "Connecting...";
 };
 
 declineCallBtn.onclick = function() {
-    isCalling = false;
 
     document.getElementById("call-status").innerText = "Call ended";
 
@@ -164,23 +162,6 @@ declineCallBtn.onclick = function() {
     callPanel.classList.add("hidden");
 };
 
-function notifyCallerCallAccepted() {
-    if (
-        sessionStorage.getItem("acceptIncomingCall") === "true"
-    ) {
-        sessionStorage.removeItem("acceptIncomingCall");
-
-        window.chatSocket.send(JSON.stringify({
-            type: "call_accept"
-        }));
-
-        callPanel.classList.remove("hidden");
-
-        document.getElementById("call-status").innerText =
-            "Connecting call...";
-    }
-}
-
 async function handleCallAccepted() {
     await startWebRTCCall();
 
@@ -199,7 +180,6 @@ async function handleCallAccepted() {
         "Calling...";
 }
 
-setTimeout(notifyCallerCallAccepted, 500);
 
 window.handleCallAccepted = handleCallAccepted;
 
