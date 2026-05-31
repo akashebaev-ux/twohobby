@@ -56,7 +56,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             if not can_call:
                 await self.send(text_data=json.dumps({
                     "type": "call_limit",
-                    "message": "You already used your call for today."
+                    "message": "You already used your 2 calls for today."
                 }))
                 return
 
@@ -162,16 +162,17 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @sync_to_async
     def can_make_call(self):
-        """Check whether the user can make a call today."""
+        """Allow up to 2 calls per day."""
 
         from django.utils import timezone
 
         today = timezone.now().date()
 
-        return not CallLog.objects.filter(
+        calls_today = CallLog.objects.filter(
             caller=self.scope["user"],
             started_at__date=today
-        ).exists()
+        ).count()
+        return calls_today < 2
 
     @sync_to_async
     def save_call_log(self):
