@@ -1204,10 +1204,34 @@ body:has(.auth-page) .app-wrapper {
 /* Dark mode */
 
 .theme-toggle-btn {
-    border: none;
-    background: transparent;
-    font-size: 22px;
+    background: transparent !important;
+
+    border: none !important;
+
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    box-shadow: none;
+
+    outline: none;
+
+    padding: 0;
+
+    width: 42px;
+
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
     cursor: pointer;
+
+    font-size: 22px;
+
     color: inherit;
 }
 

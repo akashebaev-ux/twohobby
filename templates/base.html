@@ -101,13 +101,15 @@
 <div id="global-call-panel" class="hidden">
     <p id="global-call-status"></p>
 
-    <button id="global-accept-call">
-        Accept
-    </button>
+    <div class="call-actions">
+        <button id="global-accept-call">
+            📞
+        </button>
 
-    <button id="global-decline-call">
-        Decline
-    </button>
+        <button id="global-decline-call">
+            ✕
+        </button>
+    </div>
 </div>
 
 {% if user.is_authenticated %}
