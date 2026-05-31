@@ -10,20 +10,22 @@ const globalCallSocket = new WebSocket(
 globalCallSocket.onmessage = function(e) {
     const data = JSON.parse(e.data);
 
+    console.log("Incoming global call data:", data);
+
     if (data.type === "incoming_call") {
-        const callPanel = document.getElementById("call-panel");
-        const statusText = document.getElementById("call-status");
+        const callPanel = document.getElementById("global-call-panel");
+        const statusText = document.getElementById("global-call-status");
 
         callPanel.classList.remove("hidden");
 
         statusText.innerText =
             `${data.username} is calling you...`;
 
-        document.getElementById("accept-call").onclick = function() {
+        document.getElementById("global-accept-call").onclick = function() {
             window.location.href = `/chat/${data.room_id}/`;
         };
 
-        document.getElementById("decline-call").onclick = function() {
+        document.getElementById("global-decline-call").onclick = function() {
             callPanel.classList.add("hidden");
         };
     }

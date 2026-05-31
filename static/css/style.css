@@ -1351,6 +1351,20 @@ a.filter-btn {
     border: 0;
 }
 
+/* Global calls notifications*/
+
+#global-call-panel {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99999;
+    background: #ffffff;
+    color: #111111;
+    padding: 18px;
+    border-radius: 14px;
+    text-align: center;
+}
 
 /* Dark mode */
 
