@@ -56,7 +56,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             if not can_call:
                 await self.send(text_data=json.dumps({
                     "type": "call_limit",
-                    "message": "You already used your 2 calls for today."
+                    "message": "You already used your 10 calls for today."
                 }))
                 return
 
@@ -172,7 +172,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             caller=self.scope["user"],
             started_at__date=today
         ).count()
-        return calls_today < 2
+        return calls_today < 10
 
     @sync_to_async
     def save_call_log(self):
