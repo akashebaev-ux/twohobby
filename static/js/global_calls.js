@@ -21,8 +21,16 @@ globalCallSocket.onmessage = function(e) {
         statusText.innerText =
             `${data.username} is calling you...`;
 
-        document.getElementById("global-accept-call").onclick = function() {
-            window.location.href = `/chat/${data.room_id}/`;
+        document.getElementById("global-accept-call").onclick =
+        function() {
+
+            sessionStorage.setItem(
+                "acceptIncomingCall",
+                "true"
+            );
+
+            window.location.href =
+                `/chat/${data.room_id}/`;
         };
 
         document.getElementById("global-decline-call").onclick = function() {

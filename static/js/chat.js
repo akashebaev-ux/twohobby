@@ -1,6 +1,6 @@
-/* jshint esversion: 11 */
-/* global roomId, currentUser, showCallInvite,
-handleWebRTCOffer, handleWebRTCAnswer, handleIceCandidate */
+/* global roomId, currentUser,
+handleCallAccepted, handleWebRTCOffer,
+handleWebRTCAnswer, handleIceCandidate */
 
 
 const protocol =
@@ -15,6 +15,11 @@ window.chatSocket.onmessage = function(e) {
 
     if (data.type === "call_limit") {
         alert(data.message);
+        return;
+    }
+
+    if (data.type === "call_accept") {
+        handleCallAccepted();
         return;
     }
 
@@ -58,15 +63,9 @@ window.chatSocket.onmessage = function(e) {
         [
             "webrtc_offer",
             "webrtc_answer",
-            "ice_candidate",
-            "call_invite"
+            "ice_candidate"
         ].includes(data.type)
     ) {
-        return;
-    }
-
-    if (data.type === "call_invite") {
-        showCallInvite(data.username);
         return;
     }
 

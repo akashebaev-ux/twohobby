@@ -164,6 +164,44 @@ declineCallBtn.onclick = function() {
     callPanel.classList.add("hidden");
 };
 
+function notifyCallerCallAccepted() {
+    if (
+        sessionStorage.getItem("acceptIncomingCall") === "true"
+    ) {
+        sessionStorage.removeItem("acceptIncomingCall");
+
+        window.chatSocket.send(JSON.stringify({
+            type: "call_accept"
+        }));
+
+        callPanel.classList.remove("hidden");
+
+        document.getElementById("call-status").innerText =
+            "Connecting call...";
+    }
+}
+
+async function handleCallAccepted() {
+    await startWebRTCCall();
+
+    endCallAfterOneMinute();
+
+    const offer = await peerConnection.createOffer();
+
+    await peerConnection.setLocalDescription(offer);
+
+    window.chatSocket.send(JSON.stringify({
+        type: "webrtc_offer",
+        offer: offer
+    }));
+
+    document.getElementById("call-status").innerText =
+        "Calling...";
+}
+
+setTimeout(notifyCallerCallAccepted, 500);
+
+window.handleCallAccepted = handleCallAccepted;
 
 window.handleWebRTCOffer = handleWebRTCOffer;
 window.handleWebRTCAnswer = handleWebRTCAnswer;

@@ -75,6 +75,16 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
                 return
 
+        if data.get("type") == "call_accept":
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    "type": "call_accept",
+                }
+            )
+
+            return
+
         if data.get("type") in [
             "webrtc_offer",
             "webrtc_answer",
@@ -120,6 +130,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
         await self.send(text_data=json.dumps({
             "type": "call_invite",
             "username": event["username"],
+        }))
+
+    async def call_accept(self, event):
+        await self.send(text_data=json.dumps({
+            "type": "call_accept",
         }))
 
     async def webrtc_signal(self, event):
