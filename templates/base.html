@@ -113,7 +113,19 @@
 </div>
 
 {% if user.is_authenticated %}
+
+{% if request.resolver_match.url_name != "landing" %}
+{% if request.resolver_match.url_name != "account_login" %}
+{% if request.resolver_match.url_name != "account_signup" %}
+{% if request.resolver_match.url_name != "account_reset_password" %}
+
 <script src="{% static 'js/global_calls.js' %}"></script>
+
+{% endif %}
+{% endif %}
+{% endif %}
+{% endif %}
+
 {% endif %}
 
 </body>
