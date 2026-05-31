@@ -709,6 +709,7 @@ body:has(.auth-page) .app-wrapper {
 }
 
 
+
 /* Edit profile page */
 .profile-actions {
     display: flex;
@@ -1380,6 +1381,9 @@ a.filter-btn {
         0 14px 40px
         rgba(163,0,136,.25);
 }
+#global-call-panel.hidden {
+    display: none;
+}
 
 #global-call-panel::before {
     content: "📞";
@@ -1594,8 +1598,6 @@ a.filter-btn {
 
 
 /* Buttons */
-
-.dark-mode .theme-toggle-btn,
 .dark-mode .post-action-btn,
 .dark-mode .comment-toggle-btn,
 .dark-mode .heart-btn,
@@ -1606,10 +1608,17 @@ a.filter-btn {
     color: #ff5864;
 }
 
+.dark-mode .theme-toggle-btn {
+    background: transparent;
+    color: white;
+    border: none;
+    box-shadow: none;
+}
+
 /* Scrollbars */
 
 .dark-mode .chat-log::-webkit-scrollbar-track {
-    background: #1e1e1e;
+    background: #121212;
 }
 
 .dark-mode .chat-log::-webkit-scrollbar-thumb {
