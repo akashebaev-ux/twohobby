@@ -172,7 +172,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             caller=self.scope["user"],
             started_at__date=today
         ).count()
-        return calls_today < 10
+        return calls_today < 100
 
     @sync_to_async
     def save_call_log(self):
