@@ -61,15 +61,19 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 return
 
             await self.save_call_log()
+            receiver = await self.get_receiver()
 
-            await self.channel_layer.group_send(
-                self.room_group_name,
-                {
-                    "type": "call_invite",
-                    "username": self.scope["user"].username,
-                }
-            )
-            return
+            if receiver:
+                await self.channel_layer.group_send(
+                    f"user_{receiver.id}",
+                    {
+                        "type": "incoming_call",
+                        "username": self.scope["user"].username,
+                        "room_id": self.room_id,
+                    }
+                )
+
+                return
 
         if data.get("type") in [
             "webrtc_offer",
@@ -92,14 +96,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
         if not is_voice:
             await self.save_message(message)
 
-        await self.channel_layer.group_send(
-            self.room_group_name,
-            {
-                "type": "chat_message",
-                "message": message,
-                "username": username,
-            }
-        )
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    "type": "chat_message",
+                    "message": message,
+                    "username": username,
+                }
+            )
 
     async def chat_message(self, event):
         """Send chat messages to the WebSocket."""
@@ -184,3 +188,46 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 caller=self.scope["user"],
                 receiver=receiver
             )
+
+    @sync_to_async
+    def get_receiver(self):
+        """Get the other participant in the room."""
+
+        room = ChatRoom.objects.get(
+            id=self.room_id
+        )
+
+        return room.users.exclude(
+            id=self.scope["user"].id
+        ).first()
+
+
+class CallConsumer(AsyncWebsocketConsumer):
+    async def connect(self):
+        user = self.scope["user"]
+
+        if user.is_anonymous:
+            await self.close()
+            return
+
+        self.user_group_name = f"user_{user.id}"
+
+        await self.channel_layer.group_add(
+            self.user_group_name,
+            self.channel_name
+        )
+
+        await self.accept()
+
+    async def disconnect(self, close_code):
+        await self.channel_layer.group_discard(
+            self.user_group_name,
+            self.channel_name
+        )
+
+    async def incoming_call(self, event):
+        await self.send(text_data=json.dumps({
+            "type": "incoming_call",
+            "username": event["username"],
+            "room_id": event["room_id"],
+        }))
