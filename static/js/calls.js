@@ -21,7 +21,6 @@ const rtcConfig = {
 };
 
 openCallBtn.onclick = function() {
-    callPanel.classList.remove("hidden");
 
     window.chatSocket.send(JSON.stringify({
         type: "call_invite"
