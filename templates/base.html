@@ -97,5 +97,22 @@
 <script src="{% static 'js/theme.js' %}"></script>
 <script src="{% static 'js/delete-modal.js' %}"></script>
 <script src="{% static 'js/carousel-hover-scroll.js' %}"></script>
+
+<div id="call-panel" class="hidden">
+    <p id="call-status"></p>
+
+    <button id="accept-call">
+        Accept
+    </button>
+
+    <button id="decline-call">
+        Decline
+    </button>
+</div>
+
+{% if user.is_authenticated %}
+<script src="{% static 'js/global_calls.js' %}"></script>
+{% endif %}
+
 </body>
 </html>
