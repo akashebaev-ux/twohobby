@@ -1671,7 +1671,7 @@ a.filter-btn {
 @media screen and (min-width: 1200px) {
 
     .dark-mode .app-wrapper {
-        max-width: 480px;
+        max-width: 520px;
         margin: 0 auto;
 
         box-shadow:
