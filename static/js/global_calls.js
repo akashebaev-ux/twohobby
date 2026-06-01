@@ -1,40 +1,48 @@
 /* jshint esversion: 11 */
 
-const callProtocol =
-    window.location.protocol === "https:" ? "wss://" : "ws://";
+const callPanel = document.getElementById("global-call-panel");
 
-const globalCallSocket = new WebSocket(
-    callProtocol + window.location.host + "/ws/calls/"
-);
+if (callPanel) {
+    const callProtocol =
+        window.location.protocol === "https:" ? "wss://" : "ws://";
 
-globalCallSocket.onmessage = function(e) {
-    const data = JSON.parse(e.data);
+    const globalCallSocket = new WebSocket(
+        callProtocol + window.location.host + "/ws/calls/"
+    );
 
-    console.log("Incoming global call data:", data);
+    window.addEventListener("beforeunload", function() {
+        globalCallSocket.close();
+    });
 
-    if (data.type === "incoming_call") {
-        const callPanel = document.getElementById("global-call-panel");
-        const statusText = document.getElementById("global-call-status");
+    globalCallSocket.onmessage = function(e) {
+        const data = JSON.parse(e.data);
 
-        callPanel.classList.remove("hidden");
+        console.log("Incoming global call data:", data);
 
-        statusText.innerText =
-            `${data.username} is calling you...`;
+        if (data.type === "incoming_call") {
+            const statusText =
+                document.getElementById("global-call-status");
 
-        document.getElementById("global-accept-call").onclick =
-        function() {
+            callPanel.classList.remove("hidden");
 
-            sessionStorage.setItem(
-                "acceptIncomingCall",
-                "true"
-            );
+            statusText.innerText =
+                `${data.username} is calling you...`;
 
-            window.location.href =
-                `/chat/${data.room_id}/`;
-        };
+            document.getElementById("global-accept-call").onclick =
+            function() {
+                sessionStorage.setItem(
+                    "acceptIncomingCall",
+                    "true"
+                );
 
-        document.getElementById("global-decline-call").onclick = function() {
-            callPanel.classList.add("hidden");
-        };
-    }
-};
+                window.location.href =
+                    `/chat/${data.room_id}/`;
+            };
+
+            document.getElementById("global-decline-call").onclick =
+            function() {
+                callPanel.classList.add("hidden");
+            };
+        }
+    };
+}

@@ -98,34 +98,32 @@
 <script src="{% static 'js/delete-modal.js' %}"></script>
 <script src="{% static 'js/carousel-hover-scroll.js' %}"></script>
 
-<div id="global-call-panel" class="hidden">
-    <p id="global-call-status"></p>
-
-    <div class="call-actions">
-        <button id="global-accept-call">
-            📞
-        </button>
-
-        <button id="global-decline-call">
-            ✕
-        </button>
-    </div>
-</div>
-
 {% if user.is_authenticated %}
+    {% if request.resolver_match.url_name != "landing" %}
+        {% if request.resolver_match.url_name != "account_login" %}
+            {% if request.resolver_match.url_name != "account_signup" %}
+                {% if request.resolver_match.url_name != "account_reset_password" %}
 
-{% if request.resolver_match.url_name != "landing" %}
-{% if request.resolver_match.url_name != "account_login" %}
-{% if request.resolver_match.url_name != "account_signup" %}
-{% if request.resolver_match.url_name != "account_reset_password" %}
+                    <div id="global-call-panel" class="hidden">
+                        <p id="global-call-status"></p>
 
-<script src="{% static 'js/global_calls.js' %}"></script>
+                        <div class="call-actions">
+                            <button id="global-accept-call">
+                                📞
+                            </button>
 
-{% endif %}
-{% endif %}
-{% endif %}
-{% endif %}
+                            <button id="global-decline-call">
+                                ✕
+                            </button>
+                        </div>
+                    </div>
 
+                    <script src="{% static 'js/global_calls.js' %}"></script>
+
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    {% endif %}
 {% endif %}
 
 </body>
