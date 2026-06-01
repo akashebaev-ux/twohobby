@@ -414,12 +414,11 @@ Whimsical was used to plan page structure, user flows, and feature relationships
 | Private Messages | Users can send private messages to the post owner/or to the first contact. | ![alt text](assets/screenshots/Private-message-post.png) |
 | Real-time Chat | Chat messages update through WebSockets for a smoother messaging experience. | ![alt text](assets/screenshots/Chat.png) |
 | Delete Confirmation Modal | Users receive a styled confirmation popup before deleting a post or chat. | ![alt text](assets/screenshots/DELETE-CONFIRMATION-MODAL.png) |
-
 | Image Messages | Users can send images in private chat. | ![alt text](assets/screenshots/Chat-img.png) |
 | Call Button | The chat interface includes a call button for communication features. | ![alt text](assets/screenshots/Chat-calls.png) |
-| Incoming Call Notification | Users receive a real-time incoming call notification overlay across the application interface. The notification displays the caller name and provides accept and decline controls for quick interaction. | ![Incoming Call Notification](assets/screenshots/CALL-NOTIFICATION-ON_NEARBY.png) |
-| Chat Call Notification | Incoming calls also appear directly inside the chat interface, allowing users to answer or reject calls without leaving the conversation page. | ![Chat Call Notification](assets/screenshots/CALL-NOTIFICATION-ON_CHAT-PAGE.png) |
-| Call Modal | The private chat interface includes a dedicated call modal with caller information and accept or decline actions to simulate a modern mobile calling experience. | ![Call Modal](assets/screenshots/CHAT_CALL_MODAL.png) |
+| Incoming Call Notification | Users receive a real-time incoming call notification overlay across the application interface. The notification displays the caller name and provides accept and decline controls for quick interaction. | ![alt text](assets/screenshots/CALL-NOTIFICATION-ON_NEARBY.png) |
+| Chat Call Notification | Incoming calls also appear directly inside the chat interface, allowing users to answer or reject calls without leaving the conversation page. | ![alt text](assets/screenshots/CALL-NOTIFICATION-ON_CHAT-PAGE.png) |
+| Call Modal | The private chat interface includes a dedicated call modal with caller information and accept or decline actions to simulate a modern mobile calling experience. | ![alt text](assets/screenshots/CHAT_CALL_MODAL.png) |
 | Block / Unblock Users | Users can block or unblock other users for safety and control. | ![alt text](assets/screenshots/Chat-block.png) |
 | Bottom Navigation | Mobile-style bottom navigation helps users move around the app easily. | ![alt text](assets/screenshots/Chat-navbar.png) |
 | Filter Profiles | Users can filter profiles by gender and age range. | ![alt text](assets/screenshots/Filter.png) |
