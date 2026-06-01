@@ -122,6 +122,7 @@ body {
     border: none;
     background: linear-gradient(135deg, #A30088, #ff9966);
     color: white;
+    font-size: 15px;
     padding: 10px 18px;
     border-radius: 25px;
     text-decoration: none;
@@ -195,7 +196,7 @@ body:has(.auth-page) .app-wrapper {
 
 .nav-link {
     text-align: center;
-    font-size: 12px;
+    font-size: 15px;
     color: #595656;
     text-decoration: none;
     transition: .2s ease;
@@ -243,7 +244,7 @@ body:has(.auth-page) .app-wrapper {
 }
 
 .profile-card p {
-    font-size: 12px;
+    font-size: 15px;
     margin: 5px 0 0;
     font-weight: 600;
     color: #555;
@@ -293,6 +294,7 @@ body:has(.auth-page) .app-wrapper {
 .profile-age {
     color: #595656;
     font-weight: 600;
+    font-size: 15px;
     margin-bottom: 14px;
 }
 
