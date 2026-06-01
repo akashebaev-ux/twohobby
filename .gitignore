@@ -17,3 +17,6 @@ db.sqlite3
 
 env.py
 node_modules/
+
+# Django collected static files
+staticfiles/
