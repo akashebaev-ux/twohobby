@@ -102,6 +102,10 @@ window.chatSocket.onmessage = function(e) {
         return;
     }
 
+    if (data.type !== "chat_message") {
+        return;
+    }
+
     const messageClass =
         data.username === currentUser ? "my-message" : "their-message";
 
