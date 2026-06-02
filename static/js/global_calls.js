@@ -1,8 +1,8 @@
 /* jshint esversion: 11 */
 
-const callPanel = document.getElementById("global-call-panel");
+const globalCallPanel = document.getElementById("global-call-panel");
 
-if (callPanel) {
+if (globalCallPanel) {
     const callProtocol =
         window.location.protocol === "https:" ? "wss://" : "ws://";
 
@@ -23,7 +23,7 @@ if (callPanel) {
             const statusText =
                 document.getElementById("global-call-status");
 
-            callPanel.classList.remove("hidden");
+            globalCallPanel.classList.remove("hidden");
 
             statusText.innerText =
                 `${data.username} is calling you...`;
@@ -41,7 +41,7 @@ if (callPanel) {
 
             document.getElementById("global-decline-call").onclick =
             function() {
-                callPanel.classList.add("hidden");
+                globalCallPanel.classList.add("hidden");
             };
         }
     };
