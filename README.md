@@ -25,27 +25,6 @@ source: [ChatGTP](https://chatgpt.com/)
 
 ---
 
-# Contents
-
-- [Overview](#overview)
-- [Project Focus](#project-focus)
-- [The 5 Planes of UX](#the-5-planes-of-ux)
-  - [1. Strategy](#1-strategy)
-  - [2. Scope](#2-scope)
-  - [3. Structure](#3-structure)
-  - [4. User Stories](#4-user-stories)
-  - [5. Design, Colour Scheme and Wireframes](#5-design-colour-scheme-and-wireframes)
-- [Features](#6-features)
-- [Database Design](#7-database-design)
-- [Agile Development Process](#8-agile-development-process)
-- [Project Structure](#9-project-structure)
-- [Installation](#10-installation)
-- [Testing](#11-testing)
-- [Credits](#12-credits)
-
-
----
-
 ## Project Focus
 
 This project focuses on:
@@ -382,7 +361,9 @@ The project was designed with a mobile-first mindset, as social networking appli
 Whimsical was used to plan page structure, user flows, and feature relationships rather than creating detailed low-fidelity wireframes for every page. Throughout development, some layouts evolved as functionality was added and user experience considerations were refined.
 
 
-
+<img src="assets/screenshots/twohobby-app-flow-wireframe.png"
+     alt="TwoHobby App Flow Wireframe"
+     width="1200">
 
 ---
 
