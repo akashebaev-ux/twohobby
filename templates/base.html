@@ -1,5 +1,6 @@
 {% load static %}
 
+
 {% url "account_login" as login_url %}
 {% url "account_signup" as signup_url %}
 {% url "account_logout" as logout_url %}
@@ -13,6 +14,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}TwoHobby{% endblock %}</title>
+
+    <link rel="icon"
+      type="image/webp"
+      sizes="32x32"
+      href="{% static 'images/favicon-32.webp' %}">
+
+    <link rel="icon"
+        type="image/webp"
+        sizes="192x192"
+        href="{% static 'images/favicon-192.webp' %}">
+
+    <link rel="icon"
+        type="image/webp"
+        sizes="512x512"
+        href="{% static 'images/favicon-512.webp' %}">
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
