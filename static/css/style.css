@@ -473,6 +473,7 @@ body:has(.auth-page) .app-wrapper {
 
 .chat-message p {
     margin: 0;
+    overflow-wrap: anywhere;
 }
 
 .chat-message span {
@@ -1009,6 +1010,8 @@ a.filter-btn {
 .like-post-body {
     margin: 5px 0 10px;
     line-height: 1.4;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .like-post-actions {
