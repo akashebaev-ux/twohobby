@@ -1,4 +1,5 @@
 /* jshint esversion: 11 */
+/* global currentUser */
 
 const globalCallPanel = document.getElementById("global-call-panel");
 
@@ -19,7 +20,10 @@ if (globalCallPanel) {
 
         console.log("Incoming global call data:", data);
 
-        if (data.type === "incoming_call") {
+        if (
+            data.type === "incoming_call" &&
+            data.username !== currentUser
+        ) {
             const statusText =
                 document.getElementById("global-call-status");
 

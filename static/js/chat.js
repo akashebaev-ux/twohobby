@@ -11,6 +11,25 @@ window.chatSocket = new WebSocket(
     protocol + window.location.host + "/ws/chat/" + roomId + "/"
 );
 
+window.chatSocket.onopen = function() {
+
+    if (sessionStorage.getItem("acceptIncomingCall") === "true") {
+
+        sessionStorage.removeItem("acceptIncomingCall");
+
+        document.getElementById("call-panel")
+            .classList.remove("hidden");
+
+        document.getElementById("call-status").innerText =
+            "Connecting...";
+
+        window.chatSocket.send(JSON.stringify({
+            type: "call_accept"
+        }));
+    }
+};
+
+
 window.chatSocket.onmessage = function(e) {
     const data = JSON.parse(e.data);
 
