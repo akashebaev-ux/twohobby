@@ -19,9 +19,19 @@ The platform is designed to encourage genuine social interaction beyond traditio
 
 <img src="assets/screenshots/Responsive.png">
 
-source: [ChatGTP](https://chatgpt.com/)
+source: [ChatGPT](https://chatgpt.com/)
 
 **NOTE**: Due to security and browser restrictions across different devices, screenshots of the application were captured separately on desktop, tablet, and mobile devices, then professionally combined into a single responsive showcase image using ChatGPT.
+
+---
+
+## Project Rationale
+
+The idea behind TwoHobby was to create a platform that combines social networking, hobby-based discovery, and real-time communication in a single application.
+
+Many existing platforms focus primarily on dating or general social media interaction. TwoHobby was designed to encourage more meaningful connections by allowing users to discover people through shared interests, communicate privately, and interact within smaller social circles.
+
+This project also provided an opportunity to explore advanced Django concepts such as WebSockets, Django Channels, Redis, real-time messaging, and WebRTC-based communication.
 
 ---
 
@@ -575,9 +585,29 @@ As development progressed, User Stories were moved across the Kanban board betwe
 | ![alt text](assets/screenshots/Story-points.png) | Issue history and completed tasks |
 
 
+---
 
+## Challenges Faced
 
+During development, several technical challenges were encountered:
 
+- Implementing real-time chat using Django Channels and Redis.
+- Managing WebSocket connections across multiple users.
+- Creating a call system using WebRTC.
+- Handling media uploads efficiently through Cloudinary.
+- Maintaining responsive layouts across a wide range of mobile devices.
+- Deploying a Channels-based application on Heroku.
+
+---
+
+## Performance Optimizations
+
+- WebP image format used to reduce file sizes.
+- Cloudinary automatic image optimization.
+- Redis used to improve real-time communication performance.
+- WhiteNoise used for efficient static file delivery.
+- Mobile-first design reducing unnecessary page complexity.
+- Lazy loading applied where appropriate.
 
 
 ---
@@ -676,6 +706,9 @@ os.environ.setdefault("SECRET_KEY", "your_secret_key")
 os.environ.setdefault("DATABASE_URL", "your_database_url")
 os.environ.setdefault("CLOUDINARY_URL", "your_cloudinary_url")
 os.environ.setdefault("REDIS_URL", "redis://127.0.0.1:6379")
+
+os.environ.setdefault("EMAIL_HOST_USER", "your_email")
+os.environ.setdefault("EMAIL_HOST_PASSWORD", "your_app_password")
 ```
 
 ---
@@ -729,9 +762,10 @@ podman run -d \
 ### Deployment
 
 The application is deployed using:
-- [Heroku](https://dashboard.heroku.com/apps/twohobby)
+- [Heroku](https://www.heroku.com/)
 - [Cloudinary](https://cloudinary.com/)
-- [PostgreSQL](https://dbs.ci-dbs.net/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Redis](https://redis.io/)
 
 ### Heroku Deployment
 
@@ -740,6 +774,72 @@ heroku login
 heroku create your-app-name
 git push heroku main
 ```
+
+### Heroku Configuration Variables
+
+The following environment variables are required to run the project locally or in production:
+
+| Variable | Purpose |
+|-----------|-----------|
+| SECRET_KEY | Django secret key |
+| DATABASE_URL | PostgreSQL database connection |
+| CLOUDINARY_URL | Cloudinary media storage |
+| REDIS_URL | Redis channel layer for Django Channels |
+| EMAIL_HOST_USER | Email account used for password recovery |
+| EMAIL_HOST_PASSWORD | Email application password |
+
+Example:
+
+```python
+os.environ.setdefault("SECRET_KEY", "your_secret_key")
+os.environ.setdefault("DATABASE_URL", "your_database_url")
+os.environ.setdefault("CLOUDINARY_URL", "your_cloudinary_url")
+os.environ.setdefault("REDIS_URL", "your_redis_url")
+os.environ.setdefault("EMAIL_HOST_USER", "your_email")
+os.environ.setdefault("EMAIL_HOST_PASSWORD", "your_email_password")
+```
+---
+
+### Cloudinary
+
+Cloudinary is used to store and deliver user-uploaded media, including profile images and chat images.
+
+Using Cloudinary prevents media files from being lost during deployments and provides automatic image optimisation and delivery through a global CDN.
+
+The following environment variable is required:
+
+```python
+CLOUDINARY_URL=your_cloudinary_url
+
+```
+
+or
+
+```
+os.environ.setdefault(
+    "CLOUDINARY_URL",
+    "your_cloudinary_url"
+)
+
+```
+---
+### Email Service
+
+TwoHobby uses Gmail SMTP to send account-related emails, including:
+
+- Password reset emails
+- Password recovery links
+- Account verification messages (future implementation)
+
+Required environment variables:
+
+```python
+os.environ.setdefault("EMAIL_HOST_USER", "your_email")
+os.environ.setdefault("EMAIL_HOST_PASSWORD", "your_app_password")
+```
+
+
+
 
 ---
 
@@ -761,11 +861,13 @@ Connected Users
 
 ### Security Features
 
-- CSRF protection
-- Secure authentication
-- User validation
-- Private chat access control
-- Protected WebSocket connections
+- CSRF protection enabled through Django.
+- Authentication handled through Django Allauth.
+- Passwords securely hashed by Django.
+- Environment variables used for sensitive credentials.
+- Protected WebSocket routes for authenticated users.
+- User blocking system for privacy and safety.
+- Restricted access to profile editing and private messaging.
 
 ---
 
@@ -783,27 +885,18 @@ Connected Users
 ---
 
 ## 11. Testing
-Detailed testing documentation can be found in [TESTING.md](TESTING.md).
+Detailed testing documentation can be found in [TESTING.md](TESTING.md), including:
 
-**Running Chat Tests**
+- Browser compatibility testing (Google Chrome, Firefox and Safari)
+- Automated unit testing using Django's built-in TestCase framework
+- Python unit test results for models, views, forms, URL routing, and authentication functionality
+- Accessibility testing and accessibility considerations
+- Responsive design testing across mobile, tablet, and desktop devices
+- Validator testing (HTML, CSS, JavaScript, and Python)
+- Manual feature testing and user acceptance testing
 
-The production application uses Redis as the Django Channels backend to support real-time WebSocket communication between users.
+For detailed screenshots, test results, and validation evidence, please refer to the dedicated TESTING.md file.
 
-However, during automated local testing, the Redis configuration may cause issues because:
-
-- the Redis server may not be running locally
-- SSL-based Redis providers (such as Heroku Redis or Upstash) can produce connection errors during tests
-- WebSocket consumer tests do not require an external Redis service to validate application logic
-
-For this reason, Django’s built-in in-memory channel layer should be used temporarily during testing:
-
-```python
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer",
-    },
-}
-```
 
 ### Manual Testing
 - Authentication testing
@@ -891,6 +984,8 @@ CHANNEL_LAYERS = {
 - [Cloudinary](https://cloudinary.com/) — Media hosting
 - [PostgreSQL](https://www.postgresql.org/) — Production database
 - [Redis](https://redis.io/) — Real-time message broker for WebSockets and Channels
+
+- [Gmail SMTP](https://support.google.com/mail/) — Used for password reset and account recovery emails.
 
 ---
 
