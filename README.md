@@ -998,6 +998,7 @@ For detailed screenshots, test results, and validation evidence, please refer to
 ### Inspiration
 - Badoo
 - Tinder
+- Threads
 - Modern social networking platforms
 
 ---
@@ -1018,7 +1019,9 @@ This project is for educational and portfolio purposes.
 
 ## Acknowledgements
 
-I would like to express my sincere gratitude to **Tim Nelson** for being my mentor and for his guidance throughout this project.
+I would like to extend my heartfelt thanks to **Tim Nelson** for his outstanding mentorship and unwavering support throughout this project. His outstanding professionalism, world-class expertise, guidance, patience, and valuable advice helped me improve every aspect of the application, from its technical implementation to its overall user experience. Tim's feedback, attention to detail, and encouragement played a significant role in my learning journey, continually challenging me to raise the standard of my work. I am deeply grateful for the time, knowledge, and dedication he invested in helping me develop both this project and my skills as a developer. His mentorship has been invaluable, and I sincerely appreciate the positive impact he has had on both this project and my growth as a software developer.
+
+
 
 Special thanks to the **Code Institute** for providing the knowledge, resources, and learning environment that made this project possible.
 
