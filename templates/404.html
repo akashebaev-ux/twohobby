@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="error-page">
+    <div class="error-card">
+        <img
+            src="{% static 'images/broken-heart.webp' %}"
+            alt="Broken heart"
+            class="error-heart"
+        >
+
+        <h1>404</h1>
+        <h2>Page Not Found</h2>
+
+        <p>
+            Oops! This page seems to be broken or no longer exists.
+        </p>
+
+        <a href="{% url 'landing' %}" class="error-btn">
+            Go Home
+        </a>
+    </div>
+</section>
+{% endblock %}

@@ -1745,3 +1745,59 @@ a.filter-btn {
         flex: 1 1 100%;
     }
 }
+
+
+
+/* 404 page */
+
+.error-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: radial-gradient(circle at top, #3a1230, #111);
+    color: #fff;
+    text-align: center;
+}
+
+.error-card {
+    max-width: 420px;
+    width: 100%;
+    padding: 2rem;
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 0 40px rgba(255, 51, 140, 0.3);
+}
+
+.error-heart {
+    width: 220px;
+    max-width: 80%;
+    margin-bottom: 1rem;
+}
+
+.error-card h1 {
+    font-size: 5rem;
+    margin: 0;
+    color: #ff4f8b;
+}
+
+.error-card h2 {
+    font-size: 1.8rem;
+    margin: 0.5rem 0;
+}
+
+.error-card p {
+    color: #ccc;
+    margin-bottom: 1.5rem;
+}
+
+.error-btn {
+    display: inline-block;
+    padding: 0.8rem 1.8rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #c2188f, #ff7b5c);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+}

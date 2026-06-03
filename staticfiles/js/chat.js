@@ -1,6 +1,7 @@
 /* jshint esversion: 11 */
-/* global roomId, currentUser, showCallInvite,
-handleWebRTCOffer, handleWebRTCAnswer, handleIceCandidate */
+/* global roomId, currentUser,
+handleCallAccepted, handleWebRTCOffer,
+handleWebRTCAnswer, handleIceCandidate */
 
 
 const protocol =
@@ -10,11 +11,52 @@ window.chatSocket = new WebSocket(
     protocol + window.location.host + "/ws/chat/" + roomId + "/"
 );
 
+window.chatSocket.onopen = function() {
+
+    if (sessionStorage.getItem("acceptIncomingCall") === "true") {
+
+        sessionStorage.removeItem("acceptIncomingCall");
+
+        document.getElementById("call-panel")
+            .classList.remove("hidden");
+
+        document.getElementById("call-status").innerText =
+            "Connecting...";
+
+        window.chatSocket.send(JSON.stringify({
+            type: "call_accept"
+        }));
+    }
+};
+
+
 window.chatSocket.onmessage = function(e) {
     const data = JSON.parse(e.data);
 
     if (data.type === "call_limit") {
         alert(data.message);
+        return;
+    }
+
+    if (
+        data.type === "incoming_call" &&
+        data.username &&
+        data.username !== currentUser
+    ) {
+        document.getElementById("call-panel")
+            .classList.remove("hidden");
+
+        document.getElementById("call-status").innerText =
+            `${data.username} is calling...`;
+
+        return;
+    }
+
+    if (
+        data.type === "call_accept" &&
+        data.username !== currentUser
+    ) {
+        handleCallAccepted();
         return;
     }
 
@@ -58,15 +100,9 @@ window.chatSocket.onmessage = function(e) {
         [
             "webrtc_offer",
             "webrtc_answer",
-            "ice_candidate",
-            "call_invite"
+            "ice_candidate"
         ].includes(data.type)
     ) {
-        return;
-    }
-
-    if (data.type === "call_invite") {
-        showCallInvite(data.username);
         return;
     }
 
@@ -82,6 +118,10 @@ window.chatSocket.onmessage = function(e) {
 
     if (data.type === "ice_candidate") {
         handleIceCandidate(data.candidate);
+        return;
+    }
+
+    if (data.type !== "chat_message") {
         return;
     }
 
