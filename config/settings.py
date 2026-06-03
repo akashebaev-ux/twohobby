@@ -11,6 +11,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 import os
+import sys
 from pathlib import Path
 import dj_database_url
 
@@ -212,3 +213,24 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+# For testing purposes only
+
+if "test" in sys.argv:
+    STORAGES = {
+        "default": {
+            "BACKEND":
+            "cloudinary_storage.storage.MediaCloudinaryStorage",
+        },
+        "staticfiles": {
+            "BACKEND":
+            "django.contrib.staticfiles.storage.StaticFilesStorage",
+        },
+    }
+
+    CHANNEL_LAYERS = {
+        "default": {
+            "BACKEND":
+            "channels.layers.InMemoryChannelLayer",
+        },
+    }
