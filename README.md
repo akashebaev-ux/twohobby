@@ -527,6 +527,22 @@ GitHub Projects was used as an Agile tool throughout the development of TwoHobby
 
 ![alt text](assets/screenshots/User-stories-progress.png)
 
+## Backlog and Future Implementations
+
+Several features were identified for future development and added to the project backlog. These features were outside the scope of the current release but remain planned for future iterations of the platform.
+
+Examples include:
+
+- Online Status
+- Video Calls
+- Verified Profiles
+- Advanced Profile Search
+
+The backlog helped prioritise core functionality while maintaining a clear roadmap for future improvements.
+
+![GitHub Project Board](assets/screenshots/agile-board.png)
+
+
 ### GitHub Issues
 
 GitHub Issues was used as an additional Agile tool throughout the development of TwoHobby. User Stories, feature tasks, bug fixes, and milestone objectives were managed and tracked using GitHub Issues to organise the development process and monitor progress.
