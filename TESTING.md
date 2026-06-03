@@ -270,3 +270,33 @@ The application was tested manually on both desktop and mobile devices to ensure
 | Empty Likes Post | Attempted to submit an empty post | Form should prevent submission and display a warning message | Validation message displayed correctly | ✅ Pass | ![Empty Post](assets/screenshots/MANUAL-TESTING-likes-post-empty-input.png) |
 | Empty Chat Message | Attempted to send an empty chat message | System should prevent submission | Empty message was not sent | ✅ Pass | ![Empty Message](assets/screenshots/MANUAL-TESTING-no-empty-messages-send.png) |
 | Image Upload and WebP Conversion | Uploaded JPEG and PNG images through chat | Images should be automatically converted to WebP format to reduce storage usage and display correctly in chat | Images were converted to WebP format and displayed successfully | ✅ Pass | ![Image Upload](assets/screenshots/MANUAL-TESTING-image-uploaded-in-webp.png) |
+
+
+
+
+
+
+---
+
+
+### Browser Compatibility Testing
+
+To ensure a consistent user experience, TwoHobby was tested on the latest versions of Safari, Google Chrome, and Mozilla Firefox. The application's layout, navigation, profile interactions, authentication system, chat functionality, likes system, filtering features, and responsive design were verified across all tested browsers. No significant browser-specific issues were identified during testing.
+
+| Browser | Screenshot | Notes |
+|---|---|---|
+| Safari | ![Safari browser test](assets/screenshots/Safari-check_NO_ERRORS.png) | Successfully tested with no issues found. |
+| Google Chrome | ![Chrome browser test](assets/screenshots/Chrome-check_NO_ERRORS.png) | Successfully tested with no issues found. |
+| Firefox | ![Firefox browser test](assets/screenshots/FireFox-check_NO_ERRORS.png) | Successfully tested with no issues found. |
+
+
+
+
+### Mobile Device Compatibility Testing
+
+The application was tested on multiple physical iPhone devices to verify responsive design, navigation, profile browsing, filtering functionality, and overall usability across different screen sizes. All core features operated as expected without significant layout or functionality issues.
+
+| Device | Screenshot | Notes |
+|---|---|---|
+| iPhone 16 Pro Max | ![iPhone 16 Pro Max](assets/screenshots/iPhone16ProMax-check_NO_ERRORS.jpeg) | Successfully tested on a physical device. Navigation, profile cards, filtering, and responsive layout functioned correctly. |
+| iPhone 12 Pro | ![iPhone 12 Pro](assets/screenshots/iPhone12Pro-check_NO_ERRORS.jpeg) | Successfully tested on a physical device. Layout, navigation, profile browsing, and bottom navigation remained fully responsive and functional. |
