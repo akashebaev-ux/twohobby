@@ -379,6 +379,7 @@ Whimsical was used to plan page structure, user flows, and feature relationships
 | Login | Existing users can log in and access protected pages. | ![alt text](assets/screenshots/login.png) |
 | Password reset | Existing users can reset their password to regain access to their protected profile page. | ![alt text](assets/screenshots/Password-reset.png) |
 | Success page | The success page informs users that their password reset request has been submitted successfully. | ![alt text](assets/screenshots/Success-page.png) |
+| Password Reset Email | The system sends a secure password reset email containing a time-sensitive recovery link. This allows users to safely reset their password and regain access to their account. | ![alt text](assets/screenshots/PASSWORD_EMAIL_RECOVERY.png) |
 | Logout | Logged-in users can securely log out using the logout button on their profile page. | ![alt text](assets/screenshots/logout.png) |
 | Responsive Layout | The website is designed to work on desktop and tablet devices, but mainly for mobile screens. | ![alt text](assets/screenshots/ipadmini.png) |
 | Dark / Light Mode | Users can switch between light and dark mode for a better viewing experience. | ![alt text](assets/screenshots/Nearby.png)|
