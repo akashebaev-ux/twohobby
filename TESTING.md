@@ -163,15 +163,6 @@ After applying the necessary corrections, every Python file successfully passed 
 | [`profiles/urls.py`](profiles/urls.py) | CI Python Linter | <img src="assets/screenshots/PROFILES_urls.py_ERRORS.png" width="350"> | Missing newline at end of file fixed |
 | [`profiles/urls.py`](profiles/urls.py) | CI Python Linter | <img src="assets/screenshots/PROFILES_urls.py_NO_ERRORS.png" width="350"> | No errors found |
 | [`profiles/views.py`](profiles/views.py) | CI Python Linter | <img src="assets/screenshots/PROFILES_views.py.png" width="350"> | No errors found |
-
----
-
-### Python tests PEP8
-
----
-
-| File Location | Validator | Screenshot | Result |
-|---|---|---|---|
 | [`chat/tests/test_consumers.py`](chat/tests/test_consumers.py) | CI Python Linter | <img src="assets/screenshots/Chat_test-consumers_No_Errors.png" width="350"> | No errors found |
 | [`chat/tests/test_models.py`](chat/tests/test_models.py) | CI Python Linter | <img src="assets/screenshots/Chat_test-models_No_Errors.png" width="350"> | No errors found |
 | [`chat/tests/test_views.py`](chat/tests/test_views.py) | CI Python Linter | <img src="assets/screenshots/Chat_test-views_No_Errors.png" width="350"> | No errors found |
@@ -181,7 +172,39 @@ After applying the necessary corrections, every Python file successfully passed 
 | [`profiles/tests/test_models.py`](profiles/tests/test_models.py) | CI Python Linter | <img src="assets/screenshots/Profile_test_models_No_Errors.png" width="350"> | No errors found |
 | [`profiles/tests/test_views.py`](profiles/tests/test_views.py) | CI Python Linter | <img src="assets/screenshots/Profile_test_views_No_Errors.png" width="350"> | No errors found |
 
+---
+### Python Unit Testing
 
+The application was tested using Django's built-in testing framework. Unit tests were created for the Chat, Matches, and Profiles applications to verify models, views, forms, and WebSocket consumer functionality.
+
+| Application | Test Command | Screenshot | Result |
+|---|---|---|---|
+| Chat | `python manage.py test chat -v 2` | <img src="assets/screenshots/CHAT_UNITTEST_3.png" width="350"> | 16 tests passed successfully |
+| Matches | `python manage.py test matches -v 2` | <img src="assets/screenshots/MATCHES_UNITTEST_3.png" width="350"> | 10 tests passed successfully |
+| Profiles | `python manage.py test profiles -v 2` | <img src="assets/screenshots/PROFILES_UNITTEST_3.png" width="350"> | 10 tests passed successfully |
+
+#### Test Coverage
+
+**Chat Application**
+- Model tests
+- View tests
+- WebSocket consumer tests
+- Authentication and access control tests
+
+**Matches Application**
+- Model tests
+- Like functionality tests
+- Block and unblock user tests
+- View tests
+
+**Profiles Application**
+- Form validation tests
+- Model tests
+- Profile view tests
+- Profile update functionality tests
+
+
+---
 
 
 
