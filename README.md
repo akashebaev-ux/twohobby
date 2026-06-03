@@ -403,6 +403,9 @@ Whimsical was used to plan page structure, user flows, and feature relationships
 | Block / Unblock Users | Users can block or unblock other users for safety and control. | ![alt text](assets/screenshots/Chat-block.png) |
 | Bottom Navigation | Mobile-style bottom navigation helps users move around the app easily. | ![alt text](assets/screenshots/Chat-navbar.png) |
 | Filter Profiles | Users can filter profiles by gender and age range. | ![alt text](assets/screenshots/Filter.png) |
+| Custom 404 Page | A custom-designed error page helps users navigate back to the platform when a requested page cannot be found. | ![404 Error Page](assets/screenshots/404_ERROR_PAGE.png) |
+| Password Change | Registered users can securely update their account password through a dedicated password management page. | ![Password Change](assets/screenshots/PASSWORD_CHANGE.png) |
+| Password Change Confirmation | Users receive confirmation after successfully changing their password, ensuring clear feedback and improved user experience. | ![Password Change Success](assets/screenshots/PASSWORD_CHANGE_SUCCESS_PAGE.png) |
 | Admin Panel | Site admins can manage users, profiles, posts, comments, and other app content through Django admin. | ![alt text](assets/screenshots/Admin.png) |
 
 ### Future Features
