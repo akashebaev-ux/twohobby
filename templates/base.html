@@ -135,7 +135,7 @@
                     </div>
 
                     <script>
-                        const currentUser = "{{ request.user.username|escapejs }}";
+                        window.currentUser = "{{ request.user.username|escapejs }}";
                     </script>
 
                     <script src="{% static 'js/global_calls.js' %}"></script>
