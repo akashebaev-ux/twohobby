@@ -963,7 +963,7 @@ For detailed screenshots, test results, and validation evidence, please refer to
 - HTML5
 - CSS3
 - JavaScript (ES6+)
-- Responsive testing
+- Responsive design principles
 - WebSockets for real-time chat and calling features
 - Mobile-first interface inspired by platforms such as Threads, WhatsApp, Tinder, and Badoo
 
@@ -990,11 +990,27 @@ For detailed screenshots, test results, and validation evidence, please refer to
 
 ---
 
-### Development Tools & Educational Resources
+### Development Tools & Resources
 
-- [Git](https://git-scm.com/) & [GitHub](https://github.com/) — Version control and project management
-- [Visual Studio Code](https://code.visualstudio.com/) — Main development environment
-- [ChatGPT](https://chatgpt.com/) — Used for debugging, fixing errors, learning new concepts, improving code structure, and educational purposes throughout the development process.
+| Tool | Purpose |
+|--------|---------|
+| [Git](https://git-scm.com/) | Version control (`git add`, `git commit`, `git push`). |
+| [GitHub](https://github.com/) | Secure online code storage and Agile project management. |
+| [Visual Studio Code](https://code.visualstudio.com/) | Local development environment (IDE). |
+| [Chrome DevTools](https://developer.chrome.com/docs/devtools/) | Debugging, testing, and performance inspection. |
+| [JSHint](https://jshint.com/) | JavaScript code validation. |
+| [W3C HTML Validator](https://validator.w3.org/) | HTML validation. |
+| [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) | CSS validation. |
+| [CI Python Linter](https://pep8ci.herokuapp.com/) | Python code validation and PEP8 compliance. |
+| [ChatGPT](https://chatgpt.com/) | Learning concepts, debugging, documentation assistance, and project planning. |
+| [dbdiagram.io](https://dbdiagram.io/) | Entity Relationship Diagram (ERD) creation. |
+| [Whimsical](https://whimsical.com/) | User flows, planning, and wireframes. |
+| [Markdown Live Preview Editor](https://markdown.2bn.dev/) | README preview and Markdown validation. |
+| [Coolors](https://coolors.co/) | Colour palette generation and accessibility improvements. |
+| [Image Color Picker](https://imagecolorpicker.com/) | Colour extraction and refinement from the UI design. |
+
+
+---
 
 ### Inspiration
 - Badoo
