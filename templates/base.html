@@ -53,6 +53,17 @@
         </header>
     {% endblock %}
 
+    <!-- Django Messages -->
+    {% if messages %}
+    <div id="alerts">
+        {% for msg in messages %}
+            <div class="site-message {{ msg.tags }}">
+                {{ msg }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
     <!-- Main Content -->
     {% block page_wrapper %}
         <main class="content">
@@ -113,6 +124,7 @@
 <script src="{% static 'js/theme.js' %}"></script>
 <script src="{% static 'js/delete-modal.js' %}"></script>
 <script src="{% static 'js/carousel-hover-scroll.js' %}"></script>
+<script src="{% static 'js/messages.js' %}"></script>
 
 {% if user.is_authenticated %}
     {% if request.resolver_match.url_name != "landing" %}

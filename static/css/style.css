@@ -1373,6 +1373,41 @@ a.filter-btn {
     border: 0;
 }
 
+/* Django messages */
+
+#alerts {
+    position: fixed;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 24px);
+    max-width: 420px;
+    z-index: 99998;
+}
+
+.site-message {
+    padding: 16px 20px;
+    margin-bottom: 10px;
+    border-radius: 26px;
+    color: white;
+    text-align: center;
+    font-weight: 600;
+    background: linear-gradient(135deg, #A30088, #ff9966);
+    box-shadow: 0 14px 40px rgba(163,0,136,.25);
+}
+
+.site-message.success {
+    background: linear-gradient(135deg, #28a745, #34d399);
+}
+
+.site-message.error {
+    background: linear-gradient(135deg, #dc3545, #ff6b6b);
+}
+
+.site-message.warning {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+}
+
 /* Global incoming call */
 
 #global-call-panel {
@@ -1804,4 +1839,22 @@ a.filter-btn {
     color: #fff;
     text-decoration: none;
     font-weight: 700;
+}
+
+
+/* Force all messages to stay green */
+
+.site-message,
+.dark-mode .site-message,
+.site-message.success,
+.site-message.error,
+.site-message.warning,
+.site-message.info {
+    background: linear-gradient(
+        135deg,
+        #28a745,
+        #34d399
+    ) !important;
+
+    color: white !important;
 }
