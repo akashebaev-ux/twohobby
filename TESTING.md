@@ -14,19 +14,19 @@ I used the recommended HTML W3C Validator to validate all HTML files throughout 
 
 | Directory | File Location | Validator | Screenshot | Notes |
 |---|---|---|---|---|
-| `templates` | [`templates/landing.html`](templates/landing.html) | Link to validator | <img src="assets/screenshots/Initial HTML errors/Landing_page_No_Errors.png" width="600"> | No errors found |
-| `templates` | [`templates/account/password_reset.html`](templates/account/password_reset.html) | Link to validator | <img src="assets/screenshots/Initial HTML errors/RESET_PASSWORD_NO_ERRORS.png" width="600"> | No errors found |
-| `templates` | [`templates/success.html`](templates/success.html) | Link to validator | <img src="assets/screenshots/Initial HTML errors/PASSWORD_RESET_SUCCESS_PAGE_NO_ERRORS.png" width="600"> | No errors found |
-| `nearby` | [`profiles/templates/profiles/nearby.html`](profiles/templates/profiles/nearby.html) | Link to validator | <img src="assets/screenshots/Initial HTML errors/Main_nearby_page_No_ERRORS.png" width="600"> | No errors found |
-| `encounters` | [`matches/templates/matches/encounters.html`](matches/templates/matches/encounters.html) | Link to validator | <img src="assets/screenshots/Initial HTML errors/Encounters_html_page_No_Errors.png" width="600"> | No errors found |
-| `chat` | [`chat/templates/chat/messages.html`](chat/templates/chat/messages.html) | Link to validator | <img src="assets/screenshots/Initial HTML errors/Chat_list_html_No_Errors.png" width="600"> | No errors found |
-| `chat` | [`chat/templates/chat/chat_room.html`](chat/templates/chat/chat_room.html) | Link to validator | <img src="assets/screenshots/Initial HTML errors/Chat_room_html_No_Errors.png" width="600"> | No errors found |
-| `profiles` | [`profiles/templates/profiles/profile_detail.html`](profiles/templates/profiles/profile_detail.html) | Link to validator | <img src="assets/screenshots/Initial HTML errors/My_Profile_No_Errors.png" width="600"> | No errors found |
-| `profiles` | [`profiles/templates/profiles/edit_profile.html`](profiles/templates/profiles/edit_profile.html) | Link to validator | <img src="assets/screenshots/Initial HTML errors/Profils_Details_page_No_Erros.png" width="600"> | No errors found |
-| `likes` | [`matches/templates/matches/likes.html`](matches/templates/matches/likes.html) | Link to validator | <img src="assets/screenshots/Initial HTML errors/Matches_likes_No_Errors.png" width="600"> | No errors found |
-| `templates` | [`templates/account/signup.html`](templates/account/signup.html) | Link to validator | <img src="assets/screenshots/Initial HTML errors/SignUp_registration_page_No_Errors.png" width="600"> | No errors found |
-| `templates` | [`templates/account/login.html`](templates/account/login.html) | Link to validator | <img src="assets/screenshots/Initial HTML errors/Login_Page_No_Errors.png" width="600"> | No errors found |
-| `templates` | [`templates/account/logout.html`](templates/account/logout.html) | Link to validator | <img src="assets/screenshots/Initial HTML errors/My_Profile_No_Errors.png" width="600"> | No errors found |
+| `templates` | [`templates/landing.html`](templates/landing.html) | HTML W3C Validator | <img src="assets/screenshots/Initial HTML errors/Landing_page_No_Errors.png" width="600"> | No errors found |
+| `templates` | [`templates/account/password_reset.html`](templates/account/password_reset.html) | HTML W3C Validator | <img src="assets/screenshots/Initial HTML errors/RESET_PASSWORD_NO_ERRORS.png" width="600"> | No errors found |
+| `templates` | [`templates/success.html`](templates/success.html) | HTML W3C Validator | <img src="assets/screenshots/Initial HTML errors/PASSWORD_RESET_SUCCESS_PAGE_NO_ERRORS.png" width="600"> | No errors found |
+| `nearby` | [`profiles/templates/profiles/nearby.html`](profiles/templates/profiles/nearby.html) | HTML W3C Validator | <img src="assets/screenshots/Initial HTML errors/Main_nearby_page_No_ERRORS.png" width="600"> | No errors found |
+| `encounters` | [`matches/templates/matches/encounters.html`](matches/templates/matches/encounters.html) | HTML W3C Validator | <img src="assets/screenshots/Initial HTML errors/Encounters_html_page_No_Errors.png" width="600"> | No errors found |
+| `chat` | [`chat/templates/chat/messages.html`](chat/templates/chat/messages.html) | HTML W3C Validator | <img src="assets/screenshots/Initial HTML errors/Chat_list_html_No_Errors.png" width="600"> | No errors found |
+| `chat` | [`chat/templates/chat/chat_room.html`](chat/templates/chat/chat_room.html) | HTML W3C Validator | <img src="assets/screenshots/Initial HTML errors/Chat_room_html_No_Errors.png" width="600"> | No errors found |
+| `profiles` | [`profiles/templates/profiles/profile_detail.html`](profiles/templates/profiles/profile_detail.html) | HTML W3C Validator | <img src="assets/screenshots/Initial HTML errors/My_Profile_No_Errors.png" width="600"> | No errors found |
+| `profiles` | [`profiles/templates/profiles/edit_profile.html`](profiles/templates/profiles/edit_profile.html) | HTML W3C Validator | <img src="assets/screenshots/Initial HTML errors/Profils_Details_page_No_Erros.png" width="600"> | No errors found |
+| `likes` | [`matches/templates/matches/likes.html`](matches/templates/matches/likes.html) | HTML W3C Validator | <img src="assets/screenshots/Initial HTML errors/Matches_likes_No_Errors.png" width="600"> | No errors found |
+| `templates` | [`templates/account/signup.html`](templates/account/signup.html) | HTML W3C Validator | <img src="assets/screenshots/Initial HTML errors/SignUp_registration_page_No_Errors.png" width="600"> | No errors found |
+| `templates` | [`templates/account/login.html`](templates/account/login.html) | HTML W3C Validator | <img src="assets/screenshots/Initial HTML errors/Login_Page_No_Errors.png" width="600"> | No errors found |
+| `templates` | [`templates/account/logout.html`](templates/account/logout.html) | HTML W3C Validator | <img src="assets/screenshots/Initial HTML errors/My_Profile_No_Errors.png" width="600"> | No errors found |
 ---
 
 ## Initial Validation Errors and Fixes
@@ -53,7 +53,7 @@ One validation error was also identified and corrected during development.
 
 ### Initial CSS Validation Error
 
-<img src="assets/screenshots/CSS_ERRORS.png" width="800">
+<img src="assets/screenshots/CSS_ERRORS.png" width="400">
 
 | Line | Error | Fix Applied |
 |---|---|---|
@@ -65,22 +65,35 @@ One validation error was also identified and corrected during development.
 
 The remaining warnings are related to vendor-specific extensions such as:
 
-- `::-webkit-scrollbar`
-- `::-webkit-scrollbar-thumb`
-- `::-webkit-scrollbar-track`
-- `-webkit-overflow-scrolling`
-- `::-webkit-file-upload-button`
-- `-webkit-mask`
+| Line | Warning | Reason |
+|------|----------|---------|
+| 446 | `::-webkit-scrollbar` is a vendor extended pseudo-element | Used to style custom scrollbars in WebKit browsers. |
+| 451 | `-webkit-overflow-scrolling` is a vendor extension | Enables smooth scrolling on iOS devices. |
+| 455 | `::-webkit-scrollbar` is a vendor extended pseudo-element | Used for custom scrollbar styling. |
+| 459 | `::-webkit-scrollbar-track` is a vendor extended pseudo-element | Styles the scrollbar track in WebKit browsers. |
+| 543 | `::-webkit-scrollbar-thumb` is a vendor extended pseudo-element | Styles the scrollbar thumb in WebKit browsers. |
+| 561 | `::-webkit-file-upload-button` is a vendor extended pseudo-element | Used to customize the appearance of file upload inputs. |
+| 580 | `-webkit-mask-image` is a vendor extension | Required for WebKit browser support when masking icons. |
+| 581 | `-webkit-mask-position` is a vendor extension | Required for proper mask positioning in WebKit browsers. |
+| 582 | `-webkit-mask-repeat` is a vendor extension | Controls mask repetition in WebKit browsers. |
+| 583 | `-webkit-mask-size` is a vendor extension | Controls mask sizing in WebKit browsers. |
+| 599 | `-webkit-appearance` is a vendor extension | Removes default browser styling from form elements. |
+| 726 | `break-word` value is deprecated | Used as a fallback to ensure long URLs and text wrap correctly on mobile devices. |
+| 1018 | `break-word` value is deprecated | Used to prevent content overflow in user-generated posts. |
+| 1064 | `::-webkit-scrollbar` is a vendor extended pseudo-element | Custom scrollbar styling for WebKit browsers. |
+| 1372 | `clip` property is deprecated | Used for visually hidden accessibility elements and remains widely supported. |
+| 1641 | `::-webkit-scrollbar-track` is a vendor extended pseudo-element | Styles dark mode scrollbar track. |
+| 1645 | `::-webkit-scrollbar-thumb` is a vendor extended pseudo-element | Styles dark mode scrollbar thumb. |
 
-These are intentional browser-specific enhancements used for custom scrollbars, mobile scrolling behavior, and improved UI styling compatibility.
+These warnings are expected and have been retained to provide a better user experience across modern browsers, especially Safari and iOS devices. They are intentional browser-specific enhancements used for custom scrollbars, mobile scrolling behavior, file upload styling, and UI compatibility.
 
 ---
 
-### CSS Validation Results
+## CSS Validation Results
 
 | Directory | File Location | Screenshot | Notes |
 |---|---|---|---|
-| `static/css` | [`static/css/style.css`](static/css/style.css) | <img src="assets/screenshots/CSS_No_ERRORS.png" width="800"> | Warnings relate to vendor-specific WebKit extensions and CSS variables |
+| `static/css` | [`static/css/style.css`](static/css/style.css) | <img src="assets/screenshots/CSS_No_ERRORS.png" width="800"> | NO ERRORS. Warnings relate to vendor-specific WebKit extensions and CSS variables |
 
 
 ---
@@ -270,6 +283,8 @@ The application was tested manually on both desktop and mobile devices to ensure
 | Empty Likes Post | Attempted to submit an empty post | Form should prevent submission and display a warning message | Validation message displayed correctly | ✅ Pass | ![Empty Post](assets/screenshots/MANUAL-TESTING-likes-post-empty-input.png) |
 | Empty Chat Message | Attempted to send an empty chat message | System should prevent submission | Empty message was not sent | ✅ Pass | ![Empty Message](assets/screenshots/MANUAL-TESTING-no-empty-messages-send.png) |
 | Image Upload and WebP Conversion | Uploaded JPEG and PNG images through chat | Images should be automatically converted to WebP format to reduce storage usage and display correctly in chat | Images were converted to WebP format and displayed successfully | ✅ Pass | ![Image Upload](assets/screenshots/MANUAL-TESTING-image-uploaded-in-webp.png) |
+| Voice Call Functionality | Started a voice call by pressing the call button and accepted the call using the green answer button | The recipient should receive an incoming call notification and be able to accept or decline the call | Incoming call notification displayed correctly and the call was successfully connected after pressing the green answer button | ✅ Pass | ![Voice Call Test](assets/screenshots/MANUAL_TESTS_CALLS_PRESS_PHONE_THEN_GREEN_BTN.png) |
+| Call Decline Functionality | Started a voice call and pressed the red decline button | The incoming call should be rejected and the call session should end immediately | Call was successfully declined and the connection was terminated without establishing an active call | ✅ Pass | ![Call Decline Test](assets/screenshots/MANUAL_TESTS_CALLS_DECLINE_RED_BTN.png) |
 
 
 
