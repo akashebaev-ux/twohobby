@@ -13,6 +13,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="description"
+        content="TwoHobby is a social platform where people connect through shared hobbies, chat in real time, discover nearby users, and build meaningful connections."
+    >
     <title>{% block title %}TwoHobby{% endblock %}</title>
 
     <link rel="icon"
@@ -121,10 +125,10 @@
         </nav>
     {% endblock %}
 </div>
-<script src="{% static 'js/theme.js' %}"></script>
-<script src="{% static 'js/delete-modal.js' %}"></script>
-<script src="{% static 'js/carousel-hover-scroll.js' %}"></script>
-<script src="{% static 'js/messages.js' %}"></script>
+<script src="{% static 'js/theme.js' %}"defer></script>
+<script src="{% static 'js/delete-modal.js' %}"defer></script>
+<script src="{% static 'js/carousel-hover-scroll.js' %}"defer></script>
+<script src="{% static 'js/messages.js' %}"defer></script>
 
 {% if user.is_authenticated %}
     {% if request.resolver_match.url_name != "landing" %}
@@ -150,7 +154,7 @@
                         window.currentUser = "{{ request.user.username|escapejs }}";
                     </script>
 
-                    <script src="{% static 'js/global_calls.js' %}"></script>
+                    <script src="{% static 'js/global_calls.js' %}"defer></script>
 
                 {% endif %}
             {% endif %}
