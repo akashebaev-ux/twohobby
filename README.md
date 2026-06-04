@@ -417,6 +417,7 @@ Whimsical was used to plan page structure, user flows, and feature relationships
 | Custom 404 Page | A custom-designed error page helps users navigate back to the platform when a requested page cannot be found. | ![404 Error Page](assets/screenshots/404_ERROR_PAGE.png) |
 | Password Change | Registered users can securely update their account password through a dedicated password management page. | ![Password Change](assets/screenshots/PASSWORD_CHANGE.png) |
 | Password Change Confirmation | Users receive confirmation after successfully changing their password, ensuring clear feedback and improved user experience. | ![Password Change Success](assets/screenshots/PASSWORD_CHANGE_SUCCESS_PAGE.png) |
+| User Confirmation Notifications | Custom notification banners provide immediate feedback for important account-related actions, including login, logout, password changes, and other successful user interactions, enhancing the overall user experience. | ![User Confirmation Notifications](assets/screenshots/MESSAGE_INFO.png) |
 | Admin Panel | Site admins can manage users, profiles, posts, comments, and other app content through Django admin. | ![alt text](assets/screenshots/Admin.png) |
 
 ### Future Features
