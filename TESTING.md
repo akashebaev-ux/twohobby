@@ -288,7 +288,7 @@ The application was tested manually on both desktop and mobile devices to ensure
 | Image Upload and WebP Conversion | Uploaded JPEG and PNG images through chat | Images should be automatically converted to WebP format to reduce storage usage and display correctly in chat | Images were converted to WebP format and displayed successfully | ✅ Pass | ![Image Upload](assets/screenshots/MANUAL-TESTING-image-uploaded-in-webp.png) |
 | Voice Call Functionality | Started a voice call by pressing the call button and accepted the call using the green answer button | The recipient should receive an incoming call notification and be able to accept or decline the call | Incoming call notification displayed correctly and the call was successfully connected after pressing the green answer button | ✅ Pass | ![Voice Call Test](assets/screenshots/MANUAL_TESTS_CALLS_PRESS_PHONE_THEN_GREEN_BTN.png) |
 | Call Decline Functionality | Started a voice call and pressed the red decline button | The incoming call should be rejected and the call session should end immediately | Call was successfully declined and the connection was terminated without establishing an active call | ✅ Pass | ![Call Decline Test](assets/screenshots/MANUAL_TESTS_CALLS_DECLINE_RED_BTN.png) |
-
+| Logout Success Message | Clicked the Logout button while authenticated | User should be logged out and receive a confirmation message | User was successfully logged out and redirected to the landing page. A green confirmation message ("You have signed out.") was displayed at the top of the page. | ✅ Pass | ![Logout Success Message](assets/screenshots/MANUAL_TESTING_INFO_MESSAGE.png) |
 
 
 
