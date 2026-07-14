@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.utils import timezone
 
 from .forms import RideForm
@@ -19,6 +19,20 @@ def ride_list(request):
         request,
         "rides/ride_list.html",
         {"rides": rides},
+    )
+
+
+@login_required
+def ride_detail(request, pk):
+    ride = get_object_or_404(
+        Ride,
+        pk=pk,
+    )
+
+    return render(
+        request,
+        "rides/ride_detail.html",
+        {"ride": ride},
     )
 
 
