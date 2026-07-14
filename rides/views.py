@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
+from django.utils import timezone
 
 from .forms import RideForm
 from .models import Ride
@@ -9,7 +10,11 @@ from .models import Ride
 
 @login_required
 def ride_list(request):
-    rides = Ride.objects.all().order_by("departure_time")
+    rides = Ride.objects.filter(
+        departure_time__gte=timezone.now(),
+        status=Ride.STATUS_PLANNED,
+    ).order_by("departure_time")
+
     return render(
         request,
         "rides/ride_list.html",

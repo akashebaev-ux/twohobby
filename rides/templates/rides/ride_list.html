@@ -9,10 +9,25 @@
     <section>
 
         <h2>Available Rides</h2>
-        <p>No rides available at the moment.</p>
-
+        
+        {% for ride in rides %}
+            <article>
+                <h3>
+                    <a href="{% url 'rides:ride_detail' ride.pk %}">
+                        {{ ride.start_name }}
+                        →
+                        {{ ride.destination_name }}
+                    </a>
+                </h3>
+                <p>Departure: {{ ride.departure_time }}</p>
+                <p>Seats Available: {{ ride.available_seats }}</p>
+            </article>
+        {% empty %}
+            <p>No rides available yet.</p>
+        {% endfor %}
+        
     </section>>
-     
+
 </div>
 
 {% endblock %}
