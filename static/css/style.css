@@ -167,6 +167,13 @@ body:has(.chat-page) .content {
 }
 
 
+/* Rides map */
+
+#ride-map {
+    width: 100%;
+    height: 500px;
+}
+
 
 /* Fullscreen pages */
 

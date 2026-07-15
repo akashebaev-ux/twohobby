@@ -12,12 +12,48 @@ from .services import users_are_trusted
 
 @login_required
 def ride_list(request):
-    rides = Ride.objects.all().order_by("departure_time")
+    rides = (
+        Ride.objects
+        .all()
+        .order_by("departure_time")
+    )
+
+    map_rides = []
+
+    for ride in rides:
+        if (
+            ride.start_latitude is not None
+            and ride.start_longitude is not None
+            and ride.destination_latitude is not None
+            and ride.destination_longitude is not None
+        ):
+            map_rides.append(
+                {
+                    "id": ride.pk,
+                    "start_name": ride.start_name,
+                    "destination_name": ride.destination_name,
+                    "start_latitude": float(
+                        ride.start_latitude
+                    ),
+                    "start_longitude": float(
+                        ride.start_longitude
+                    ),
+                    "destination_latitude": float(
+                        ride.destination_latitude
+                    ),
+                    "destination_longitude": float(
+                        ride.destination_longitude
+                    ),
+                }
+            )
 
     return render(
         request,
         "rides/ride_list.html",
-        {"rides": rides},
+        {
+            "rides": rides,
+            "map_rides": map_rides,
+        },
     )
 
 

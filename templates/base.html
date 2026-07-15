@@ -1,12 +1,8 @@
 {% load static %}
 
-
 {% url "account_login" as login_url %}
 {% url "account_signup" as signup_url %}
 {% url "account_logout" as logout_url %}
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,25 +13,43 @@
         name="description"
         content="TwoHobby is a social platform where people connect through shared hobbies, chat in real time, discover nearby users, and build meaningful connections."
     >
-    <title>{% block title %}TwoHobby{% endblock %}</title>
 
-    <link rel="icon"
-      type="image/webp"
-      sizes="32x32"
-      href="{% static 'images/favicon-32.webp' %}">
+    <title>
+        {% block title %}
+            TwoHobby
+        {% endblock %}
+    </title>
 
-    <link rel="icon"
+    <link
+        rel="icon"
+        type="image/webp"
+        sizes="32x32"
+        href="{% static 'images/favicon-32.webp' %}"
+    >
+
+    <link
+        rel="icon"
         type="image/webp"
         sizes="192x192"
-        href="{% static 'images/favicon-192.webp' %}">
+        href="{% static 'images/favicon-192.webp' %}"
+    >
 
-    <link rel="icon"
+    <link
+        rel="icon"
         type="image/webp"
         sizes="512x512"
-        href="{% static 'images/favicon-512.webp' %}">
+        href="{% static 'images/favicon-512.webp' %}"
+    >
 
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link
+        rel="stylesheet"
+        href="{% static 'css/style.css' %}"
+    >
+
+    {% block extra_css %}
+    {% endblock %}
 </head>
+
 <body id="app-body">
 
 <div class="app-wrapper">
@@ -44,15 +58,24 @@
     {% block topbar %}
         <header class="top-bar">
             <h1 class="app-logo">TwoHobby</h1>
+
             {% block filter_button %}
-            <button id="toggle-filter-btn" class="filter-btn">
-                Filter
-            </button>
+                <button
+                    id="toggle-filter-btn"
+                    class="filter-btn"
+                >
+                    Filter
+                </button>
             {% endblock %}
+
             {% block theme_button %}
-            <button id="theme-toggle" class="theme-toggle-btn" type="button">
-                🌙
-            </button>
+                <button
+                    id="theme-toggle"
+                    class="theme-toggle-btn"
+                    type="button"
+                >
+                    🌙
+                </button>
             {% endblock %}
         </header>
     {% endblock %}
@@ -60,13 +83,13 @@
     <!-- Django Messages -->
     {% if request.resolver_match.url_name != "room" %}
         {% if messages %}
-        <div id="alerts">
-            {% for msg in messages %}
-                <div class="site-message {{ msg.tags }}">
-                    {{ msg }}
-                </div>
-            {% endfor %}
-        </div>
+            <div id="alerts">
+                {% for msg in messages %}
+                    <div class="site-message {{ msg.tags }}">
+                        {{ msg }}
+                    </div>
+                {% endfor %}
+            </div>
         {% endif %}
     {% endif %}
 
@@ -77,60 +100,87 @@
             {% endblock %}
         </main>
     {% endblock %}
+
     <!-- Bottom Navigation -->
     {% block bottom_nav %}
         <nav class="bottom-nav">
-            <a href="{% url 'profile_list' %}"
+            <a
+                href="{% url 'profile_list' %}"
                 class="nav-link
                 {% if request.resolver_match.url_name == 'profile_list' %}
                     active
-                {% endif %}">
+                {% endif %}"
+            >
                 <span>📍</span>
                 <div>Nearby</div>
             </a>
 
-            <a href="{% url 'encounters' %}"
+            <a
+                href="{% url 'encounters' %}"
                 class="nav-link
                 {% if request.resolver_match.url_name == 'encounters' %}
                     active
-                {% endif %}">
+                {% endif %}"
+            >
                 <span>💞</span>
                 <div>Encounters</div>
             </a>
 
-            <a href="{% url 'likes' %}"
+            <a
+                href="{% url 'likes' %}"
                 class="nav-link
                 {% if request.resolver_match.url_name == 'likes' %}
                     active
-                {% endif %}">
+                {% endif %}"
+            >
                 <span>❤</span>
                 <div>Likes</div>
             </a>
 
-            <a href="{% url 'chat_list' %}"
+            <a
+                href="{% url 'chat_list' %}"
                 class="nav-link
                 {% if request.resolver_match.url_name == 'chat_list' %}
                     active
-                {% endif %}">
+                {% endif %}"
+            >
                 <span>💬</span>
                 <div>Chats</div>
             </a>
 
-            <a href="{% url 'my_profile' %}"
+            <a
+                href="{% url 'my_profile' %}"
                 class="nav-link
                 {% if request.resolver_match.url_name == 'my_profile' %}
                     active
-                {% endif %}">
+                {% endif %}"
+            >
                 <span>👤</span>
                 <div>Profile</div>
             </a>
         </nav>
     {% endblock %}
 </div>
-<script src="{% static 'js/theme.js' %}" defer></script>
-<script src="{% static 'js/delete-modal.js' %}" defer></script>
-<script src="{% static 'js/carousel-hover-scroll.js' %}" defer></script>
-<script src="{% static 'js/messages.js' %}" defer></script>
+
+<script
+    src="{% static 'js/theme.js' %}"
+    defer
+></script>
+
+<script
+    src="{% static 'js/delete-modal.js' %}"
+    defer
+></script>
+
+<script
+    src="{% static 'js/carousel-hover-scroll.js' %}"
+    defer
+></script>
+
+<script
+    src="{% static 'js/messages.js' %}"
+    defer
+></script>
 
 {% if user.is_authenticated %}
     {% if request.resolver_match.url_name != "landing" %}
@@ -153,16 +203,23 @@
                     </div>
 
                     <script>
-                        window.currentUser = "{{ request.user.username|escapejs }}";
+                        window.currentUser =
+                            "{{ request.user.username|escapejs }}";
                     </script>
 
-                    <script src="{% static 'js/global_calls.js' %}" defer></script>
+                    <script
+                        src="{% static 'js/global_calls.js' %}"
+                        defer
+                    ></script>
 
                 {% endif %}
             {% endif %}
         {% endif %}
     {% endif %}
 {% endif %}
+
+{% block extra_js %}
+{% endblock %}
 
 </body>
 </html>

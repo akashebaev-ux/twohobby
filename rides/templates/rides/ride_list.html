@@ -1,21 +1,21 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+{% endblock %}
 
 {% block content %}
 <div class="container">
     <h1>Rides</h1>
 
-    <a href="{% url 'rides:create_ride' %}">
-        Create a ride
-    </a>
-
-    <a href="{% url 'rides:ride_activity' %}">
-        My ride activity
-    </a>
-
     <div id="ride-map"></div>
 
     <section>
-        <h2>Available Rides</h2>
+        <h2>Available rides</h2>
 
         {% for ride in rides %}
             <article>
@@ -27,10 +27,19 @@
                     </a>
                 </h3>
 
-                <p>Departure: {{ ride.departure_time }}</p>
                 <p>
-                    Remaining Seats:
+                    Departure:
+                    {{ ride.departure_time }}
+                </p>
+
+                <p>
+                    Remaining seats:
                     {{ ride.remaining_seats }}
+                </p>
+
+                <p>
+                    Status:
+                    {{ ride.get_status_display }}
                 </p>
             </article>
         {% empty %}
@@ -38,4 +47,16 @@
         {% endfor %}
     </section>
 </div>
+
+{{ map_rides|json_script:"ride-map-data" }}
+{% endblock %}
+
+{% block extra_js %}
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    ></script>
+
+    <script
+        src="{% static 'rides/js/ride-map.js' %}"
+    ></script>
 {% endblock %}
