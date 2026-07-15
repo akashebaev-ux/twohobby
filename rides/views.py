@@ -307,3 +307,28 @@ def reject_request(request, pk):
         "rides:ride_detail",
         pk=ride_request.ride.pk,
     )
+
+
+@login_required
+def ride_activity(request):
+    created_rides = (
+        Ride.objects
+        .filter(driver=request.user)
+        .order_by("-departure_time")
+    )
+
+    passenger_requests = (
+        RideRequest.objects
+        .filter(passenger=request.user)
+        .select_related("ride")
+        .order_by("-created_at")
+    )
+
+    return render(
+        request,
+        "rides/ride_activity.html",
+        {
+            "created_rides": created_rides,
+            "passenger_requests": passenger_requests,
+        },
+    )

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>My ride activity</h1>
+
+    <section>
+        <h2>Rides I created</h2>
+
+        {% for ride in created_rides %}
+            <article>
+                <h3>
+                    <a href="{% url 'rides:ride_detail' ride.pk %}">
+                        {{ ride.start_name }}
+                        →
+                        {{ ride.destination_name }}
+                    </a>
+                </h3>
+
+                <p>
+                    Departure:
+                    {{ ride.departure_time }}
+                </p>
+
+                <p>
+                    Remaining seats:
+                    {{ ride.remaining_seats }}
+                </p>
+
+                <p>
+                    Status:
+                    {{ ride.get_status_display }}
+                </p>
+            </article>
+        {% empty %}
+            <p>You have not created any rides yet.</p>
+        {% endfor %}
+    </section>
+
+    <section>
+        <h2>My passenger requests</h2>
+
+        {% for ride_request in passenger_requests %}
+            <article>
+                <h3>
+                    <a href="{% url 'rides:ride_detail' ride_request.ride.pk %}">
+                        {{ ride_request.ride.start_name }}
+                        →
+                        {{ ride_request.ride.destination_name }}
+                    </a>
+                </h3>
+
+                <p>
+                    Seats requested:
+                    {{ ride_request.seats_requested }}
+                </p>
+
+                <p>
+                    Offered price:
+                    {{ ride_request.offered_price }}
+                </p>
+
+                <p>
+                    Status:
+                    {{ ride_request.get_status_display }}
+                </p>
+            </article>
+        {% empty %}
+            <p>You have not requested any rides yet.</p>
+        {% endfor %}
+    </section>
+
+    <a href="{% url 'rides:ride_list' %}">
+        Back to rides
+    </a>
+</div>
+{% endblock %}
