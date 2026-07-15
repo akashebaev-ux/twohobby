@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.db.models import Sum
 
 # Create your models here.
 
@@ -76,6 +77,19 @@ class Ride(models.Model):
         return (
             f"{self.start_name} to "
             f"{self.destination_name}"
+        )
+
+    @property
+    def remaining_seats(self):
+        reserved = self.requests.filter(
+            status=RideRequest.STATUS_ACCEPTED
+        ).aggregate(
+            total=Sum("seats_requested")
+        )["total"] or 0
+
+        return max(
+            self.available_seats - reserved,
+            0,
         )
 
 
