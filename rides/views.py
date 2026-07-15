@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 
 from .forms import RideForm
@@ -54,4 +54,38 @@ def create_ride(request):
         request,
         "rides/create_ride.html",
         {"form": form},
+    )
+
+
+@login_required
+def edit_ride(request, pk):
+    ride = get_object_or_404(
+        Ride,
+        pk=pk,
+        driver=request.user,
+    )
+
+    if request.method == "POST":
+        form = RideForm(
+            request.POST,
+            instance=ride,
+        )
+
+        if form.is_valid():
+            form.save()
+
+            return redirect(
+                "rides:ride_detail",
+                pk=ride.pk,
+            )
+    else:
+        form = RideForm(instance=ride)
+
+    return render(
+        request,
+        "rides/edit_ride.html",
+        {
+            "form": form,
+            "ride": ride,
+        },
     )

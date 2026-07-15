@@ -17,6 +17,12 @@
         <p>{{ ride.description }}</p>
     {% endif %}
 
+    {% if ride.driver == request.user %}
+        <a href="{% url 'rides:edit_ride' ride.pk %}">
+            Edit ride
+        </a>
+    {% endif %}
+
     <a href="{% url 'rides:ride_list' %}">
         Back to rides
     </a>
