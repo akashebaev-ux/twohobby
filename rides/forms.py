@@ -1,4 +1,5 @@
 from django import forms
+
 from .models import Ride, RideRequest
 
 
@@ -33,6 +34,18 @@ class RideRequestForm(forms.ModelForm):
             "offered_price",
             "message",
         ]
+
+    def clean_seats_requested(self):
+        seats_requested = self.cleaned_data[
+            "seats_requested"
+        ]
+
+        if seats_requested < 1:
+            raise forms.ValidationError(
+                "You must request at least one seat."
+            )
+
+        return seats_requested
 
     def clean_offered_price(self):
         offered_price = self.cleaned_data[

@@ -113,7 +113,9 @@ def cancel_ride(request, pk):
     )
 
     ride.status = Ride.STATUS_CANCELLED
-    ride.save(update_fields=["status"])
+    ride.save(
+        update_fields=["status"]
+    )
 
     return redirect(
         "rides:ride_detail",
@@ -133,6 +135,7 @@ def request_ride(request, pk):
             request,
             "You cannot request to join your own ride.",
         )
+
         return redirect(
             "rides:ride_detail",
             pk=ride.pk,
@@ -143,6 +146,7 @@ def request_ride(request, pk):
             request,
             "This ride is not accepting requests.",
         )
+
         return redirect(
             "rides:ride_detail",
             pk=ride.pk,
@@ -160,20 +164,39 @@ def request_ride(request, pk):
         form = RideRequestForm(request.POST)
 
         if form.is_valid():
-            ride_request = form.save(commit=False)
-            ride_request.ride = ride
-            ride_request.passenger = request.user
-            ride_request.save()
+            if (
+                form.cleaned_data["seats_requested"]
+                > ride.available_seats
+            ):
+                form.add_error(
+                    "seats_requested",
+                    (
+                        "You cannot request more seats "
+                        "than the ride capacity."
+                    ),
+                )
+            else:
+                ride_request = form.save(
+                    commit=False
+                )
 
-            messages.success(
-                request,
-                "Your ride request has been sent.",
-            )
+                ride_request.ride = ride
 
-            return redirect(
-                "rides:ride_detail",
-                pk=ride.pk,
-            )
+                ride_request.passenger = (
+                    request.user
+                )
+
+                ride_request.save()
+
+                messages.success(
+                    request,
+                    "Your ride request has been sent.",
+                )
+
+                return redirect(
+                    "rides:ride_detail",
+                    pk=ride.pk,
+                )
     else:
         form = RideRequestForm()
 
@@ -221,6 +244,7 @@ def accept_request(request, pk):
                 request,
                 "This ride is not accepting requests.",
             )
+
             return redirect(
                 "rides:ride_detail",
                 pk=ride.pk,
@@ -234,6 +258,7 @@ def accept_request(request, pk):
                 request,
                 "Not enough remaining seats.",
             )
+
             return redirect(
                 "rides:ride_detail",
                 pk=ride.pk,
@@ -242,12 +267,14 @@ def accept_request(request, pk):
         ride_request.status = (
             RideRequest.STATUS_ACCEPTED
         )
+
         ride_request.save(
             update_fields=["status"]
         )
 
         if ride.remaining_seats == 0:
             ride.status = Ride.STATUS_FULL
+
             ride.save(
                 update_fields=["status"]
             )
