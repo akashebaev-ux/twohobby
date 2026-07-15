@@ -21,6 +21,58 @@
         <a href="{% url 'rides:edit_ride' ride.pk %}">
             Edit ride
         </a>
+
+        {% if ride.status == "planned" %}
+            <form
+                method="POST"
+                action="{% url 'rides:cancel_ride' ride.pk %}"
+            >
+                {% csrf_token %}
+                <button type="submit">
+                    Cancel ride
+                </button>
+            </form>
+        {% endif %}
+    {% endif %}
+
+    {% if ride.driver == request.user %}
+        <h2>Passenger requests</h2>
+
+        {% for ride_request in passenger_requests %}
+            <article>
+                <p>
+                    Passenger:
+                    {{ ride_request.passenger }}
+                </p>
+
+                <p>
+                    Pickup:
+                    {{ ride_request.pickup_point }}
+                </p>
+
+                <p>
+                    Drop-off:
+                    {{ ride_request.dropoff_point }}
+                </p>
+
+                <p>
+                    Seats:
+                    {{ ride_request.seats_requested }}
+                </p>
+
+                <p>
+                    Offer:
+                    {{ ride_request.offered_price }}
+                </p>
+
+                <p>
+                    Status:
+                    {{ ride_request.get_status_display }}
+                </p>
+            </article>
+        {% empty %}
+            <p>No passenger requests yet.</p>
+        {% endfor %}
     {% endif %}
 
     <a href="{% url 'rides:ride_list' %}">

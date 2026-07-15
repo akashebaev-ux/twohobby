@@ -51,10 +51,20 @@ def ride_detail(request, pk):
         pk=pk,
     )
 
+    passenger_requests = None
+
+    if ride.driver == request.user:
+        passenger_requests = ride.requests.select_related(
+            "passenger"
+        )
+
     return render(
         request,
         "rides/ride_detail.html",
-        {"ride": ride},
+        {
+            "ride": ride,
+            "passenger_requests": passenger_requests,
+        },
     )
 
 
