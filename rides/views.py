@@ -1,8 +1,9 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 
-from .forms import RideForm
+from .forms import RideForm, RideRequestForm
 from .models import Ride
 
 
@@ -104,4 +105,62 @@ def cancel_ride(request, pk):
     return redirect(
         "rides:ride_detail",
         pk=ride.pk,
+    )
+
+
+@login_required
+def request_ride(request, pk):
+    ride = get_object_or_404(
+        Ride,
+        pk=pk,
+    )
+
+    if ride.driver == request.user:
+        messages.error(
+            request,
+            "You cannot request to join your own ride.",
+        )
+        return redirect(
+            "rides:ride_detail",
+            pk=ride.pk,
+        )
+
+    if ride.status != Ride.STATUS_PLANNED:
+        messages.error(
+            request,
+            "This ride is not accepting requests.",
+        )
+        return redirect(
+            "rides:ride_detail",
+            pk=ride.pk,
+        )
+
+    if request.method == "POST":
+        form = RideRequestForm(request.POST)
+
+        if form.is_valid():
+            ride_request = form.save(commit=False)
+            ride_request.ride = ride
+            ride_request.passenger = request.user
+            ride_request.save()
+
+            messages.success(
+                request,
+                "Your ride request has been sent.",
+            )
+
+            return redirect(
+                "rides:ride_detail",
+                pk=ride.pk,
+            )
+    else:
+        form = RideRequestForm()
+
+    return render(
+        request,
+        "rides/request_ride.html",
+        {
+            "form": form,
+            "ride": ride,
+        },
     )
