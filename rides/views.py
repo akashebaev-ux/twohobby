@@ -1,11 +1,12 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db import transaction
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 
 from .forms import RideForm, RideRequestForm
-from .models import Ride
+from .models import Ride, RideRequest
 from .services import users_are_trusted
 
 
@@ -183,4 +184,99 @@ def request_ride(request, pk):
             "form": form,
             "ride": ride,
         },
+    )
+
+
+@login_required
+@require_POST
+def accept_request(request, pk):
+    with transaction.atomic():
+        ride_request = (
+            RideRequest.objects
+            .select_for_update()
+            .select_related("ride")
+            .get(pk=pk)
+        )
+
+        ride = (
+            Ride.objects
+            .select_for_update()
+            .get(pk=ride_request.ride_id)
+        )
+
+        if ride.driver != request.user:
+            return HttpResponseForbidden()
+
+        if (
+            ride_request.status
+            != RideRequest.STATUS_PENDING
+        ):
+            return redirect(
+                "rides:ride_detail",
+                pk=ride.pk,
+            )
+
+        if ride.status != Ride.STATUS_PLANNED:
+            messages.error(
+                request,
+                "This ride is not accepting requests.",
+            )
+            return redirect(
+                "rides:ride_detail",
+                pk=ride.pk,
+            )
+
+        if (
+            ride_request.seats_requested
+            > ride.remaining_seats
+        ):
+            messages.error(
+                request,
+                "Not enough remaining seats.",
+            )
+            return redirect(
+                "rides:ride_detail",
+                pk=ride.pk,
+            )
+
+        ride_request.status = (
+            RideRequest.STATUS_ACCEPTED
+        )
+        ride_request.save(
+            update_fields=["status"]
+        )
+
+        if ride.remaining_seats == 0:
+            ride.status = Ride.STATUS_FULL
+            ride.save(
+                update_fields=["status"]
+            )
+
+    return redirect(
+        "rides:ride_detail",
+        pk=ride.pk,
+    )
+
+
+@login_required
+@require_POST
+def reject_request(request, pk):
+    ride_request = get_object_or_404(
+        RideRequest,
+        pk=pk,
+        ride__driver=request.user,
+        status=RideRequest.STATUS_PENDING,
+    )
+
+    ride_request.status = (
+        RideRequest.STATUS_REJECTED
+    )
+
+    ride_request.save(
+        update_fields=["status"]
+    )
+
+    return redirect(
+        "rides:ride_detail",
+        pk=ride_request.ride.pk,
     )

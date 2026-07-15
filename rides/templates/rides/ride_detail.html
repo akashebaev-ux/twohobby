@@ -11,6 +11,7 @@
     <p>Driver: {{ ride.driver }}</p>
     <p>Departure: {{ ride.departure_time }}</p>
     <p>Available seats: {{ ride.available_seats }}</p>
+    <p>Remaining seats: {{ ride.remaining_seats }}</p>
     <p>Status: {{ ride.get_status_display }}</p>
 
     {% if ride.description %}
@@ -65,10 +66,39 @@
                     {{ ride_request.offered_price }}
                 </p>
 
+                {% if ride_request.message %}
+                    <p>
+                        Message:
+                        {{ ride_request.message }}
+                    </p>
+                {% endif %}
+
                 <p>
                     Status:
                     {{ ride_request.get_status_display }}
                 </p>
+
+                {% if ride_request.status == "pending" %}
+                    <form
+                        method="POST"
+                        action="{% url 'rides:accept_request' ride_request.pk %}"
+                    >
+                        {% csrf_token %}
+                        <button type="submit">
+                            Accept
+                        </button>
+                    </form>
+
+                    <form
+                        method="POST"
+                        action="{% url 'rides:reject_request' ride_request.pk %}"
+                    >
+                        {% csrf_token %}
+                        <button type="submit">
+                            Reject
+                        </button>
+                    </form>
+                {% endif %}
             </article>
         {% empty %}
             <p>No passenger requests yet.</p>
