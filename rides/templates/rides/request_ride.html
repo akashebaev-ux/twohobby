@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Request This Ride</h1>
+
+    <h2>
+        {{ ride.start_name }}
+        →
+        {{ ride.destination_name }}
+    </h2>
+
+    <p>Driver: {{ ride.driver }}</p>
+    <p>Departure: {{ ride.departure_time }}</p>
+    <p>Remaining Seats: {{ ride.remaining_seats }}</p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            Send Request
+        </button>
+    </form>
+
+    <a href="{% url 'rides:ride_detail' ride.pk %}">
+        Back to Ride
+    </a>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Create a Ride</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            Create Ride
+        </button>
+    </form>
+
+    <a href="{% url 'rides:ride_list' %}">
+        Back to Rides
+    </a>
+</div>
+{% endblock %}
