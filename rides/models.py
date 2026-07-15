@@ -77,3 +77,75 @@ class Ride(models.Model):
             f"{self.start_name} to "
             f"{self.destination_name}"
         )
+
+
+class RideRequest(models.Model):
+    STATUS_PENDING = "pending"
+    STATUS_ACCEPTED = "accepted"
+    STATUS_REJECTED = "rejected"
+
+    STATUS_CHOICES = [
+        (STATUS_PENDING, "Pending"),
+        (STATUS_ACCEPTED, "Accepted"),
+        (STATUS_REJECTED, "Rejected"),
+    ]
+
+    ride = models.ForeignKey(
+        Ride,
+        on_delete=models.CASCADE,
+        related_name="requests",
+    )
+
+    passenger = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="ride_requests",
+    )
+
+    seats_requested = models.PositiveIntegerField(
+        default=1
+    )
+
+    pickup_point = models.CharField(
+        max_length=255
+    )
+
+    dropoff_point = models.CharField(
+        max_length=255
+    )
+
+    offered_price = models.DecimalField(
+        max_digits=8,
+        decimal_places=2,
+    )
+
+    message = models.TextField(
+        blank=True
+    )
+
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default=STATUS_PENDING,
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=[
+                    "ride",
+                    "passenger",
+                ],
+                name="unique_passenger_ride_request",
+            )
+        ]
+
+    def __str__(self):
+        return (
+            f"{self.passenger} - "
+            f"{self.ride}"
+        )
