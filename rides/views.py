@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from django.views.decorators.http import require_POST
 
 from .forms import RideForm, RideRequestForm
@@ -14,7 +15,10 @@ from .services import users_are_trusted
 def ride_list(request):
     rides = (
         Ride.objects
-        .all()
+        .filter(
+            status=Ride.STATUS_PLANNED,
+        )
+        .select_related("driver")
         .order_by("departure_time")
     )
 
@@ -43,6 +47,18 @@ def ride_list(request):
                     ),
                     "destination_longitude": float(
                         ride.destination_longitude
+                    ),
+                    "remaining_seats": (
+                        ride.remaining_seats
+                    ),
+                    "departure_time": (
+                        ride.departure_time.isoformat()
+                    ),
+                    "detail_url": reverse(
+                        "rides:ride_detail",
+                        kwargs={
+                            "pk": ride.pk,
+                        },
                     ),
                 }
             )

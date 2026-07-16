@@ -241,3 +241,8 @@ if "test" in sys.argv:
             "channels.layers.InMemoryChannelLayer",
         },
     }
+
+
+GEOCODING_USER_AGENT = (
+    "TwoHobby/1.0 (akashebaev@email.com)"
+)
