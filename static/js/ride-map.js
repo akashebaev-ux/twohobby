@@ -24,24 +24,74 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     ).addTo(map);
 
+    function escapeHtml(value) {
+        const element = document.createElement("div");
+        element.textContent = String(value ?? "");
+        return element.innerHTML;
+    }
+
     rides.forEach(function (ride) {
+        const departureDate = new Date(
+            ride.departure_time
+        );
+
+        const formattedDeparture =
+            departureDate.toLocaleString();
+
+        const startPopup = `
+            <strong>
+                Start:
+                ${escapeHtml(ride.start_name)}
+            </strong>
+
+            <p>
+                Destination:
+                ${escapeHtml(ride.destination_name)}
+            </p>
+
+            <p>
+                Departure:
+                ${escapeHtml(formattedDeparture)}
+            </p>
+
+            <p>
+                Remaining seats:
+                ${escapeHtml(ride.remaining_seats)}
+            </p>
+
+            <a href="${ride.detail_url}">
+                View ride
+            </a>
+        `;
+
+        const destinationPopup = `
+            <strong>
+                Destination:
+                ${escapeHtml(ride.destination_name)}
+            </strong>
+
+            <p>
+                Starting point:
+                ${escapeHtml(ride.start_name)}
+            </p>
+
+            <a href="${ride.detail_url}">
+                View ride
+            </a>
+        `;
+
         L.marker([
             ride.start_latitude,
             ride.start_longitude
         ])
             .addTo(map)
-            .bindPopup(
-                "Start: " + ride.start_name
-            );
+            .bindPopup(startPopup);
 
         L.marker([
             ride.destination_latitude,
             ride.destination_longitude
         ])
             .addTo(map)
-            .bindPopup(
-                "Destination: "
-                + ride.destination_name
-            );
+            .bindPopup(destinationPopup);
     });
 });
