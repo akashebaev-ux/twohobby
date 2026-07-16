@@ -2,8 +2,6 @@ from django.conf import settings
 from django.db import models
 from django.db.models import Sum
 
-# Create your models here.
-
 
 class Ride(models.Model):
     STATUS_PLANNED = "planned"
@@ -17,12 +15,6 @@ class Ride(models.Model):
         (STATUS_CANCELLED, "Cancelled"),
         (STATUS_COMPLETED, "Completed"),
     ]
-
-    driver = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        related_name="rides_created",
-    )
 
     driver = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -117,15 +109,15 @@ class RideRequest(models.Model):
     )
 
     seats_requested = models.PositiveIntegerField(
-        default=1
+        default=1,
     )
 
     pickup_point = models.CharField(
-        max_length=255
+        max_length=255,
     )
 
     dropoff_point = models.CharField(
-        max_length=255
+        max_length=255,
     )
 
     offered_price = models.DecimalField(
@@ -134,7 +126,7 @@ class RideRequest(models.Model):
     )
 
     message = models.TextField(
-        blank=True
+        blank=True,
     )
 
     status = models.CharField(
@@ -144,7 +136,7 @@ class RideRequest(models.Model):
     )
 
     created_at = models.DateTimeField(
-        auto_now_add=True
+        auto_now_add=True,
     )
 
     class Meta:
