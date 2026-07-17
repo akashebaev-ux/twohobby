@@ -16,6 +16,14 @@ class Ride(models.Model):
         (STATUS_COMPLETED, "Completed"),
     ]
 
+    TRIP_SINGLE = "single"
+    TRIP_RECURRING = "recurring"
+
+    TRIP_TYPE_CHOICES = [
+        (TRIP_SINGLE, "Single trip"),
+        (TRIP_RECURRING, "Recurring trip"),
+    ]
+
     driver = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -56,6 +64,41 @@ class Ride(models.Model):
     departure_time = models.DateTimeField()
     available_seats = models.PositiveIntegerField()
     description = models.TextField(blank=True)
+
+    car_brand = models.CharField(
+        max_length=100,
+        blank=True,
+    )
+
+    car_model = models.CharField(
+        max_length=100,
+        blank=True,
+    )
+
+    car_year = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+    )
+
+    car_image = models.ImageField(
+        upload_to="ride_cars/",
+        blank=True,
+    )
+
+    trip_type = models.CharField(
+        max_length=20,
+        choices=TRIP_TYPE_CHOICES,
+        default=TRIP_SINGLE,
+    )
+
+    recurring_days = models.CharField(
+        max_length=100,
+        blank=True,
+        help_text=(
+            "Comma-separated days, for example: "
+            "monday,tuesday,wednesday"
+        ),
+    )
 
     status = models.CharField(
         max_length=20,
