@@ -3,6 +3,15 @@ from django.db import models
 from django.db.models import Sum
 
 
+TRIP_SINGLE = "single"
+TRIP_RECURRING = "recurring"
+
+TRIP_TYPE_CHOICES = [
+    (TRIP_SINGLE, "Single trip"),
+    (TRIP_RECURRING, "Recurring trip"),
+]
+
+
 class Ride(models.Model):
     STATUS_PLANNED = "planned"
     STATUS_FULL = "full"
@@ -16,22 +25,19 @@ class Ride(models.Model):
         (STATUS_COMPLETED, "Completed"),
     ]
 
-    TRIP_SINGLE = "single"
-    TRIP_RECURRING = "recurring"
-
-    TRIP_TYPE_CHOICES = [
-        (TRIP_SINGLE, "Single trip"),
-        (TRIP_RECURRING, "Recurring trip"),
-    ]
-
     driver = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="rides_created",
     )
 
-    start_name = models.CharField(max_length=255)
-    destination_name = models.CharField(max_length=255)
+    start_name = models.CharField(
+        max_length=255,
+    )
+
+    destination_name = models.CharField(
+        max_length=255,
+    )
 
     start_latitude = models.DecimalField(
         max_digits=9,
@@ -62,8 +68,12 @@ class Ride(models.Model):
     )
 
     departure_time = models.DateTimeField()
+
     available_seats = models.PositiveIntegerField()
-    description = models.TextField(blank=True)
+
+    description = models.TextField(
+        blank=True,
+    )
 
     car_brand = models.CharField(
         max_length=100,
@@ -106,7 +116,9 @@ class Ride(models.Model):
         default=STATUS_PLANNED,
     )
 
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
 
     def __str__(self):
         return (
@@ -117,9 +129,9 @@ class Ride(models.Model):
     @property
     def remaining_seats(self):
         reserved = self.requests.filter(
-            status=RideRequest.STATUS_ACCEPTED
+            status=RideRequest.STATUS_ACCEPTED,
         ).aggregate(
-            total=Sum("seats_requested")
+            total=Sum("seats_requested"),
         )["total"] or 0
 
         return max(
@@ -168,6 +180,26 @@ class RideRequest(models.Model):
         decimal_places=2,
     )
 
+    preferred_time = models.TimeField(
+        null=True,
+        blank=True,
+    )
+
+    trip_type = models.CharField(
+        max_length=20,
+        choices=TRIP_TYPE_CHOICES,
+        default=TRIP_SINGLE,
+    )
+
+    recurring_days = models.CharField(
+        max_length=100,
+        blank=True,
+        help_text=(
+            "Comma-separated days, for example: "
+            "monday,tuesday,wednesday"
+        ),
+    )
+
     message = models.TextField(
         blank=True,
     )
@@ -190,7 +222,7 @@ class RideRequest(models.Model):
                     "passenger",
                 ],
                 name="unique_passenger_ride_request",
-            )
+            ),
         ]
 
     def __str__(self):
