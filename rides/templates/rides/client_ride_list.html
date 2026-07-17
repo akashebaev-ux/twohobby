@@ -1,76 +1,207 @@
 {% extends "base.html" %}
 
 {% block title %}
-    Find a driver
+    Find a Ride
 {% endblock %}
 
 {% block filter_button %}
+    <a
+        href="{% url 'rides:ride_home' %}"
+        class="filter-btn"
+    >
+        Back
+    </a>
 {% endblock %}
 
 {% block content %}
-<section class="client-rides-page">
-    <h1>Find a driving plan</h1>
+<div class="container client-ride-page">
+    <section class="ride-search-card">
+        <h1>Where are you going?</h1>
 
-    <p>
-        Choose a driver route and offer your preferred
-        pickup, time, and price.
-    </p>
+        <form
+            method="post"
+            class="ride-search-form"
+        >
+            {% csrf_token %}
 
-    {% for ride in rides %}
-        <article class="client-route-card">
+            {{ form.non_field_errors }}
 
-            {% if ride.driver.profile.profile_image %}
-                <img
-                    src="{{ ride.driver.profile.profile_image.url }}"
-                    alt="{{ ride.driver.username }}"
-                    class="client-driver-image"
-                >
-            {% endif %}
+            <div class="route-search-box">
+                <div class="route-search-field">
+                    <span class="pickup-dot"></span>
 
-            <h2>
-                {{ ride.start_name }}
-                →
-                {{ ride.destination_name }}
-            </h2>
+                    <div class="route-input-content">
+                        <label
+                            for="{{ form.start_name.id_for_label }}"
+                        >
+                            From
+                        </label>
 
-            <p>
-                Departure:
-                {{ ride.departure_time|date:"M j, Y H:i" }}
-            </p>
+                        {{ form.start_name }}
+                        {{ form.start_name.errors }}
+                    </div>
+                </div>
 
-            <p>
-                Car:
-                {% if ride.car_brand or ride.car_model %}
-                    {{ ride.car_brand }}
-                    {{ ride.car_model }}
-                {% else %}
-                    Not specified
-                {% endif %}
-            </p>
+                <div class="route-connector"></div>
 
-            <p>
-                Remaining seats:
-                {{ ride.remaining_seats }}
-            </p>
+                <div class="route-search-field">
+                    <span class="destination-dot"></span>
 
-            <p>
-                Schedule:
-                {{ ride.get_trip_type_display }}
-            </p>
+                    <div class="route-input-content">
+                        <label
+                            for="{{ form.destination_name.id_for_label }}"
+                        >
+                            To
+                        </label>
 
-            <a
-                href="{% url 'rides:request_ride' ride.pk %}"
-                class="filter-btn"
+                        {{ form.destination_name }}
+                        {{ form.destination_name.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="ride-search-grid">
+                <div class="ride-search-control">
+                    <label
+                        for="{{ form.preferred_date.id_for_label }}"
+                    >
+                        Date
+                    </label>
+
+                    {{ form.preferred_date }}
+                    {{ form.preferred_date.errors }}
+                </div>
+
+                <div class="ride-search-control">
+                    <label
+                        for="{{ form.preferred_time.id_for_label }}"
+                    >
+                        Time
+                    </label>
+
+                    {{ form.preferred_time }}
+                    {{ form.preferred_time.errors }}
+                </div>
+            </div>
+
+            <div class="ride-search-grid">
+                <div class="ride-search-control">
+                    <label
+                        for="{{ form.seats_requested.id_for_label }}"
+                    >
+                        Passengers
+                    </label>
+
+                    {{ form.seats_requested }}
+                    {{ form.seats_requested.errors }}
+                </div>
+
+                <div class="ride-search-control">
+                    <label
+                        for="{{ form.offered_price.id_for_label }}"
+                    >
+                        Your offer
+                    </label>
+
+                    <div class="price-offer-field">
+                        {{ form.offered_price }}
+                        <span>₸</span>
+                    </div>
+
+                    {{ form.offered_price.errors }}
+                </div>
+            </div>
+
+            <button
+                type="submit"
+                class="find-driver-btn"
             >
-                Offer a bid
-            </a>
+                Find drivers
+            </button>
+        </form>
+    </section>
 
-        </article>
+    {% if search_performed %}
+        <section class="driver-results">
+            <h2>Available drivers</h2>
 
-    {% empty %}
+            {% for ride in rides %}
+                <article class="driver-result-card">
+                    <div class="driver-result-header">
+                        {% if ride.driver.profile.profile_image %}
+                            <img
+                                src="{{ ride.driver.profile.profile_image.url }}"
+                                alt="{{ ride.driver.username }}"
+                                class="driver-result-image"
+                            >
+                        {% else %}
+                            <div class="driver-image-placeholder">
+                                👤
+                            </div>
+                        {% endif %}
 
-        <p>No driver plans are available.</p>
+                        <div>
+                            <h3>
+                                {{ ride.driver.profile.display_name|default:ride.driver.username }}
+                            </h3>
 
-    {% endfor %}
-</section>
+                            {% if ride.car_brand or ride.car_model %}
+                                <p>
+                                    {{ ride.car_brand }}
+                                    {{ ride.car_model }}
+                                </p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="driver-route">
+                        <p>
+                            <strong>From:</strong>
+                            {{ ride.start_name }}
+                        </p>
+
+                        <p>
+                            <strong>To:</strong>
+                            {{ ride.destination_name }}
+                        </p>
+                    </div>
+
+                    <div class="driver-plan-details">
+                        <p>
+                            <strong>Departure:</strong>
+                            {{ ride.departure_time|date:"M j, H:i" }}
+                        </p>
+
+                        <p>
+                            <strong>Available seats:</strong>
+                            {{ ride.remaining_seats }}
+                        </p>
+
+                        <p>
+                            <strong>Schedule:</strong>
+                            {{ ride.get_trip_type_display }}
+                        </p>
+                    </div>
+
+                    <a
+                        href="{{ ride.bid_url }}"
+                        class="choose-driver-btn"
+                    >
+                        Choose driver
+                    </a>
+                </article>
+            {% empty %}
+                <div class="no-driver-results">
+                    <p>
+                        No matching drivers were found.
+                    </p>
+
+                    <p>
+                        Try a different time or route.
+                    </p>
+                </div>
+            {% endfor %}
+        </section>
+    {% endif %}
+</div>
 {% endblock %}

@@ -1,5 +1,18 @@
 {% extends "base.html" %}
 
+{% block title %}
+    My ride activity
+{% endblock %}
+
+{% block filter_button %}
+    <a
+        href="{% url 'rides:driver_ride_list' %}"
+        class="filter-btn"
+    >
+        Back to Driver Plans
+    </a>
+{% endblock %}
+
 {% block content %}
 <div class="container">
     <h1>My ride activity</h1>
@@ -69,12 +82,5 @@
             <p>You have not requested any rides yet.</p>
         {% endfor %}
     </section>
-
-    <a
-        href="{% url 'rides:driver_ride_list' %}"
-        class="filter-btn"
-    >
-        Back to Driver Plans
-    </a>
 </div>
 {% endblock %}

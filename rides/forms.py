@@ -18,6 +18,79 @@ DAY_CHOICES = [
 ]
 
 
+class ClientRideSearchForm(forms.Form):
+    start_name = forms.CharField(
+        label="From",
+        max_length=255,
+        widget=forms.TextInput(
+            attrs={
+                "class": "ride-search-input",
+                "placeholder": "Pickup location",
+                "autocomplete": "off",
+            },
+        ),
+    )
+
+    destination_name = forms.CharField(
+        label="To",
+        max_length=255,
+        widget=forms.TextInput(
+            attrs={
+                "class": "ride-search-input",
+                "placeholder": "Destination",
+                "autocomplete": "off",
+            },
+        ),
+    )
+
+    preferred_date = forms.DateField(
+        label="Date",
+        widget=forms.DateInput(
+            attrs={
+                "class": "ride-search-input",
+                "type": "date",
+            },
+        ),
+    )
+
+    preferred_time = forms.TimeField(
+        label="Time",
+        widget=forms.TimeInput(
+            attrs={
+                "class": "ride-search-input",
+                "type": "time",
+            },
+        ),
+    )
+
+    seats_requested = forms.IntegerField(
+        label="Passengers",
+        min_value=1,
+        initial=1,
+        widget=forms.NumberInput(
+            attrs={
+                "class": "ride-search-input",
+                "min": "1",
+            },
+        ),
+    )
+
+    offered_price = forms.DecimalField(
+        label="Your offer",
+        min_value=1,
+        max_digits=8,
+        decimal_places=2,
+        widget=forms.NumberInput(
+            attrs={
+                "class": "ride-search-input",
+                "placeholder": "Price in ₸",
+                "min": "1",
+                "step": "100",
+            },
+        ),
+    )
+
+
 class RideForm(forms.ModelForm):
     recurring_days = forms.MultipleChoiceField(
         choices=DAY_CHOICES,
@@ -124,25 +197,52 @@ class RideRequestForm(forms.ModelForm):
         ]
 
         widgets = {
+            "pickup_point": forms.TextInput(
+                attrs={
+                    "class": "ride-search-input",
+                    "placeholder": "Pickup location",
+                    "autocomplete": "off",
+                },
+            ),
+            "dropoff_point": forms.TextInput(
+                attrs={
+                    "class": "ride-search-input",
+                    "placeholder": "Destination",
+                    "autocomplete": "off",
+                },
+            ),
             "preferred_time": forms.TimeInput(
                 attrs={
+                    "class": "ride-search-input",
                     "type": "time",
                 },
             ),
             "seats_requested": forms.NumberInput(
                 attrs={
+                    "class": "ride-search-input",
                     "min": "1",
                 },
             ),
             "offered_price": forms.NumberInput(
                 attrs={
+                    "class": "ride-search-input",
                     "min": "1",
                     "step": "100",
+                    "placeholder": "Price in ₸",
+                },
+            ),
+            "trip_type": forms.Select(
+                attrs={
+                    "class": "ride-search-input",
                 },
             ),
             "message": forms.Textarea(
                 attrs={
+                    "class": "ride-search-input",
                     "rows": 3,
+                    "placeholder": (
+                        "Add a message for the driver"
+                    ),
                 },
             ),
         }

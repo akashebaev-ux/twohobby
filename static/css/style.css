@@ -1247,6 +1247,193 @@ a.filter-btn {
 }
 
 
+
+/* RideBody client page */
+
+.client-ride-page {
+    padding-bottom: 40px;
+}
+
+.ride-search-card {
+    background: #fff;
+    border-radius: 24px;
+    padding: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.ride-search-card h1 {
+    margin-top: 0;
+}
+
+.ride-search-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.route-search-box {
+    position: relative;
+    background: #f4f4f4;
+    border-radius: 18px;
+    padding: 4px 16px;
+}
+
+.route-search-field {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 72px;
+}
+
+.route-search-field:first-child {
+    border-bottom: 1px solid #ddd;
+}
+
+.pickup-dot,
+.destination-dot {
+    display: block;
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+}
+
+.pickup-dot {
+    border: 3px solid #222;
+    border-radius: 50%;
+}
+
+.destination-dot {
+    background: #222;
+    border-radius: 3px;
+}
+
+.route-input-content {
+    flex: 1;
+}
+
+.route-input-content label,
+.ride-search-control label {
+    display: block;
+    margin-bottom: 4px;
+    color: #666;
+    font-size: 0.85rem;
+}
+
+.ride-search-input {
+    width: 100%;
+    box-sizing: border-box;
+    border: 0;
+    background: transparent;
+    padding: 8px 0;
+    font-size: 1rem;
+    outline: none;
+}
+
+.ride-search-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.ride-search-control {
+    background: #f4f4f4;
+    border-radius: 14px;
+    padding: 12px;
+}
+
+.price-offer-field {
+    display: flex;
+    align-items: center;
+}
+
+.price-offer-field span {
+    font-weight: 700;
+}
+
+.find-driver-btn,
+.choose-driver-btn {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    border: 0;
+    border-radius: 16px;
+    padding: 15px;
+    background: #111;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.driver-results {
+    margin-top: 28px;
+}
+
+.driver-result-card {
+    margin-bottom: 16px;
+    padding: 18px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.08);
+}
+
+.driver-result-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.driver-result-header h3,
+.driver-result-header p {
+    margin: 2px 0;
+}
+
+.driver-result-image,
+.driver-image-placeholder {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+}
+
+.driver-result-image {
+    object-fit: cover;
+}
+
+.driver-image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eee;
+    font-size: 1.5rem;
+}
+
+.driver-route,
+.driver-plan-details {
+    margin-bottom: 16px;
+}
+
+.driver-route p,
+.driver-plan-details p {
+    margin: 7px 0;
+}
+
+.no-driver-results {
+    padding: 20px;
+    background: #f4f4f4;
+    border-radius: 16px;
+    text-align: center;
+}
+
+@media (max-width: 480px) {
+    .ride-search-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
 /* Profile filter form */
 
 .profile-filter-form {

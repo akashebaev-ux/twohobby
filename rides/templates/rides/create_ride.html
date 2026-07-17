@@ -1,11 +1,24 @@
 {% extends "base.html" %}
 
+{% block title %}
+    Create Ride
+{% endblock %}
+
+{% block filter_button %}
+    <a
+        href="{% url 'rides:driver_ride_list' %}"
+        class="filter-btn"
+    >
+        Back to Driver Plans
+    </a>
+{% endblock %}
+
 {% block content %}
 <div class="container">
     <h1>Create a Ride</h1>
 
     <form
-        method="POST"
+        method="post"
         enctype="multipart/form-data"
     >
         {% csrf_token %}
@@ -19,12 +32,5 @@
             Create Ride
         </button>
     </form>
-
-    <a
-        href="{% url 'rides:driver_ride_list' %}"
-        class="filter-btn"
-    >
-        Back to Driver Plans
-    </a>
 </div>
 {% endblock %}
