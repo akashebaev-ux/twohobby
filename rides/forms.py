@@ -1,6 +1,10 @@
 from django import forms
 
-from .models import Ride, RideRequest
+from .models import (
+    Ride,
+    RideRequest,
+    TRIP_RECURRING,
+)
 
 
 DAY_CHOICES = [
@@ -39,10 +43,14 @@ class RideForm(forms.ModelForm):
 
         widgets = {
             "departure_time": forms.DateTimeInput(
-                attrs={"type": "datetime-local"}
+                attrs={
+                    "type": "datetime-local",
+                },
             ),
             "description": forms.Textarea(
-                attrs={"rows": 3}
+                attrs={
+                    "rows": 3,
+                },
             ),
         }
 
@@ -66,7 +74,7 @@ class RideForm(forms.ModelForm):
         )
 
         if (
-            trip_type == Ride.TRIP_RECURRING
+            trip_type == TRIP_RECURRING
             and not recurring_days
         ):
             self.add_error(
@@ -84,7 +92,7 @@ class RideForm(forms.ModelForm):
             [],
         )
 
-        if ride.trip_type == Ride.TRIP_RECURRING:
+        if ride.trip_type == TRIP_RECURRING:
             ride.recurring_days = ",".join(days)
         else:
             ride.recurring_days = ""
@@ -96,15 +104,91 @@ class RideForm(forms.ModelForm):
 
 
 class RideRequestForm(forms.ModelForm):
+    recurring_days = forms.MultipleChoiceField(
+        choices=DAY_CHOICES,
+        required=False,
+        widget=forms.CheckboxSelectMultiple,
+    )
+
     class Meta:
         model = RideRequest
         fields = [
-            "seats_requested",
             "pickup_point",
             "dropoff_point",
+            "preferred_time",
+            "seats_requested",
             "offered_price",
+            "trip_type",
+            "recurring_days",
             "message",
         ]
+
+        widgets = {
+            "preferred_time": forms.TimeInput(
+                attrs={
+                    "type": "time",
+                },
+            ),
+            "seats_requested": forms.NumberInput(
+                attrs={
+                    "min": "1",
+                },
+            ),
+            "offered_price": forms.NumberInput(
+                attrs={
+                    "min": "1",
+                    "step": "100",
+                },
+            ),
+            "message": forms.Textarea(
+                attrs={
+                    "rows": 3,
+                },
+            ),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        if (
+            self.instance.pk
+            and self.instance.recurring_days
+        ):
+            self.initial["recurring_days"] = (
+                self.instance.recurring_days.split(",")
+            )
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        pickup = cleaned_data.get("pickup_point")
+        dropoff = cleaned_data.get("dropoff_point")
+        trip_type = cleaned_data.get("trip_type")
+        recurring_days = cleaned_data.get(
+            "recurring_days"
+        )
+
+        if (
+            pickup
+            and dropoff
+            and pickup.strip().lower()
+            == dropoff.strip().lower()
+        ):
+            self.add_error(
+                "dropoff_point",
+                "Pickup and drop-off must be different.",
+            )
+
+        if (
+            trip_type == TRIP_RECURRING
+            and not recurring_days
+        ):
+            self.add_error(
+                "recurring_days",
+                "Select at least one recurring day.",
+            )
+
+        return cleaned_data
 
     def clean_seats_requested(self):
         seats_requested = self.cleaned_data[
@@ -129,3 +213,21 @@ class RideRequestForm(forms.ModelForm):
             )
 
         return offered_price
+
+    def save(self, commit=True):
+        bid = super().save(commit=False)
+
+        days = self.cleaned_data.get(
+            "recurring_days",
+            [],
+        )
+
+        if bid.trip_type == TRIP_RECURRING:
+            bid.recurring_days = ",".join(days)
+        else:
+            bid.recurring_days = ""
+
+        if commit:
+            bid.save()
+
+        return bid
