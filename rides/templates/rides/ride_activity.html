@@ -8,7 +8,7 @@
         <h2>Rides I created</h2>
 
         {% for ride in created_rides %}
-            <article>
+            <article class="ride-card">
                 <h3>
                     <a href="{% url 'rides:ride_detail' ride.pk %}">
                         {{ ride.start_name }}
@@ -41,7 +41,7 @@
         <h2>My passenger requests</h2>
 
         {% for ride_request in passenger_requests %}
-            <article>
+            <article class="ride-card">
                 <h3>
                     <a href="{% url 'rides:ride_detail' ride_request.ride.pk %}">
                         {{ ride_request.ride.start_name }}
@@ -70,8 +70,11 @@
         {% endfor %}
     </section>
 
-    <a href="{% url 'rides:ride_list' %}">
-        Back to rides
+    <a
+        href="{% url 'rides:driver_ride_list' %}"
+        class="filter-btn"
+    >
+        Back to Driver Plans
     </a>
 </div>
 {% endblock %}

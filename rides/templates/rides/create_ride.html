@@ -12,13 +12,19 @@
 
         {{ form.as_p }}
 
-        <button type="submit">
+        <button
+            type="submit"
+            class="filter-btn"
+        >
             Create Ride
         </button>
     </form>
 
-    <a href="{% url 'rides:ride_list' %}">
-        Back to Rides
+    <a
+        href="{% url 'rides:driver_ride_list' %}"
+        class="filter-btn"
+    >
+        Back to Driver Plans
     </a>
 </div>
 {% endblock %}

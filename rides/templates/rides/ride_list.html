@@ -10,15 +10,39 @@
 
 {% block content %}
 <div class="container">
-    <h1>Rides</h1>
+    <h1>Driver plans</h1>
+
+    <div class="ride-page-actions">
+        <a
+            href="{% url 'rides:create_ride' %}"
+            class="filter-btn"
+        >
+            Publish driving plan
+        </a>
+
+        <a
+            href="{% url 'rides:ride_activity' %}"
+            class="filter-btn"
+        >
+            My driving plans
+        </a>
+    </div>
 
     <div id="ride-map"></div>
 
     <section>
-        <h2>Available rides</h2>
+        <h2>Available driving plans</h2>
 
         {% for ride in rides %}
-            <article>
+            <article class="ride-card">
+                {% if ride.car_image %}
+                    <img
+                        src="{{ ride.car_image.url }}"
+                        alt="{{ ride.car_brand }} {{ ride.car_model }}"
+                        class="ride-car-image"
+                    >
+                {% endif %}
+
                 <h3>
                     <a href="{% url 'rides:ride_detail' ride.pk %}">
                         {{ ride.start_name }}
@@ -26,6 +50,11 @@
                         {{ ride.destination_name }}
                     </a>
                 </h3>
+
+                <p>
+                    Driver:
+                    {{ ride.driver.profile.display_name|default:ride.driver.username }}
+                </p>
 
                 <p>
                     Departure:
@@ -38,12 +67,38 @@
                 </p>
 
                 <p>
+                    Car:
+                    {% if ride.car_brand or ride.car_model %}
+                        {{ ride.car_brand }}
+                        {{ ride.car_model }}
+
+                        {% if ride.car_year %}
+                            ({{ ride.car_year }})
+                        {% endif %}
+                    {% else %}
+                        Not provided
+                    {% endif %}
+                </p>
+
+                <p>
+                    Schedule:
+                    {{ ride.get_trip_type_display }}
+                </p>
+
+                {% if ride.trip_type == ride.TRIP_RECURRING %}
+                    <p>
+                        Days:
+                        {{ ride.recurring_days }}
+                    </p>
+                {% endif %}
+
+                <p>
                     Status:
                     {{ ride.get_status_display }}
                 </p>
             </article>
         {% empty %}
-            <p>No rides available yet.</p>
+            <p>No driving plans available yet.</p>
         {% endfor %}
     </section>
 </div>

@@ -1182,7 +1182,69 @@ a.filter-btn {
 }
 
 
+/* Ride driver page */
 
+.ride-page-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.ride-card {
+    margin-bottom: 24px;
+    padding: 18px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, .08);
+}
+
+.ride-card h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.ride-card h3 a {
+    text-decoration: none;
+    color: #A30088;
+}
+
+.ride-card h3 a:hover {
+    color: #ff9966;
+}
+
+.ride-card p {
+    margin: 8px 0;
+    color: #595656;
+}
+
+.ride-car-image {
+    width: 100%;
+    max-height: 220px;
+    object-fit: cover;
+    border-radius: 18px;
+    margin-bottom: 16px;
+}
+
+
+/* RideBody driver page dark mode */
+
+.dark-mode .ride-card {
+    background: #2b2b2b;
+    color: white;
+}
+
+.dark-mode .ride-card p {
+    color: #cccccc;
+}
+
+.dark-mode .ride-card h3 a {
+    color: #ff9966;
+}
+
+.dark-mode .ride-card h3 a:hover {
+    color: white;
+}
 
 
 /* Profile filter form */
