@@ -112,8 +112,13 @@ def ride_detail(request, pk):
     passenger_requests = None
 
     if ride.driver == request.user:
-        passenger_requests = ride.requests.select_related(
-            "passenger"
+        passenger_requests = (
+            ride.requests
+            .select_related(
+                "passenger",
+                "passenger__profile",
+            )
+            .order_by("-created_at")
         )
 
     return render(

@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block title %}
+    Ride details
+{% endblock %}
+
 {% block content %}
 <div class="container">
     <h1>
@@ -8,105 +12,208 @@
         {{ ride.destination_name }}
     </h1>
 
-    <p>Driver: {{ ride.driver }}</p>
-    <p>Departure: {{ ride.departure_time }}</p>
-    <p>Available seats: {{ ride.available_seats }}</p>
-    <p>Remaining seats: {{ ride.remaining_seats }}</p>
-    <p>Status: {{ ride.get_status_display }}</p>
+    <p>
+        Driver:
+        {{ ride.driver.profile.display_name|default:ride.driver.username }}
+    </p>
+
+    <p>
+        Departure:
+        {{ ride.departure_time|date:"M j, Y H:i" }}
+    </p>
+
+    <p>
+        Available seats:
+        {{ ride.available_seats }}
+    </p>
+
+    <p>
+        Remaining seats:
+        {{ ride.remaining_seats }}
+    </p>
+
+    <p>
+        Status:
+        {{ ride.get_status_display }}
+    </p>
+
+    <p>
+        Schedule:
+        {{ ride.get_trip_type_display }}
+    </p>
+
+    {% if ride.trip_type == "recurring" %}
+        <p>
+            Days:
+            {{ ride.recurring_days }}
+        </p>
+    {% endif %}
+
+    {% if ride.car_brand or ride.car_model %}
+        <p>
+            Car:
+            {{ ride.car_brand }}
+            {{ ride.car_model }}
+
+            {% if ride.car_year %}
+                ({{ ride.car_year }})
+            {% endif %}
+        </p>
+    {% endif %}
+
+    {% if ride.car_image %}
+        <img
+            src="{{ ride.car_image.url }}"
+            alt="{{ ride.car_brand }} {{ ride.car_model }}"
+            class="ride-car-image"
+        >
+    {% endif %}
 
     {% if ride.description %}
-        <p>{{ ride.description }}</p>
+        <p>
+            {{ ride.description }}
+        </p>
     {% endif %}
 
-    {% if ride.driver == request.user %}
-        <a href="{% url 'rides:edit_ride' ride.pk %}">
-            Edit ride
-        </a>
-
-        {% if ride.status == "planned" %}
-            <form
-                method="POST"
-                action="{% url 'rides:cancel_ride' ride.pk %}"
+    {% if request.user == ride.driver %}
+        <div class="ride-page-actions">
+            <a
+                href="{% url 'rides:edit_ride' ride.pk %}"
+                class="filter-btn"
             >
-                {% csrf_token %}
-                <button type="submit">
-                    Cancel ride
-                </button>
-            </form>
-        {% endif %}
+                Edit ride
+            </a>
+
+            {% if ride.status == "planned" %}
+                <form
+                    method="post"
+                    action="{% url 'rides:cancel_ride' ride.pk %}"
+                >
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="filter-btn"
+                    >
+                        Cancel ride
+                    </button>
+                </form>
+            {% endif %}
+        </div>
     {% endif %}
 
-    {% if ride.driver == request.user %}
-        <h2>Passenger requests</h2>
+    {% if request.user == ride.driver %}
+        <section>
+            <h2>Client bids</h2>
 
-        {% for ride_request in passenger_requests %}
-            <article>
-                <p>
-                    Passenger:
-                    {{ ride_request.passenger }}
-                </p>
+            {% for bid in passenger_requests %}
+                <article class="client-bid-card">
+                    {% if bid.passenger.profile.profile_image %}
+                        <img
+                            src="{{ bid.passenger.profile.profile_image.url }}"
+                            alt="{{ bid.passenger.username }}"
+                            class="client-bid-image"
+                        >
+                    {% endif %}
 
-                <p>
-                    Pickup:
-                    {{ ride_request.pickup_point }}
-                </p>
+                    <h3>
+                        {{ bid.passenger.profile.display_name|default:bid.passenger.username }}
+                    </h3>
 
-                <p>
-                    Drop-off:
-                    {{ ride_request.dropoff_point }}
-                </p>
-
-                <p>
-                    Seats:
-                    {{ ride_request.seats_requested }}
-                </p>
-
-                <p>
-                    Offer:
-                    {{ ride_request.offered_price }}
-                </p>
-
-                {% if ride_request.message %}
                     <p>
-                        Message:
-                        {{ ride_request.message }}
+                        Pickup:
+                        {{ bid.pickup_point }}
                     </p>
-                {% endif %}
 
-                <p>
-                    Status:
-                    {{ ride_request.get_status_display }}
-                </p>
+                    <p>
+                        Drop-off:
+                        {{ bid.dropoff_point }}
+                    </p>
 
-                {% if ride_request.status == "pending" %}
-                    <form
-                        method="POST"
-                        action="{% url 'rides:accept_request' ride_request.pk %}"
-                    >
-                        {% csrf_token %}
-                        <button type="submit">
-                            Accept
-                        </button>
-                    </form>
+                    {% if bid.preferred_time %}
+                        <p>
+                            Preferred time:
+                            {{ bid.preferred_time|time:"H:i" }}
+                        </p>
+                    {% endif %}
 
-                    <form
-                        method="POST"
-                        action="{% url 'rides:reject_request' ride_request.pk %}"
-                    >
-                        {% csrf_token %}
-                        <button type="submit">
-                            Reject
-                        </button>
-                    </form>
-                {% endif %}
-            </article>
-        {% empty %}
-            <p>No passenger requests yet.</p>
-        {% endfor %}
+                    <p>
+                        Seats:
+                        {{ bid.seats_requested }}
+                    </p>
+
+                    <p>
+                        Offered price:
+                        {{ bid.offered_price }} ₸
+                    </p>
+
+                    <p>
+                        Schedule:
+                        {{ bid.get_trip_type_display }}
+                    </p>
+
+                    {% if bid.trip_type == "recurring" %}
+                        <p>
+                            Days:
+                            {{ bid.recurring_days }}
+                        </p>
+                    {% endif %}
+
+                    {% if bid.message %}
+                        <p>
+                            Message:
+                            {{ bid.message }}
+                        </p>
+                    {% endif %}
+
+                    {% if bid.status == "pending" %}
+                        <div class="ride-page-actions">
+                            <form
+                                method="post"
+                                action="{% url 'rides:accept_request' bid.pk %}"
+                            >
+                                {% csrf_token %}
+
+                                <button
+                                    type="submit"
+                                    class="filter-btn"
+                                >
+                                    Accept bid
+                                </button>
+                            </form>
+
+                            <form
+                                method="post"
+                                action="{% url 'rides:reject_request' bid.pk %}"
+                            >
+                                {% csrf_token %}
+
+                                <button
+                                    type="submit"
+                                    class="filter-btn"
+                                >
+                                    Reject bid
+                                </button>
+                            </form>
+                        </div>
+                    {% else %}
+                        <p>
+                            Status:
+                            {{ bid.get_status_display }}
+                        </p>
+                    {% endif %}
+                </article>
+            {% empty %}
+                <p>No client bids yet.</p>
+            {% endfor %}
+        </section>
     {% endif %}
 
-    <a href="{% url 'rides:ride_list' %}">
-        Back to rides
+    <a
+        href="{% url 'rides:driver_ride_list' %}"
+        class="filter-btn"
+    >
+        Back to driver plans
     </a>
 </div>
 {% endblock %}
