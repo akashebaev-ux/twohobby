@@ -384,3 +384,29 @@ def ride_activity(request):
             "passenger_requests": passenger_requests,
         },
     )
+
+
+@login_required
+def ride_home(request):
+    return render(
+        request,
+        "rides/ride_home.html",
+    )
+
+
+@login_required
+def client_ride_list(request):
+    rides = (
+        Ride.objects
+        .filter(status=Ride.STATUS_PLANNED)
+        .select_related("driver")
+        .order_by("departure_time")
+    )
+
+    return render(
+        request,
+        "rides/client_ride_list.html",
+        {
+            "rides": rides,
+        },
+    )

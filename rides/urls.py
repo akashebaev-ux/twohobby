@@ -5,11 +5,22 @@ from . import views
 
 app_name = "rides"
 
+
 urlpatterns = [
     path(
         "",
+        views.ride_home,
+        name="ride_home",
+    ),
+    path(
+        "drivers/",
         views.ride_list,
-        name="ride_list",
+        name="driver_ride_list",
+    ),
+    path(
+        "clients/",
+        views.client_ride_list,
+        name="client_ride_list",
     ),
     path(
         "create/",

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}
+    RideBody
+{% endblock %}
+
+{% block filter_button %}
+{% endblock %}
+
+{% block content %}
+<section class="ride-role-page">
+    <h1>RideBody</h1>
+
+    <p>
+        Choose how you want to use RideBody.
+    </p>
+
+    <div class="ride-role-actions">
+        <a
+            href="{% url 'rides:driver_ride_list' %}"
+            class="ride-role-card"
+        >
+            <span class="ride-role-icon">🚗</span>
+            <strong>Driver</strong>
+            <small>
+                Publish your driving plan and choose client bids.
+            </small>
+        </a>
+
+        <a
+            href="{% url 'rides:client_ride_list' %}"
+            class="ride-role-card"
+        >
+            <span class="ride-role-icon">👤</span>
+            <strong>Client</strong>
+            <small>
+                Find a suitable route and offer your price.
+            </small>
+        </a>
+    </div>
+</section>
+{% endblock %}

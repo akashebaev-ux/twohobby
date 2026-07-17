@@ -1140,6 +1140,51 @@ a.filter-btn {
     line-height: 1.4;
 }
 
+/* RideBody home page */
+
+.ride-role-page {
+    text-align: center;
+}
+
+.ride-role-actions {
+    display: grid;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.ride-role-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 30px 20px;
+    border-radius: 24px;
+    color: #222;
+    text-decoration: none;
+    background: white;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, .1);
+}
+
+.ride-role-card:hover {
+    transform: translateY(-2px);
+}
+
+.ride-role-icon {
+    font-size: 3rem;
+}
+
+.ride-role-card strong {
+    font-size: 1.4rem;
+}
+
+.ride-role-card small {
+    color: #595656;
+    line-height: 1.5;
+}
+
+
+
+
+
 /* Profile filter form */
 
 .profile-filter-form {
