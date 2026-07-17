@@ -9,6 +9,7 @@ from django.urls import reverse
 from django.views.decorators.http import require_POST
 
 from .forms import (
+    CAR_MODELS,
     ClientRideSearchForm,
     RideForm,
     RideRequestForm,
@@ -115,6 +116,7 @@ def create_ride(request):
         "rides/create_ride.html",
         {
             "form": form,
+            "car_models": CAR_MODELS,
         },
     )
 

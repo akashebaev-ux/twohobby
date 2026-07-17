@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% block filter_button %}{% endblock %}
 
 {% block extra_css %}
     <link
@@ -17,14 +18,14 @@
             href="{% url 'rides:create_ride' %}"
             class="filter-btn"
         >
-            Publish driving plan
+            My driving plan
         </a>
 
         <a
             href="{% url 'rides:ride_activity' %}"
             class="filter-btn"
         >
-            My driving plans
+            My orders
         </a>
     </div>
 

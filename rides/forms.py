@@ -6,6 +6,110 @@ from .models import (
     TRIP_RECURRING,
 )
 
+CAR_MODELS = {
+    "Toyota": [
+        "Camry",
+        "Corolla",
+        "RAV4",
+        "Land Cruiser",
+        "Highlander",
+        "Prius",
+    ],
+    "Hyundai": [
+        "Accent",
+        "Elantra",
+        "Sonata",
+        "Tucson",
+        "Santa Fe",
+    ],
+    "Kia": [
+        "Rio",
+        "Cerato",
+        "K5",
+        "Sportage",
+        "Sorento",
+    ],
+    "Chevrolet": [
+        "Cobalt",
+        "Nexia",
+        "Malibu",
+        "Tracker",
+        "Tahoe",
+    ],
+    "Lexus": [
+        "ES",
+        "RX",
+        "NX",
+        "GX",
+        "LX",
+    ],
+    "Mercedes-Benz": [
+        "A-Class",
+        "C-Class",
+        "E-Class",
+        "S-Class",
+        "GLC",
+        "GLE",
+    ],
+    "BMW": [
+        "3 Series",
+        "5 Series",
+        "7 Series",
+        "X3",
+        "X5",
+        "X7",
+    ],
+    "Audi": [
+        "A3",
+        "A4",
+        "A6",
+        "Q3",
+        "Q5",
+        "Q7",
+    ],
+    "Volkswagen": [
+        "Polo",
+        "Jetta",
+        "Passat",
+        "Tiguan",
+        "Touareg",
+    ],
+    "Nissan": [
+        "Almera",
+        "Qashqai",
+        "X-Trail",
+        "Patrol",
+    ],
+    "Honda": [
+        "Civic",
+        "Accord",
+        "CR-V",
+        "Pilot",
+    ],
+    "Skoda": [
+        "Rapid",
+        "Octavia",
+        "Superb",
+        "Kodiaq",
+    ],
+    "Renault": [
+        "Logan",
+        "Duster",
+        "Kaptur",
+        "Arkana",
+    ],
+    "Other": [
+        "Other",
+    ],
+}
+
+
+CAR_BRAND_CHOICES = [
+    ("", "Choose car brand"),
+] + [
+    (brand, brand)
+    for brand in CAR_MODELS
+]
 
 DAY_CHOICES = [
     ("monday", "Monday"),
@@ -98,8 +202,31 @@ class RideForm(forms.ModelForm):
         widget=forms.CheckboxSelectMultiple,
     )
 
+    car_brand = forms.ChoiceField(
+        choices=CAR_BRAND_CHOICES,
+        widget=forms.Select(
+            attrs={
+                "class": "driver-form-input",
+                "id": "id_car_brand",
+            }
+        ),
+    )
+
+    car_model = forms.ChoiceField(
+        choices=[
+            ("", "Choose car model"),
+        ],
+        widget=forms.Select(
+            attrs={
+                "class": "driver-form-input",
+                "id": "id_car_model",
+            }
+        ),
+    )
+
     class Meta:
         model = Ride
+
         fields = [
             "start_name",
             "destination_name",
@@ -115,28 +242,101 @@ class RideForm(forms.ModelForm):
         ]
 
         widgets = {
+            "start_name": forms.TextInput(
+                attrs={
+                    "class": "driver-form-input",
+                    "placeholder": "Starting point",
+                }
+            ),
+            "destination_name": forms.TextInput(
+                attrs={
+                    "class": "driver-form-input",
+                    "placeholder": "Destination",
+                }
+            ),
             "departure_time": forms.DateTimeInput(
                 attrs={
+                    "class": "driver-form-input",
                     "type": "datetime-local",
                 },
+                format="%Y-%m-%dT%H:%M",
+            ),
+            "available_seats": forms.NumberInput(
+                attrs={
+                    "class": "driver-form-input",
+                    "min": 1,
+                    "max": 8,
+                }
+            ),
+            "car_year": forms.NumberInput(
+                attrs={
+                    "class": "driver-form-input",
+                    "min": 1980,
+                    "max": 2030,
+                    "placeholder": "Car year",
+                }
+            ),
+            "car_image": forms.ClearableFileInput(
+                attrs={
+                    "class": "driver-file-input",
+                    "accept": "image/*",
+                }
+            ),
+            "trip_type": forms.Select(
+                attrs={
+                    "class": "driver-form-input",
+                    "id": "id_trip_type",
+                }
             ),
             "description": forms.Textarea(
                 attrs={
-                    "rows": 3,
-                },
+                    "class": "driver-form-input",
+                    "rows": 4,
+                    "placeholder": (
+                        "Additional information about your trip"
+                    ),
+                }
             ),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        if (
-            self.instance.pk
-            and self.instance.recurring_days
-        ):
-            self.initial["recurring_days"] = (
-                self.instance.recurring_days.split(",")
+        self.fields["departure_time"].input_formats = [
+            "%Y-%m-%dT%H:%M",
+        ]
+
+        selected_brand = ""
+
+        if self.is_bound:
+            selected_brand = self.data.get(
+                "car_brand",
+                "",
             )
+        elif self.instance and self.instance.pk:
+            selected_brand = self.instance.car_brand
+
+        if selected_brand in CAR_MODELS:
+            self.fields["car_model"].choices = [
+                ("", "Choose car model"),
+            ] + [
+                (model, model)
+                for model in CAR_MODELS[selected_brand]
+            ]
+
+        selected_days = []
+
+        if self.instance and self.instance.pk:
+            if self.instance.recurring_days:
+                selected_days = [
+                    day.strip()
+                    for day in (
+                        self.instance.recurring_days.split(",")
+                    )
+                    if day.strip()
+                ]
+
+        self.initial["recurring_days"] = selected_days
 
     def clean(self):
         cleaned_data = super().clean()
@@ -152,7 +352,10 @@ class RideForm(forms.ModelForm):
         ):
             self.add_error(
                 "recurring_days",
-                "Select at least one recurring day.",
+                (
+                    "Choose at least one day "
+                    "for a recurring trip."
+                ),
             )
 
         return cleaned_data
@@ -160,15 +363,14 @@ class RideForm(forms.ModelForm):
     def save(self, commit=True):
         ride = super().save(commit=False)
 
-        days = self.cleaned_data.get(
+        recurring_days = self.cleaned_data.get(
             "recurring_days",
             [],
         )
 
-        if ride.trip_type == TRIP_RECURRING:
-            ride.recurring_days = ",".join(days)
-        else:
-            ride.recurring_days = ""
+        ride.recurring_days = ",".join(
+            recurring_days
+        )
 
         if commit:
             ride.save()

@@ -1,7 +1,8 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}
-    Create Ride
+    Create Driving Plan
 {% endblock %}
 
 {% block filter_button %}
@@ -14,23 +15,326 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <h1>Create a Ride</h1>
+<div class="driver-plan-page">
+    <section class="driver-plan-card">
+        <div class="driver-plan-heading">
+            <span class="driver-plan-icon">🚘</span>
 
-    <form
-        method="post"
-        enctype="multipart/form-data"
-    >
-        {% csrf_token %}
+            <div>
+                <h1>My driving plan</h1>
 
-        {{ form.as_p }}
+                <p>
+                    Add your route, schedule and car details.
+                </p>
+            </div>
+        </div>
 
-        <button
-            type="submit"
-            class="filter-btn"
+        <form
+            method="post"
+            enctype="multipart/form-data"
+            class="driver-plan-form"
         >
-            Create Ride
-        </button>
-    </form>
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="driver-form-errors">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <div class="driver-route-box">
+                <div class="driver-route-field">
+                    <span class="pickup-dot"></span>
+
+                    <div class="driver-input-content">
+                        <label for="{{ form.start_name.id_for_label }}">
+                            Starting point
+                        </label>
+
+                        {{ form.start_name }}
+
+                        {% for error in form.start_name.errors %}
+                            <small class="driver-field-error">
+                                {{ error }}
+                            </small>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="driver-route-field">
+                    <span class="destination-dot"></span>
+
+                    <div class="driver-input-content">
+                        <label for="{{ form.destination_name.id_for_label }}">
+                            Destination
+                        </label>
+
+                        {{ form.destination_name }}
+
+                        {% for error in form.destination_name.errors %}
+                            <small class="driver-field-error">
+                                {{ error }}
+                            </small>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="driver-form-grid">
+                <div class="driver-form-control">
+                    <label for="{{ form.departure_time.id_for_label }}">
+                        Departure time
+                    </label>
+
+                    {{ form.departure_time }}
+
+                    {% for error in form.departure_time.errors %}
+                        <small class="driver-field-error">
+                            {{ error }}
+                        </small>
+                    {% endfor %}
+                </div>
+
+                <div class="driver-form-control">
+                    <label for="{{ form.available_seats.id_for_label }}">
+                        Available seats
+                    </label>
+
+                    {{ form.available_seats }}
+
+                    {% for error in form.available_seats.errors %}
+                        <small class="driver-field-error">
+                            {{ error }}
+                        </small>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <section class="driver-form-section">
+                <h2>Car details</h2>
+
+                <div class="driver-form-grid">
+                    <div class="driver-form-control">
+                        <label for="{{ form.car_brand.id_for_label }}">
+                            Car brand
+                        </label>
+
+                        {{ form.car_brand }}
+
+                        {% for error in form.car_brand.errors %}
+                            <small class="driver-field-error">
+                                {{ error }}
+                            </small>
+                        {% endfor %}
+                    </div>
+
+                    <div class="driver-form-control">
+                        <label for="{{ form.car_model.id_for_label }}">
+                            Car model
+                        </label>
+
+                        {{ form.car_model }}
+
+                        {% for error in form.car_model.errors %}
+                            <small class="driver-field-error">
+                                {{ error }}
+                            </small>
+                        {% endfor %}
+                    </div>
+
+                    <div class="driver-form-control">
+                        <label for="{{ form.car_year.id_for_label }}">
+                            Car year
+                        </label>
+
+                        {{ form.car_year }}
+
+                        {% for error in form.car_year.errors %}
+                            <small class="driver-field-error">
+                                {{ error }}
+                            </small>
+                        {% endfor %}
+                    </div>
+
+                    <div class="driver-form-control">
+                        <label for="{{ form.car_image.id_for_label }}">
+                            Car image
+                        </label>
+
+                        {{ form.car_image }}
+
+                        {% for error in form.car_image.errors %}
+                            <small class="driver-field-error">
+                                {{ error }}
+                            </small>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+
+            <section class="driver-form-section">
+                <h2>Trip schedule</h2>
+
+                <div class="driver-form-control">
+                    <label for="{{ form.trip_type.id_for_label }}">
+                        Trip type
+                    </label>
+
+                    {{ form.trip_type }}
+
+                    {% for error in form.trip_type.errors %}
+                        <small class="driver-field-error">
+                            {{ error }}
+                        </small>
+                    {% endfor %}
+                </div>
+
+                <div
+                    id="recurring-days-section"
+                    class="recurring-days-section"
+                >
+                    <p class="driver-form-label">
+                        Recurring days
+                    </p>
+
+                    <div class="recurring-day-grid">
+                        {% for checkbox in form.recurring_days %}
+                            <label class="recurring-day-option">
+                                {{ checkbox.tag }}
+
+                                <span>
+                                    {{ checkbox.choice_label }}
+                                </span>
+                            </label>
+                        {% endfor %}
+                    </div>
+
+                    {% for error in form.recurring_days.errors %}
+                        <small class="driver-field-error">
+                            {{ error }}
+                        </small>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <div class="driver-form-control">
+                <label for="{{ form.description.id_for_label }}">
+                    Description
+                </label>
+
+                {{ form.description }}
+
+                {% for error in form.description.errors %}
+                    <small class="driver-field-error">
+                        {{ error }}
+                    </small>
+                {% endfor %}
+            </div>
+
+            <button
+                type="submit"
+                class="publish-driver-plan-btn"
+            >
+                Publish driving plan
+            </button>
+        </form>
+    </section>
 </div>
+
+{{ car_models|json_script:"car-model-data" }}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const brandSelect = document.getElementById(
+            "id_car_brand"
+        );
+
+        const modelSelect = document.getElementById(
+            "id_car_model"
+        );
+
+        const tripTypeSelect = document.getElementById(
+            "id_trip_type"
+        );
+
+        const recurringSection = document.getElementById(
+            "recurring-days-section"
+        );
+
+        const modelDataElement = document.getElementById(
+            "car-model-data"
+        );
+
+        const carModels = modelDataElement
+            ? JSON.parse(modelDataElement.textContent)
+            : {};
+
+        function updateCarModels() {
+            const selectedBrand = brandSelect.value;
+            const selectedModel = modelSelect.dataset.selected || "";
+
+            modelSelect.innerHTML = "";
+
+            const defaultOption = document.createElement(
+                "option"
+            );
+
+            defaultOption.value = "";
+            defaultOption.textContent = "Choose car model";
+
+            modelSelect.appendChild(defaultOption);
+
+            const models = carModels[selectedBrand] || [];
+
+            models.forEach(function (model) {
+                const option = document.createElement(
+                    "option"
+                );
+
+                option.value = model;
+                option.textContent = model;
+
+                if (model === selectedModel) {
+                    option.selected = true;
+                }
+
+                modelSelect.appendChild(option);
+            });
+
+            modelSelect.dataset.selected = "";
+        }
+
+        function updateRecurringDays() {
+            if (!tripTypeSelect || !recurringSection) {
+                return;
+            }
+
+            const isRecurring = (
+                tripTypeSelect.value === "recurring"
+            );
+
+            recurringSection.hidden = !isRecurring;
+        }
+
+        if (modelSelect) {
+            modelSelect.dataset.selected = modelSelect.value;
+        }
+
+        if (brandSelect && modelSelect) {
+            brandSelect.addEventListener(
+                "change",
+                updateCarModels
+            );
+        }
+
+        if (tripTypeSelect) {
+            tripTypeSelect.addEventListener(
+                "change",
+                updateRecurringDays
+            );
+        }
+
+        updateRecurringDays();
+    });
+</script>
 {% endblock %}

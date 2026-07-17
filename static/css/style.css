@@ -1434,6 +1434,254 @@ a.filter-btn {
 }
 
 
+/* Create driver plan page */
+
+.driver-plan-page {
+    padding-bottom: 40px;
+}
+
+.driver-plan-card {
+    padding: 20px;
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .08);
+}
+
+.driver-plan-heading {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+.driver-plan-heading h1 {
+    margin: 0 0 4px;
+    font-size: 1.7rem;
+}
+
+.driver-plan-heading p {
+    margin: 0;
+    color: #666;
+    line-height: 1.4;
+}
+
+.driver-plan-icon {
+    display: flex;
+    width: 52px;
+    height: 52px;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 16px;
+    background: #f4f4f4;
+    font-size: 1.7rem;
+}
+
+.driver-plan-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.driver-route-box {
+    padding: 4px 16px;
+    background: #f4f4f4;
+    border-radius: 18px;
+}
+
+.driver-route-field {
+    display: flex;
+    min-height: 72px;
+    align-items: center;
+    gap: 12px;
+}
+
+.driver-route-field:first-child {
+    border-bottom: 1px solid #ddd;
+}
+
+.driver-input-content {
+    flex: 1;
+}
+
+.driver-input-content label,
+.driver-form-control label,
+.driver-form-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+.driver-form-input {
+    width: 100%;
+    padding: 11px 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: #222;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.driver-route-box .driver-form-input {
+    padding: 6px 0;
+}
+
+.driver-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.driver-form-control {
+    padding: 12px;
+    background: #f4f4f4;
+    border-radius: 14px;
+}
+
+.driver-form-control textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.driver-form-control select {
+    cursor: pointer;
+}
+
+.driver-form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.driver-form-section h2 {
+    margin: 4px 0 0;
+    font-size: 1.1rem;
+}
+
+.driver-file-input {
+    width: 100%;
+    margin-top: 8px;
+    font-size: .9rem;
+}
+
+.driver-file-input::file-selector-button {
+    margin-right: 10px;
+    padding: 9px 12px;
+    border: 0;
+    border-radius: 12px;
+    background: #111;
+    color: #fff;
+    cursor: pointer;
+}
+
+.recurring-days-section {
+    padding: 14px;
+    background: #f4f4f4;
+    border-radius: 16px;
+}
+
+.recurring-day-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+}
+
+.recurring-day-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    background: #fff;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.recurring-day-option input {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+}
+
+.publish-driver-plan-btn {
+    width: 100%;
+    padding: 15px;
+    border: 0;
+    border-radius: 16px;
+    background: linear-gradient(
+        135deg,
+        #A30088,
+        #ff9966
+    );
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.publish-driver-plan-btn:hover {
+    transform: translateY(-1px);
+    opacity: .95;
+}
+
+.driver-field-error,
+.driver-form-errors {
+    display: block;
+    margin-top: 6px;
+    color: #c62828;
+    font-size: .82rem;
+}
+
+.driver-form-errors ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.dark-mode .driver-plan-card {
+    background: #2b2b2b;
+}
+
+.dark-mode .driver-plan-heading p,
+.dark-mode .driver-input-content label,
+.dark-mode .driver-form-control label,
+.dark-mode .driver-form-label {
+    color: #ccc;
+}
+
+.dark-mode .driver-plan-icon,
+.dark-mode .driver-route-box,
+.dark-mode .driver-form-control,
+.dark-mode .recurring-days-section {
+    background: #1e1e1e;
+}
+
+.dark-mode .driver-form-input {
+    color: #fff;
+}
+
+.dark-mode .recurring-day-option {
+    background: #333;
+    color: #fff;
+}
+
+.dark-mode .driver-route-field:first-child {
+    border-color: #444;
+}
+
+@media screen and (max-width: 480px) {
+    .driver-form-grid,
+    .recurring-day-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .driver-plan-card {
+        padding: 16px;
+    }
+}
+
+
 /* Profile filter form */
 
 .profile-filter-form {
