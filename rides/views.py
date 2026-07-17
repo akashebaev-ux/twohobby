@@ -8,7 +8,10 @@ from django.views.decorators.http import require_POST
 
 from .forms import RideForm, RideRequestForm
 from .models import Ride, RideRequest
-from .services import users_are_trusted
+from .services import (
+    bid_matches_ride,
+    users_are_trusted,
+)
 
 
 @login_required
@@ -120,6 +123,9 @@ def ride_detail(request, pk):
             )
             .order_by("-created_at")
         )
+
+        for bid in passenger_requests:
+            bid.matches = bid_matches_ride(bid)
 
     return render(
         request,

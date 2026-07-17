@@ -108,6 +108,16 @@
 
             {% for bid in passenger_requests %}
                 <article class="client-bid-card">
+                    {% if bid.matches %}
+                        <p class="bid-match">
+                            ✓ Matches your driving plan
+                        </p>
+                    {% else %}
+                        <p class="bid-no-match">
+                            ✗ Does not fully match your driving plan
+                        </p>
+                    {% endif %}
+
                     {% if bid.passenger.profile.profile_image %}
                         <img
                             src="{{ bid.passenger.profile.profile_image.url }}"
@@ -166,7 +176,7 @@
                         </p>
                     {% endif %}
 
-                    {% if bid.status == "pending" %}
+                    {% if bid.matches and bid.status == "pending" %}
                         <div class="ride-page-actions">
                             <form
                                 method="post"
@@ -196,6 +206,25 @@
                                 </button>
                             </form>
                         </div>
+                    {% elif bid.status == "pending" %}
+                        <p>
+                            This bid cannot be accepted because it does not
+                            fully match the driving plan.
+                        </p>
+
+                        <form
+                            method="post"
+                            action="{% url 'rides:reject_request' bid.pk %}"
+                        >
+                            {% csrf_token %}
+
+                            <button
+                                type="submit"
+                                class="filter-btn"
+                            >
+                                Reject bid
+                            </button>
+                        </form>
                     {% else %}
                         <p>
                             Status:
@@ -210,10 +239,10 @@
     {% endif %}
 
     <a
-        href="{% url 'rides:driver_ride_list' %}"
+        href="{% url 'rides:ride_activity' %}"
         class="filter-btn"
     >
-        Back to driver plans
+        Back to ride activity
     </a>
 </div>
 {% endblock %}
