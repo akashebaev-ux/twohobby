@@ -1792,7 +1792,15 @@ a.filter-btn {
     }
 }
 
-
+@media screen and (max-width: 400px) {
+    .bottom-nav .nav-link div {
+        display: none;
+    }
+    .filter-btn {
+        font-size: 12px;
+        padding: 8px 14px;
+    }
+}
 
 /* 404 page */
 
