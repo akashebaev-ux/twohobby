@@ -405,7 +405,10 @@ def client_ride_list(request):
     rides = (
         Ride.objects
         .filter(status=Ride.STATUS_PLANNED)
-        .select_related("driver")
+        .select_related(
+            "driver",
+            "driver__profile",
+        )
         .order_by("departure_time")
     )
 

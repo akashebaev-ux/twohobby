@@ -1,6 +1,76 @@
 {% extends "base.html" %}
 
+{% block title %}
+    Find a driver
+{% endblock %}
+
+{% block filter_button %}
+{% endblock %}
+
 {% block content %}
-<h1>Client rides</h1>
-<p>Client ride search will be added next.</p>
+<section class="client-rides-page">
+    <h1>Find a driving plan</h1>
+
+    <p>
+        Choose a driver route and offer your preferred
+        pickup, time, and price.
+    </p>
+
+    {% for ride in rides %}
+        <article class="client-route-card">
+
+            {% if ride.driver.profile.profile_image %}
+                <img
+                    src="{{ ride.driver.profile.profile_image.url }}"
+                    alt="{{ ride.driver.username }}"
+                    class="client-driver-image"
+                >
+            {% endif %}
+
+            <h2>
+                {{ ride.start_name }}
+                →
+                {{ ride.destination_name }}
+            </h2>
+
+            <p>
+                Departure:
+                {{ ride.departure_time|date:"M j, Y H:i" }}
+            </p>
+
+            <p>
+                Car:
+                {% if ride.car_brand or ride.car_model %}
+                    {{ ride.car_brand }}
+                    {{ ride.car_model }}
+                {% else %}
+                    Not specified
+                {% endif %}
+            </p>
+
+            <p>
+                Remaining seats:
+                {{ ride.remaining_seats }}
+            </p>
+
+            <p>
+                Schedule:
+                {{ ride.get_trip_type_display }}
+            </p>
+
+            <a
+                href="{% url 'rides:request_ride' ride.pk %}"
+                class="filter-btn"
+            >
+                Offer a bid
+            </a>
+
+        </article>
+
+    {% empty %}
+
+        <p>No driver plans are available.</p>
+
+    {% endfor %}
+</section>
 {% endblock %}
