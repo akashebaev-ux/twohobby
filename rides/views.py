@@ -235,13 +235,13 @@ def request_ride(request, pk):
         if form.is_valid():
             if (
                 form.cleaned_data["seats_requested"]
-                > ride.available_seats
+                > ride.remaining_seats
             ):
                 form.add_error(
                     "seats_requested",
                     (
                         "You cannot request more seats "
-                        "than the ride capacity."
+                        "than are currently available."
                     ),
                 )
             else:
@@ -319,6 +319,17 @@ def accept_request(request, pk):
                 pk=ride.pk,
             )
 
+        if not bid_matches_ride(ride_request):
+            messages.error(
+                request,
+                "This bid does not match your driving plan.",
+            )
+
+            return redirect(
+                "rides:ride_detail",
+                pk=ride.pk,
+            )
+
         if (
             ride_request.seats_requested
             > ride.remaining_seats
@@ -348,6 +359,11 @@ def accept_request(request, pk):
                 update_fields=["status"]
             )
 
+    messages.success(
+        request,
+        "The client bid has been accepted.",
+    )
+
     return redirect(
         "rides:ride_detail",
         pk=ride.pk,
@@ -370,6 +386,11 @@ def reject_request(request, pk):
 
     ride_request.save(
         update_fields=["status"]
+    )
+
+    messages.success(
+        request,
+        "The client bid has been rejected.",
     )
 
     return redirect(
