@@ -3,7 +3,24 @@ from django import forms
 from .models import Ride, RideRequest
 
 
+DAY_CHOICES = [
+    ("monday", "Monday"),
+    ("tuesday", "Tuesday"),
+    ("wednesday", "Wednesday"),
+    ("thursday", "Thursday"),
+    ("friday", "Friday"),
+    ("saturday", "Saturday"),
+    ("sunday", "Sunday"),
+]
+
+
 class RideForm(forms.ModelForm):
+    recurring_days = forms.MultipleChoiceField(
+        choices=DAY_CHOICES,
+        required=False,
+        widget=forms.CheckboxSelectMultiple,
+    )
+
     class Meta:
         model = Ride
         fields = [
@@ -11,6 +28,12 @@ class RideForm(forms.ModelForm):
             "destination_name",
             "departure_time",
             "available_seats",
+            "car_brand",
+            "car_model",
+            "car_year",
+            "car_image",
+            "trip_type",
+            "recurring_days",
             "description",
         ]
 
@@ -22,6 +45,54 @@ class RideForm(forms.ModelForm):
                 attrs={"rows": 3}
             ),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        if (
+            self.instance.pk
+            and self.instance.recurring_days
+        ):
+            self.initial["recurring_days"] = (
+                self.instance.recurring_days.split(",")
+            )
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        trip_type = cleaned_data.get("trip_type")
+        recurring_days = cleaned_data.get(
+            "recurring_days"
+        )
+
+        if (
+            trip_type == Ride.TRIP_RECURRING
+            and not recurring_days
+        ):
+            self.add_error(
+                "recurring_days",
+                "Select at least one recurring day.",
+            )
+
+        return cleaned_data
+
+    def save(self, commit=True):
+        ride = super().save(commit=False)
+
+        days = self.cleaned_data.get(
+            "recurring_days",
+            [],
+        )
+
+        if ride.trip_type == Ride.TRIP_RECURRING:
+            ride.recurring_days = ",".join(days)
+        else:
+            ride.recurring_days = ""
+
+        if commit:
+            ride.save()
+
+        return ride
 
 
 class RideRequestForm(forms.ModelForm):

@@ -76,7 +76,10 @@ def ride_list(request):
 @login_required
 def create_ride(request):
     if request.method == "POST":
-        form = RideForm(request.POST)
+        form = RideForm(
+            request.POST,
+            request.FILES,
+        )
 
         if form.is_valid():
             ride = form.save(commit=False)
@@ -93,7 +96,9 @@ def create_ride(request):
     return render(
         request,
         "rides/create_ride.html",
-        {"form": form},
+        {
+            "form": form,
+        },
     )
 
 
@@ -132,6 +137,7 @@ def edit_ride(request, pk):
     if request.method == "POST":
         form = RideForm(
             request.POST,
+            request.FILES,
             instance=ride,
         )
 
