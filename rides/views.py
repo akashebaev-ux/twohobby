@@ -15,6 +15,7 @@ from .forms import (
 from .models import Ride, RideRequest
 from .services import (
     bid_matches_ride,
+    open_request_matches_ride,
     time_difference_minutes,
     users_are_trusted,
 )
@@ -455,33 +456,54 @@ def ride_activity(request):
     created_rides = (
         Ride.objects
         .filter(driver=request.user)
-        .prefetch_related(
-            "requests",
-            "requests__passenger",
-            "requests__passenger__profile",
+        .select_related(
+            "driver",
+            "driver__profile",
         )
         .order_by("-departure_time")
     )
 
-    for ride in created_rides:
-        incoming_requests = (
-            ride.requests
-            .filter(
-                status=RideRequest.STATUS_PENDING
-            )
-            .select_related(
-                "passenger",
-                "passenger__profile",
-            )
-            .order_by("-created_at")
+    open_requests = (
+        RideRequest.objects
+        .filter(
+            ride__isnull=True,
+            status=RideRequest.STATUS_PENDING,
         )
+        .exclude(
+            passenger=request.user,
+        )
+        .exclude(
+            rejected_by=request.user,
+        )
+        .select_related(
+            "passenger",
+            "passenger__profile",
+        )
+        .prefetch_related("rejected_by")
+        .order_by("-created_at")
+    )
 
-        for ride_request in incoming_requests:
-            ride_request.matches = (
-                bid_matches_ride(ride_request)
+    for ride in created_rides:
+        matching_requests = []
+
+        for ride_request in open_requests:
+            if not users_are_trusted(
+                request.user,
+                ride_request.passenger,
+            ):
+                continue
+
+            if not open_request_matches_ride(
+                ride_request,
+                ride,
+            ):
+                continue
+
+            matching_requests.append(
+                ride_request
             )
 
-        ride.incoming_requests = incoming_requests
+        ride.incoming_requests = matching_requests
 
     passenger_requests = (
         RideRequest.objects
