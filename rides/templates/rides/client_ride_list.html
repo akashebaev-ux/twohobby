@@ -203,5 +203,58 @@
             {% endfor %}
         </section>
     {% endif %}
+    <section class="client-saved-requests">
+        <h2>My ride requests</h2>
+
+        {% for request_item in my_saved_requests %}
+            <article class="driver-result-card">
+                <h3>
+                    {{ request_item.pickup_point }}
+                    →
+                    {{ request_item.dropoff_point }}
+                </h3>
+
+                <p>
+                    Date:
+                    {{ request_item.preferred_date }}
+                </p>
+
+                <p>
+                    Preferred time:
+                    {{ request_item.preferred_time }}
+                </p>
+
+                <p>
+                    Passengers:
+                    {{ request_item.seats_requested }}
+                </p>
+
+                <p>
+                    Offer:
+                    {{ request_item.offered_price }} ₸
+                </p>
+
+                {% if request_item.ride %}
+                    <p>
+                        Driver:
+                        {{ request_item.ride.driver.profile.display_name|default:request_item.ride.driver.username }}
+                    </p>
+                {% else %}
+                    <p>
+                        Waiting for a driver
+                    </p>
+                {% endif %}
+
+                <p>
+                    Status:
+                    {{ request_item.get_status_display }}
+                </p>
+            </article>
+        {% empty %}
+            <p>
+                You have not published any requests yet.
+            </p>
+        {% endfor %}
+    </section>
 </div>
 {% endblock %}
