@@ -332,11 +332,14 @@ def request_ride(request, pk):
 @require_POST
 def accept_request(request, pk):
     with transaction.atomic():
-        ride_request = (
+        ride_request = get_object_or_404(
             RideRequest.objects
             .select_for_update()
-            .select_related("ride")
-            .get(pk=pk)
+            .select_related("ride"),
+            pk=pk,
+            ride__isnull=False,
+            ride__driver=request.user,
+            status=RideRequest.STATUS_PENDING,
         )
 
         ride = (
@@ -428,6 +431,7 @@ def reject_request(request, pk):
     ride_request = get_object_or_404(
         RideRequest,
         pk=pk,
+        ride__isnull=False,
         ride__driver=request.user,
         status=RideRequest.STATUS_PENDING,
     )
@@ -484,7 +488,7 @@ def ride_activity(request):
     )
 
     for ride in created_rides:
-        matching_requests = []
+        incoming_requests = []
 
         for ride_request in open_requests:
             if not users_are_trusted(
@@ -493,17 +497,19 @@ def ride_activity(request):
             ):
                 continue
 
-            if not open_request_matches_ride(
-                ride_request,
-                ride,
-            ):
-                continue
-
-            matching_requests.append(
-                ride_request
+            incoming_requests.append(
+                {
+                    "request": ride_request,
+                    "matches_schedule": (
+                        open_request_matches_ride(
+                            ride_request,
+                            ride,
+                        )
+                    ),
+                }
             )
 
-        ride.incoming_requests = matching_requests
+        ride.incoming_requests = incoming_requests
 
     passenger_requests = (
         RideRequest.objects
