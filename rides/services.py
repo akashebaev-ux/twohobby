@@ -2,7 +2,7 @@ from datetime import datetime
 
 from matches.models import Swipe
 
-from .models import TRIP_RECURRING
+from .models import TRIP_RECURRING, RideRequest
 
 
 def users_are_trusted(user_a, user_b):
@@ -91,5 +91,68 @@ def bid_matches_ride(bid):
 
         if not bid_days.intersection(ride_days):
             return False
+
+    return True
+
+
+def open_request_matches_ride(
+    ride_request,
+    ride,
+):
+    if ride_request.status != RideRequest.STATUS_PENDING:
+        return False
+
+    if ride_request.ride_id is not None:
+        return False
+
+    if (
+        ride_request.preferred_date
+        != ride.departure_time.date()
+    ):
+        return False
+
+    request_start = (
+        ride_request.pickup_point
+        .strip()
+        .casefold()
+    )
+
+    request_destination = (
+        ride_request.dropoff_point
+        .strip()
+        .casefold()
+    )
+
+    ride_start = (
+        ride.start_name
+        .strip()
+        .casefold()
+    )
+
+    ride_destination = (
+        ride.destination_name
+        .strip()
+        .casefold()
+    )
+
+    if request_start not in ride_start:
+        return False
+
+    if request_destination not in ride_destination:
+        return False
+
+    difference = time_difference_minutes(
+        ride_request.preferred_time,
+        ride.departure_time.time(),
+    )
+
+    if difference > 30:
+        return False
+
+    if (
+        ride_request.seats_requested
+        > ride.remaining_seats
+    ):
+        return False
 
     return True
