@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block title %}
+    Ride Activity
+{% endblock %}
+
 {% block filter_button %}
     <a
         href="{% url 'rides:driver_ride_list' %}"
@@ -36,7 +40,7 @@
 
                     <div class="driver-route-meta">
                         <span>
-                            {{ ride.departure_time }}
+                            {{ ride.departure_time|date:"M j, Y, H:i" }}
                         </span>
 
                         <span>
@@ -48,67 +52,72 @@
                 </header>
 
                 <div class="passenger-orders-list">
-                    {% for order in ride.incoming_requests %}
-                        <div class="passenger-order-row">
-                            <div class="passenger-order-main">
-                                <div class="passenger-order-person">
-                                    <strong>
-                                        {{ order.passenger.profile.display_name|default:order.passenger.username }}
-                                    </strong>
+                    {% for item in ride.incoming_requests %}
+                        {% with order=item.request %}
+                            <div class="passenger-order-row">
+                                <div class="passenger-order-main">
+                                    <div class="passenger-order-person">
+                                        <strong>
+                                            {{ order.passenger.profile.display_name|default:order.passenger.username }}
+                                        </strong>
 
-                                    {% if order.matches %}
-                                        <span class="order-match-badge">
-                                            Matches your route
-                                        </span>
-                                    {% else %}
-                                        <span class="order-warning-badge">
-                                            Route differs
-                                        </span>
-                                    {% endif %}
-                                </div>
+                                        {% if item.matches_schedule %}
+                                            <span class="order-match-badge">
+                                                Matches your schedule
+                                            </span>
+                                        {% else %}
+                                            <span class="order-warning-badge">
+                                                Different schedule
+                                            </span>
+                                        {% endif %}
+                                    </div>
 
-                                <p class="passenger-order-route">
-                                    {{ order.pickup_point }}
-                                    →
-                                    {{ order.dropoff_point }}
-                                </p>
+                                    <p class="passenger-order-route">
+                                        {{ order.pickup_point }}
+                                        →
+                                        {{ order.dropoff_point }}
+                                    </p>
 
-                                <div class="passenger-order-details">
-                                    <span>
-                                        Seats:
-                                        {{ order.seats_requested }}
-                                    </span>
-
-                                    {% if order.preferred_time %}
+                                    <div class="passenger-order-details">
                                         <span>
-                                            Preferred time:
-                                            {{ order.preferred_time }}
+                                            Date:
+                                            {{ order.preferred_date|date:"M j, Y" }}
                                         </span>
-                                    {% endif %}
 
-                                    {% if order.message %}
                                         <span>
-                                            Message:
-                                            {{ order.message }}
+                                            Time:
+                                            {{ order.preferred_time|time:"H:i" }}
                                         </span>
-                                    {% endif %}
+
+                                        <span>
+                                            Passengers:
+                                            {{ order.seats_requested }}
+                                        </span>
+
+                                        {% if order.message %}
+                                            <span>
+                                                Message:
+                                                {{ order.message }}
+                                            </span>
+                                        {% endif %}
+                                    </div>
                                 </div>
-                            </div>
 
-                            <aside class="passenger-order-actions">
-                                <div class="passenger-order-price">
-                                    <span>Offer</span>
+                                <aside class="passenger-order-actions">
+                                    <div class="passenger-order-price">
+                                        <span>
+                                            Offer
+                                        </span>
 
-                                    <strong>
-                                        {{ order.offered_price }} ₸
-                                    </strong>
-                                </div>
+                                        <strong>
+                                            {{ order.offered_price }} ₸
+                                        </strong>
+                                    </div>
 
-                                <div class="passenger-order-buttons">
-                                    {% if order.matches %}
+                                    <div class="passenger-order-buttons">
                                         <form
                                             method="post"
-                                            action="{% url 'rides:accept_request' order.pk %}"
+                                            action="{% url 'rides:accept_open_request' order.pk ride.pk %}"
                                         >
                                             {% csrf_token %}
 
@@ -119,34 +128,36 @@
                                                 Accept
                                             </button>
                                         </form>
-                                    {% endif %}
 
-                                    <form
-                                        method="post"
-                                        action="{% url 'rides:reject_request' order.pk %}"
-                                    >
-                                        {% csrf_token %}
-
-                                        <button
-                                            type="submit"
-                                            class="order-decline-btn"
+                                        <form
+                                            method="post"
+                                            action="{% url 'rides:decline_open_request' order.pk %}"
                                         >
-                                            Decline
-                                        </button>
-                                    </form>
-                                </div>
-                            </aside>
-                        </div>
+                                            {% csrf_token %}
+
+                                            <button
+                                                type="submit"
+                                                class="order-decline-btn"
+                                            >
+                                                Decline
+                                            </button>
+                                        </form>
+                                    </div>
+                                </aside>
+                            </div>
+                        {% endwith %}
                     {% empty %}
                         <p class="empty-driver-orders">
-                            No passenger orders for this route yet.
+                            No open passenger requests yet.
                         </p>
                     {% endfor %}
                 </div>
             </article>
         {% empty %}
             <div class="empty-activity-card">
-                <p>You have not created any driving plans yet.</p>
+                <p>
+                    You have not created any driving plans yet.
+                </p>
 
                 <a
                     href="{% url 'rides:create_ride' %}"
@@ -171,9 +182,42 @@
                     </h3>
 
                     <p>
-                        Driver:
-                        {{ request_item.ride.driver.profile.display_name|default:request_item.ride.driver.username }}
+                        Date:
+                        {{ request_item.preferred_date|date:"M j, Y" }}
                     </p>
+
+                    <p>
+                        Time:
+                        {{ request_item.preferred_time|time:"H:i" }}
+                    </p>
+
+                    <p>
+                        Passengers:
+                        {{ request_item.seats_requested }}
+                    </p>
+
+                    {% if request_item.ride %}
+                        <p>
+                            Driver:
+                            {{ request_item.ride.driver.profile.display_name|default:request_item.ride.driver.username }}
+                        </p>
+
+                        <p>
+                            Driver route:
+                            {{ request_item.ride.start_name }}
+                            →
+                            {{ request_item.ride.destination_name }}
+                        </p>
+
+                        <p>
+                            Departure:
+                            {{ request_item.ride.departure_time|date:"M j, Y, H:i" }}
+                        </p>
+                    {% else %}
+                        <p>
+                            Waiting for a driver
+                        </p>
+                    {% endif %}
                 </div>
 
                 <div>
@@ -184,13 +228,23 @@
                     <span class="request-status">
                         {{ request_item.get_status_display }}
                     </span>
+
+                    {% if request_item.ride %}
+                        <a
+                            href="{% url 'rides:ride_detail' request_item.ride.pk %}"
+                            class="choose-driver-btn"
+                        >
+                            View accepted ride
+                        </a>
+                    {% endif %}
                 </div>
             </article>
         {% empty %}
             <p>
-                You have not requested any rides yet.
+                You have not published any passenger requests yet.
             </p>
         {% endfor %}
     </section>
+
 </div>
 {% endblock %}
