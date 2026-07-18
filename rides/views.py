@@ -1,5 +1,3 @@
-from urllib.parse import urlencode
-
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
@@ -518,6 +516,7 @@ def ride_home(request):
 def client_ride_list(request):
     matching_rides = []
     search_performed = False
+    submitted_request = None
 
     if request.method == "POST":
         form = ClientRideSearchForm(request.POST)
@@ -527,11 +526,11 @@ def client_ride_list(request):
 
             start_name = form.cleaned_data[
                 "start_name"
-            ]
+            ].strip()
 
             destination_name = form.cleaned_data[
                 "destination_name"
-            ]
+            ].strip()
 
             preferred_date = form.cleaned_data[
                 "preferred_date"
@@ -548,6 +547,20 @@ def client_ride_list(request):
             offered_price = form.cleaned_data[
                 "offered_price"
             ]
+
+            submitted_request = (
+                RideRequest.objects.create(
+                    passenger=request.user,
+                    ride=None,
+                    pickup_point=start_name,
+                    dropoff_point=destination_name,
+                    preferred_date=preferred_date,
+                    preferred_time=preferred_time,
+                    seats_requested=seats_requested,
+                    offered_price=offered_price,
+                    status=RideRequest.STATUS_PENDING,
+                )
+            )
 
             possible_rides = (
                 Ride.objects
@@ -576,14 +589,12 @@ def client_ride_list(request):
 
                 ride_time = ride.departure_time.time()
 
-                time_difference = (
-                    time_difference_minutes(
-                        preferred_time,
-                        ride_time,
-                    )
+                difference = time_difference_minutes(
+                    preferred_time,
+                    ride_time,
                 )
 
-                if time_difference > 30:
+                if difference > 30:
                     continue
 
                 if not users_are_trusted(
@@ -592,41 +603,29 @@ def client_ride_list(request):
                 ):
                     continue
 
-                query_string = urlencode(
-                    {
-                        "pickup_point": start_name,
-                        "dropoff_point": (
-                            destination_name
-                        ),
-                        "preferred_time": (
-                            preferred_time.strftime(
-                                "%H:%M"
-                            )
-                        ),
-                        "seats_requested": (
-                            seats_requested
-                        ),
-                        "offered_price": (
-                            str(offered_price)
-                        ),
-                        "trip_type": ride.trip_type,
-                    }
-                )
-
-                ride.bid_url = (
-                    reverse(
-                        "rides:request_ride",
-                        kwargs={
-                            "pk": ride.pk,
-                        },
-                    )
-                    + "?"
-                    + query_string
-                )
-
+                ride.open_request = submitted_request
                 matching_rides.append(ride)
+
+            messages.success(
+                request,
+                (
+                    "Your ride request has been saved "
+                    "and published to compatible drivers."
+                ),
+            )
     else:
         form = ClientRideSearchForm()
+
+    my_saved_requests = (
+        RideRequest.objects
+        .filter(passenger=request.user)
+        .select_related(
+            "ride",
+            "ride__driver",
+            "ride__driver__profile",
+        )
+        .order_by("-created_at")
+    )
 
     return render(
         request,
@@ -635,5 +634,7 @@ def client_ride_list(request):
             "form": form,
             "rides": matching_rides,
             "search_performed": search_performed,
+            "submitted_request": submitted_request,
+            "my_saved_requests": my_saved_requests,
         },
     )
