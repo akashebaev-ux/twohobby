@@ -457,8 +457,33 @@ def ride_activity(request):
     created_rides = (
         Ride.objects
         .filter(driver=request.user)
+        .prefetch_related(
+            "requests",
+            "requests__passenger",
+            "requests__passenger__profile",
+        )
         .order_by("-departure_time")
     )
+
+    for ride in created_rides:
+        incoming_requests = (
+            ride.requests
+            .filter(
+                status=RideRequest.STATUS_PENDING
+            )
+            .select_related(
+                "passenger",
+                "passenger__profile",
+            )
+            .order_by("-created_at")
+        )
+
+        for ride_request in incoming_requests:
+            ride_request.matches = (
+                bid_matches_ride(ride_request)
+            )
+
+        ride.incoming_requests = incoming_requests
 
     passenger_requests = (
         RideRequest.objects

@@ -155,12 +155,20 @@ class RideRequest(models.Model):
         Ride,
         on_delete=models.CASCADE,
         related_name="requests",
+        null=True,
+        blank=True,
     )
 
     passenger = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="ride_requests",
+    )
+
+    rejected_by = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name="declined_ride_requests",
+        blank=True,
     )
 
     seats_requested = models.PositiveIntegerField(
@@ -178,6 +186,11 @@ class RideRequest(models.Model):
     offered_price = models.DecimalField(
         max_digits=8,
         decimal_places=2,
+    )
+
+    preferred_date = models.DateField(
+        null=True,
+        blank=True,
     )
 
     preferred_time = models.TimeField(
@@ -214,19 +227,10 @@ class RideRequest(models.Model):
         auto_now_add=True,
     )
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=[
-                    "ride",
-                    "passenger",
-                ],
-                name="unique_passenger_ride_request",
-            ),
-        ]
-
     def __str__(self):
         return (
-            f"{self.passenger} - "
-            f"{self.ride}"
+            f"{self.passenger} | "
+            f"{self.pickup_point} → "
+            f"{self.dropoff_point} "
+            f"({self.status})"
         )

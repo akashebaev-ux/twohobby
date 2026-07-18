@@ -1,9 +1,5 @@
 {% extends "base.html" %}
 
-{% block title %}
-    My ride activity
-{% endblock %}
-
 {% block filter_button %}
     <a
         href="{% url 'rides:driver_ride_list' %}"
@@ -14,72 +10,186 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <h1>My ride activity</h1>
+<div class="container ride-activity-page">
 
-    <section>
-        <h2>Rides I created</h2>
+    <section class="driver-orders-section">
+        <h2>My routes</h2>
 
         {% for ride in created_rides %}
-            <article class="ride-card">
-                <h3>
-                    <a href="{% url 'rides:ride_detail' ride.pk %}">
-                        {{ ride.start_name }}
-                        →
-                        {{ ride.destination_name }}
-                    </a>
-                </h3>
+            <article class="driver-route-order-card">
+                <header class="driver-route-header">
+                    <div>
+                        <span class="driver-route-label">
+                            My route
+                        </span>
 
-                <p>
-                    Departure:
-                    {{ ride.departure_time }}
-                </p>
+                        <h3>
+                            <a
+                                href="{% url 'rides:ride_detail' ride.pk %}"
+                            >
+                                {{ ride.start_name }}
+                                →
+                                {{ ride.destination_name }}
+                            </a>
+                        </h3>
+                    </div>
 
-                <p>
-                    Remaining seats:
-                    {{ ride.remaining_seats }}
-                </p>
+                    <div class="driver-route-meta">
+                        <span>
+                            {{ ride.departure_time }}
+                        </span>
 
-                <p>
-                    Status:
-                    {{ ride.get_status_display }}
-                </p>
+                        <span>
+                            {{ ride.remaining_seats }}
+                            seat{{ ride.remaining_seats|pluralize }}
+                            left
+                        </span>
+                    </div>
+                </header>
+
+                <div class="passenger-orders-list">
+                    {% for order in ride.incoming_requests %}
+                        <div class="passenger-order-row">
+                            <div class="passenger-order-main">
+                                <div class="passenger-order-person">
+                                    <strong>
+                                        {{ order.passenger.profile.display_name|default:order.passenger.username }}
+                                    </strong>
+
+                                    {% if order.matches %}
+                                        <span class="order-match-badge">
+                                            Matches your route
+                                        </span>
+                                    {% else %}
+                                        <span class="order-warning-badge">
+                                            Route differs
+                                        </span>
+                                    {% endif %}
+                                </div>
+
+                                <p class="passenger-order-route">
+                                    {{ order.pickup_point }}
+                                    →
+                                    {{ order.dropoff_point }}
+                                </p>
+
+                                <div class="passenger-order-details">
+                                    <span>
+                                        Seats:
+                                        {{ order.seats_requested }}
+                                    </span>
+
+                                    {% if order.preferred_time %}
+                                        <span>
+                                            Preferred time:
+                                            {{ order.preferred_time }}
+                                        </span>
+                                    {% endif %}
+
+                                    {% if order.message %}
+                                        <span>
+                                            Message:
+                                            {{ order.message }}
+                                        </span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <aside class="passenger-order-actions">
+                                <div class="passenger-order-price">
+                                    <span>Offer</span>
+
+                                    <strong>
+                                        {{ order.offered_price }} ₸
+                                    </strong>
+                                </div>
+
+                                <div class="passenger-order-buttons">
+                                    {% if order.matches %}
+                                        <form
+                                            method="post"
+                                            action="{% url 'rides:accept_request' order.pk %}"
+                                        >
+                                            {% csrf_token %}
+
+                                            <button
+                                                type="submit"
+                                                class="order-accept-btn"
+                                            >
+                                                Accept
+                                            </button>
+                                        </form>
+                                    {% endif %}
+
+                                    <form
+                                        method="post"
+                                        action="{% url 'rides:reject_request' order.pk %}"
+                                    >
+                                        {% csrf_token %}
+
+                                        <button
+                                            type="submit"
+                                            class="order-decline-btn"
+                                        >
+                                            Decline
+                                        </button>
+                                    </form>
+                                </div>
+                            </aside>
+                        </div>
+                    {% empty %}
+                        <p class="empty-driver-orders">
+                            No passenger orders for this route yet.
+                        </p>
+                    {% endfor %}
+                </div>
             </article>
         {% empty %}
-            <p>You have not created any rides yet.</p>
+            <div class="empty-activity-card">
+                <p>You have not created any driving plans yet.</p>
+
+                <a
+                    href="{% url 'rides:create_ride' %}"
+                    class="filter-btn"
+                >
+                    Create driving plan
+                </a>
+            </div>
         {% endfor %}
     </section>
 
-    <section>
+    <section class="my-passenger-requests-section">
         <h2>My passenger requests</h2>
 
-        {% for ride_request in passenger_requests %}
-            <article class="ride-card">
-                <h3>
-                    <a href="{% url 'rides:ride_detail' ride_request.ride.pk %}">
-                        {{ ride_request.ride.start_name }}
+        {% for request_item in passenger_requests %}
+            <article class="passenger-request-summary">
+                <div>
+                    <h3>
+                        {{ request_item.pickup_point }}
                         →
-                        {{ ride_request.ride.destination_name }}
-                    </a>
-                </h3>
+                        {{ request_item.dropoff_point }}
+                    </h3>
 
-                <p>
-                    Seats requested:
-                    {{ ride_request.seats_requested }}
-                </p>
+                    <p>
+                        Driver:
+                        {{ request_item.ride.driver.profile.display_name|default:request_item.ride.driver.username }}
+                    </p>
+                </div>
 
-                <p>
-                    Offered price:
-                    {{ ride_request.offered_price }}
-                </p>
+                <div>
+                    <strong>
+                        {{ request_item.offered_price }} ₸
+                    </strong>
 
-                <p>
-                    Status:
-                    {{ ride_request.get_status_display }}
-                </p>
+                    <span class="request-status">
+                        {{ request_item.get_status_display }}
+                    </span>
+                </div>
             </article>
         {% empty %}
-            <p>You have not requested any rides yet.</p>
+            <p>
+                You have not requested any rides yet.
+            </p>
         {% endfor %}
     </section>
 </div>
