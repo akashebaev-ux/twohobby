@@ -5,8 +5,8 @@ from . import views
 
 app_name = "rides"
 
-
 urlpatterns = [
+    # Home pages
     path(
         "",
         views.ride_home,
@@ -22,6 +22,8 @@ urlpatterns = [
         views.client_ride_list,
         name="client_ride_list",
     ),
+
+    # Driver rides
     path(
         "create/",
         views.create_ride,
@@ -31,16 +33,6 @@ urlpatterns = [
         "activity/",
         views.ride_activity,
         name="ride_activity",
-    ),
-    path(
-        "requests/<int:pk>/accept/",
-        views.accept_request,
-        name="accept_request",
-    ),
-    path(
-        "requests/<int:pk>/reject/",
-        views.reject_request,
-        name="reject_request",
     ),
     path(
         "<int:pk>/",
@@ -61,5 +53,29 @@ urlpatterns = [
         "<int:pk>/request/",
         views.request_ride,
         name="request_ride",
+    ),
+
+    # Open passenger requests
+    path(
+        "requests/<int:request_pk>/rides/<int:ride_pk>/accept/",
+        views.accept_open_request,
+        name="accept_open_request",
+    ),
+    path(
+        "requests/<int:request_pk>/decline/",
+        views.decline_open_request,
+        name="decline_open_request",
+    ),
+
+    # Existing ride requests
+    path(
+        "requests/<int:pk>/accept/",
+        views.accept_request,
+        name="accept_request",
+    ),
+    path(
+        "requests/<int:pk>/reject/",
+        views.reject_request,
+        name="reject_request",
     ),
 ]
