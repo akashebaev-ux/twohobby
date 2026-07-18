@@ -751,3 +751,36 @@ def accept_open_request(
     return redirect(
         "rides:ride_activity"
     )
+
+
+@login_required
+@require_POST
+def decline_open_request(
+    request,
+    request_pk,
+):
+    ride_request = get_object_or_404(
+        RideRequest,
+        pk=request_pk,
+        ride__isnull=True,
+        status=RideRequest.STATUS_PENDING,
+    )
+
+    if ride_request.passenger == request.user:
+        return HttpResponseForbidden()
+
+    ride_request.rejected_by.add(
+        request.user
+    )
+
+    messages.success(
+        request,
+        (
+            "The request was removed from "
+            "your driver dashboard."
+        ),
+    )
+
+    return redirect(
+        "rides:ride_activity"
+    )
