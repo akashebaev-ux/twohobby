@@ -660,3 +660,94 @@ def client_ride_list(request):
             "my_saved_requests": my_saved_requests,
         },
     )
+
+
+@login_required
+@require_POST
+def accept_open_request(
+    request,
+    request_pk,
+    ride_pk,
+):
+    with transaction.atomic():
+        ride_request = get_object_or_404(
+            RideRequest.objects
+            .select_for_update()
+            .select_related("passenger"),
+            pk=request_pk,
+        )
+
+        ride = get_object_or_404(
+            Ride.objects.select_for_update(),
+            pk=ride_pk,
+            driver=request.user,
+        )
+
+        if (
+            ride_request.status
+            != RideRequest.STATUS_PENDING
+            or ride_request.ride_id is not None
+        ):
+            messages.error(
+                request,
+                (
+                    "This passenger request is no "
+                    "longer available."
+                ),
+            )
+
+            return redirect(
+                "rides:ride_activity"
+            )
+
+        if not users_are_trusted(
+            request.user,
+            ride_request.passenger,
+        ):
+            return HttpResponseForbidden(
+                "You cannot accept this request."
+            )
+
+        if not open_request_matches_ride(
+            ride_request,
+            ride,
+        ):
+            messages.error(
+                request,
+                (
+                    "This request does not match "
+                    "your driving plan."
+                ),
+            )
+
+            return redirect(
+                "rides:ride_activity"
+            )
+
+        ride_request.ride = ride
+        ride_request.status = (
+            RideRequest.STATUS_ACCEPTED
+        )
+
+        ride_request.save(
+            update_fields=[
+                "ride",
+                "status",
+            ]
+        )
+
+        if ride.remaining_seats == 0:
+            ride.status = Ride.STATUS_FULL
+
+            ride.save(
+                update_fields=["status"]
+            )
+
+    messages.success(
+        request,
+        "The passenger request was accepted.",
+    )
+
+    return redirect(
+        "rides:ride_activity"
+    )
