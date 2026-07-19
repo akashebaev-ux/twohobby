@@ -170,13 +170,11 @@ USE_TZ = True
 # Ride map configuration
 
 RIDE_MAP_TILE_URL = os.getenv(
-    "RIDE_MAP_TILE_URL",
-    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    "RIDE_MAP_TILE_URL"
 )
 
 RIDE_MAP_TILE_ATTRIBUTION = os.getenv(
-    "RIDE_MAP_TILE_ATTRIBUTION",
-    "&copy; OpenStreetMap contributors",
+    "RIDE_MAP_TILE_ATTRIBUTION"
 )
 
 # Static files (CSS, JavaScript, Images)
