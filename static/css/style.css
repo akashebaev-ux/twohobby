@@ -1737,6 +1737,33 @@ a.filter-btn {
     }
 }
 
+/* Ride map */
+
+.ride-map-marker-wrapper {
+    background: transparent;
+    border: 0;
+}
+
+.ride-map-marker {
+    background: #fff;
+    border: 4px solid #171717;
+    border-radius: 50%;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 25%);
+    display: block;
+    height: 20px;
+    width: 20px;
+}
+
+.ride-map-marker--destination {
+    background: #171717;
+    border-radius: 4px;
+}
+
+.ride-map-marker--pickup {
+    background: #fff;
+}
+
+
 
 /* Create driver plan page */
 
