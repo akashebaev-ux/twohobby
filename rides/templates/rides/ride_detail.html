@@ -4,6 +4,15 @@
     Ride details
 {% endblock %}
 
+{% block filter_button %}
+    <a
+        href="javascript:history.back()"
+        class="filter-btn"
+    >
+        ← Back
+    </a>
+{% endblock %}
+
 {% block content %}
 <div class="container">
     <h1>
@@ -108,6 +117,7 @@
 
             {% for bid in passenger_requests %}
                 <article class="client-bid-card">
+
                     {% if bid.matches %}
                         <p class="bid-match">
                             ✓ Matches your driving plan
@@ -206,7 +216,9 @@
                                 </button>
                             </form>
                         </div>
+
                     {% elif bid.status == "pending" %}
+
                         <p>
                             This bid cannot be accepted because it does not
                             fully match the driving plan.
@@ -225,24 +237,26 @@
                                 Reject bid
                             </button>
                         </form>
+
                     {% else %}
+
                         <p>
                             Status:
                             {{ bid.get_status_display }}
                         </p>
+
                     {% endif %}
                 </article>
+
             {% empty %}
-                <p>No client bids yet.</p>
+
+                <p>
+                    No client bids yet.
+                </p>
+
             {% endfor %}
         </section>
     {% endif %}
 
-    <a
-        href="{% url 'rides:ride_activity' %}"
-        class="filter-btn"
-    >
-        Back to ride activity
-    </a>
 </div>
 {% endblock %}
