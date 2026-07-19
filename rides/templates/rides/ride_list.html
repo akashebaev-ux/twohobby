@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block filter_button %}{% endblock %}
 
 {% block extra_css %}
@@ -29,11 +30,22 @@
         </a>
     </div>
 
-    <div
-        id="ride-map"
-        data-tile-url="{{ ride_map_tile_url }}"
-        data-tile-attribution="{{ ride_map_tile_attribution }}"
-    ></div>
+    <div class="ride-map-shell">
+        <div
+            id="ride-map"
+            data-tile-url="{{ ride_map_tile_url }}"
+            data-tile-attribution="{{ ride_map_tile_attribution }}"
+        ></div>
+
+        <div class="ride-map-summary">
+            <strong>Available routes</strong>
+
+            <span>
+                {{ rides|length }}
+                driving plan{{ rides|length|pluralize }}
+            </span>
+        </div>
+    </div>
 
     <section>
         <h2>Available driving plans</h2>
@@ -117,6 +129,6 @@
     ></script>
 
     <script
-        src="{% static 'js/ride-map.js' %}?v=10"
+        src="{% static 'js/ride-map.js' %}?v=11"
     ></script>
 {% endblock %}
