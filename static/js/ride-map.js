@@ -68,6 +68,32 @@ document.addEventListener(
             return;
         }
 
+        const pickupIcon = L.divIcon({
+            className: "ride-map-marker-wrapper",
+            html: `
+                <span
+                    class="ride-map-marker ride-map-marker--pickup"
+                    aria-hidden="true"
+                ></span>
+            `,
+            iconSize: [24, 24],
+            iconAnchor: [12, 12],
+            popupAnchor: [0, -14],
+        });
+
+        const destinationIcon = L.divIcon({
+            className: "ride-map-marker-wrapper",
+            html: `
+                <span
+                    class="ride-map-marker ride-map-marker--destination"
+                    aria-hidden="true"
+                ></span>
+            `,
+            iconSize: [24, 24],
+            iconAnchor: [12, 12],
+            popupAnchor: [0, -14],
+        });
+
         L.tileLayer(
             tileUrl,
             {
@@ -209,13 +235,20 @@ document.addEventListener(
             );
 
             const startMarker = L.marker(
-                startCoordinates
+                startCoordinates,
+                {
+                    icon: pickupIcon,
+                }
             )
+
                 .addTo(map)
                 .bindPopup(startPopup);
 
             const destinationMarker = L.marker(
-                destinationCoordinates
+                destinationCoordinates,
+                {
+                    icon: destinationIcon,
+                }
             )
                 .addTo(map)
                 .bindPopup(destinationPopup);
