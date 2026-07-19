@@ -2859,6 +2859,225 @@ a.filter-btn {
 
 
 /* =========================================================
+   Accepted ride tracking page
+========================================================= */
+
+.ride-tracking-page {
+    margin: -16px;
+    padding-bottom: 30px;
+    background: #f4f4f4;
+}
+
+#ride-tracking-map {
+    width: 100%;
+    height: 52vh;
+    min-height: 340px;
+    background: #e8e8e8;
+}
+
+.tracking-status-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 18px;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.tracking-status-card h1 {
+    margin: 0 0 5px;
+    font-size: 1.1rem;
+}
+
+.tracking-status-card p {
+    margin: 0;
+    color: #666;
+}
+
+.tracking-eta {
+    display: flex;
+    min-width: 58px;
+    height: 58px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-shrink: 0;
+    background: #111;
+    color: #fff;
+}
+
+.tracking-eta strong {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.tracking-eta span {
+    font-size: .8rem;
+}
+
+.tracking-driver-card {
+    padding: 20px;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.tracking-driver-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.tracking-driver-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.tracking-driver-avatar,
+.tracking-driver-avatar-placeholder {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+}
+
+.tracking-driver-avatar {
+    object-fit: cover;
+}
+
+.tracking-driver-avatar-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eee;
+    font-size: 1.6rem;
+}
+
+.tracking-driver-profile strong,
+.tracking-rating {
+    display: block;
+}
+
+.tracking-rating {
+    margin-top: 4px;
+    color: #555;
+    font-size: .85rem;
+}
+
+.tracking-car-image {
+    width: 130px;
+    height: 76px;
+    object-fit: contain;
+}
+
+.tracking-vehicle-details {
+    margin-top: 18px;
+}
+
+.tracking-vehicle-details h2 {
+    margin: 0 0 8px;
+    font-size: 1.05rem;
+}
+
+.tracking-vehicle-details p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.tracking-contact-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 48px 48px;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.tracking-message-btn {
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    border-radius: 999px;
+    background: #eee;
+    color: #222;
+    text-decoration: none;
+}
+
+.tracking-contact-btn {
+    display: flex;
+    width: 48px;
+    height: 48px;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 50%;
+    background: #eee;
+    cursor: pointer;
+}
+
+.tracking-contact-btn-dark {
+    background: #111;
+    color: #fff;
+}
+
+.tracking-marker-wrapper {
+    background: transparent;
+    border: 0;
+}
+
+.tracking-marker {
+    display: block;
+    width: 22px;
+    height: 22px;
+    background: #fff;
+    border: 5px solid #111;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 30%);
+}
+
+.tracking-marker-pickup {
+    border-radius: 50%;
+}
+
+.tracking-marker-destination {
+    background: #111;
+    border-radius: 4px;
+}
+
+/* Accepted ride tracking — dark mode */
+
+.dark-mode .ride-tracking-page {
+    background: #111;
+}
+
+.dark-mode .tracking-status-card,
+.dark-mode .tracking-driver-card {
+    background: #202020;
+    border-color: #3f3f3f;
+    color: #fff;
+}
+
+.dark-mode .tracking-status-card p,
+.dark-mode .tracking-rating,
+.dark-mode .tracking-vehicle-details p {
+    color: #ccc;
+}
+
+.dark-mode .tracking-driver-avatar-placeholder {
+    background: #333;
+}
+
+.dark-mode .tracking-message-btn,
+.dark-mode .tracking-contact-btn {
+    background: #333;
+    color: #fff;
+}
+
+.dark-mode .tracking-contact-btn-dark {
+    background: #fff;
+    color: #111;
+}
+
+
+/* =========================================================
    Responsive styles — keep all @media rules below
 ========================================================= */
 
@@ -3019,5 +3238,22 @@ a.filter-btn {
     .filter-btn {
         font-size: 12px;
         padding: 8px 14px;
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    #ride-tracking-map {
+        height: 46vh;
+        min-height: 300px;
+    }
+
+    .tracking-car-image {
+        width: 105px;
+    }
+
+    .tracking-status-card,
+    .tracking-driver-card {
+        padding: 16px;
     }
 }

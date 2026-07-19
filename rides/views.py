@@ -843,3 +843,57 @@ def decline_open_request(
     return redirect(
         "rides:ride_activity"
     )
+
+
+@login_required
+def ride_tracking(request, pk):
+    ride_request = get_object_or_404(
+        RideRequest.objects.select_related(
+            "ride",
+            "ride__driver",
+            "ride__driver__profile",
+            "passenger",
+        ),
+        pk=pk,
+        passenger=request.user,
+        status=RideRequest.STATUS_ACCEPTED,
+        ride__isnull=False,
+    )
+
+    ride = ride_request.ride
+
+    map_data = {
+        "start_name": ride.start_name,
+        "destination_name": ride.destination_name,
+        "start_latitude": float(
+            ride.start_latitude
+        ),
+        "start_longitude": float(
+            ride.start_longitude
+        ),
+        "destination_latitude": float(
+            ride.destination_latitude
+        ),
+        "destination_longitude": float(
+            ride.destination_longitude
+        ),
+    }
+
+    estimated_minutes = 8
+
+    return render(
+        request,
+        "rides/ride_tracking.html",
+        {
+            "ride": ride,
+            "ride_request": ride_request,
+            "map_data": map_data,
+            "estimated_minutes": estimated_minutes,
+            "ride_map_tile_url": (
+                settings.RIDE_MAP_TILE_URL
+            ),
+            "ride_map_tile_attribution": (
+                settings.RIDE_MAP_TILE_ATTRIBUTION
+            ),
+        },
+    )

@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Ride Tracking
+{% endblock %}
+
+{% block extra_css %}
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+>
+{% endblock %}
+
+{% block content %}
+
+<section class="ride-tracking-page">
+
+    <div
+        id="ride-tracking-map"
+        data-tile-url="{{ ride_map_tile_url }}"
+        data-tile-attribution="{{ ride_map_tile_attribution }}"
+    ></div>
+
+    <section class="tracking-status-card">
+
+        <div class="tracking-status-text">
+            <h1>Meet at the pick-up point</h1>
+
+            <p>
+                {{ ride_request.pickup_point }}
+            </p>
+        </div>
+
+        {% if estimated_minutes %}
+            <div class="tracking-eta">
+                <strong>{{ estimated_minutes }}</strong>
+                <span>min</span>
+            </div>
+        {% endif %}
+
+    </section>
+
+    <section class="tracking-driver-card">
+
+        <div class="tracking-driver-header">
+
+            <div class="tracking-driver-profile">
+
+                {% if ride.driver.profile.profile_image %}
+                    <img
+                        src="{{ ride.driver.profile.profile_image.url }}"
+                        alt="{{ ride.driver.profile.display_name }}"
+                        class="tracking-driver-avatar"
+                    >
+                {% else %}
+                    <div class="tracking-driver-avatar-placeholder">
+                        👤
+                    </div>
+                {% endif %}
+
+                <div class="tracking-driver-summary">
+                    <h2>
+                        {{ ride.driver.profile.display_name }}
+                    </h2>
+
+                    <p class="tracking-rating">
+                        5.0 ★
+                    </p>
+                </div>
+
+            </div>
+
+            {% if ride.car_image %}
+                <img
+                    src="{{ ride.car_image.url }}"
+                    alt="{{ ride.car_brand }} {{ ride.car_model }}"
+                    class="tracking-car-image"
+                >
+            {% endif %}
+
+        </div>
+
+        <div class="tracking-vehicle-details">
+
+            <h3>
+                {{ ride.car_brand }}
+                {{ ride.car_model }}
+            </h3>
+
+            {% if ride.car_year %}
+                <p>
+                    {{ ride.car_year }}
+                </p>
+            {% endif %}
+
+            <p>
+                {{ ride.start_name }}
+                →
+                {{ ride.destination_name }}
+            </p>
+
+            <p>
+                Seats requested:
+                {{ ride_request.seats_requested }}
+            </p>
+
+            <p>
+                Agreed price:
+                {{ ride_request.offered_price }} ₸
+            </p>
+
+        </div>
+
+        <div class="tracking-contact-row">
+
+            <a
+                href="{% url 'start_chat' ride.driver.pk %}"
+                class="tracking-message-btn"
+            >
+                Message driver
+            </a>
+
+            <button
+                type="button"
+                class="tracking-icon-btn"
+                aria-label="Call driver"
+                title="Call driver"
+            >
+                📞
+            </button>
+
+            <button
+                type="button"
+                class="tracking-icon-btn tracking-icon-btn-dark"
+                aria-label="Ride safety"
+                title="Ride safety"
+            >
+                🛡️
+            </button>
+
+        </div>
+
+    </section>
+
+</section>
+
+{{ map_data|json_script:"ride-tracking-map-data" }}
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+></script>
+
+<script
+    src="{% static 'js/ride-tracking-map.js' %}"
+></script>
+
+{% endblock %}

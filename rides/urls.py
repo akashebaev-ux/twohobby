@@ -78,4 +78,9 @@ urlpatterns = [
         views.reject_request,
         name="reject_request",
     ),
+    path(
+        "requests/<int:pk>/tracking/",
+        views.ride_tracking,
+        name="ride_tracking",
+    ),
 ]
