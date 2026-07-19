@@ -35,6 +35,11 @@ urlpatterns = [
         name="ride_activity",
     ),
     path(
+        "requests/<int:pk>/tracking/",
+        views.ride_tracking,
+        name="ride_tracking",
+    ),
+    path(
         "<int:pk>/",
         views.ride_detail,
         name="ride_detail",
@@ -77,10 +82,5 @@ urlpatterns = [
         "requests/<int:pk>/reject/",
         views.reject_request,
         name="reject_request",
-    ),
-    path(
-        "requests/<int:pk>/tracking/",
-        views.ride_tracking,
-        name="ride_tracking",
     ),
 ]

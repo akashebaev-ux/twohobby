@@ -114,35 +114,41 @@
                                         </strong>
                                     </div>
 
-                                    <div class="passenger-order-buttons">
-                                        <form
-                                            method="post"
-                                            action="{% url 'rides:accept_open_request' order.pk ride.pk %}"
-                                        >
-                                            {% csrf_token %}
-
-                                            <button
-                                                type="submit"
-                                                class="order-accept-btn"
+                                    {% if order.status == "pending" %}
+                                        <div class="passenger-order-buttons">
+                                            <form
+                                                method="post"
+                                                action="{% url 'rides:accept_open_request' order.pk ride.pk %}"
                                             >
-                                                Accept
-                                            </button>
-                                        </form>
+                                                {% csrf_token %}
 
-                                        <form
-                                            method="post"
-                                            action="{% url 'rides:decline_open_request' order.pk %}"
-                                        >
-                                            {% csrf_token %}
+                                                <button
+                                                    type="submit"
+                                                    class="order-accept-btn"
+                                                >
+                                                    Accept
+                                                </button>
+                                            </form>
 
-                                            <button
-                                                type="submit"
-                                                class="order-decline-btn"
+                                            <form
+                                                method="post"
+                                                action="{% url 'rides:decline_open_request' order.pk %}"
                                             >
-                                                Decline
-                                            </button>
-                                        </form>
-                                    </div>
+                                                {% csrf_token %}
+
+                                                <button
+                                                    type="submit"
+                                                    class="order-decline-btn"
+                                                >
+                                                    Decline
+                                                </button>
+                                            </form>
+                                        </div>
+                                    {% else %}
+                                        <span class="request-status">
+                                            {{ order.get_status_display }}
+                                        </span>
+                                    {% endif %}
                                 </aside>
                             </div>
                         {% endwith %}
@@ -220,7 +226,7 @@
                     {% endif %}
                 </div>
 
-                <div>
+                <div class="passenger-request-actions">
                     <strong>
                         {{ request_item.offered_price }} ₸
                     </strong>
@@ -235,6 +241,15 @@
                             class="choose-driver-btn"
                         >
                             View accepted ride
+                        </a>
+                    {% endif %}
+
+                    {% if request_item.status == "accepted" and request_item.ride %}
+                        <a
+                            href="{% url 'rides:ride_tracking' request_item.pk %}"
+                            class="tracking-open-btn"
+                        >
+                            Track ride
                         </a>
                     {% endif %}
                 </div>
