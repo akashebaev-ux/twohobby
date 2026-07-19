@@ -167,19 +167,37 @@ body:has(.chat-page) .content {
 }
 
 
-/* Rides map */
+/* Ride map */
 
 #ride-map {
-    width: 100%;
-    height: 500px;
-    overflow: hidden;
     border-radius: 20px;
-    box-shadow: 0 6px 22px rgba(0, 0, 0, .1);
-    z-index: 1;
+    box-shadow: 0 8px 28px rgb(0 0 0 / 12%);
+    height: 480px;
+    margin: 20px 0 28px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.leaflet-control-zoom {
+    border: 0 !important;
+    box-shadow: 0 4px 16px rgb(0 0 0 / 18%) !important;
+}
+
+.leaflet-control-zoom a {
+    border: 0 !important;
+    width: 40px !important;
+    height: 40px !important;
+    line-height: 40px !important;
+}
+
+.leaflet-popup-content-wrapper {
+    border-radius: 16px;
+    box-shadow: 0 8px 28px rgb(0 0 0 / 18%);
 }
 
 .leaflet-popup-content {
-    line-height: 1.5;
+    margin: 18px;
+    line-height: 1.45;
 }
 
 .leaflet-popup-content a {
@@ -191,15 +209,18 @@ body:has(.chat-page) .content {
         #A30088,
         #ff9966
     );
-    color: white;
+    color: #fff;
     font-weight: 700;
     text-decoration: none;
 }
 
-@media screen and (max-width: 480px) {
+@media (max-width: 767px) {
     #ride-map {
-        height: 430px;
-        border-radius: 16px;
+        border-radius: 0;
+        height: 55vh;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+        width: 100vw;
     }
 }
 
@@ -1761,6 +1782,36 @@ a.filter-btn {
 
 .ride-map-marker--pickup {
     background: #fff;
+}
+
+
+/* Leaflet interactions */
+
+.leaflet-container {
+    background: #f6f6f6;
+}
+
+.leaflet-interactive {
+    transition:
+        stroke .2s ease,
+        stroke-width .2s ease;
+}
+
+.leaflet-interactive:hover {
+    stroke-width: 8 !important;
+}
+
+.leaflet-marker-icon {
+    transition:
+        transform .2s ease,
+        filter .2s ease;
+}
+
+.leaflet-marker-icon:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(
+        0 6px 12px rgb(0 0 0 / 20%)
+    );
 }
 
 
