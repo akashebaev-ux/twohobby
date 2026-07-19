@@ -36,10 +36,28 @@ document.addEventListener(
         console.log("New ride-map.js loaded");
         console.log("Map rides:", rides);
 
-        const map = L.map("ride-map").setView(
-            [43.238949, 76.889709],
-            11
+        const almatyBounds = L.latLngBounds(
+            [43.05, 76.65],
+            [43.40, 77.20]
         );
+
+        const map = L.map(
+            "ride-map",
+            {
+                minZoom: 10,
+                maxZoom: 18,
+                maxBounds: almatyBounds,
+                maxBoundsViscosity: 1.0,
+                zoomControl: false,
+            }
+        ).setView(
+            [43.238949, 76.889709],
+            12
+        );
+
+        L.control.zoom({
+            position: "topright",
+        }).addTo(map);
 
         const tileUrl = mapElement.dataset.tileUrl;
         const tileAttribution = (
