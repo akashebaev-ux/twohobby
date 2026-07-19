@@ -33,8 +33,6 @@ document.addEventListener(
             return;
         }
 
-        console.log("New ride-map.js loaded");
-        console.log("Map rides:", rides);
 
         const almatyBounds = L.latLngBounds(
             [43.05, 76.65],
