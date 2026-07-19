@@ -167,6 +167,18 @@ USE_I18N = True
 USE_TZ = True
 
 
+# Ride map configuration
+
+RIDE_MAP_TILE_URL = os.getenv(
+    "RIDE_MAP_TILE_URL",
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+)
+
+RIDE_MAP_TILE_ATTRIBUTION = os.getenv(
+    "RIDE_MAP_TILE_ATTRIBUTION",
+    "&copy; OpenStreetMap contributors",
+)
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 

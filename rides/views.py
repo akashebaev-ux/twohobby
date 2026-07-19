@@ -1,10 +1,12 @@
 from django.contrib import messages
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views.decorators.http import require_POST
+
 
 from .forms import (
     CAR_MODELS,
@@ -81,6 +83,12 @@ def ride_list(request):
         {
             "rides": rides,
             "map_rides": map_rides,
+            "ride_map_tile_url": (
+                settings.RIDE_MAP_TILE_URL
+            ),
+            "ride_map_tile_attribution": (
+                settings.RIDE_MAP_TILE_ATTRIBUTION
+            ),
         },
     )
 
