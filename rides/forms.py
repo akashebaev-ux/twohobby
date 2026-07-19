@@ -188,7 +188,7 @@ class ClientRideSearchForm(forms.Form):
             attrs={
                 "class": "ride-search-input",
                 "placeholder": "Price in ₸",
-                "min": "1",
+                "min": "0",
                 "step": "100",
             },
         ),

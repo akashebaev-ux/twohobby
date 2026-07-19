@@ -101,8 +101,6 @@ body {
 }
 
 
-
-
 /* Hide scrollbar for connections row on mobile */
 .connections-row::-webkit-scrollbar {
     display: none;
@@ -231,16 +229,6 @@ body:has(.chat-page) .content {
     text-decoration: none;
 }
 
-@media (max-width: 767px) {
-    #ride-map {
-        border-radius: 0;
-        height: 55vh;
-        margin-left: calc(50% - 50vw);
-        margin-right: calc(50% - 50vw);
-        width: 100vw;
-    }
-}
-
 
 /* RideBody client map */
 
@@ -280,24 +268,7 @@ body:has(.chat-page) .content {
     font-size: .82rem;
 }
 
-@media (max-width: 767px) {
-    .ride-map-shell {
-        margin-left: calc(50% - 50vw);
-        margin-right: calc(50% - 50vw);
-        width: 100vw;
-    }
 
-    #client-ride-map {
-        border-radius: 0;
-        height: 55vh;
-    }
-
-    .ride-map-summary {
-        bottom: 12px;
-        left: 12px;
-        right: 12px;
-    }
-}
 
 /* Fullscreen pages */
 
@@ -553,40 +524,6 @@ body:has(.auth-page) .app-wrapper {
     color: #fff;
 }
 
-@media screen and (max-width: 600px) {
-    .driver-route-header {
-        flex-direction: column;
-    }
-
-    .driver-route-meta {
-        text-align: left;
-    }
-
-    .passenger-order-row {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-
-    .passenger-order-actions {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        align-items: end;
-    }
-
-    .passenger-order-price {
-        text-align: left;
-    }
-
-    .passenger-request-summary {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .request-status {
-        text-align: left;
-    }
-}
-
 
 /* Bottom nav */
 
@@ -710,8 +647,6 @@ body:has(.auth-page) .app-wrapper {
 }
 
 
-
-
 /* Encounters swipe page */
 
 .encounters-page {
@@ -741,8 +676,6 @@ body:has(.auth-page) .app-wrapper {
 }
 
 
-
-
 .encounter-info {
     padding: 20px;
 }
@@ -767,9 +700,6 @@ body:has(.auth-page) .app-wrapper {
     flex: 1;
     text-align: center;
 }
-
-
-
 
 
 /* Chat */
@@ -1015,11 +945,7 @@ body:has(.auth-page) .app-wrapper {
     border: 2px solid #A30088;
     flex-shrink: 0;
 }
-@media (hover: hover) and (pointer: fine) {
-    .chat-card:hover {
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    }
-}
+
 
 /* Chat time */
 
@@ -1188,8 +1114,6 @@ body:has(.auth-page) .app-wrapper {
     font-size: .95rem;
     font-weight: 600;
 }
-
-
 
 
 /* Auth pages */
@@ -1826,11 +1750,7 @@ a.filter-btn {
     text-align: center;
 }
 
-@media (max-width: 480px) {
-    .ride-search-grid {
-        grid-template-columns: 1fr;
-    }
-}
+
 
 /* Ride map */
 
@@ -2126,17 +2046,6 @@ a.filter-btn {
     border-color: #444;
 }
 
-@media screen and (max-width: 480px) {
-    .driver-form-grid,
-    .recurring-day-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .driver-plan-card {
-        padding: 16px;
-    }
-}
-
 
 /* Profile filter form */
 
@@ -2297,10 +2206,6 @@ a.filter-btn {
         #ff9966
     );
 }
-
-
-
-
 
 
 /* Chat call button */
@@ -2717,88 +2622,8 @@ a.filter-btn {
 }
 
 
-@media screen and (min-width: 1200px) {
-
-    .dark-mode .app-wrapper {
-        max-width: 520px;
-        margin: 0 auto;
-
-        box-shadow:
-            0 0 40px rgba(0,0,0,.18);
-
-        border-left: 1px solid rgba(255,255,255,.04);
-        border-right: 1px solid rgba(255,255,255,.04);
-    }
-}
-
-
-
 /* Desktop app preview */
-@media screen and (min-width: 1200px) {
-    .app-wrapper {
-        width: 100%;
-        max-width: 520px;
-        margin: 0 auto;
 
-        box-shadow:
-            0 0 35px rgba(0,0,0,.12);
-
-        border-left: 1px solid #222;
-        border-right: 1px solid #222;
-    }
-
-    .landing-content {
-        padding: 0 20px;
-    }
-
-    .profile-grid {
-        grid-template-columns:
-            repeat(auto-fill, minmax(180px, 1fr));
-    }
-}
-
-
-
-@media screen and (min-width: 413px) and (max-width: 600px) {
-    .profile-filter-form {
-        display: grid;
-        grid-template-columns: 120px 128px 128px;
-        gap: 4px;
-        justify-content: center;
-    }
-
-    .profile-filter-form select,
-    .profile-filter-form input,
-    .profile-filter-form .filter-btn {
-        width: 100%;
-        min-width: 0;
-        flex: none;
-    }
-
-    .profile-filter-form .filter-btn {
-        grid-column: 1 / -1;
-        width: 160px;
-        justify-self: center;
-    }
-}
-@media screen and (max-width: 412px) {
-    .profile-filter-form select,
-    .profile-filter-form input[name="min_age"],
-    .profile-filter-form input[name="max_age"],
-    .profile-filter-form .filter-btn {
-        flex: 1 1 100%;
-    }
-}
-
-@media screen and (max-width: 400px) {
-    .bottom-nav .nav-link div {
-        display: none;
-    }
-    .filter-btn {
-        font-size: 12px;
-        padding: 8px 14px;
-    }
-}
 
 /* 404 page */
 
@@ -2870,4 +2695,303 @@ a.filter-btn {
     ) !important;
 
     color: white !important;
+}
+
+/* =========================================================
+   RideBody client page — dark mode
+========================================================= */
+
+.dark-mode .ride-search-card,
+.dark-mode .driver-result-card,
+.dark-mode .no-driver-results,
+.dark-mode .passenger-request-summary,
+.dark-mode .empty-activity-card {
+    background: #2b2b2b;
+    color: #fff;
+}
+
+.dark-mode .route-search-box,
+.dark-mode .ride-search-control {
+    background: #1e1e1e;
+}
+
+.dark-mode .route-search-field:first-child {
+    border-color: #444;
+}
+
+.dark-mode .route-input-content label,
+.dark-mode .ride-search-control label,
+.dark-mode .driver-result-header p,
+.dark-mode .driver-route p,
+.dark-mode .driver-plan-details p,
+.dark-mode .request-status {
+    color: #ccc;
+}
+
+.dark-mode .ride-search-input {
+    color: #fff;
+    color-scheme: dark;
+}
+
+.dark-mode .ride-search-input::placeholder {
+    color: #999;
+}
+
+.dark-mode .pickup-dot {
+    border-color: #fff;
+}
+
+.dark-mode .destination-dot {
+    background: #fff;
+}
+
+.dark-mode .driver-image-placeholder {
+    background: #3a3a3a;
+    color: #fff;
+}
+
+.dark-mode .find-driver-btn,
+.dark-mode .choose-driver-btn {
+    background: #fff;
+    color: #111;
+}
+
+.dark-mode .find-driver-btn:hover,
+.dark-mode .choose-driver-btn:hover {
+    background: #e8e8e8;
+}
+
+/* Leaflet map — dark mode UI */
+
+.dark-mode .leaflet-container {
+    background: #181818;
+}
+
+.dark-mode .leaflet-control-zoom,
+.dark-mode .leaflet-bar {
+    border-color: #444 !important;
+}
+
+.dark-mode .leaflet-control-zoom a,
+.dark-mode .leaflet-bar a {
+    background: #2b2b2b;
+    border-color: #444 !important;
+    color: #fff;
+}
+
+.dark-mode .leaflet-control-zoom a:hover,
+.dark-mode .leaflet-bar a:hover {
+    background: #3a3a3a;
+}
+
+.dark-mode .leaflet-control-attribution {
+    background: rgb(24 24 24 / 90%);
+    color: #ccc;
+}
+
+.dark-mode .leaflet-control-attribution a {
+    color: #ff9966;
+}
+
+.dark-mode .leaflet-control-scale-line {
+    background: rgb(24 24 24 / 90%);
+    border-color: #666;
+    color: #fff;
+}
+
+.dark-mode .leaflet-popup-content-wrapper,
+.dark-mode .leaflet-popup-tip {
+    background: #2b2b2b;
+    color: #fff;
+}
+
+.dark-mode .leaflet-popup-content a {
+    color: #fff;
+}
+
+.dark-mode .ride-map-summary {
+    background: rgb(43 43 43 / 96%);
+}
+
+.dark-mode .ride-map-summary strong {
+    color: #fff;
+}
+
+.dark-mode .ride-map-summary span {
+    color: #ccc;
+}
+
+.dark-mode .ride-map-marker {
+    background: #fff;
+    border-color: #111;
+}
+
+.dark-mode .ride-map-marker--destination {
+    background: #111;
+    border-color: #fff;
+}
+
+
+/* =========================================================
+   Responsive styles — keep all @media rules below
+========================================================= */
+
+@media (hover: hover) and (pointer: fine) {
+.chat-card:hover {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+}
+
+@media screen and (min-width: 1200px) {
+.dark-mode .app-wrapper {
+        max-width: 520px;
+        margin: 0 auto;
+
+        box-shadow:
+            0 0 40px rgba(0,0,0,.18);
+
+        border-left: 1px solid rgba(255,255,255,.04);
+        border-right: 1px solid rgba(255,255,255,.04);
+    }
+
+.app-wrapper {
+        width: 100%;
+        max-width: 520px;
+        margin: 0 auto;
+
+        box-shadow:
+            0 0 35px rgba(0,0,0,.12);
+
+        border-left: 1px solid #222;
+        border-right: 1px solid #222;
+    }
+
+    .landing-content {
+        padding: 0 20px;
+    }
+
+    .profile-grid {
+        grid-template-columns:
+            repeat(auto-fill, minmax(180px, 1fr));
+    }
+}
+
+@media (max-width: 767px) {
+#ride-map {
+        border-radius: 0;
+        height: 55vh;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+        width: 100vw;
+    }
+
+.ride-map-shell {
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+        width: 100vw;
+    }
+
+    #client-ride-map {
+        border-radius: 0;
+        height: 55vh;
+    }
+
+    .ride-map-summary {
+        bottom: 12px;
+        left: 12px;
+        right: 12px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+.driver-route-header {
+        flex-direction: column;
+    }
+
+    .driver-route-meta {
+        text-align: left;
+    }
+
+    .passenger-order-row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .passenger-order-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: end;
+    }
+
+    .passenger-order-price {
+        text-align: left;
+    }
+
+    .passenger-request-summary {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .request-status {
+        text-align: left;
+    }
+}
+
+@media screen and (min-width: 413px) and (max-width: 600px) {
+.profile-filter-form {
+        display: grid;
+        grid-template-columns: 120px 128px 128px;
+        gap: 4px;
+        justify-content: center;
+    }
+
+    .profile-filter-form select,
+    .profile-filter-form input,
+    .profile-filter-form .filter-btn {
+        width: 100%;
+        min-width: 0;
+        flex: none;
+    }
+
+    .profile-filter-form .filter-btn {
+        grid-column: 1 / -1;
+        width: 160px;
+        justify-self: center;
+    }
+}
+
+@media (max-width: 480px) {
+.ride-search-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 480px) {
+.driver-form-grid,
+    .recurring-day-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .driver-plan-card {
+        padding: 16px;
+    }
+}
+
+@media screen and (max-width: 412px) {
+.profile-filter-form select,
+    .profile-filter-form input[name="min_age"],
+    .profile-filter-form input[name="max_age"],
+    .profile-filter-form .filter-btn {
+        flex: 1 1 100%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+.bottom-nav .nav-link div {
+        display: none;
+    }
+    .filter-btn {
+        font-size: 12px;
+        padding: 8px 14px;
+    }
 }
