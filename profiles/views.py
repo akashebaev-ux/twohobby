@@ -3,11 +3,14 @@
 
 import json
 from math import atan2, cos, radians, sin, sqrt
+from django.contrib import messages
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views import generic
+from django.views.decorators.http import require_POST
 
 from matches.models import BlockedUser, Swipe
 
@@ -281,3 +284,39 @@ def save_location(request):
         return JsonResponse({"status": "ok"})
 
     return JsonResponse({"status": "error"}, status=400)
+
+
+@login_required
+def delete_profile_confirm(request):
+    """
+    Displays a confirmation page before permanently deleting
+    the logged-in user's account.
+    """
+
+    return render(
+        request,
+        "profiles/delete_profile_confirm.html",
+    )
+
+
+@login_required
+@require_POST
+def delete_profile(request):
+    """
+    Permanently deletes the logged-in user's account.
+
+    Deleting the user also deletes the associated profile and
+    related objects that use on_delete=models.CASCADE.
+    """
+
+    user = request.user
+
+    logout(request)
+    user.delete()
+
+    messages.success(
+        request,
+        "Your account has been permanently deleted.",
+    )
+
+    return redirect("landing")

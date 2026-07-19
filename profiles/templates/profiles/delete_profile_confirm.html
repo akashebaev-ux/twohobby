@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block filter_button %}{% endblock %}
+{% block title %}Delete Account{% endblock %}
+
+{% block content %}
+<div class="profile-detail">
+
+    <div class="profile-info">
+        <h2>Delete Account</h2>
+
+        <p>
+            Are you sure you want to permanently delete your
+            TwoHobby account?
+        </p>
+
+        <p>
+            This action cannot be undone. Your profile, likes,
+            messages, ride information, and other associated
+            account data may be permanently deleted.
+        </p>
+    </div>
+
+    <div class="profile-actions">
+
+        <form
+            method="post"
+            action="{% url 'delete_profile' %}"
+        >
+            {% csrf_token %}
+
+            <button
+                type="submit"
+                class="filter-btn"
+            >
+                Permanently Delete Account
+            </button>
+        </form>
+
+        <a
+            href="{% url 'my_profile' %}"
+            class="filter-btn"
+        >
+            Cancel
+        </a>
+
+    </div>
+
+</div>
+{% endblock %}

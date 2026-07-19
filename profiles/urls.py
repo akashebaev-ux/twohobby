@@ -13,4 +13,14 @@ urlpatterns = [
     path("my-profile/", views.my_profile, name="my_profile"),
     path("encounters/", views.encounters, name="encounters"),
     path("save-location/", views.save_location, name="save_location"),
+    path(
+        "profile/delete/",
+        views.delete_profile_confirm,
+        name="delete_profile_confirm",
+    ),
+    path(
+        "profile/delete/confirm/",
+        views.delete_profile,
+        name="delete_profile",
+    ),
 ]

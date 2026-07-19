@@ -2080,6 +2080,21 @@ a.filter-btn {
 }
 
 
+/* Profile delete */
+
+.delete-profile-btn {
+    background-color: #b42318;
+    border-color: #b42318;
+    color: #fff;
+}
+
+.delete-profile-btn:hover {
+    background-color: #912018;
+    border-color: #912018;
+    color: #fff;
+}
+
+
 /* Filter box */
 .filter-box {
     display: none;
