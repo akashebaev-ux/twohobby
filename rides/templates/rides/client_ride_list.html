@@ -1,7 +1,15 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}
     Find a Ride
+{% endblock %}
+
+{% block extra_css %}
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
 {% endblock %}
 
 {% block filter_button %}
@@ -121,6 +129,31 @@
         </form>
     </section>
 
+    <div class="ride-map-shell">
+        <div
+            id="client-ride-map"
+            data-tile-url="{{ ride_map_tile_url }}"
+            data-tile-attribution="{{ ride_map_tile_attribution }}"
+        ></div>
+
+        <div class="ride-map-summary">
+            {% if search_performed %}
+                <strong>Available drivers</strong>
+
+                <span>
+                    {{ rides|length }}
+                    driver{{ rides|length|pluralize }}
+                </span>
+            {% else %}
+                <strong>Find your route</strong>
+
+                <span>
+                    Enter your journey details above
+                </span>
+            {% endif %}
+        </div>
+    </div>
+
     {% if search_performed %}
         <section class="driver-results">
             <h2>Available drivers</h2>
@@ -131,11 +164,14 @@
                         {% if ride.driver.profile.profile_image %}
                             <img
                                 src="{{ ride.driver.profile.profile_image.url }}"
-                                alt="{{ ride.driver.username }}"
+                                alt="{{ ride.driver.profile.display_name|default:ride.driver.username }}"
                                 class="driver-result-image"
                             >
                         {% else %}
-                            <div class="driver-image-placeholder">
+                            <div
+                                class="driver-image-placeholder"
+                                aria-hidden="true"
+                            >
                                 👤
                             </div>
                         {% endif %}
@@ -149,6 +185,10 @@
                                 <p>
                                     {{ ride.car_brand }}
                                     {{ ride.car_model }}
+
+                                    {% if ride.car_year %}
+                                        ({{ ride.car_year }})
+                                    {% endif %}
                                 </p>
                             {% endif %}
                         </div>
@@ -181,6 +221,13 @@
                             <strong>Schedule:</strong>
                             {{ ride.get_trip_type_display }}
                         </p>
+
+                        {% if ride.trip_type == ride.TRIP_RECURRING %}
+                            <p>
+                                <strong>Days:</strong>
+                                {{ ride.recurring_days }}
+                            </p>
+                        {% endif %}
                     </div>
 
                     <a
@@ -203,6 +250,7 @@
             {% endfor %}
         </section>
     {% endif %}
+
     <section class="client-saved-requests">
         <h2>My ride requests</h2>
 
@@ -215,28 +263,28 @@
                 </h3>
 
                 <p>
-                    Date:
+                    <strong>Date:</strong>
                     {{ request_item.preferred_date }}
                 </p>
 
                 <p>
-                    Preferred time:
+                    <strong>Preferred time:</strong>
                     {{ request_item.preferred_time }}
                 </p>
 
                 <p>
-                    Passengers:
+                    <strong>Passengers:</strong>
                     {{ request_item.seats_requested }}
                 </p>
 
                 <p>
-                    Offer:
+                    <strong>Offer:</strong>
                     {{ request_item.offered_price }} ₸
                 </p>
 
                 {% if request_item.ride %}
                     <p>
-                        Driver:
+                        <strong>Driver:</strong>
                         {{ request_item.ride.driver.profile.display_name|default:request_item.ride.driver.username }}
                     </p>
                 {% else %}
@@ -246,7 +294,7 @@
                 {% endif %}
 
                 <p>
-                    Status:
+                    <strong>Status:</strong>
                     {{ request_item.get_status_display }}
                 </p>
             </article>
@@ -257,4 +305,16 @@
         {% endfor %}
     </section>
 </div>
+
+{{ map_rides|json_script:"client-ride-map-data" }}
+{% endblock %}
+
+{% block extra_js %}
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    ></script>
+
+    <script
+        src="{% static 'js/client-ride-map.js' %}?v=1"
+    ></script>
 {% endblock %}
