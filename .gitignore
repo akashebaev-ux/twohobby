@@ -20,3 +20,11 @@ node_modules/
 
 # Django collected static files
 staticfiles/
+
+
+# Generated map data
+map-data/
+map-tiles/
+*.osm.pbf
+*.mbtiles
+*.pmtiles
