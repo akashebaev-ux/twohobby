@@ -33,7 +33,6 @@ document.addEventListener(
             return;
         }
 
-
         const almatyBounds = L.latLngBounds(
             [43.05, 76.65],
             [43.40, 77.20]
@@ -57,22 +56,39 @@ document.addEventListener(
             position: "topright",
         }).addTo(map);
 
-        const tileUrl = mapElement.dataset.tileUrl;
+        const tileUrl = (
+            mapElement.dataset.tileUrl
+        );
+
         const tileAttribution = (
             mapElement.dataset.tileAttribution
             || "&copy; OpenStreetMap contributors"
         );
 
         if (!tileUrl) {
-            console.error("The map tile URL is missing.");
+            console.error(
+                "The map tile URL is missing."
+            );
             return;
         }
+
+        L.tileLayer(
+            tileUrl,
+            {
+                minZoom: 10,
+                maxZoom: 18,
+                attribution: tileAttribution,
+            }
+        ).addTo(map);
 
         const pickupIcon = L.divIcon({
             className: "ride-map-marker-wrapper",
             html: `
                 <span
-                    class="ride-map-marker ride-map-marker--pickup"
+                    class="
+                        ride-map-marker
+                        ride-map-marker--pickup
+                    "
                     aria-hidden="true"
                 ></span>
             `,
@@ -85,7 +101,10 @@ document.addEventListener(
             className: "ride-map-marker-wrapper",
             html: `
                 <span
-                    class="ride-map-marker ride-map-marker--destination"
+                    class="
+                        ride-map-marker
+                        ride-map-marker--destination
+                    "
                     aria-hidden="true"
                 ></span>
             `,
@@ -93,15 +112,6 @@ document.addEventListener(
             iconAnchor: [12, 12],
             popupAnchor: [0, -14],
         });
-
-        L.tileLayer(
-            tileUrl,
-            {
-                minZoom: 10,
-                maxZoom: 18,
-                attribution: tileAttribution,
-            }
-        ).addTo(map);
 
         function escapeHtml(value) {
             const element = document.createElement(
@@ -177,7 +187,7 @@ document.addEventListener(
                 ride.start_latitude,
                 ride.start_longitude,
                 ride.destination_latitude,
-                ride.destination_longitude
+                ride.destination_longitude,
             ];
 
             const hasValidCoordinates = (
@@ -196,26 +206,22 @@ document.addEventListener(
 
             const startCoordinates = [
                 Number(ride.start_latitude),
-                Number(ride.start_longitude)
+                Number(ride.start_longitude),
             ];
 
             const destinationCoordinates = [
                 Number(ride.destination_latitude),
-                Number(ride.destination_longitude)
+                Number(ride.destination_longitude),
             ];
-
-            console.log(
-                "Coordinates:",
-                startCoordinates,
-                destinationCoordinates
-            );
 
             const departureDate = new Date(
                 ride.departure_time
             );
 
             const formattedDeparture = (
-                Number.isNaN(departureDate.getTime())
+                Number.isNaN(
+                    departureDate.getTime()
+                )
                     ? String(ride.departure_time)
                     : departureDate.toLocaleString()
             );
@@ -240,7 +246,6 @@ document.addEventListener(
                     icon: pickupIcon,
                 }
             )
-
                 .addTo(map)
                 .bindPopup(startPopup);
 
@@ -261,20 +266,20 @@ document.addEventListener(
                 destinationMarker.getLatLng()
             );
 
-            const testLine = L.polyline(
+            const fallbackLine = L.polyline(
                 [
                     startCoordinates,
-                    destinationCoordinates
+                    destinationCoordinates,
                 ],
                 {
-                    color: "#ff0000",
-                    weight: 4,
+                    color: "#171717",
+                    weight: 5,
                     opacity: 0.45,
-                    dashArray: "8, 8"
+                    dashArray: "10, 8",
+                    lineCap: "round",
+                    lineJoin: "round",
                 }
             ).addTo(map);
-
-            testLine.bringToFront();
 
             const routeUrl = (
                 "https://router.project-osrm.org/"
@@ -291,11 +296,6 @@ document.addEventListener(
                 + "&steps=false"
             );
 
-            console.log(
-                "OSRM URL:",
-                routeUrl
-            );
-
             try {
                 const response = await fetch(
                     routeUrl
@@ -303,18 +303,13 @@ document.addEventListener(
 
                 if (!response.ok) {
                     throw new Error(
-                        `Routing request failed: `
-                        + `${response.status}`
+                        "Routing request failed: "
+                        + response.status
                     );
                 }
 
                 const routeData = (
                     await response.json()
-                );
-
-                console.log(
-                    "OSRM result:",
-                    routeData
                 );
 
                 if (
@@ -333,7 +328,12 @@ document.addEventListener(
                     routeData.routes[0]
                 );
 
-                if (!route.geometry) {
+                if (
+                    !route.geometry
+                    || !Array.isArray(
+                        route.geometry.coordinates
+                    )
+                ) {
                     throw new Error(
                         "Route geometry is missing."
                     );
@@ -388,32 +388,56 @@ document.addEventListener(
                     </a>
                 `;
 
-                map.removeLayer(testLine);
+                map.removeLayer(
+                    fallbackLine
+                );
 
-                const routeLayer = L.geoJSON(
-                    route.geometry,
-                    {
-                        style: {
-                            color: "#ff0000",
-                            weight: 8,
-                            opacity: 1
+                const routeCoordinates = (
+                    route.geometry.coordinates.map(
+                        function (coordinate) {
+                            return [
+                                coordinate[1],
+                                coordinate[0],
+                            ];
                         }
+                    )
+                );
+
+                const routeShadow = L.polyline(
+                    routeCoordinates,
+                    {
+                        color: "#000000",
+                        weight: 10,
+                        opacity: 0.18,
+                        lineCap: "round",
+                        lineJoin: "round",
+                        interactive: false,
                     }
                 ).addTo(map);
 
-                routeLayer.bindPopup(
+                const routeLine = L.polyline(
+                    routeCoordinates,
+                    {
+                        color: "#171717",
+                        weight: 6,
+                        opacity: 1,
+                        lineCap: "round",
+                        lineJoin: "round",
+                    }
+                ).addTo(map);
+
+                routeLine.bindPopup(
                     routePopup
                 );
 
-                routeLayer.bringToFront();
+                routeShadow.bringToBack();
+                routeLine.bringToFront();
 
-                console.log(
-                    "Route layer added:",
-                    routeLayer.getBounds()
-                );
+                startMarker.bringToFront();
+                destinationMarker.bringToFront();
 
                 allRouteBounds.push(
-                    routeLayer.getBounds()
+                    routeLine.getBounds()
                 );
             } catch (error) {
                 console.error(
@@ -421,16 +445,7 @@ document.addEventListener(
                     error
                 );
 
-                testLine.setStyle(
-                    {
-                        color: "#A30088",
-                        weight: 6,
-                        opacity: 0.85,
-                        dashArray: "10, 8"
-                    }
-                );
-
-                testLine.bindPopup(
+                fallbackLine.bindPopup(
                     `
                         <strong>
                             Route unavailable
@@ -450,8 +465,13 @@ document.addEventListener(
                     `
                 );
 
+                fallbackLine.bringToFront();
+
+                startMarker.bringToFront();
+                destinationMarker.bringToFront();
+
                 allRouteBounds.push(
-                    testLine.getBounds()
+                    fallbackLine.getBounds()
                 );
             }
         }
@@ -478,7 +498,7 @@ document.addEventListener(
                     combinedBounds,
                     {
                         padding: [30, 30],
-                        maxZoom: 15
+                        maxZoom: 15,
                     }
                 );
             }
