@@ -41,12 +41,23 @@ document.addEventListener(
             11
         );
 
+        const tileUrl = mapElement.dataset.tileUrl;
+        const tileAttribution = (
+            mapElement.dataset.tileAttribution
+            || "&copy; OpenStreetMap contributors"
+        );
+
+        if (!tileUrl) {
+            console.error("The map tile URL is missing.");
+            return;
+        }
+
         L.tileLayer(
-            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            tileUrl,
             {
-                maxZoom: 19,
-                attribution:
-                    "&copy; OpenStreetMap contributors"
+                minZoom: 10,
+                maxZoom: 18,
+                attribution: tileAttribution,
             }
         ).addTo(map);
 
