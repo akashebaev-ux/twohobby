@@ -242,6 +242,63 @@ body:has(.chat-page) .content {
 }
 
 
+/* RideBody client map */
+
+#client-ride-map {
+    border-radius: 20px;
+    box-shadow: 0 8px 28px rgb(0 0 0 / 12%);
+    height: 480px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.ride-map-shell {
+    margin: 28px 0;
+    position: relative;
+}
+
+.ride-map-summary {
+    background: rgb(255 255 255 / 95%);
+    border-radius: 14px;
+    bottom: 20px;
+    box-shadow: 0 6px 20px rgb(0 0 0 / 16%);
+    display: flex;
+    flex-direction: column;
+    left: 20px;
+    padding: 12px 16px;
+    position: absolute;
+    z-index: 500;
+}
+
+.ride-map-summary strong {
+    color: #222;
+    font-size: .95rem;
+}
+
+.ride-map-summary span {
+    color: #666;
+    font-size: .82rem;
+}
+
+@media (max-width: 767px) {
+    .ride-map-shell {
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+        width: 100vw;
+    }
+
+    #client-ride-map {
+        border-radius: 0;
+        height: 55vh;
+    }
+
+    .ride-map-summary {
+        bottom: 12px;
+        left: 12px;
+        right: 12px;
+    }
+}
+
 /* Fullscreen pages */
 
 body:has(.landing-page) .content,

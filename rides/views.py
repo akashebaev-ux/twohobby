@@ -584,18 +584,16 @@ def client_ride_list(request):
                 "offered_price"
             ]
 
-            submitted_request = (
-                RideRequest.objects.create(
-                    passenger=request.user,
-                    ride=None,
-                    pickup_point=start_name,
-                    dropoff_point=destination_name,
-                    preferred_date=preferred_date,
-                    preferred_time=preferred_time,
-                    seats_requested=seats_requested,
-                    offered_price=offered_price,
-                    status=RideRequest.STATUS_PENDING,
-                )
+            submitted_request = RideRequest.objects.create(
+                passenger=request.user,
+                ride=None,
+                pickup_point=start_name,
+                dropoff_point=destination_name,
+                preferred_date=preferred_date,
+                preferred_time=preferred_time,
+                seats_requested=seats_requested,
+                offered_price=offered_price,
+                status=RideRequest.STATUS_PENDING,
             )
 
             possible_rides = (
@@ -617,10 +615,7 @@ def client_ride_list(request):
             )
 
             for ride in possible_rides:
-                if (
-                    ride.remaining_seats
-                    < seats_requested
-                ):
+                if ride.remaining_seats < seats_requested:
                     continue
 
                 ride_time = ride.departure_time.time()
@@ -663,6 +658,49 @@ def client_ride_list(request):
         .order_by("-created_at")
     )
 
+    map_rides = []
+
+    for ride in matching_rides:
+        if (
+            ride.start_latitude is not None
+            and ride.start_longitude is not None
+            and ride.destination_latitude is not None
+            and ride.destination_longitude is not None
+        ):
+            map_rides.append(
+                {
+                    "id": ride.pk,
+                    "start_name": ride.start_name,
+                    "destination_name": (
+                        ride.destination_name
+                    ),
+                    "start_latitude": float(
+                        ride.start_latitude
+                    ),
+                    "start_longitude": float(
+                        ride.start_longitude
+                    ),
+                    "destination_latitude": float(
+                        ride.destination_latitude
+                    ),
+                    "destination_longitude": float(
+                        ride.destination_longitude
+                    ),
+                    "remaining_seats": (
+                        ride.remaining_seats
+                    ),
+                    "departure_time": (
+                        ride.departure_time.isoformat()
+                    ),
+                    "detail_url": reverse(
+                        "rides:ride_detail",
+                        kwargs={
+                            "pk": ride.pk,
+                        },
+                    ),
+                }
+            )
+
     return render(
         request,
         "rides/client_ride_list.html",
@@ -672,6 +710,13 @@ def client_ride_list(request):
             "search_performed": search_performed,
             "submitted_request": submitted_request,
             "my_saved_requests": my_saved_requests,
+            "map_rides": map_rides,
+            "ride_map_tile_url": (
+                settings.RIDE_MAP_TILE_URL
+            ),
+            "ride_map_tile_attribution": (
+                settings.RIDE_MAP_TILE_ATTRIBUTION
+            ),
         },
     )
 
