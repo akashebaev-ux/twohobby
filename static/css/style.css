@@ -2831,6 +2831,32 @@ a.filter-btn {
     border-color: #fff;
 }
 
+/* =========================================================
+   RideBody home page — dark mode
+========================================================= */
+
+.dark-mode .ride-role-card {
+    background: #2b2b2b;
+    color: #fff;
+    box-shadow: 0 6px 24px rgb(0 0 0 / 35%);
+}
+
+.dark-mode .ride-role-card strong {
+    color: #fff;
+}
+
+.dark-mode .ride-role-card small {
+    color: #ccc;
+}
+
+.dark-mode .ride-role-card:hover {
+    background: #333;
+}
+
+.dark-mode .ride-role-icon {
+    color: #fff;
+}
+
 
 /* =========================================================
    Responsive styles — keep all @media rules below
